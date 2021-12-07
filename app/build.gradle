@@ -2,9 +2,26 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
 }
-
+apply from: "../ktlint.gradle"
 android {
     compileSdk 31
+
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res',
+                            'src/main/res-screen/health',
+                            'src/main/res-screen/login',
+                            'src/main/res-screen/mood',
+                            'src/main/res-screen/notes',
+                            'src/main/res-screen/settings',
+                            'src/main/res-screen/splash',
+                            'src/main/res-screen/welcome',
+
+                    ]
+        }
+    }
 
     defaultConfig {
         applicationId "com.example.moodtrackerproject"
@@ -31,8 +48,10 @@ android {
     }
 }
 
-dependencies {
 
+
+dependencies {
+    ktlint 'com.pinterest:ktlint:0.43.2'
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation 'com.google.android.material:material:1.4.0'
