@@ -10,9 +10,11 @@
         <entry key="app/src/main/res-screen/mood/layout/fragment_mood.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_notes.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/notes/layout/fragment_create_new_note_fragment.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res-screen/notes/layout/fragment_notes.xml" value="0.121875" />
         <entry key="app/src/main/res-screen/settings/layout/fragment_settings.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/splash/drawable/ic_splash_smile.xml" value="0.17604166666666668" />
         <entry key="app/src/main/res-screen/splash/drawable/puprle_gradient.xml" value="0.16458333333333333" />
+        <entry key="app/src/main/res-screen/splash/layout/fragment_splash_screen.xml" value="0.121875" />
         <entry key="app/src/main/res-screen/statistics/layout/fragment_login_screen.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/statistics/layout/fragment_statistics.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/welcome/drawable/ic_smiley_color.xml" value="0.1578125" />
@@ -27,6 +29,8 @@
         <entry key="app/src/main/res/drawable/ic_notes_list_layout.xml" value="0.18385416666666668" />
         <entry key="app/src/main/res/drawable/main_color.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/font/font.xml" value="0.22037037037037038" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.21965579710144928" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.24739583333333334" />
       </map>
     </option>
   </component>
