@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MoodTrackerProject</string>
 
-    <string name="welcome_screen_hi">Hi! Im Moody</string>
+    <string name="welcome_screen_hi">Hi there! I\'m Moody</string>
     <string name="welcome_screen_your_new">Your new personal mood tracker</string>
     <string name="welcome_screen_hi_moody">Hi Moody!</string>
 

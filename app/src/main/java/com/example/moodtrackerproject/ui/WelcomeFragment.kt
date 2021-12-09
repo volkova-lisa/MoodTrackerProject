@@ -6,14 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
 
 class WelcomeFragment : Fragment() {
+
+    private var _binding: FragmentWelcomeScreenBinding? = null
+    private val mBinding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_welcome_screen, container, false)
+        _binding = FragmentWelcomeScreenBinding.inflate(layoutInflater, container, false)
+
+        mBinding.welcomeButton.setOnClickListener {
+            val transaction = requireActivity().supportFragmentManager.beginTransaction()
+            transaction.replace(R.id.nav_host_fragment, LoginFragment())
+            transaction.commit()
+        }
+
+        return mBinding.root
     }
 }
