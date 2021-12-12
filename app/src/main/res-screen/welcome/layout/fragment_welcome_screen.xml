@@ -35,7 +35,7 @@
         android:fontFamily="@font/raleway_regular"
         android:text="@string/welcome_screen_your_new"
         android:textColor="@color/light_purple"
-        android:textSize="21sp" />
+        android:textSize="18sp" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
         android:layout_below="@id/your_text"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:src="@drawable/boy" />
+        android:src="@drawable/welcome_boy" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/welcome_button"
