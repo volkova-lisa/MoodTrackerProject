@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/welcomeFragment">
 
     <fragment
         android:id="@+id/healthFragment"
@@ -31,15 +31,6 @@
         android:label="fragment_statistics"
         tools:layout="@layout/fragment_statistics" />
     <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.example.moodtrackerproject.ui.SplashFragment"
-        android:label="fragment_splash_screen"
-        tools:layout="@layout/fragment_splash_screen" >
-        <action
-            android:id="@+id/action_splashFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.moodtrackerproject.ui.WelcomeFragment"
         android:label="fragment_welcome_screen"
@@ -55,7 +46,7 @@
         tools:layout="@layout/fragment_add_mood" />
     <fragment
         android:id="@+id/loginFragment2"
-        android:name="com.example.moodtrackerproject.ui.LoginFragment"
+        android:name="com.example.moodtrackerproject.ui.login.LoginFragment"
         android:label="fragment_login_screen"
         tools:layout="@layout/fragment_login_screen" >
         <action
