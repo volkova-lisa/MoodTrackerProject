@@ -8,7 +8,6 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
-import com.example.moodtrackerproject.ui.login.LoginFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WelcomeFragment : Fragment() {
