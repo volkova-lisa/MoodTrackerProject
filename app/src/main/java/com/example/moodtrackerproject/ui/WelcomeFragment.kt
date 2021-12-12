@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
+import com.example.moodtrackerproject.ui.login.LoginFragment
 
 class WelcomeFragment : Fragment() {
 

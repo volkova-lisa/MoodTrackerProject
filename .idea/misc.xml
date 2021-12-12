@@ -5,7 +5,7 @@
       <map>
         <entry key="app/src/main/res-screen/bottom_nav/drawable/notes_paperlines.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res-screen/health/layout/fragment_health.xml" value="0.17481884057971014" />
-        <entry key="app/src/main/res-screen/login/layout/fragment_login_screen.xml" value="0.17481884057971014" />
+        <entry key="app/src/main/res-screen/login/layout/fragment_login_screen.xml" value="0.25" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_add_mood.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_mood.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_notes.xml" value="0.17481884057971014" />
@@ -26,13 +26,19 @@
         <entry key="app/src/main/res/drawable/ic_bottom_nav_mood.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/drawable/ic_bottom_nav_notes.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.22037037037037038" />
+        <entry key="app/src/main/res/drawable/ic_lock.xml" value="0.2175925925925926" />
         <entry key="app/src/main/res/drawable/ic_notes_list_layout.xml" value="0.18385416666666668" />
+        <entry key="app/src/main/res/drawable/ic_welcome_lock.xml" value="0.18489583333333334" />
         <entry key="app/src/main/res/drawable/main_color.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/drawable/purple_gradient.xml" value="0.22314814814814815" />
         <entry key="app/src/main/res/drawable/purple_gradient_for_buttons.xml" value="0.19814814814814816" />
+        <entry key="app/src/main/res/drawable/purple_stroke_for_fields.xml" value="0.2175925925925926" />
+        <entry key="app/src/main/res/drawable/splash_screen.xml" value="0.165" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/font/font.xml" value="0.22037037037037038" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21965579710144928" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.1875" />
+        <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.19202898550724637" />
         <entry key="app/src/main/res/menu/menu.xml" value="0.24739583333333334" />
       </map>
     </option>
