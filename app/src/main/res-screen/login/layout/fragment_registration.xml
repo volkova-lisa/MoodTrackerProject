@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.login.LoginFragment">
+    tools:context=".ui.login.RegistrationFragment">
 
     <ImageView
         android:id="@+id/logo_welcome"
@@ -20,8 +20,9 @@
         android:layout_below="@id/logo_welcome"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
+        android:elevation="3dp"
         android:fontFamily="@font/raleway_bold"
-        android:text="@string/login_screen_login_or_signup"
+        android:text="@string/create_new_account"
         android:textColor="@color/light_purple"
         android:textSize="21sp" />
 
@@ -31,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/hi_text"
         android:layout_centerHorizontal="true"
+        android:elevation="3dp"
         android:fontFamily="@font/raleway_regular"
         android:text="@string/login_screen_to_save"
         android:textColor="@color/light_purple"
@@ -42,15 +44,36 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/to_save_text"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp"
-        android:paddingLeft="40dp"
-        android:paddingRight="40dp">
+        android:layout_marginTop="31dp">
+        <LinearLayout
+            android:id="@+id/name_field"
+            android:layout_width="280dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/purple_stroke_for_fields"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
 
+            <EditText
+                android:id="@+id/name_input"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/raleway_regular"
+                android:hint="Name"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/light_purple"
+                android:textColorHint="@color/light_purple"
+                android:textSize="16dp" />
+        </LinearLayout>
         <LinearLayout
             android:id="@+id/login_field"
             android:layout_width="280dp"
             android:layout_height="40dp"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:layout_below="@id/name_field"
             android:background="@drawable/purple_stroke_for_fields"
             android:orientation="horizontal"
             android:paddingLeft="10dp"
@@ -88,8 +111,8 @@
                 android:fontFamily="@font/raleway_regular"
                 android:hint="Password"
                 android:paddingLeft="10dp"
-                android:paddingRight="2dp"
                 android:textColor="@color/light_purple"
+                android:paddingRight="2dp"
                 android:textColorHint="@color/light_purple"
                 android:textSize="16dp" />
 
@@ -100,7 +123,7 @@
         </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/login_button"
+            android:id="@+id/register_button"
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_below="@id/pass_field"
@@ -108,81 +131,11 @@
             android:layout_marginTop="6dp"
             android:background="@drawable/purple_gradient_for_buttons"
             android:fontFamily="@font/raleway_regular"
-            android:text="@string/login_screen_login"
+            android:text="@string/create_account"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textSize="21sp" />
+            android:textSize="16sp" />
 
     </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/get_new_text"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="18dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/login_form"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/forgot_password"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp" />
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="match_parent"/>
-        <TextView
-            android:id="@+id/get_new_pass_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_bold"
-            android:text="@string/get_new"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/create_new_text"
-        android:layout_width="wrap_content"
-        android:orientation="horizontal"
-        android:elevation="3dp"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/get_new_text"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/do_you_have_an_account"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp" />
-        <Space
-            android:layout_width="10dp"
-            android:layout_height="match_parent"/>
-        <Button
-            android:id="@+id/create_new_account_button"
-            android:layout_width="wrap_content"
-            android:padding="0dp"
-            android:layout_height="30dp"
-            android:background="#0000"
-            android:fontFamily="@font/raleway_bold"
-            android:text="@string/create_new"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp"
-            android:textAllCaps="false"/>
-    </LinearLayout>
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/create_new_text"
-        android:layout_centerHorizontal="true"
-        android:adjustViewBounds="true"
-        android:focusable="false"
-        android:maxHeight="670dp"
-        android:paddingTop="300dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_boy" />
-
-    </RelativeLayout>
+</RelativeLayout>
