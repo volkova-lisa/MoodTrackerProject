@@ -8,7 +8,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
-import com.example.moodtrackerproject.routing.Route
+import com.example.moodtrackerproject.routing.Routes
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WelcomeFragment : Fragment() {
@@ -29,7 +29,7 @@ class WelcomeFragment : Fragment() {
         navBar.isVisible = false
 
         binding.welcomeButton.setOnClickListener {
-            Route.goToLogin(requireActivity())
+            Routes.goToLogin(requireActivity())
         }
 
         return binding.root

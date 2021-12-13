@@ -7,14 +7,16 @@ import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.ui.LoginFragment
 
-object Route {
+object Routes {
     fun goToLogin(fragmentActivity: FragmentActivity) {
         val transaction = fragmentActivity.supportFragmentManager.beginTransaction()
         transaction.replace(R.id.nav_host_fragment, LoginFragment())
         transaction.commit()
     }
+
     fun goToMainActivity(context: Context) {
-        var intent = Intent(context, MainActivity::class.java)
+        var intent = Intent(context.applicationContext, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
     }
 }
