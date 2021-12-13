@@ -20,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController
+
+        //if (navController.currentDestination == navController.graph[R.id.loginFragment])
+
         mBinding.bottomNavigation.setupWithNavController(navController)
     }
 }

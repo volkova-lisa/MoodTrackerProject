@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.ui.NotesFragment
@@ -20,6 +21,8 @@ class LoginFragment : Fragment() {
     private val mBinding get() = _binding!!
     lateinit var auth: FirebaseAuth
     lateinit var navBar: BottomNavigationView
+
+    private lateinit var loginViewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,6 +39,16 @@ class LoginFragment : Fragment() {
         }
         login()
         return mBinding.root
+    }
+
+    override fun onStart() {
+        super.onStart()
+        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        initialisation()
+    }
+
+    private fun initialisation() {
+        TODO("Not yet implemented")
     }
 
     private fun login() {
