@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/purple_gradient"/>
+    <item android:drawable="@drawable/bg_color"/>
    <item android:drawable="@drawable/ic_splash_smile"
        android:gravity="center"
        android:height="110dp"

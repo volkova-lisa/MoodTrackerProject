@@ -11,12 +11,12 @@ import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginScreenBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
-        return inflater.inflate(R.layout.fragment_login_screen, container, false)
+        return binding.root
     }
 }

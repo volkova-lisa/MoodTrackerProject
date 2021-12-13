@@ -12,8 +12,10 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WelcomeFragment : Fragment() {
 
+    // TODO("this needs to be removed from the fragment and should be
+    //  handled with LiveData")
     private var _binding: FragmentWelcomeScreenBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
     lateinit var navBar: BottomNavigationView
 
     override fun onCreateView(
@@ -25,12 +27,12 @@ class WelcomeFragment : Fragment() {
         navBar = requireActivity()!!.findViewById(R.id.bottom_navigation)
         navBar.isVisible = false
 
-        mBinding.welcomeButton.setOnClickListener {
+        binding.welcomeButton.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()
             transaction.replace(R.id.nav_host_fragment, LoginFragment())
             transaction.commit()
         }
 
-        return mBinding.root
+        return binding.root
     }
 }
