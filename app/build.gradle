@@ -21,8 +21,7 @@ android {
                             'src/main/res-screen/settings',
                             'src/main/res-screen/statistics',
                             'src/main/res-screen/splash',
-                            'src/main/res-screen/welcome',
-                            'src/main/res-screen/bottom_nav',
+                            'src/main/res-screen/welcome'
                     ]
         }
     }
