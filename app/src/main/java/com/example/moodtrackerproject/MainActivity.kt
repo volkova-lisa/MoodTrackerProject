@@ -21,8 +21,9 @@ class MainActivity : AppCompatActivity() {
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController
+        binding.bottomNavigation.setupWithNavController(navController)
+
         if (navController.currentDestination!!.id == R.id.loginFragment || navController.currentDestination!!.id == R.id.welcomeFragment)
             binding.bottomNavigation.isVisible = false
-        binding.bottomNavigation.setupWithNavController(navController)
     }
 }
