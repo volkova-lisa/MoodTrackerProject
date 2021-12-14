@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.fragment.app.FragmentActivity
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.ui.LoginFragment
+import com.example.moodtrackerproject.ui.login.LoginFragment
 
 object Routes {
     fun goToLogin(fragmentActivity: FragmentActivity) {
