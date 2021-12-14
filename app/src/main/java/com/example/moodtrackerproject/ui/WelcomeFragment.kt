@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
@@ -22,9 +21,6 @@ class WelcomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentWelcomeScreenBinding.inflate(layoutInflater, container, false)
-
-        navBar = requireActivity()!!.findViewById(R.id.bottom_navigation)
-        navBar.isVisible = false
 
         mBinding.welcomeButton.setOnClickListener {
             val transaction = requireActivity().supportFragmentManager.beginTransaction()

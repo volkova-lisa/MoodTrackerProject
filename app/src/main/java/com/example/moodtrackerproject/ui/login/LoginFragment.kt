@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        initialisation()
+        // initialisation()
     }
 
     private fun initialisation() {
@@ -56,10 +56,10 @@ class LoginFragment : Fragment() {
             val emailInput = mBinding.emailInput.text.toString()
             val passInput = mBinding.passInput.text.toString()
             if (TextUtils.isEmpty(emailInput)) {
-                mBinding.emailInput.error = "Please enter email"
+                mBinding.emailInput.error = getString(R.string.registration_enter_email)
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(passInput)) {
-                mBinding.passInput.error = "Please enter password"
+                mBinding.passInput.error = getString(R.string.registration_enter_pass)
                 return@setOnClickListener
             }
             auth.signInWithEmailAndPassword(emailInput, passInput)
@@ -68,7 +68,7 @@ class LoginFragment : Fragment() {
                         val transaction = requireActivity().supportFragmentManager.beginTransaction()
                         transaction.replace(R.id.nav_host_fragment, NotesFragment())
                         transaction.commit()
-                    } else Toast.makeText(context, "Login failed", Toast.LENGTH_SHORT).show()
+                    } else Toast.makeText(context, getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
                 }
         }
     }

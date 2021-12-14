@@ -30,6 +30,11 @@
     <string name="do_you_have_an_account">Do you have an account?</string>
     <string name="create_new">Create new</string>
     <string name="create_new_account">Create new account</string>
+    <string name="registration_enter_email">Please enter email</string>
+    <string name="registration_enter_pass">Please enter password</string>
+    <string name="login_failed">Login failed</string>
+    <string name="reg_successful">Registration successful</string>
+    <string name="reg_failed">Registration failed</string>
 
 
 </resources>

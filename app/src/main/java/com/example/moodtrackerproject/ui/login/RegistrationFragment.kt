@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
@@ -30,8 +29,6 @@ class RegistrationFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentRegistrationBinding.inflate(layoutInflater, container, false)
-        navBar = requireActivity()!!.findViewById(R.id.bottom_navigation)
-        navBar.isVisible = false
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
         databaseReference = database?.reference!!.child("profile")
@@ -46,10 +43,10 @@ class RegistrationFragment : Fragment() {
             val inputName = mBinding.nameInput.text.toString()
 
             if (TextUtils.isEmpty(inputEmail)) {
-                mBinding.emailInput.error = "Please enter email"
+                mBinding.emailInput.error = getString(R.string.registration_enter_email)
                 return@setOnClickListener
             } else if (TextUtils.isEmpty(inputPass)) {
-                mBinding.passInput.error = "Please enter password"
+                mBinding.passInput.error = getString(R.string.registration_enter_pass)
                 return@setOnClickListener
             }
 
@@ -59,12 +56,12 @@ class RegistrationFragment : Fragment() {
                         val currentUser = auth.currentUser
                         val currentUserDb = databaseReference?.child((currentUser?.uid!!))
                         currentUserDb?.child("name")?.setValue(inputName)
-                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.reg_successful), Toast.LENGTH_SHORT).show()
                         val transaction = requireActivity().supportFragmentManager.beginTransaction()
                         transaction.replace(R.id.nav_host_fragment, LoginFragment())
                         transaction.commit()
                     } else {
-                        Toast.makeText(context, "Registration failed", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, getString(R.string.reg_failed), Toast.LENGTH_SHORT).show()
                     }
                 }
         }
