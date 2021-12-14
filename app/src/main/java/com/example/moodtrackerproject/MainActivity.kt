@@ -11,20 +11,18 @@ import com.example.moodtrackerproject.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private var _binding: ActivityMainBinding? = null
-    private val mBinding get() = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(mBinding.root)
+        setContentView(binding.root)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController
-
         if (navController.currentDestination!!.id == R.id.loginFragment || navController.currentDestination!!.id == R.id.welcomeFragment)
-            mBinding.bottomNavigation.isVisible = false
-
-        mBinding.bottomNavigation.setupWithNavController(navController)
+            binding.bottomNavigation.isVisible = false
+        binding.bottomNavigation.setupWithNavController(navController)
     }
 }

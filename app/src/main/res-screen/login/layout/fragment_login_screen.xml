@@ -185,4 +185,6 @@
         android:scaleType="centerCrop"
         android:src="@drawable/login_boy" />
 
-    </RelativeLayout>
+</RelativeLayout>
+
+

@@ -1,14 +1,13 @@
 package com.example.moodtrackerproject
-
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.moodtrackerproject.routing.Routes
 
 class SplashActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var intent = Intent(this, MainActivity::class.java)
-        startActivity(intent)
+        Routes.goToMainActivity(this)
         finish()
     }
 }

@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
-import com.example.moodtrackerproject.ui.login.LoginFragment
+import com.example.moodtrackerproject.routing.Routes
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WelcomeFragment : Fragment() {
 
+    // TODO("this needs to be removed from the fragment and should be
+    //  handled with LiveData")
     private var _binding: FragmentWelcomeScreenBinding? = null
-    private val mBinding get() = _binding!!
+
+    private val binding get() = _binding!!
     lateinit var navBar: BottomNavigationView
 
     override fun onCreateView(
@@ -22,12 +26,13 @@ class WelcomeFragment : Fragment() {
     ): View? {
         _binding = FragmentWelcomeScreenBinding.inflate(layoutInflater, container, false)
 
-        mBinding.welcomeButton.setOnClickListener {
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment, LoginFragment())
-            transaction.commit()
+        navBar = requireActivity()!!.findViewById(R.id.bottom_navigation)
+        navBar.isVisible = false
+
+        binding.welcomeButton.setOnClickListener {
+            Routes.goToLogin(requireActivity())
         }
 
-        return mBinding.root
+        return binding.root
     }
 }
