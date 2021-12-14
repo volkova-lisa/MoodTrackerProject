@@ -34,7 +34,7 @@
     <string name="login_failed">Login failed</string>
     <string name="reg_successful">Registration successful</string>
     <string name="reg_failed">Registration failed</string>
-
+    <string name="enter_name">Enter name</string>
 
 
 </resources>
