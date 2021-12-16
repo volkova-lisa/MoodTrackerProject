@@ -1,11 +1,9 @@
 package com.example.moodtrackerproject.ui.login
 
 import android.os.Bundle
-import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
@@ -15,14 +13,15 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginScreenBinding? = null
     private val binding get() = _binding!!
-    private lateinit var loginViewModel: LoginViewModel
+    private val loginViewModel: LoginViewModel by lazy {
+        ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         binding.createNewAccountTextButton.setOnClickListener {
             Routes.goTo(requireActivity(), RegistrationFragment())
         }
@@ -49,13 +48,5 @@ class LoginFragment : Fragment() {
             )
             loginViewModel.commitLogIn(binding, requireActivity(), requireContext())
         }
-    }
-
-    private fun createNewAccountText() {
-        SpannableStringBuilder("Don't have an account?")
-            .bold {
-                append(" Create new!")
-            }
-            .append("\n")
     }
 }

@@ -15,7 +15,7 @@ class RegistrationViewModel : ViewModel() {
     var databaseReference: DatabaseReference? = null
     var database: FirebaseDatabase? = null
 
-    lateinit var auth: FirebaseAuth
+    private lateinit var auth: FirebaseAuth
 
     fun checkRegistrationData(email: String, password: String, fullName: String, binding: FragmentRegistrationBinding, context: Context) {
         var isValid = true
