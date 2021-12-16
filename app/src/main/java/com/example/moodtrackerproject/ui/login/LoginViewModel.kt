@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
-import com.example.moodtrackerproject.utils.EMAIL
-import com.example.moodtrackerproject.utils.PASSWORD
 import com.example.moodtrackerproject.utils.isEmailValid
 import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth

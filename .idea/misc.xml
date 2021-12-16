@@ -6,6 +6,7 @@
         <entry key="app/src/main/res-screen/bottom_nav/drawable/notes_paperlines.xml" value="0.22685185185185186" />
         <entry key="app/src/main/res-screen/health/layout/fragment_health.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/login/layout/fragment_login_screen.xml" value="0.25" />
+        <entry key="app/src/main/res-screen/login/layout/fragment_registration.xml" value="0.18704710144927536" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_add_mood.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_mood.xml" value="0.17481884057971014" />
         <entry key="app/src/main/res-screen/mood/layout/fragment_notes.xml" value="0.17481884057971014" />

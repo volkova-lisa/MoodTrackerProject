@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.login
 
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -26,7 +25,6 @@ class RegistrationFragment : Fragment() {
     lateinit var navBar: BottomNavigationView
 
     private lateinit var registrationViewModel: RegistrationViewModel
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -2,7 +2,6 @@ package com.example.moodtrackerproject.ui.login
 
 import android.content.Context
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
 import com.example.moodtrackerproject.utils.*
 
@@ -11,10 +10,10 @@ class RegistrationViewModel {
     fun checkRegistrationData(email: String, password: String, fullName: String, binding: FragmentRegistrationBinding, context: Context) {
         var isValid = true
         if (!fullName.isEmpty()) {
-                binding.nameInput.error = context.getString(R.string.enter_name)
-                isValid = false
+            binding.nameInput.error = context.getString(R.string.enter_name)
+            isValid = false
         } else {
-                FULL_NAME = fullName
+            FULL_NAME = fullName
         }
 
         if (!email.isEmpty()) {
