@@ -1,13 +1,16 @@
 package com.example.moodtrackerproject.ui.login
 
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.text.bold
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
+import com.example.moodtrackerproject.routing.Routes
+
 class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginScreenBinding? = null
@@ -20,10 +23,8 @@ class LoginFragment : Fragment() {
     ): View? {
         _binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
         loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
-        binding.createNewAccountButton.setOnClickListener {
-            val transaction = requireActivity().supportFragmentManager.beginTransaction()
-            transaction.replace(R.id.nav_host_fragment, RegistrationFragment())
-            transaction.commit()
+        binding.createNewAccountTextButton.setOnClickListener {
+            Routes.goTo(requireActivity(), RegistrationFragment())
         }
         login()
         return binding.root
@@ -31,7 +32,6 @@ class LoginFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        loginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
         // initialisation()
     }
 
@@ -49,5 +49,13 @@ class LoginFragment : Fragment() {
             )
             loginViewModel.commitLogIn(binding, requireActivity(), requireContext())
         }
+    }
+
+    private fun createNewAccountText() {
+        SpannableStringBuilder("Don't have an account?")
+            .bold {
+                append(" Create new!")
+            }
+            .append("\n")
     }
 }

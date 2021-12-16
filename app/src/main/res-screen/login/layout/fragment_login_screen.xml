@@ -130,61 +130,37 @@
             android:textColor="@color/white"
             android:textSize="21sp" />
 
+    <TextView
+        android:id="@+id/create_new_account_text_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/login_button"
+        android:fontFamily="@font/raleway_regular"
+        android:text="@string/do_you_have_an_account"
+        android:textColor="@color/light_purple"
+        android:textSize="14sp" />
+
         <TextView
-            android:id="@+id/forgot_pass_text"
+            android:id="@+id/forgot_pass_text_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/raleway_regular"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintEnd_toStartOf="@id/get_new_pass_button"
-            app:layout_constraintTop_toBottomOf="@id/do_you_have"
-            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintEnd_toStartOf="@id/guideline_right"
+            app:layout_constraintTop_toBottomOf="@id/create_new_account_text_button"
             android:text="@string/forgot_password"
             android:textColor="@color/light_purple"
             android:textSize="14sp" />
-        <TextView
-            android:id="@+id/get_new_pass_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/create_new_account_button"
-            app:layout_constraintStart_toEndOf="@id/forgot_pass_text"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            android:fontFamily="@font/raleway_bold"
-            android:text="@string/get_new"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp" />
-
-        <TextView
-            android:id="@+id/do_you_have"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@id/guideline_left"
-            app:layout_constraintEnd_toStartOf="@id/create_new_account_button"
-            app:layout_constraintTop_toBottomOf="@id/login_button"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:fontFamily="@font/raleway_regular"
-            android:text="@string/do_you_have_an_account"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp" />
-        <TextView
-            android:id="@+id/create_new_account_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/login_button"
-            app:layout_constraintStart_toEndOf="@id/do_you_have"
-            app:layout_constraintEnd_toEndOf="@id/guideline_right"
-            android:fontFamily="@font/raleway_bold"
-            android:text="@string/create_new"
-            android:textColor="@color/light_purple"
-            android:textSize="14sp"
-            android:textAllCaps="false"/>
 
     <ImageView
         android:layout_width="300dp"
-        android:layout_height="400dp"
+        android:layout_height="350dp"
         android:adjustViewBounds="true"
         android:focusable="false"
-        android:maxHeight="670dp"
         android:paddingTop="300dp"
         android:scaleType="centerCrop"
         android:src="@drawable/login_boy"
