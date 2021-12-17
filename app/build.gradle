@@ -49,6 +49,22 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res',
+                            'src/main/res-screen/health',
+                            'src/main/res-screen/login',
+                            'src/main/res-screen/mood',
+                            'src/main/res-screen/notes',
+                            'src/main/res-screen/settings',
+                            'src/main/res-screen/statistics',
+                            'src/main/res-screen/splash',
+                            'src/main/res-screen/welcome'
+                    ]
+        }
+    }
 }
 
 dependencies {
