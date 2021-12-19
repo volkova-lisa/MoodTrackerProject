@@ -1,52 +1,73 @@
 package com.example.moodtrackerproject.ui.login
 
-import android.content.Context
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
-import com.example.moodtrackerproject.routing.Routes
-import com.example.moodtrackerproject.ui.NotesFragment
 import com.example.moodtrackerproject.utils.isEmailValid
 import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import java.lang.Exception
+class LoginViewModel() : ViewModel() {
 
-internal class LoginViewModel() : ViewModel() {
+    private val _loginOutputLiveData: MutableLiveData<LoginOutputs> =
+        MutableLiveData()
+    val loginOutputLiveData get() = _loginOutputLiveData
+
+    var databaseReference: DatabaseReference? = null
+    var database: FirebaseDatabase? = null
     private lateinit var auth: FirebaseAuth
 
-    private val _uiStateLiveData = MutableLiveData<LoginViewState>().apply {
-        value = LoginViewState()
-    }
-    val uiStateLiveData: LiveData<LoginViewState> = _uiStateLiveData
+    private val _loginStateLiveData: MutableLiveData<LoginViewState> =
+        MutableLiveData<LoginViewState>().apply {
+            value = LoginViewState()
+        }
+    val loginStateLiveData get() = _loginStateLiveData
 
-    fun checkLogInData(email: String, password: String, binding: FragmentLoginScreenBinding, context: Context) {
+    fun checkLogInData(email: String, password: String) {
         var isValid = true
-        if (!email.isEmpty() && !email.isEmailValid()) {
-            binding.emailInput.error = context.getString(R.string.registration_enter_email)
+
+        if (!email.isEmailValid()) {
+            setLoginOutput(LoginOutputs.ShowEmailInvalid)
             isValid = false
         }
-        if (!password.isEmpty() && !password.isPasswordValid()) {
-            binding.passInput.error = context.getString(R.string.registration_enter_pass)
+        if (!password.isPasswordValid()) {
+            setLoginOutput(LoginOutputs.ShowPasswordInvalid)
             isValid = false
+        }
+
+        if (isValid) {
+            return loginUserWithEmailAndPassword(email, password)
+        } else {
+            setLoginOutput(LoginOutputs.ShowNoInternet)
         }
     }
 
-    fun commitLogIn(binding: FragmentLoginScreenBinding, fragmentActivity: FragmentActivity, context: Context) {
+    private fun loginUserWithEmailAndPassword(email: String, password: String) {
         auth = FirebaseAuth.getInstance()
-        auth.signInWithEmailAndPassword(binding.emailInput.text.toString(), binding.passInput.text.toString())
+        auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (it.isSuccessful) {
-                    Routes.goTo(fragmentActivity, NotesFragment())
-                } else Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
+                    // Routes.goTo(fragmentActivity, NotesFragment())
+                } else {
+                    // Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
+                }
             }
     }
 
-    data class LoginViewState(
-        var IS_LOADING: Boolean = false,
-        var ERROR: String = "Error occurred",
-        var SUCCESS: String = "Success"
-    )
+    fun setLoginOutput(loginOutput: LoginOutputs) {
+        loginOutputLiveData.value = loginOutput
+    }
+}
+
+data class LoginViewState(var isLoading: Boolean = false)
+
+sealed class LoginOutputs {
+    class ShowLoginError(val exception: Exception) : LoginOutputs()
+    object StartNotesScreen : LoginOutputs()
+    object StartLogInScreen : LoginOutputs()
+    object StartResetPasswordScreen : LoginOutputs()
+    object ShowNoInternet : LoginOutputs()
+    object ShowPasswordInvalid : LoginOutputs()
+    object ShowEmailInvalid : LoginOutputs()
 }

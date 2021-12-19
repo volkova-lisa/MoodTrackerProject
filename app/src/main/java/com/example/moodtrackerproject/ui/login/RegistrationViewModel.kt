@@ -1,68 +1,93 @@
 package com.example.moodtrackerproject.ui.login
 
-import android.content.Context
-import android.widget.Toast
-import androidx.fragment.app.FragmentActivity
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
 import com.example.moodtrackerproject.utils.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class RegistrationViewModel : ViewModel() {
+
+    private val _registrationOutputLiveData: MutableLiveData<RegistrationOutputs> =
+        MutableLiveData()
+    val registrationOutputLiveData get() = _registrationOutputLiveData
+
     var databaseReference: DatabaseReference? = null
     var database: FirebaseDatabase? = null
 
     private lateinit var auth: FirebaseAuth
 
-    fun checkRegistrationData(email: String, password: String, fullName: String, binding: FragmentRegistrationBinding, context: Context) {
+    private val _registrationStateLiveData: MutableLiveData<RegistrationViewState> =
+        MutableLiveData<RegistrationViewState>().apply {
+            value = RegistrationViewState()
+        }
+    val registrationStateLiveData get() = _registrationStateLiveData
+
+    fun checkRegistrationData(
+        email: String,
+        password: String,
+        fullName: String
+    ) {
         var isValid = true
-        if (!fullName.isEmpty()) {
-            binding.nameInput.error = context.getString(R.string.enter_name)
+
+        if (!fullName.isNameValid()) {
+            setRegistrationOutput(ShowNameInvalid)
             isValid = false
+        }
+        if (!email.isEmailValid()) {
+            setRegistrationOutput(ShowEmailInvalid)
+            isValid = false
+        }
+        if (!password.isPasswordValid()) {
+            setRegistrationOutput(ShowPasswordInvalid)
+            isValid = false
+        }
+
+        if (isValid) {
+            return registerUserWithEmailAndPassword(fullName, email, password)
         } else {
-            FULL_NAME = fullName
-        }
-
-        if (!email.isEmpty()) {
-            if (!email.isEmailValid()) {
-                binding.emailInput.error = context.getString(R.string.registration_enter_email)
-                isValid = false
-            } else {
-                EMAIL = email
-            }
-        }
-
-        if (!password.isEmpty()) {
-            if (!password.isPasswordValid()) {
-                binding.passInput.error = context.getString(R.string.registration_enter_pass)
-                isValid = false
-            } else {
-                PASSWORD = password
-            }
+            setRegistrationOutput(ShowNoInternet)
         }
     }
 
-    fun commitRegistration(binding: FragmentRegistrationBinding, fragmentActivity: FragmentActivity, context: Context) {
-        auth = FirebaseAuth.getInstance()
-        database = FirebaseDatabase.getInstance()
-        databaseReference = database?.reference!!.child(PROFILE)
+    private fun registerUserWithEmailAndPassword(name: String, email: String, password: String) {
+        CoroutineScope(Dispatchers.Main).launch {
+            auth = FirebaseAuth.getInstance()
+            database = FirebaseDatabase.getInstance()
+            databaseReference = database?.reference!!.child(PROFILE)
 
-        auth.createUserWithEmailAndPassword(binding.emailInput.text.toString(), binding.passInput.text.toString())
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    val currentUser = auth.currentUser
-                    val currentUserDb = databaseReference?.child((currentUser?.uid!!))
-                    currentUserDb?.child(NAME)?.setValue(binding.nameInput.text.toString())
-                    Toast.makeText(context, context.getString(R.string.reg_successful), Toast.LENGTH_SHORT).show()
-                    val transaction = fragmentActivity.supportFragmentManager.beginTransaction()
-                    transaction.replace(R.id.nav_host_fragment, LoginFragment())
-                    transaction.commit()
-                } else {
-                    Toast.makeText(context, context.getString(R.string.reg_failed), Toast.LENGTH_SHORT).show()
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        val currentUser = auth.currentUser
+                        val currentUserDb = databaseReference?.child((currentUser?.uid!!))
+                        currentUserDb?.child(NAME)?.setValue(name)
+                        // toast successful
+                        // Routes.goTo() login
+                    } else {
+                        // toast failed
+                    }
                 }
-            }
+        }
+    }
+
+    fun setRegistrationOutput(registrationOutput: RegistrationOutputs) {
+        registrationOutputLiveData.value = registrationOutput
     }
 }
+
+data class RegistrationViewState(var isLoading: Boolean = false)
+
+sealed class RegistrationOutputs
+class ShowRegistrationError(val exception: Exception) : RegistrationOutputs()
+object StartLogInScreen : RegistrationOutputs()
+object StartResetPasswordScreen : RegistrationOutputs()
+object ShowNoInternet : RegistrationOutputs()
+object ShowPasswordInvalid : RegistrationOutputs()
+object ShowEmailInvalid : RegistrationOutputs()
+object ShowNameInvalid : RegistrationOutputs()
