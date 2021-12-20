@@ -1,7 +1,5 @@
 package com.example.moodtrackerproject.ui.login
 
-import java.lang.Exception
-
 data class LoginViewState(
     val isLoading: Boolean = false,
     val action: LoginAction? = null,

@@ -19,7 +19,7 @@ class LoginViewModel() : ViewModel() {
 
     private val _loginStateLiveData: MutableLiveData<LoginViewState> =
         MutableLiveData<LoginViewState>().apply {
-            value = LoginViewState()
+            value = state
         }
     val liveData get() = _loginStateLiveData
 
@@ -40,10 +40,11 @@ class LoginViewModel() : ViewModel() {
 
     private fun loginUserWithEmailAndPassword(email: String, password: String) {
         CoroutineScope(Dispatchers.Main).launch {
+            liveData.value = state.copy(isLoading = true)
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
+                    liveData.value = state.copy(isLoading = false)
                     if (it.isSuccessful) {
-                        // Routes.goTo(fragmentActivity, NotesFragment())
                         liveData.value = state.copy(action = LoginAction.StartNotesScreen)
                     } else {
                         // Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()

@@ -5,6 +5,7 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
@@ -16,8 +17,6 @@ import com.example.moodtrackerproject.ui.login.LoginError.*
 import com.example.moodtrackerproject.ui.registration.RegistrationFragment
 import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import java.lang.Exception
 
 class LoginFragment : Fragment() {
 
@@ -72,9 +71,15 @@ class LoginFragment : Fragment() {
     }
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
-            TODO("//to start progress bar")
+            // ("//to start progress bar")
+            binding.run {
+                progressBar.isVisible = true
+                loginButton.text = ""
+            }
         } else {
-            // to stop??
+            binding.run {
+                progressBar.isVisible = false
+            }
         }
     }
     private fun removeInputsErrors() {
@@ -100,7 +105,6 @@ class LoginFragment : Fragment() {
             )
         }
     }
-
 
     private fun showNoInternetError() {
         Snackbar.make(

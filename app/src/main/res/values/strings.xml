@@ -45,6 +45,7 @@
     <string name="add_name">Please add name</string>
     <string name="invalid_email">Invalid Email</string>
     <string name="invalid_password">Invalid Password</string>
+    <string name="created">Created!</string>
 
 
 </resources>

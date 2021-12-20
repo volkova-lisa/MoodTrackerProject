@@ -5,6 +5,7 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
@@ -73,8 +74,14 @@ class RegistrationFragment : Fragment() {
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
             // ("//to start progress bar")
+            binding.run {
+                progressBar.isVisible = true
+                registerButton.text = ""
+            }
         } else {
-            // to stop??
+            binding.run {
+                progressBar.isVisible = false
+            }
         }
     }
 
