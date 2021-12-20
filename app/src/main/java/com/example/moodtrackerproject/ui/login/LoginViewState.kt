@@ -15,7 +15,6 @@ sealed class LoginAction {
 }
 
 sealed class LoginError {
-    class ShowLoginError(val exception: Exception) : LoginError()
     object ShowNoInternet : LoginError()
     object ShowPasswordInvalid : LoginError()
     object ShowEmailInvalid : LoginError()

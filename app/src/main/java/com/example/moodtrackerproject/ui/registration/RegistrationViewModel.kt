@@ -31,6 +31,7 @@ class RegistrationViewModel : ViewModel() {
     ) {
         when {
             fullName.isNotEmpty() && email.isEmailValid() && password.isPasswordValid() -> {
+
                 registerUserWithEmailAndPassword(fullName, email, password)
             }
             fullName.isEmpty() ->
@@ -54,8 +55,8 @@ class RegistrationViewModel : ViewModel() {
     private fun registerUserWithEmailAndPassword(name: String, email: String, password: String) {
         CoroutineScope(Dispatchers.Main).launch {
             databaseReference = database.reference.child(PROFILE)
-
             liveData.value = state.copy(isLoading = true)
+
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
                     liveData.value = state.copy(isLoading = false)
@@ -63,13 +64,11 @@ class RegistrationViewModel : ViewModel() {
                         val currentUser = auth.currentUser
                         val currentUserDb = databaseReference?.child((currentUser?.uid!!))
                         currentUserDb?.child(NAME)?.setValue(name)
-                        // toast successful
-                        // Routes.goTo() login
-                        liveData.value = state.copy(action = RegistrationAction.StartLogInScreen)
+                        liveData.value =
+                            state.copy(action = RegistrationAction.StartLogInScreen)
                     } else {
-                        // toast failed
-                        // setRegistrationOutput(ShowNoInternet)
-                        // liveData.value = state.copy(error = RegistrationError.ShowRegistrationError)
+                        liveData.value =
+                            state.copy(error = RegistrationError.ShowRegistrationError)
                     }
                 }
         }

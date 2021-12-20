@@ -1,7 +1,5 @@
 package com.example.moodtrackerproject.ui.registration
 
-import java.lang.Exception
-
 data class RegistrationViewState(
     val isLoading: Boolean = false,
     val action: RegistrationAction? = null,
@@ -14,7 +12,7 @@ sealed class RegistrationAction {
 }
 
 sealed class RegistrationError {
-    class ShowRegistrationError(val exception: Exception) : RegistrationError()
+    object ShowRegistrationError : RegistrationError()
     object ShowNoInternet : RegistrationError()
     object ShowPasswordInvalid : RegistrationError()
     object ShowEmailInvalid : RegistrationError()

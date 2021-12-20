@@ -5,7 +5,6 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
@@ -78,23 +77,19 @@ class LoginFragment : Fragment() {
             // to stop??
         }
     }
-
     private fun removeInputsErrors() {
         binding.run {
             emailInput.error = null
             passInput.error = null
         }
     }
-
     private fun handleError(loginError: LoginError) {
         when (loginError) {
             is ShowNoInternet -> showNoInternetError()
             is ShowPasswordInvalid -> binding.passInput.error = getString(R.string.invalid_password)
             is ShowEmailInvalid -> binding.emailInput.error = getString(R.string.invalid_email)
-            is ShowLoginError -> showLoginError(loginError.exception)
         }
     }
-
     private fun handleAction(loginAction: LoginAction) {
         when (loginAction) {
             is StartNotesScreen -> Routes.goTo(requireActivity(), NotesFragment())
@@ -106,17 +101,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showLoginError(exception: Exception?) {
-        val errorMessage = when (exception) {
-            is FirebaseAuthUserCollisionException -> {
-                resources.getString(R.string.email_address_collision)
-            }
-            else -> {
-                resources.getString(R.string.unknown_error)
-            }
-        }
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
-    }
 
     private fun showNoInternetError() {
         Snackbar.make(

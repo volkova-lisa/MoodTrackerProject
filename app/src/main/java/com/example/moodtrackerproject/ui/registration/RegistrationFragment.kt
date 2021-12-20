@@ -5,7 +5,6 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
@@ -16,8 +15,6 @@ import com.example.moodtrackerproject.ui.registration.RegistrationAction.*
 import com.example.moodtrackerproject.ui.registration.RegistrationError.*
 import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.FirebaseAuthUserCollisionException
-import java.lang.Exception
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
@@ -100,7 +97,7 @@ class RegistrationFragment : Fragment() {
                 binding.emailInput.error = getString(R.string.invalid_email)
             }
             is ShowRegistrationError -> {
-                showRegistrationError(registrationError.exception)
+                binding.emailInput.error = getString(R.string.email_address_collision)
             }
             is ShowNameInvalid -> {
                 binding.nameInput.error = getString(R.string.add_name)
@@ -118,18 +115,6 @@ class RegistrationFragment : Fragment() {
                 // https://github.com/JakeWharton/timber
             }
         }
-    }
-
-    private fun showRegistrationError(exception: Exception?) {
-        val errorMessage = when (exception) {
-            is FirebaseAuthUserCollisionException -> {
-                resources.getString(R.string.email_address_collision)
-            }
-            else -> {
-                resources.getString(R.string.unknown_error)
-            }
-        }
-        Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
     }
 
     private fun showNoInternetError() {
