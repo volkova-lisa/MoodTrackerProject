@@ -7,67 +7,49 @@ import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import java.lang.Exception
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 class LoginViewModel() : ViewModel() {
+    private val database: FirebaseDatabase by lazy { FirebaseDatabase.getInstance() }
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+    private var databaseReference: DatabaseReference? = null
 
-    private val _loginOutputLiveData: MutableLiveData<LoginOutputs> =
-        MutableLiveData()
-    val loginOutputLiveData get() = _loginOutputLiveData
-
-    var databaseReference: DatabaseReference? = null
-    var database: FirebaseDatabase? = null
-    private lateinit var auth: FirebaseAuth
+    private val state = LoginViewState()
 
     private val _loginStateLiveData: MutableLiveData<LoginViewState> =
         MutableLiveData<LoginViewState>().apply {
             value = LoginViewState()
         }
-    val loginStateLiveData get() = _loginStateLiveData
+    val liveData get() = _loginStateLiveData
 
     fun checkLogInData(email: String, password: String) {
-        var isValid = true
-
-        if (!email.isEmailValid()) {
-            setLoginOutput(LoginOutputs.ShowEmailInvalid)
-            isValid = false
-        }
-        if (!password.isPasswordValid()) {
-            setLoginOutput(LoginOutputs.ShowPasswordInvalid)
-            isValid = false
-        }
-
-        if (isValid) {
-            return loginUserWithEmailAndPassword(email, password)
-        } else {
-            setLoginOutput(LoginOutputs.ShowNoInternet)
+        when {
+            email.isEmailValid() && password.isPasswordValid() -> {
+                loginUserWithEmailAndPassword(email, password)
+            }
+            !email.isEmailValid() -> liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
+            !password.isPasswordValid() -> liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)
+            !email.isEmailValid() && !password.isPasswordValid() ->
+                {
+                    liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
+                    liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)
+                }
         }
     }
 
     private fun loginUserWithEmailAndPassword(email: String, password: String) {
-        auth = FirebaseAuth.getInstance()
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    // Routes.goTo(fragmentActivity, NotesFragment())
-                } else {
-                    // Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
+        CoroutineScope(Dispatchers.Main).launch {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        // Routes.goTo(fragmentActivity, NotesFragment())
+                        liveData.value = state.copy(action = LoginAction.StartNotesScreen)
+                    } else {
+                        // Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
+                        // liveData.value = state.copy(error = LoginError.ShowLoginError)
+                    }
                 }
-            }
+        }
     }
-
-    fun setLoginOutput(loginOutput: LoginOutputs) {
-        loginOutputLiveData.value = loginOutput
-    }
-}
-
-data class LoginViewState(var isLoading: Boolean = false)
-
-sealed class LoginOutputs {
-    class ShowLoginError(val exception: Exception) : LoginOutputs()
-    object StartNotesScreen : LoginOutputs()
-    object StartLogInScreen : LoginOutputs()
-    object StartResetPasswordScreen : LoginOutputs()
-    object ShowNoInternet : LoginOutputs()
-    object ShowPasswordInvalid : LoginOutputs()
-    object ShowEmailInvalid : LoginOutputs()
 }

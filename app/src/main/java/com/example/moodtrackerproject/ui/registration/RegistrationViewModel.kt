@@ -33,9 +33,21 @@ class RegistrationViewModel : ViewModel() {
             fullName.isNotEmpty() && email.isEmailValid() && password.isPasswordValid() -> {
                 registerUserWithEmailAndPassword(fullName, email, password)
             }
-            fullName.isEmpty() -> liveData.value = state.copy(error = RegistrationError.ShowNameInvalid)
-            !email.isEmailValid() -> liveData.value = state.copy(error = RegistrationError.ShowEmailInvalid)
-            !password.isPasswordValid() -> liveData.value = state.copy(error = RegistrationError.ShowPasswordInvalid)
+            fullName.isEmpty() ->
+                liveData.value =
+                    state.copy(error = RegistrationError.ShowNameInvalid)
+            !email.isEmailValid() ->
+                liveData.value =
+                    state.copy(error = RegistrationError.ShowEmailInvalid)
+            !password.isPasswordValid() ->
+                liveData.value =
+                    state.copy(error = RegistrationError.ShowPasswordInvalid)
+            fullName.isEmpty() && !email.isEmailValid() && !password.isPasswordValid() ->
+                {
+                    state.copy(error = RegistrationError.ShowNameInvalid)
+                    state.copy(error = RegistrationError.ShowEmailInvalid)
+                    state.copy(error = RegistrationError.ShowEmailInvalid)
+                }
         }
     }
 
@@ -53,9 +65,11 @@ class RegistrationViewModel : ViewModel() {
                         currentUserDb?.child(NAME)?.setValue(name)
                         // toast successful
                         // Routes.goTo() login
+                        liveData.value = state.copy(action = RegistrationAction.StartLogInScreen)
                     } else {
                         // toast failed
                         // setRegistrationOutput(ShowNoInternet)
+                        // liveData.value = state.copy(error = RegistrationError.ShowRegistrationError)
                     }
                 }
         }

@@ -2,7 +2,6 @@ package com.example.moodtrackerproject.ui.registration
 
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,9 @@ import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
 import com.example.moodtrackerproject.routing.Routes
 import com.example.moodtrackerproject.ui.login.LoginFragment
-import com.example.moodtrackerproject.ui.login.ResetPasswordFragment
 import com.example.moodtrackerproject.ui.registration.RegistrationAction.*
 import com.example.moodtrackerproject.ui.registration.RegistrationError.*
+import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import java.lang.Exception
@@ -93,22 +92,18 @@ class RegistrationFragment : Fragment() {
         when (registrationError) {
             is ShowNoInternet -> {
                 showNoInternetError()
-                Log.d("", "CCCCCCCCCCCCCCCCCCCCCCC")
             }
             is ShowPasswordInvalid -> {
-                binding.passInput.error = "Invalid Password"
-                Log.d("", "DDDDDDDDDDDDDDDDDDDDDD")
+                binding.passInput.error = getString(R.string.invalid_password)
             }
             is ShowEmailInvalid -> {
-                binding.emailInput.error = "Invalid Email"
-                Log.d("", "EEEEEEEEEEEEEEEEEEEEEE")
+                binding.emailInput.error = getString(R.string.invalid_email)
             }
             is ShowRegistrationError -> {
-                showLoginError(registrationError.exception)
-                Log.d("", "DDDDDDDDDDDDDDDDDDDDDDD")
+                showRegistrationError(registrationError.exception)
             }
-            ShowNameInvalid -> {
-                TODO()
+            is ShowNameInvalid -> {
+                binding.nameInput.error = getString(R.string.add_name)
             }
         }
     }
@@ -117,17 +112,15 @@ class RegistrationFragment : Fragment() {
         when (registrationAction) {
             is StartLogInScreen -> {
                 Routes.goTo(requireActivity(), LoginFragment())
-                Log.d("", "AAAAAAAAAAAAAAAAAAAAAA")
             }
             is StartResetPasswordScreen -> {
                 Routes.goTo(requireActivity(), ResetPasswordFragment())
                 // https://github.com/JakeWharton/timber
-                Log.d("", "BBBBBBBBBBBBBBBBBBBBBB")
             }
         }
     }
 
-    private fun showLoginError(exception: Exception?) {
+    private fun showRegistrationError(exception: Exception?) {
         val errorMessage = when (exception) {
             is FirebaseAuthUserCollisionException -> {
                 resources.getString(R.string.email_address_collision)

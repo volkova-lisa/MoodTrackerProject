@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.login
 
 import android.os.Bundle
+import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,17 +11,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.routing.Routes
+import com.example.moodtrackerproject.ui.NotesFragment
+import com.example.moodtrackerproject.ui.login.LoginAction.*
+import com.example.moodtrackerproject.ui.login.LoginError.*
 import com.example.moodtrackerproject.ui.registration.RegistrationFragment
+import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import java.lang.Exception
 
 class LoginFragment : Fragment() {
 
-    private var _binding: FragmentLoginScreenBinding? = null
-    private val binding get() = _binding!!
-
-    private val loginViewModel: LoginViewModel by lazy {
+    private lateinit var binding: FragmentLoginScreenBinding
+    private val viewModel: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
 
@@ -28,27 +31,45 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
-        binding.createNewAccountTextButton.setOnClickListener {
-            Routes.goTo(requireActivity(), RegistrationFragment())
-        }
-
-        pickDataForLogin()
-
-        loginViewModel.loginOutputLiveData.observe(
-            requireActivity(),
-            { output -> showLoginOutput(output) }
-        )
-        loginViewModel.loginStateLiveData.observe(requireActivity(), { state -> updateUi(state) })
-
-        binding.pass.setEndIconOnClickListener {
-            var timesPressed = true
-            TODO("//how to change it normally?")
-        }
+        binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-    private fun updateUi(state: LoginViewState) {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.run {
+            createNewAccountTextButton.setOnClickListener {
+                Routes.goTo(requireActivity(), RegistrationFragment())
+            }
+            loginButton.setOnClickListener {
+                removeInputsErrors()
+                viewModel.checkLogInData(
+                    binding.emailInput.text.toString(),
+                    binding.passInput.text.toString()
+                )
+            }
+            pass.setEndIconOnClickListener {
+                var timesPressed = true
+                // ("//how to change it normally?")
+                passInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
+                if (passInput.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
+                    // set icon
+                } else {
+                    // set icon
+                }
+            }
+        }
+
+        viewModel.liveData.observe(viewLifecycleOwner, {
+            render(it)
+        })
+    }
+
+    private fun render(state: LoginViewState) {
         showProgress(state.isLoading)
+        state.action?.let { handleAction(it) }
+        state.error?.let { handleError(it) }
     }
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
@@ -58,29 +79,30 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun pickDataForLogin() {
-        binding.loginButton.setOnClickListener {
-            removeInputsErrors()
-            loginViewModel.checkLogInData(
-                binding.emailInput.text.toString(),
-                binding.passInput.text.toString()
-            )
+    private fun removeInputsErrors() {
+        binding.run {
+            emailInput.error = null
+            passInput.error = null
         }
     }
 
-    private fun removeInputsErrors() {
-        binding.emailInput.error = ""
-        binding.passInput.error = ""
+    private fun handleError(loginError: LoginError) {
+        when (loginError) {
+            is ShowNoInternet -> showNoInternetError()
+            is ShowPasswordInvalid -> binding.passInput.error = getString(R.string.invalid_password)
+            is ShowEmailInvalid -> binding.emailInput.error = getString(R.string.invalid_email)
+            is ShowLoginError -> showLoginError(loginError.exception)
+        }
     }
 
-    private fun showLoginOutput(loginOutput: LoginOutputs) {
-        when (loginOutput) {
-            is LoginOutputs.StartLogInScreen -> Routes.goTo(requireActivity(), LoginFragment())
-            is LoginOutputs.StartResetPasswordScreen -> Routes.goTo(requireActivity(), ResetPasswordFragment())
-            is LoginOutputs.ShowNoInternet -> showNoInternetError()
-            is LoginOutputs.ShowPasswordInvalid -> binding.passInput.error = "Invalid Password"
-            is LoginOutputs.ShowEmailInvalid -> binding.emailInput.error = "Invalid Email"
-            is LoginOutputs.ShowLoginError -> showLoginError(loginOutput.exception)
+    private fun handleAction(loginAction: LoginAction) {
+        when (loginAction) {
+            is StartNotesScreen -> Routes.goTo(requireActivity(), NotesFragment())
+            is StartRegistrationScreen -> Routes.goTo(requireActivity(), LoginFragment())
+            is StartResetPasswordScreen -> Routes.goTo(
+                requireActivity(),
+                ResetPasswordFragment()
+            )
         }
     }
 
