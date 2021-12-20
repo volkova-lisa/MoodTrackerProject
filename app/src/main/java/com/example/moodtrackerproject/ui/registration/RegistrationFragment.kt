@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.registration
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ class RegistrationFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,9 +55,9 @@ class RegistrationFragment : Fragment() {
                 // ("//how to change it normally?")
                 passInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 if (passInput.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                    // set icon
+                    pass.endIconDrawable = resources.getDrawable(R.drawable.ic_welcome_lock)
                 } else {
-                    // set icon
+                    pass.endIconDrawable = resources.getDrawable(R.drawable.ic_welcome_unlock)
                 }
             }
         }
