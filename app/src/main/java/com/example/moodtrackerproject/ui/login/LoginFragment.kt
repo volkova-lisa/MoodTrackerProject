@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.routing.Routes
+import com.example.moodtrackerproject.ui.registration.RegistrationFragment
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import java.lang.Exception

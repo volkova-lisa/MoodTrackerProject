@@ -1,4 +1,4 @@
 package com.example.moodtrackerproject.utils
 
-val PROFILE = "profile"
-val NAME = "name"
+const val PROFILE = "profile"
+const val NAME = "name"

@@ -8,8 +8,6 @@ fun Fragment.ifNetworkIsAvailable(): Boolean {
     return true
 }
 
-fun String.isNameValid() = isNotEmpty()
-
 fun String.isEmailValid() =
     isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:id="@+id/registerScreen"
     android:layout_height="match_parent"
-    tools:context=".ui.login.RegistrationFragment">
+    tools:context=".ui.registration.RegistrationFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
