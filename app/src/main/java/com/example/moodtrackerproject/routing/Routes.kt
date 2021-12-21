@@ -2,15 +2,16 @@ package com.example.moodtrackerproject.routing
 
 import android.content.Context
 import android.content.Intent
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.ui.LoginFragment
 
 object Routes {
-    fun goToLogin(fragmentActivity: FragmentActivity) {
+
+    fun goTo(fragmentActivity: FragmentActivity, fragment: Fragment) {
         val transaction = fragmentActivity.supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.nav_host_fragment, LoginFragment())
+        transaction.replace(R.id.nav_host_fragment, fragment)
         transaction.commit()
     }
 

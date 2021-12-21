@@ -38,6 +38,7 @@
         android:fontFamily="@font/raleway_regular"
         android:text="@string/welcome_screen_your_new"
         android:textColor="@color/light_purple"
+
         android:textSize="18sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -51,6 +52,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/your_text" />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/welcome_button"
