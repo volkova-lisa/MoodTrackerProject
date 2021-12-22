@@ -18,7 +18,7 @@ android {
                             'src/main/res-screen/login',
                             'src/main/res-screen/mood',
                             'src/main/res-screen/notes',
-                            'src/main/res-screen/settings',
+                            'src/main/res-screen/home',
                             'src/main/res-screen/statistics',
                             'src/main/res-screen/splash',
                             'src/main/res-screen/welcome'
@@ -58,7 +58,7 @@ android {
                             'src/main/res-screen/login',
                             'src/main/res-screen/mood',
                             'src/main/res-screen/notes',
-                            'src/main/res-screen/settings',
+                            'src/main/res-screen/home',
                             'src/main/res-screen/statistics',
                             'src/main/res-screen/splash',
                             'src/main/res-screen/welcome'
@@ -81,6 +81,7 @@ dependencies {
 
     implementation 'com.google.firebase:firebase-analytics:20.0.1'
     implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     //Ktlint
     ktlint 'com.pinterest:ktlint:0.42.1'
 

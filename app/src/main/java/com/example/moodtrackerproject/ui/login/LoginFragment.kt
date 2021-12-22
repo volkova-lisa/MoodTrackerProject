@@ -11,9 +11,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.routing.Routes
-import com.example.moodtrackerproject.ui.NotesFragment
 import com.example.moodtrackerproject.ui.login.LoginAction.*
 import com.example.moodtrackerproject.ui.login.LoginError.*
+import com.example.moodtrackerproject.ui.notes.NotesFragment
 import com.example.moodtrackerproject.ui.registration.RegistrationFragment
 import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
