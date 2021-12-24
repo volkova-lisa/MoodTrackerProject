@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
 import com.example.moodtrackerproject.routing.Routes
 import com.example.moodtrackerproject.ui.login.LoginFragment
@@ -26,7 +27,7 @@ class WelcomeFragment : Fragment() {
         _binding = FragmentWelcomeScreenBinding.inflate(layoutInflater, container, false)
 
         binding.welcomeButton.setOnClickListener {
-            Routes.goTo(requireActivity(), LoginFragment())
+            Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
         }
 
         return binding.root

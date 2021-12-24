@@ -16,8 +16,8 @@
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes" >
         <action
-            android:id="@+id/action_notesFragment_to_createNewNoteFragment2"
-            app:destination="@id/createNewNoteFragment2" />
+            android:id="@+id/action_notesFragment_to_createNewNoteFragment"
+            app:destination="@id/createNewNoteFragment" />
     </fragment>
     <fragment
         android:id="@+id/moodFragment"
@@ -39,7 +39,7 @@
         android:label="fragment_welcome_screen"
         tools:layout="@layout/fragment_welcome_screen" >
         <action
-            android:id="@+id/action_welcomeFragment_to_loginFragment2"
+            android:id="@+id/action_welcomeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
@@ -57,11 +57,17 @@
         android:label="fragment_login_screen"
         tools:layout="@layout/fragment_login_screen" >
         <action
-            android:id="@+id/action_loginFragment2_to_notesFragment"
+            android:id="@+id/action_loginFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_resetPasswordFragment"
+            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
-        android:id="@+id/createNewNoteFragment2"
+        android:id="@+id/createNewNoteFragment"
         android:name="com.example.moodtrackerproject.ui.CreateNewNoteFragment"
         android:label="fragment_create_new_note_fragment"
         tools:layout="@layout/fragment_create_new_note" >
@@ -73,10 +79,22 @@
         android:id="@+id/registrationFragment"
         android:name="com.example.moodtrackerproject.ui.registration.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" />
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.moodtrackerproject.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="com.example.moodtrackerproject.ui.reset.ResetPasswordFragment"
+        android:label="ResetPasswordFragment" >
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 </navigation>

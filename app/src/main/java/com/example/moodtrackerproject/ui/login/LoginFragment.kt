@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.routing.Routes
@@ -19,12 +20,10 @@ import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
-
     private lateinit var binding: FragmentLoginScreenBinding
     private val viewModel: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,13 +31,11 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.run {
             createNewAccountTextButton.setOnClickListener {
-                Routes.goTo(requireActivity(), RegistrationFragment())
+                Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), RegistrationFragment())
             }
             loginButton.setOnClickListener {
                 removeInputsErrors()
@@ -58,12 +55,10 @@ class LoginFragment : Fragment() {
                 }
             }
         }
-
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
     }
-
     private fun render(state: LoginViewState) {
         showProgress(state.isLoading)
         state.action?.let { handleAction(it) }
@@ -97,15 +92,25 @@ class LoginFragment : Fragment() {
     }
     private fun handleAction(loginAction: LoginAction) {
         when (loginAction) {
-            is StartNotesScreen -> Routes.goTo(requireActivity(), NotesFragment())
-            is StartRegistrationScreen -> Routes.goTo(requireActivity(), LoginFragment())
-            is StartResetPasswordScreen -> Routes.goTo(
-                requireActivity(),
-                ResetPasswordFragment()
-            )
+            is StartNotesScreen -> {
+//                Routes.getInstance(requireActivity() as MainActivity)
+//                    .goTo(requireActivity(), NotesFragment())
+                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.nav_host_fragment, NotesFragment())
+                transaction.commit()
+            }
+            is StartRegistrationScreen -> {
+                Routes.getInstance(requireActivity() as MainActivity)
+                    .goTo(requireActivity(), LoginFragment())
+            }
+            is StartResetPasswordScreen -> {
+                Routes.getInstance(requireActivity() as MainActivity).goTo(
+                    requireActivity(),
+                    ResetPasswordFragment()
+                )
+            }
         }
     }
-
     private fun showNoInternetError() {
         Snackbar.make(
             binding.loginScreen,

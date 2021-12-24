@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.ui.login
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.utils.Preference
 import com.example.moodtrackerproject.utils.isEmailValid
 import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
@@ -46,6 +47,7 @@ class LoginViewModel() : ViewModel() {
                     liveData.value = state.copy(isLoading = false)
                     if (it.isSuccessful) {
                         liveData.value = state.copy(action = LoginAction.StartNotesScreen)
+                        Preference.setInitUser(true)
                     } else {
                         // Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
                         // liveData.value = state.copy(error = LoginError.ShowLoginError)

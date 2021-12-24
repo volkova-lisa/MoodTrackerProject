@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.moodtrackerproject.databinding.ActivityMainBinding
+import com.example.moodtrackerproject.utils.Preference
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,11 +17,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController: NavController = navHostFragment.navController
         binding.bottomNavigation.setupWithNavController(navController)
+        setContentView(binding.root)
+
+        Preference.getPreference(this)
 
 //        navController.addOnDestinationChangedListener { _, destination, _ ->
 //            Log.d("HELLO", destination.toString())
@@ -29,6 +32,10 @@ class MainActivity : AppCompatActivity() {
 //                R.id.welcomeFragment -> binding.bottomNavigation.visibility = View.GONE
 //                R.id.notesFragment -> binding.bottomNavigation.visibility = View.VISIBLE
 //            }
+//        }
+
+//        if(!Preference.getInitUser()){
+//            navController.navigate()
 //        }
     }
 }

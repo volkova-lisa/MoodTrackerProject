@@ -9,13 +9,13 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
 import com.example.moodtrackerproject.routing.Routes
 import com.example.moodtrackerproject.ui.login.LoginFragment
 import com.example.moodtrackerproject.ui.registration.RegistrationAction.*
 import com.example.moodtrackerproject.ui.registration.RegistrationError.*
-import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
 
 class RegistrationFragment : Fragment() {
@@ -47,7 +47,7 @@ class RegistrationFragment : Fragment() {
                 )
             }
             alreadyHaveTextButton.setOnClickListener {
-                Routes.goTo(requireActivity(), LoginFragment())
+                Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
             }
 
             pass.setEndIconOnClickListener {
@@ -117,11 +117,7 @@ class RegistrationFragment : Fragment() {
     private fun handleAction(registrationAction: RegistrationAction) {
         when (registrationAction) {
             is StartLogInScreen -> {
-                Routes.goTo(requireActivity(), LoginFragment())
-            }
-            is StartResetPasswordScreen -> {
-                Routes.goTo(requireActivity(), ResetPasswordFragment())
-                // https://github.com/JakeWharton/timber
+                Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
             }
         }
     }
