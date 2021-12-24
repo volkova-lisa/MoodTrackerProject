@@ -14,7 +14,7 @@
         android:id="@+id/notesFragment"
         android:name="com.example.moodtrackerproject.ui.notes.NotesFragment"
         android:label="fragment_notes"
-        tools:layout="@layout/fragment_notes" >
+        tools:layout="@layout/fragment_notes">
         <action
             android:id="@+id/action_notesFragment_to_createNewNoteFragment"
             app:destination="@id/createNewNoteFragment" />
@@ -23,7 +23,7 @@
         android:id="@+id/moodFragment"
         android:name="com.example.moodtrackerproject.ui.MoodFragment"
         android:label="fragment_mood"
-        tools:layout="@layout/fragment_mood" >
+        tools:layout="@layout/fragment_mood">
         <action
             android:id="@+id/action_moodFragment_to_addMoodFragment"
             app:destination="@id/addMoodFragment" />
@@ -37,7 +37,7 @@
         android:id="@+id/welcomeFragment"
         android:name="com.example.moodtrackerproject.ui.WelcomeFragment"
         android:label="fragment_welcome_screen"
-        tools:layout="@layout/fragment_welcome_screen" >
+        tools:layout="@layout/fragment_welcome_screen">
         <action
             android:id="@+id/action_welcomeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -46,7 +46,7 @@
         android:id="@+id/addMoodFragment"
         android:name="com.example.moodtrackerproject.ui.AddMoodFragment"
         android:label="fragment_add_mood"
-        tools:layout="@layout/fragment_add_mood" >
+        tools:layout="@layout/fragment_add_mood">
         <action
             android:id="@+id/action_addMoodFragment_to_moodFragment"
             app:destination="@id/moodFragment" />
@@ -55,7 +55,7 @@
         android:id="@+id/loginFragment"
         android:name="com.example.moodtrackerproject.ui.login.LoginFragment"
         android:label="fragment_login_screen"
-        tools:layout="@layout/fragment_login_screen" >
+        tools:layout="@layout/fragment_login_screen">
         <action
             android:id="@+id/action_loginFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
@@ -70,7 +70,7 @@
         android:id="@+id/createNewNoteFragment"
         android:name="com.example.moodtrackerproject.ui.CreateNewNoteFragment"
         android:label="fragment_create_new_note_fragment"
-        tools:layout="@layout/fragment_create_new_note" >
+        tools:layout="@layout/fragment_create_new_note">
         <action
             android:id="@+id/action_createNewNoteFragment2_to_notesFragment"
             app:destination="@id/notesFragment" />
@@ -79,7 +79,7 @@
         android:id="@+id/registrationFragment"
         android:name="com.example.moodtrackerproject.ui.registration.RegistrationFragment"
         android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" >
+        tools:layout="@layout/fragment_registration">
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -92,7 +92,7 @@
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="com.example.moodtrackerproject.ui.reset.ResetPasswordFragment"
-        android:label="ResetPasswordFragment" >
+        android:label="ResetPasswordFragment">
         <action
             android:id="@+id/action_resetPasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />

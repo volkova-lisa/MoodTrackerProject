@@ -6,9 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
-import com.example.moodtrackerproject.ui.login.LoginFragment
 import com.example.moodtrackerproject.utils.Preference
 
 class HomeFragment : Fragment() {
@@ -57,9 +56,10 @@ class HomeFragment : Fragment() {
     private fun handleAction(homeAction: HomeAction) {
         when (homeAction) {
             is HomeAction.LogOut -> {
-                val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host_fragment, LoginFragment())
-                transaction.commit()
+//                val transaction = requireActivity().supportFragmentManager.beginTransaction()
+//                transaction.replace(R.id.nav_host_fragment, LoginFragment())
+//                transaction.commit()
+                (requireActivity() as MainActivity).router.openWelcome()
             }
         }
     }

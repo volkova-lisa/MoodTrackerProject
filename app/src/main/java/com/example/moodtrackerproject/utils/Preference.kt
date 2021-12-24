@@ -8,9 +8,11 @@ object Preference {
     private const val PREF = "pref"
     private lateinit var preferences: SharedPreferences
 
-    fun getPreference(context: Context): SharedPreferences {
-        preferences = context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
-        return preferences
+    fun getPreference(context: Context): Preference {
+        if (!::preferences.isInitialized) {
+            preferences = context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+        }
+        return this
     }
 
     fun setInitUser(init: Boolean) {
@@ -19,7 +21,7 @@ object Preference {
             .apply()
     }
 
-//    fun getInitUser(): Boolean {
-//        return preferences.getBoolean(INIT_USER, false)
-//    }
+    fun getInitUser(): Boolean {
+        return preferences.getBoolean(INIT_USER, false)
+    }
 }

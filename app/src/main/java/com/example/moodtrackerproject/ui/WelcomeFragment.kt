@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentWelcomeScreenBinding
-import com.example.moodtrackerproject.routing.Routes
-import com.example.moodtrackerproject.ui.login.LoginFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class WelcomeFragment : Fragment() {
@@ -27,7 +25,8 @@ class WelcomeFragment : Fragment() {
         _binding = FragmentWelcomeScreenBinding.inflate(layoutInflater, container, false)
 
         binding.welcomeButton.setOnClickListener {
-            Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+//            Router.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+            (requireActivity() as MainActivity).router.openLoginFromWelcome()
         }
 
         return binding.root

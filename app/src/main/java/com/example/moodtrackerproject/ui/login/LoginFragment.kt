@@ -11,31 +11,31 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
-import com.example.moodtrackerproject.routing.Routes
 import com.example.moodtrackerproject.ui.login.LoginAction.*
 import com.example.moodtrackerproject.ui.login.LoginError.*
-import com.example.moodtrackerproject.ui.notes.NotesFragment
-import com.example.moodtrackerproject.ui.registration.RegistrationFragment
-import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
+
     private lateinit var binding: FragmentLoginScreenBinding
+
     private val viewModel: LoginViewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
             createNewAccountTextButton.setOnClickListener {
-                Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), RegistrationFragment())
+                (requireActivity() as MainActivity).router.openRegistration()
             }
             loginButton.setOnClickListener {
                 removeInputsErrors()
@@ -59,11 +59,13 @@ class LoginFragment : Fragment() {
             render(it)
         })
     }
+
     private fun render(state: LoginViewState) {
         showProgress(state.isLoading)
         state.action?.let { handleAction(it) }
         state.error?.let { handleError(it) }
     }
+
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
             // ("//to start progress bar")
@@ -77,12 +79,14 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
     private fun removeInputsErrors() {
         binding.run {
             emailInput.error = null
             passInput.error = null
         }
     }
+
     private fun handleError(loginError: LoginError) {
         when (loginError) {
             is ShowNoInternet -> showNoInternetError()
@@ -90,27 +94,29 @@ class LoginFragment : Fragment() {
             is ShowEmailInvalid -> binding.emailInput.error = getString(R.string.invalid_email)
         }
     }
+
     private fun handleAction(loginAction: LoginAction) {
         when (loginAction) {
             is StartNotesScreen -> {
 //                Routes.getInstance(requireActivity() as MainActivity)
 //                    .goTo(requireActivity(), NotesFragment())
-                val transaction = requireActivity().supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.nav_host_fragment, NotesFragment())
-                transaction.commit()
+                (requireActivity() as MainActivity).router.openHome()
             }
             is StartRegistrationScreen -> {
-                Routes.getInstance(requireActivity() as MainActivity)
-                    .goTo(requireActivity(), LoginFragment())
+                (requireActivity() as MainActivity).router.openRegistration()
+//                Router.getInstance(requireActivity() as MainActivity)
+//                    .goTo(requireActivity(), LoginFragment())
             }
             is StartResetPasswordScreen -> {
-                Routes.getInstance(requireActivity() as MainActivity).goTo(
-                    requireActivity(),
-                    ResetPasswordFragment()
-                )
+//                Router.getInstance(requireActivity() as MainActivity).goTo(
+//                    requireActivity(),
+//                    ResetPasswordFragment()
+//                )
+                (requireActivity() as MainActivity).router.openResetPassScreen()
             }
         }
     }
+
     private fun showNoInternetError() {
         Snackbar.make(
             binding.loginScreen,

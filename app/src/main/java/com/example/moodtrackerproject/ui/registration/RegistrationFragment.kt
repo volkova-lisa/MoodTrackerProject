@@ -12,8 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
-import com.example.moodtrackerproject.routing.Routes
-import com.example.moodtrackerproject.ui.login.LoginFragment
 import com.example.moodtrackerproject.ui.registration.RegistrationAction.*
 import com.example.moodtrackerproject.ui.registration.RegistrationError.*
 import com.google.android.material.snackbar.Snackbar
@@ -47,7 +45,8 @@ class RegistrationFragment : Fragment() {
                 )
             }
             alreadyHaveTextButton.setOnClickListener {
-                Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+//                Router.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+                (requireActivity() as MainActivity).router.openLoginFromRegistration()
             }
 
             pass.setEndIconOnClickListener {
@@ -117,7 +116,8 @@ class RegistrationFragment : Fragment() {
     private fun handleAction(registrationAction: RegistrationAction) {
         when (registrationAction) {
             is StartLogInScreen -> {
-                Routes.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+//                Router.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+                (requireActivity() as MainActivity).router.openLoginFromRegistration()
             }
         }
     }
