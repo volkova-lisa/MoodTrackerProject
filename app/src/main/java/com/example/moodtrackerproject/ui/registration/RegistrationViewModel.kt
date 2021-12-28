@@ -31,7 +31,6 @@ class RegistrationViewModel : ViewModel() {
     ) {
         when {
             fullName.isNotEmpty() && email.isEmailValid() && password.isPasswordValid() -> {
-
                 registerUserWithEmailAndPassword(fullName, email, password)
             }
             fullName.isEmpty() ->

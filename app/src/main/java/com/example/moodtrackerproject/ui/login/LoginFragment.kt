@@ -45,7 +45,6 @@ class LoginFragment : Fragment() {
                 )
             }
             pass.setEndIconOnClickListener {
-                var timesPressed = true
                 // ("//how to change it normally?")
                 passInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
                 if (passInput.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {

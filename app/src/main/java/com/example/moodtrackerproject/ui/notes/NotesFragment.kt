@@ -5,14 +5,31 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.moodtrackerproject.R
+import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 
 class NotesFragment : Fragment() {
+    private lateinit var binding: FragmentNotesBinding
+
+    private val viewModel: NotesViewModel by lazy {
+        ViewModelProvider(this).get(NotesViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_notes, container, false)
+        binding = FragmentNotesBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.run {
+            addNoteBtn.setOnClickListener {
+                (requireActivity() as MainActivity).router.openAddNewNote()
+            }
+        }
     }
 }

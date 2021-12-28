@@ -51,6 +51,10 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.action_loginFragment_to_notesFragment)
     }
 
+    fun openAddNewNote() {
+        navController.navigate(R.id.addNewNoteFragment)
+    }
+
     fun openRegistration() {
         navController.navigate(R.id.action_loginFragment_to_registrationFragment)
     }

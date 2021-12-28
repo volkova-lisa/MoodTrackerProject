@@ -18,7 +18,6 @@ import com.google.android.material.snackbar.Snackbar
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
-
     private val viewModel: RegistrationViewModel by lazy {
         ViewModelProvider(this).get(RegistrationViewModel::class.java)
     }
