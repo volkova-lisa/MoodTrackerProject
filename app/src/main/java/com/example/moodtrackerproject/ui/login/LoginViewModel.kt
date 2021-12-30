@@ -44,7 +44,7 @@ class LoginViewModel() : ViewModel() {
             liveData.value = state.copy(isLoading = true)
             auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener {
-                    liveData.value = state.copy(isLoading = false)
+                            liveData.value = state.copy(isLoading = false)
                     if (it.isSuccessful) {
                         liveData.value = state.copy(action = LoginAction.StartNotesScreen)
                         Preference.setInitUser(true)
