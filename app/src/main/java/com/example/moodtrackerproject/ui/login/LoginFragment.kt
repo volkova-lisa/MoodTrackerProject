@@ -71,7 +71,6 @@ class LoginFragment : Fragment() {
             binding.run {
                 progressBar.isVisible = true
                 loginButton.text = ""
-
             }
         } else {
             binding.run {

@@ -26,12 +26,9 @@ class HomeFragment : Fragment() {
 
         binding.run {
             logout.setOnClickListener {
+                viewModel.logOut()
+                Preference.setInitUser(false)
             }
-        }
-
-        binding.logout.setOnClickListener {
-            viewModel.logOut()
-            Preference.setInitUser(false)
         }
 
         return binding.root

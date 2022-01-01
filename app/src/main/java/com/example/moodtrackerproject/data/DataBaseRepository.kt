@@ -9,7 +9,7 @@ class DataBaseRepository {
     // get list of all notes
     // add note to db
     // remove note from db
-     val allNotes: LiveData<List<NoteBody>> = NotesLiveData()
+    var allNotes: LiveData<List<NoteBody>> = NotesLiveData()
 
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
         val idNote = FirebaseDatabase.getInstance().reference.push().key.toString()

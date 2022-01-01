@@ -32,7 +32,10 @@ class MainActivity : AppCompatActivity() {
 
         if (Preference.getPreference(this).getInitUser()) {
             navController.graph.startDestination = R.id.homeFragment
-//            router.openHome()
+            router.openHome()
+        } else {
+            navController.graph.startDestination = R.id.welcomeFragment
+            router.openWelcome()
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->

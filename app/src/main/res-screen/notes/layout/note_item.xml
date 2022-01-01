@@ -8,7 +8,7 @@
 
 
         <TextView
-            android:id="@+id/note_name_item"
+            android:id="@+id/note_title_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/raleway_bold"
@@ -36,7 +36,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/note_name_item"
+            app:layout_constraintTop_toBottomOf="@+id/note_title_item"
             tools:text="@string/note_small_text" />
         <ImageView
             android:id="@+id/note_more_button"
