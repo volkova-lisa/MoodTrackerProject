@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.moodtrackerproject.utils.Preference
 import com.google.firebase.database.FirebaseDatabase
 
 object DataBaseRepository {
@@ -15,6 +16,7 @@ object DataBaseRepository {
         Log.d("-------------", allNotes.value.toString())
         allNotes.value!!.add(noteBody)
         Log.d("++++++++++++++", allNotes.value.toString())
+        Preference.saveNotes()
     }
 
     fun delete(noteBody: NoteBody, onSuccess: () -> Unit) {

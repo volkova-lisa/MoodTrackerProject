@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentAddNewNoteBinding
+import com.example.moodtrackerproject.utils.Preference
 
 class AddNewNoteFragment : Fragment() {
 
