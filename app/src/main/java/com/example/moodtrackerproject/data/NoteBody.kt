@@ -3,7 +3,7 @@ package com.example.moodtrackerproject.data
 import java.io.Serializable
 
 data class NoteBody(
-    val idFirebase: String = "",
+    val id: String = "",
     val title: String = "",
     val text: String = " "
 ) : Serializable

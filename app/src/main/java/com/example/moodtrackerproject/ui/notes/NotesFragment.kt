@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.notes
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,16 +15,13 @@ import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
-    private val notesAdapter: NotesAdapter = NotesAdapter()
+    private lateinit var notesAdapter: NotesAdapter
     private lateinit var recyclerView: RecyclerView
-    private var observerList: Observer<List<NoteBody>> = Observer {
-        val list = it.asReversed()
-        notesAdapter.setList(list)
-    }
+    private lateinit var observerList: Observer<List<NoteBody>>
     // var allNotes:
 
-    private val viewModel: AddNewNoteViewModel by lazy {
-        ViewModelProvider(this).get(AddNewNoteViewModel::class.java)
+    private val viewModel: NotesViewModel by lazy {
+        ViewModelProvider(this).get(NotesViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -31,15 +29,22 @@ class NotesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNotesBinding.inflate(layoutInflater, container, false)
-        recyclerView = binding.notesList
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        notesAdapter = NotesAdapter()
+        recyclerView = binding.notesList
         recyclerView.adapter = notesAdapter
-        // viewModel.allNotes.observe(this, observerList)
-        viewModel.allNotes.observe(viewLifecycleOwner, observerList)
+        viewModel.getAllNotes().observe(
+            viewLifecycleOwner,
+            Observer {
+                val list = it.asReversed()
+                Log.d("===================", list.toString())
+                notesAdapter.setList(list)
+            }
+        )
         binding.run {
             addNoteBtn.setOnClickListener {
                 (requireActivity() as MainActivity).router.openAddNewNote()

@@ -1,33 +1,24 @@
 package com.example.moodtrackerproject.data
 
 import android.util.Log
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.google.firebase.database.FirebaseDatabase
 
-class DataBaseRepository {
+object DataBaseRepository {
     // should:
     // get list of all notes
     // add note to db
     // remove note from db
-    var allNotes: LiveData<List<NoteBody>> = NotesLiveData()
+    var allNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
 
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
-        val idNote = FirebaseDatabase.getInstance().reference.push().key.toString()
-        val mapNote = hashMapOf<String, Any>()
-        mapNote["id"] = idNote
-        mapNote["title"] = noteBody.title
-        mapNote["text"] = noteBody.text
-
-        FirebaseDatabase.getInstance().reference.child(idNote)
-            .updateChildren(mapNote)
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener {
-                Log.d("______", "________________")
-            }
+        Log.d("-------------", allNotes.value.toString())
+        allNotes.value!!.add(noteBody)
+        Log.d("++++++++++++++", allNotes.value.toString())
     }
 
     fun delete(noteBody: NoteBody, onSuccess: () -> Unit) {
-        FirebaseDatabase.getInstance().reference.child(noteBody.idFirebase).removeValue()
+        FirebaseDatabase.getInstance().reference.child(noteBody.id).removeValue()
             .addOnSuccessListener { onSuccess() }
             .addOnFailureListener {
                 Log.d("++++++++", "++++++++++++++")

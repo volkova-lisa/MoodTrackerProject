@@ -48,7 +48,7 @@ class Router(private val activity: MainActivity) {
     }
 
     fun openNotesScreen() {
-        navController.navigate(R.id.action_loginFragment_to_notesFragment)
+        navController.navigate(R.id.notesFragment)
     }
 
     fun openAddNewNote() {

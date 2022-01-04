@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import kotlinx.android.synthetic.main.note_item.view.*
 
 class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
-    private var mListOfNotes = emptyList<NoteBody>()
+    private var listOfNotes = emptyList<NoteBody>()
 
     class NotesHolder(view: View) : RecyclerView.ViewHolder(view) {
         val noteTitle: TextView = view.note_title_item
@@ -20,7 +21,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
     override fun onViewAttachedToWindow(holder: NotesHolder) {
         holder.itemView.setOnClickListener {
-            NotesFragment.click(mListOfNotes[holder.adapterPosition])
+            NotesFragment.click(listOfNotes[holder.adapterPosition])
         }
     }
 
@@ -35,14 +36,15 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     }
 
     override fun onBindViewHolder(holder: NotesHolder, position: Int) {
-        holder.noteTitle.text = mListOfNotes[position].title
-        holder.noteText.text = mListOfNotes[position].text
+        holder.noteTitle.text = listOfNotes[position].title
+        holder.noteText.text = listOfNotes[position].text
     }
 
-    override fun getItemCount(): Int = mListOfNotes.size
+    override fun getItemCount(): Int = listOfNotes.size
 
     fun setList(list: List<NoteBody>) {
-        mListOfNotes = list
+        listOfNotes = list
         notifyDataSetChanged()
+        Log.d("ooooooooooooooooooooooooo", listOfNotes.toString())
     }
 }

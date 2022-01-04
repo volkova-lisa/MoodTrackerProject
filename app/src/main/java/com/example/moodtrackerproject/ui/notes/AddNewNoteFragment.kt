@@ -55,6 +55,7 @@ class AddNewNoteFragment : Fragment() {
                     title.text.toString(),
                     noteText.text.toString()
                 )
+                (requireActivity() as MainActivity).router.openNotesScreen()
             }
         }
         viewModel.liveData.observe(viewLifecycleOwner, {

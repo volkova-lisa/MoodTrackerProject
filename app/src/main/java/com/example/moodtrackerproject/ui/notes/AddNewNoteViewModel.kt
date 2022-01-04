@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -11,8 +12,10 @@ import kotlinx.coroutines.launch
 class AddNewNoteViewModel : ViewModel() {
 
     private val state = AddNewNoteViewState()
-    val database = DataBaseRepository()
-    var allNotes = database.allNotes
+
+    init {
+        Log.d("VVVVVVVVVVVVVVV", "------------")
+    }
 
     private val _addNewNoteStateLiveData: MutableLiveData<AddNewNoteViewState> =
         MutableLiveData<AddNewNoteViewState>().apply {
@@ -30,7 +33,7 @@ class AddNewNoteViewModel : ViewModel() {
     private fun insertNewNote(note: NoteBody) =
         viewModelScope.launch(Dispatchers.Main) {
 //          here i have to input note in livedata allNotes
-            database.insert(note) {
+            DataBaseRepository.insert(note) {
                 state.copy(action = NewNoteAction.ShowNotesScreen)
             }
         }
