@@ -97,4 +97,9 @@
             android:id="@+id/action_addNewNoteFragment_to_notesFragment"
             app:destination="@id/notesFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/insideNoteFragment"
+        android:name="com.example.moodtrackerproject.ui.notes.InsideNoteFragment"
+        android:label="fragment_inside_note"
+        tools:layout="@layout/fragment_inside_note" />
 </navigation>

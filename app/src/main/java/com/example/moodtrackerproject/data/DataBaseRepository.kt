@@ -1,29 +1,28 @@
 package com.example.moodtrackerproject.data
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import com.example.moodtrackerproject.utils.Preference
-import com.google.firebase.database.FirebaseDatabase
+import kotlinx.serialization.Serializable
 
+@Serializable
 object DataBaseRepository {
-    // should:
-    // get list of all notes
-    // add note to db
-    // remove note from db
     var allNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
+    var favoriteNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
 
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
-        Log.d("-------------", allNotes.value.toString())
         allNotes.value!!.add(noteBody)
-        Log.d("++++++++++++++", allNotes.value.toString())
-        Preference.saveNotes()
+        var notesList: List<NoteBody> = allNotes.value!!
+        // Preference.saveNotes(Json.encodeToString(notesList))
     }
 
     fun delete(noteBody: NoteBody, onSuccess: () -> Unit) {
-        FirebaseDatabase.getInstance().reference.child(noteBody.id).removeValue()
-            .addOnSuccessListener { onSuccess() }
-            .addOnFailureListener {
-                Log.d("++++++++", "++++++++++++++")
-            }
+        allNotes.value!!.remove(noteBody)
+    }
+
+    fun addToFavorites(noteBody: NoteBody) {
+        favoriteNotes.value!!.add(noteBody)
+    }
+
+    fun removeFromFavorites(noteBody: NoteBody) {
+        favoriteNotes.value!!.remove(noteBody)
     }
 }

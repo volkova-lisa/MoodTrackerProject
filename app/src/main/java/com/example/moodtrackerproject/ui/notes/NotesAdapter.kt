@@ -15,6 +15,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     private var listOfNotes = emptyList<NoteBody>()
 
     class NotesHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val noteDate: TextView = view.note_text_date_time
         val noteTitle: TextView = view.note_title_item
         val noteText: TextView = view.note_text_item
     }
@@ -36,6 +37,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     }
 
     override fun onBindViewHolder(holder: NotesHolder, position: Int) {
+        holder.noteDate.text = listOfNotes[position].date
         holder.noteTitle.text = listOfNotes[position].title
         holder.noteText.text = listOfNotes[position].text
     }

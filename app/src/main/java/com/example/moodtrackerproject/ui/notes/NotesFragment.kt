@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.notes
 
+import android.annotation.SuppressLint
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.data.NoteBody
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 
@@ -37,18 +40,56 @@ class NotesFragment : Fragment() {
         notesAdapter = NotesAdapter()
         recyclerView = binding.notesList
         recyclerView.adapter = notesAdapter
-        viewModel.getAllNotes().observe(
-            viewLifecycleOwner,
-            Observer {
-                val list = it.asReversed()
-                Log.d("===================", list.toString())
-                notesAdapter.setList(list)
-            }
-        )
+        if (onStarClicked()) {
+            // in case menu star clicked
+            viewModel.getFavNotes().observe(
+                viewLifecycleOwner,
+                Observer {
+                    val list = it.asReversed()
+                    notesAdapter.setList(list)
+                }
+            )
+        } else {
+            // in case menu star not clicked
+            viewModel.getAllNotes().observe(
+                viewLifecycleOwner,
+                Observer {
+                    val list = it.asReversed()
+                    notesAdapter.setList(list)
+                }
+            )
+        }
         binding.run {
             addNoteBtn.setOnClickListener {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
+        }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    fun onStarClicked(): Boolean {
+        binding.run {
+            var checked = false
+            toolbarStar.setOnClickListener {
+                Log.d("==================", toolbarStar.drawable.toString())
+                Log.d(
+                    "==================", resources.getDrawable(R.drawable.ic_note_star_unchecked).toString()
+                )
+                val bitmapCheckedStar = (resources.getDrawable(R.drawable.ic_note_star_unchecked) as BitmapDrawable).bitmap
+                val bitmapUncheckedStar = (resources.getDrawable(R.drawable.ic_note_star_checked) as BitmapDrawable).bitmap
+
+                checked =
+                    if ((toolbarStar.drawable as BitmapDrawable).bitmap == bitmapUncheckedStar) {
+                        binding.toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
+                        Log.d("----------------", "------------")
+                        true
+                    } else {
+                        binding.toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
+                        Log.d("+++++++++++++++", "+++++++++++++")
+                        false
+                    }
+            }
+            return checked
         }
     }
 
@@ -57,6 +98,7 @@ class NotesFragment : Fragment() {
             val bundle = Bundle()
             bundle.putSerializable("note", note)
             // go inside note
+            // (requireActivity() as MainActivity).router.openAddNewNote()
         }
     }
 }

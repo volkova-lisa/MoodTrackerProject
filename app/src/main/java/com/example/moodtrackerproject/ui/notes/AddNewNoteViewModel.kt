@@ -1,14 +1,16 @@
 package com.example.moodtrackerproject.ui.notes
 
+import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.data.NoteBody
-import com.example.moodtrackerproject.utils.Preference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.util.*
 
 class AddNewNoteViewModel : ViewModel() {
 
@@ -24,11 +26,18 @@ class AddNewNoteViewModel : ViewModel() {
         }
     val liveData get() = _addNewNoteStateLiveData
 
+    @SuppressLint("SimpleDateFormat")
     fun checkNoteData(title: String, text: String) {
+        val calendar: Calendar = Calendar.getInstance()
+        val month = SimpleDateFormat("MMM").format(calendar.get(Calendar.MONTH))
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+        val hour = calendar.get(Calendar.HOUR_OF_DAY)
+        val minute = calendar.get(Calendar.MINUTE)
+        val noteDate = "$month $day, $hour:$minute"
         if (title.isEmpty())
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
         // else insertNewNote(title, text)
-        else insertNewNote(NoteBody(title = title, text = text))
+        else insertNewNote(NoteBody(date = noteDate, title = title, text = text))
     }
 
     private fun insertNewNote(note: NoteBody) =

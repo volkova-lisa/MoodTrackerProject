@@ -66,4 +66,8 @@ class Router(private val activity: MainActivity) {
     fun openResetPassScreen() {
         navController.navigate(R.id.action_loginFragment_to_resetPasswordFragment)
     }
+
+    fun openInsideNote() {
+        navController.navigate(R.id.insideNoteFragment)
+    }
 }
