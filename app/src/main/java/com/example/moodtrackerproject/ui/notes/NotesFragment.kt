@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.data.NoteBody
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 
@@ -31,29 +32,40 @@ class NotesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        notesAdapter = NotesAdapter()
-        recyclerView = binding.notesList
-        recyclerView.adapter = notesAdapter
-        if (viewModel.isChecked) {
-            // in case menu star clicked
-            viewModel.getFavNotes().observe(
-                viewLifecycleOwner,
-                Observer {
-                    val list = it.asReversed()
-                    notesAdapter.setList(list)
-                }
-            )
-        } else {
-            // in case menu star not clicked
-            viewModel.getAllNotes().observe(
-                viewLifecycleOwner,
-                Observer {
-                    val list = it!!.asReversed()
-                    notesAdapter.setList(list)
-                }
-            )
-        }
         binding.run {
+            notesAdapter = NotesAdapter()
+            recyclerView = binding.notesList
+            recyclerView.adapter = notesAdapter
+
+            toolbarStar.setOnClickListener {
+                viewModel.isChecked = !viewModel.isChecked
+                if (viewModel.isChecked) {
+                    toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
+                } else {
+                    toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
+                }
+            }
+
+            // in case menu star clicked
+            if (viewModel.isChecked) {
+                viewModel.getFavNotes().observe(
+                    viewLifecycleOwner,
+                    Observer {
+                        val list = it.asReversed()
+                        notesAdapter.setList(list)
+                    }
+                )
+            } else {
+                // in case menu star not clicked
+                viewModel.getAllNotes().observe(
+                    viewLifecycleOwner,
+                    Observer {
+                        val list = it!!.asReversed()
+                        notesAdapter.setList(list)
+                    }
+                )
+            }
+
             addNoteBtn.setOnClickListener {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
@@ -67,5 +79,9 @@ class NotesFragment : Fragment() {
             // go inside note
             // (requireActivity() as MainActivity).router.openAddNewNote()
         }
+    }
+
+    fun showFavourites(): Boolean {
+        return true
     }
 }

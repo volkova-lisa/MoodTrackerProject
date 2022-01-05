@@ -18,7 +18,7 @@ class NotesViewModel : ViewModel() {
     private val values: ParameterizedType = Types.newParameterizedType(List::class.java, NoteBody::class.java)
     private val jsonAdapter: JsonAdapter<MutableList<NoteBody>> = moshi.adapter(values)
     private val jsonResponse = Preference.getNotes()
-    private val notesList: MutableList<NoteBody>? = jsonAdapter.fromJson(jsonResponse)
+    private val notesList: MutableList<NoteBody>? = if (jsonResponse == null) mutableListOf() else jsonAdapter.fromJson(jsonResponse)
 
     fun getAllNotes(): MutableLiveData<MutableList<NoteBody>?> = MutableLiveData(notesList)
     fun getFavNotes(): MutableLiveData<MutableList<NoteBody>> = DataBaseRepository.favoriteNotes
