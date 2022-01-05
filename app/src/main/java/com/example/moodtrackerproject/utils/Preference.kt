@@ -22,7 +22,7 @@ object Preference {
             .apply()
     }
 
-    fun saveNotes(notesList: String) {
+    fun setNotes(notesList: String) {
         preferences.edit()
             .putString(NOTES, notesList)
             .apply()
@@ -30,5 +30,9 @@ object Preference {
 
     fun getInitUser(): Boolean {
         return preferences.getBoolean(INIT_USER, false)
+    }
+
+    fun getNotes(): String? {
+        return preferences.getString(NOTES, null)
     }
 }

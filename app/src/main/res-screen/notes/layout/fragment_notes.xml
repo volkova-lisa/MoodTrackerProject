@@ -47,7 +47,7 @@
         android:layout_height="24dp"
         android:layout_marginEnd="18dp"
         android:elevation="5dp"
-        android:src="@drawable/ic_note_star_unchecked"
+        android:src="@drawable/notes_star_selector"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toStartOf="@id/toolbar_calendar"
         app:layout_constraintTop_toTopOf="@id/toolbar_layout" />

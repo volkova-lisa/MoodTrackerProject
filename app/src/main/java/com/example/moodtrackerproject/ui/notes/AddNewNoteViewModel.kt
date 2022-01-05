@@ -36,7 +36,6 @@ class AddNewNoteViewModel : ViewModel() {
         val noteDate = "$month $day, $hour:$minute"
         if (title.isEmpty())
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
-        // else insertNewNote(title, text)
         else insertNewNote(NoteBody(date = noteDate, title = title, text = text))
     }
 
