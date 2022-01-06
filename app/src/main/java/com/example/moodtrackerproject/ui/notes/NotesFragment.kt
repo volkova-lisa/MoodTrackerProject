@@ -37,33 +37,34 @@ class NotesFragment : Fragment() {
             recyclerView = binding.notesList
             recyclerView.adapter = notesAdapter
 
+            viewModel.getAllNotes().observe(
+                viewLifecycleOwner,
+                Observer {
+                    val list = it!!.asReversed()
+                    notesAdapter.setList(list)
+                }
+            )
             toolbarStar.setOnClickListener {
                 viewModel.isChecked = !viewModel.isChecked
                 if (viewModel.isChecked) {
                     toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
+                    viewModel.getFavNotes().observe(
+                        viewLifecycleOwner,
+                        Observer {
+                            val list = it.asReversed()
+                            notesAdapter.setList(list)
+                        }
+                    )
                 } else {
                     toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
+                    viewModel.getAllNotes().observe(
+                        viewLifecycleOwner,
+                        Observer {
+                            val list = it!!.asReversed()
+                            notesAdapter.setList(list)
+                        }
+                    )
                 }
-            }
-
-            // in case menu star clicked
-            if (viewModel.isChecked) {
-                viewModel.getFavNotes().observe(
-                    viewLifecycleOwner,
-                    Observer {
-                        val list = it.asReversed()
-                        notesAdapter.setList(list)
-                    }
-                )
-            } else {
-                // in case menu star not clicked
-                viewModel.getAllNotes().observe(
-                    viewLifecycleOwner,
-                    Observer {
-                        val list = it!!.asReversed()
-                        notesAdapter.setList(list)
-                    }
-                )
             }
 
             addNoteBtn.setOnClickListener {

@@ -44,7 +44,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
     override fun getItemCount(): Int = listOfNotes.size
 
-    fun setList(list: List<NoteBody>) {
+    fun setList(list: MutableList<NoteBody>) {
         listOfNotes = list
         notifyDataSetChanged()
         Log.d("ooooooooooooooooooooooooo", listOfNotes.toString())

@@ -2,12 +2,21 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.moodtrackerproject.data.NoteBody
+import com.squareup.moshi.JsonAdapter
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.Types
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import java.lang.reflect.ParameterizedType
 
 object Preference {
     private const val INIT_USER = "init_user"
     private const val PREF = "pref"
     private const val NOTES = "all_notes"
     private lateinit var preferences: SharedPreferences
+    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
+    private val values: ParameterizedType = Types.newParameterizedType(List::class.java, NoteBody::class.java)
+    private val jsonAdapter: JsonAdapter<MutableList<NoteBody>> = moshi.adapter(values)
 
     fun getPreference(context: Context): Preference {
         if (!::preferences.isInitialized) {
@@ -32,7 +41,11 @@ object Preference {
         return preferences.getBoolean(INIT_USER, false)
     }
 
-    fun getNotes(): String? {
+    fun getNotes(): MutableList<NoteBody>? {
+        return jsonAdapter.fromJson(preferences.getString(NOTES, null))
+    }
+
+    fun getJsonNotes(): String? {
         return preferences.getString(NOTES, null)
     }
 }
