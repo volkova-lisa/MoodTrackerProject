@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.note_item.view.*
 class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
     private var listOfNotes = emptyList<NoteBody>()
+    private var isFavourite = false
 
     class NotesHolder(view: View) : RecyclerView.ViewHolder(view) {
         val noteDate: TextView = view.note_text_date_time
@@ -23,6 +24,15 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
     override fun onViewAttachedToWindow(holder: NotesHolder) {
         holder.itemView.setOnClickListener {
             NotesFragment.click(listOfNotes[holder.adapterPosition])
+        }
+        holder.itemView.note_star_button_unchecked.setOnClickListener {
+            isFavourite = !isFavourite
+            if (isFavourite) {
+                holder.itemView.note_star_button_unchecked.setImageResource(R.drawable.ic_note_star_checked)
+            }
+            if (!isFavourite) {
+                holder.itemView.note_star_button_unchecked.setImageResource(R.drawable.ic_note_star_unchecked)
+            }
         }
     }
 
