@@ -1,4 +1,4 @@
-package com.example.moodtrackerproject.ui.notes
+package com.example.moodtrackerproject.ui.notes.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,16 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.data.NoteBody
+import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
-    private lateinit var notesAdapter: NotesAdapter
-    private lateinit var recyclerView: RecyclerView
+
+    private val notesAdapter = NotesAdapter()
 
     private val viewModel: NotesViewModel by lazy {
         ViewModelProvider(this).get(NotesViewModel::class.java)
@@ -33,9 +32,7 @@ class NotesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
-            notesAdapter = NotesAdapter()
-            recyclerView = binding.notesList
-            recyclerView.adapter = notesAdapter
+            notesList.adapter = notesAdapter
 
             viewModel.getAllNotes().observe(
                 viewLifecycleOwner,

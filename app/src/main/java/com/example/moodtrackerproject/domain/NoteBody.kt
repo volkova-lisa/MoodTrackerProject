@@ -1,4 +1,4 @@
-package com.example.moodtrackerproject.data
+package com.example.moodtrackerproject.domain
 
 import com.squareup.moshi.JsonClass
 import java.io.Serializable

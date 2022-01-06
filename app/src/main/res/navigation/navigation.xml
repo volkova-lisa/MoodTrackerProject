@@ -12,7 +12,7 @@
         tools:layout="@layout/fragment_health" />
     <fragment
         android:id="@+id/notesFragment"
-        android:name="com.example.moodtrackerproject.ui.notes.NotesFragment"
+        android:name="com.example.moodtrackerproject.ui.notes.list.NotesFragment"
         android:label="fragment_notes"
         tools:layout="@layout/fragment_notes">
         <action

@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.data
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.utils.Preference
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -9,6 +10,7 @@ import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.ParameterizedType
 
+// single source of truth
 object DataBaseRepository {
     var allNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
     var favoriteNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
@@ -27,6 +29,15 @@ object DataBaseRepository {
         val serNotes = jsonAdapter.toJson(notesList)
         // here i have to concat new notes with previous
         Preference.setNotes(serNotes)
+
+
+        favoriteNotes = DataBaseRepository.favoriteNotes.value?.map {
+            if (it.noteId == noteId) {
+                it.copy(isChecked = !it.checked)
+            } else {
+                it
+            }
+        }
     }
 
     fun delete(noteBody: NoteBody, onSuccess: () -> Unit) {

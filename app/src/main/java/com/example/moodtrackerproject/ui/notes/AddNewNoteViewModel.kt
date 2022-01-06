@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.data.NoteBody
+import com.example.moodtrackerproject.domain.NoteBody
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*

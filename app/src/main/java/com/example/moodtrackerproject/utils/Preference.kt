@@ -2,7 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.moodtrackerproject.data.NoteBody
+import com.example.moodtrackerproject.domain.NoteBody
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
