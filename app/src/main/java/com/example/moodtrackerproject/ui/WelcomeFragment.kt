@@ -25,7 +25,6 @@ class WelcomeFragment : Fragment() {
         _binding = FragmentWelcomeScreenBinding.inflate(layoutInflater, container, false)
 
         binding.welcomeButton.setOnClickListener {
-//            Router.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
             (requireActivity() as MainActivity).router.openLoginFromWelcome()
         }
 

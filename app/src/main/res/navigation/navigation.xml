@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewNoteFragment"
-        android:name="com.example.moodtrackerproject.ui.notes.AddNewNoteFragment"
+        android:name="com.example.moodtrackerproject.ui.notes.add.AddNewNoteFragment"
         android:label="fragment_add_new_note"
         tools:layout="@layout/fragment_add_new_note" >
         <action
@@ -98,8 +98,8 @@
             app:destination="@id/notesFragment" />
     </fragment>
     <fragment
-        android:id="@+id/insideNoteFragment"
-        android:name="com.example.moodtrackerproject.ui.notes.InsideNoteFragment"
-        android:label="fragment_inside_note"
-        tools:layout="@layout/fragment_inside_note" />
+        android:id="@+id/noteDetailsFragment"
+        android:name="com.example.moodtrackerproject.ui.notes.NoteDetailsFragment"
+        android:label="fragment_note_details"
+        tools:layout="@layout/fragment_note_details" />
 </navigation>

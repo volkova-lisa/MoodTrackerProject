@@ -21,9 +21,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
         binding.run {
             logout.setOnClickListener {
                 viewModel.logOut()
@@ -41,21 +39,13 @@ class HomeFragment : Fragment() {
         })
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     private fun render(state: HomeViewState) {
-        // showProgress(state.isLoading)
         state.action?.let { handleAction(it) }
     }
 
     private fun handleAction(homeAction: HomeAction) {
         when (homeAction) {
             is HomeAction.LogOut -> {
-//                val transaction = requireActivity().supportFragmentManager.beginTransaction()
-//                transaction.replace(R.id.nav_host_fragment, LoginFragment())
-//                transaction.commit()
                 (requireActivity() as MainActivity).router.openWelcome()
             }
         }

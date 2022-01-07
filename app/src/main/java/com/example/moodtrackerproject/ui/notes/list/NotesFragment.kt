@@ -8,8 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
-import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 
 class NotesFragment : Fragment() {
@@ -33,7 +31,6 @@ class NotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
             notesList.adapter = notesAdapter
-
             viewModel.getAllNotes().observe(
                 viewLifecycleOwner,
                 Observer {
@@ -41,45 +38,9 @@ class NotesFragment : Fragment() {
                     notesAdapter.setList(list)
                 }
             )
-            toolbarStar.setOnClickListener {
-                viewModel.isChecked = !viewModel.isChecked
-                if (viewModel.isChecked) {
-                    toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
-                    viewModel.getFavNotes().observe(
-                        viewLifecycleOwner,
-                        Observer {
-                            val list = it.asReversed()
-                            notesAdapter.setList(list)
-                        }
-                    )
-                } else {
-                    toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
-                    viewModel.getAllNotes().observe(
-                        viewLifecycleOwner,
-                        Observer {
-                            val list = it!!.asReversed()
-                            notesAdapter.setList(list)
-                        }
-                    )
-                }
-            }
-
             addNoteBtn.setOnClickListener {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
         }
-    }
-
-    companion object {
-        fun click(note: NoteBody) {
-            val bundle = Bundle()
-            bundle.putSerializable("note", note)
-            // go inside note
-            // (requireActivity() as MainActivity).router.openAddNewNote()
-        }
-    }
-
-    fun showFavourites(): Boolean {
-        return true
     }
 }

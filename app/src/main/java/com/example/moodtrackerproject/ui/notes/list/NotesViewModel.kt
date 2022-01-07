@@ -7,7 +7,6 @@ import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.utils.Preference
 
 class NotesViewModel : ViewModel() {
-    var isChecked: Boolean = false
 
     private val notesList: MutableList<NoteBody>? = if (Preference.getNotes() == null) mutableListOf() else Preference.getNotes()
 
@@ -17,5 +16,4 @@ class NotesViewModel : ViewModel() {
     // map NoteBody to NoteBodyUiModel
     // fun getAllNotes
     // fun getFavNotes
-    
 }

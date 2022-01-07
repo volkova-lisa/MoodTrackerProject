@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
+    // TODO("revise router use")
     val router = Router(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {

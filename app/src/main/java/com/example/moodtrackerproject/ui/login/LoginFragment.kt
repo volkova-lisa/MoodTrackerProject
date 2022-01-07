@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.login
 
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,15 +42,6 @@ class LoginFragment : Fragment() {
                     binding.emailInput.text.toString(),
                     binding.passInput.text.toString()
                 )
-            }
-            pass.setEndIconOnClickListener {
-                // ("//how to change it normally?")
-                passInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                if (passInput.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                    // set icon
-                } else {
-                    // set icon
-                }
             }
         }
         viewModel.liveData.observe(viewLifecycleOwner, {
@@ -97,20 +87,12 @@ class LoginFragment : Fragment() {
     private fun handleAction(loginAction: LoginAction) {
         when (loginAction) {
             is StartNotesScreen -> {
-//                Routes.getInstance(requireActivity() as MainActivity)
-//                    .goTo(requireActivity(), NotesFragment())
                 (requireActivity() as MainActivity).router.openHome()
             }
             is StartRegistrationScreen -> {
                 (requireActivity() as MainActivity).router.openRegistration()
-//                Router.getInstance(requireActivity() as MainActivity)
-//                    .goTo(requireActivity(), LoginFragment())
             }
             is StartResetPasswordScreen -> {
-//                Router.getInstance(requireActivity() as MainActivity).goTo(
-//                    requireActivity(),
-//                    ResetPasswordFragment()
-//                )
                 (requireActivity() as MainActivity).router.openResetPassScreen()
             }
         }

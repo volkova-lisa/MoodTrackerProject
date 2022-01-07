@@ -6,34 +6,11 @@ import com.example.moodtrackerproject.R
 
 class Router(private val activity: MainActivity) {
 
-//    private val activity: MainActivity
-
-    lateinit var navController: NavController // = activity.findNavController(R.id.nav_host_fragment)
+    private lateinit var navController: NavController // = activity.findNavController(R.id.nav_host_fragment)
 
     fun setNavigationController(controller: NavController) {
         navController = controller
     }
-//    companion object {
-//
-//        @Volatile private var INSTANCE: Router? = null
-//
-//        fun getInstance(activity: MainActivity): Router =
-//            INSTANCE ?: synchronized(this) {
-//                INSTANCE ?: Router(activity)
-//            }
-//    }
-//
-//    fun goTo(fragmentActivity: FragmentActivity, fragment: Fragment) {
-//        val transaction = fragmentActivity.supportFragmentManager.beginTransaction()
-//        transaction.replace(R.id.nav_host_fragment, fragment)
-//        transaction.commit()
-//    }
-//
-//    fun goToMainActivity(activity: SplashActivity) {
-//        var intent = Intent(activity.applicationContext, MainActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-//        activity.startActivity(intent)
-//    }
 
     fun openWelcome() {
         navController.navigate(R.id.welcomeFragment)
@@ -68,6 +45,6 @@ class Router(private val activity: MainActivity) {
     }
 
     fun openInsideNote() {
-        navController.navigate(R.id.insideNoteFragment)
+        navController.navigate(R.id.noteDetailsFragment)
     }
 }

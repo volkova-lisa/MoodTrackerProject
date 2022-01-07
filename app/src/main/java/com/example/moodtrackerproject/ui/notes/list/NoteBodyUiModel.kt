@@ -1,11 +1,9 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import java.util.*
-
 data class NoteBodyUiModel(
-    val noteId: String = "",//text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
+    val noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
 
-    var date: String = "",
+    val date: String = "",
     val title: String = "",
     val text: String = " ",
     val isChecked: Boolean = false,
@@ -13,4 +11,3 @@ data class NoteBodyUiModel(
     val checkChanged: (String) -> Unit,
     val openDetails: (String) -> Unit,
 )
-

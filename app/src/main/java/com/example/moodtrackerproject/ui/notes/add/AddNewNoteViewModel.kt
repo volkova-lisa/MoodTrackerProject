@@ -1,13 +1,15 @@
-package com.example.moodtrackerproject.ui.notes
+package com.example.moodtrackerproject.ui.notes.add
 
 import android.annotation.SuppressLint
 import android.icu.text.SimpleDateFormat
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.AddNewNoteViewState
+import com.example.moodtrackerproject.ui.notes.NewNoteAction
+import com.example.moodtrackerproject.ui.notes.NewNoteError
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.*
@@ -15,11 +17,6 @@ import java.util.*
 class AddNewNoteViewModel : ViewModel() {
 
     private val state = AddNewNoteViewState()
-
-    init {
-        Log.d("VVVVVVVVVVVVVVV", "------------")
-    }
-
     private val _addNewNoteStateLiveData: MutableLiveData<AddNewNoteViewState> =
         MutableLiveData<AddNewNoteViewState>().apply {
             value = state

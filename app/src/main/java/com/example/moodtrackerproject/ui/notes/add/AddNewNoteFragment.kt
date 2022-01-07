@@ -1,4 +1,4 @@
-package com.example.moodtrackerproject.ui.notes
+package com.example.moodtrackerproject.ui.notes.add
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentAddNewNoteBinding
+import com.example.moodtrackerproject.ui.notes.AddNewNoteViewState
+import com.example.moodtrackerproject.ui.notes.NewNoteAction
+import com.example.moodtrackerproject.ui.notes.NewNoteError
 
 class AddNewNoteFragment : Fragment() {
 
@@ -20,7 +23,6 @@ class AddNewNoteFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         binding = FragmentAddNewNoteBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
