@@ -10,8 +10,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
-import com.example.moodtrackerproject.ui.login.LoginAction.*
-import com.example.moodtrackerproject.ui.login.LoginError.*
+import com.example.moodtrackerproject.ui.login.LoginAction.StartNotesScreen
+import com.example.moodtrackerproject.ui.login.LoginAction.StartRegistrationScreen
+import com.example.moodtrackerproject.ui.login.LoginAction.StartResetPasswordScreen
+import com.example.moodtrackerproject.ui.login.LoginError.ShowEmailInvalid
+import com.example.moodtrackerproject.ui.login.LoginError.ShowNoInternet
+import com.example.moodtrackerproject.ui.login.LoginError.ShowPasswordInvalid
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
@@ -57,7 +61,6 @@ class LoginFragment : Fragment() {
 
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
-            // ("//to start progress bar")
             binding.run {
                 progressBar.isVisible = true
                 loginButton.text = ""

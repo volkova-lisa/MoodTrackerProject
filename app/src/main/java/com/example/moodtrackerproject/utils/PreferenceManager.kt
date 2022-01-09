@@ -3,22 +3,23 @@ package com.example.moodtrackerproject.utils
 import android.content.Context
 import android.content.SharedPreferences
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.ParameterizedType
 
-object Preference {
+object PreferenceManager {
     private const val INIT_USER = "init_user"
     private const val PREF = "pref"
     private const val NOTES = "all_notes"
     private lateinit var preferences: SharedPreferences
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val values: ParameterizedType = Types.newParameterizedType(List::class.java, NoteBody::class.java)
-    private val jsonAdapter: JsonAdapter<MutableList<NoteBody>> = moshi.adapter(values)
+    private val jsonAdapter: JsonAdapter<MutableList<NoteBodyUiModel>> = moshi.adapter(values)
 
-    fun getPreference(context: Context): Preference {
+    fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
             preferences = context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
         }
@@ -41,7 +42,10 @@ object Preference {
         return preferences.getBoolean(INIT_USER, false)
     }
 
-    fun getNotes(): MutableList<NoteBody>? {
+    fun getNotes(): MutableList<NoteBodyUiModel>? {
+//        val list = jsonAdapter.fromJson(preferences.getString(NOTES, null))
+//        return if (list!!.isEmpty()) emptyList<NoteBody>()
+//        else list
         return jsonAdapter.fromJson(preferences.getString(NOTES, null))
     }
 

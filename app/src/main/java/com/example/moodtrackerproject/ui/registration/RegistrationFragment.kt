@@ -2,7 +2,6 @@ package com.example.moodtrackerproject.ui.registration
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,8 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
-import com.example.moodtrackerproject.ui.registration.RegistrationAction.*
-import com.example.moodtrackerproject.ui.registration.RegistrationError.*
+import com.example.moodtrackerproject.ui.registration.RegistrationAction.StartLogInScreen
+import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowEmailInvalid
+import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowNameInvalid
+import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowNoInternet
+import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowPasswordInvalid
+import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowRegistrationError
 import com.google.android.material.snackbar.Snackbar
 
 class RegistrationFragment : Fragment() {
@@ -44,22 +47,9 @@ class RegistrationFragment : Fragment() {
                 )
             }
             alreadyHaveTextButton.setOnClickListener {
-//                Router.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
                 (requireActivity() as MainActivity).router.openLoginFromRegistration()
             }
-
-            pass.setEndIconOnClickListener {
-                var timesPressed = true
-                // ("//how to change it normally?")
-                passInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                if (passInput.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                    pass.endIconDrawable = resources.getDrawable(R.drawable.ic_welcome_lock)
-                } else {
-                    pass.endIconDrawable = resources.getDrawable(R.drawable.ic_welcome_unlock)
-                }
-            }
         }
-
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
@@ -73,7 +63,6 @@ class RegistrationFragment : Fragment() {
 
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
-            // ("//to start progress bar")
             binding.run {
                 progressBar.isVisible = true
                 registerButton.text = ""

@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.moodtrackerproject.databinding.ActivityMainBinding
 import com.example.moodtrackerproject.routing.Router
-import com.example.moodtrackerproject.utils.Preference
+import com.example.moodtrackerproject.utils.PreferenceManager
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigation.setupWithNavController(navController)
         router.setNavigationController(navController)
 
-        if (Preference.getPreference(this).getInitUser()) {
+        if (PreferenceManager.getPreference(this).getInitUser()) {
             navController.graph.startDestination = R.id.homeFragment
             router.openHome()
         } else {

@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
-import com.example.moodtrackerproject.utils.Preference
+import com.example.moodtrackerproject.utils.PreferenceManager
 
 class HomeFragment : Fragment() {
 
@@ -25,7 +25,7 @@ class HomeFragment : Fragment() {
         binding.run {
             logout.setOnClickListener {
                 viewModel.logOut()
-                Preference.setInitUser(false)
+                PreferenceManager.setInitUser(false)
             }
         }
 

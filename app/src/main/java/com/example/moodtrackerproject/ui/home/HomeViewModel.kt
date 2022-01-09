@@ -2,7 +2,7 @@ package com.example.moodtrackerproject.ui.home
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.ui.home.HomeAction.*
+import com.example.moodtrackerproject.ui.home.HomeAction.LogOut
 import com.google.firebase.auth.FirebaseAuth
 
 class HomeViewModel() : ViewModel() {

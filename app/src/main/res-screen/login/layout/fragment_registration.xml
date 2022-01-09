@@ -104,7 +104,6 @@
         android:hint="@string/password"
         android:textColorHint="@color/light_purple"
         app:boxStrokeColor="@color/light_purple"
-        app:endIconDrawable="@drawable/ic_welcome_lock"
         app:endIconMode="custom"
         app:errorIconTint="@color/light_purple"
         app:layout_constraintEnd_toStartOf="@+id/guideline_right"

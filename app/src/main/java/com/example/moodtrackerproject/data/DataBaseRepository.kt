@@ -2,7 +2,7 @@ package com.example.moodtrackerproject.data
 
 import androidx.lifecycle.MutableLiveData
 import com.example.moodtrackerproject.domain.NoteBody
-import com.example.moodtrackerproject.utils.Preference
+import com.example.moodtrackerproject.utils.PreferenceManager
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -20,13 +20,13 @@ object DataBaseRepository {
 
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
 
-        allNotes.value = Preference.getNotes()
+        allNotes.value = PreferenceManager.getNotes()
         allNotes.value!!.add(noteBody)
         // allNotes.value?.let{.add(noteBody)}
         var notesList: List<NoteBody> = allNotes.value!!
         val serNotes = jsonAdapter.toJson(notesList)
         // here i have to concat new notes with previous
-        Preference.setNotes(serNotes)
+        PreferenceManager.setNotes(serNotes)
 
 //        favoriteNotes = DataBaseRepository.favoriteNotes.value?.map {
 //            if (it.noteId == noteId) {

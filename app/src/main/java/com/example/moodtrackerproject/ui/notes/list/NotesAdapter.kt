@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.NoteItemBinding
-import com.example.moodtrackerproject.domain.NoteBody
 
 class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
@@ -14,7 +13,6 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
             binding.run {
                 root.setOnClickListener {
                     model.openDetails(model.noteId)
-//                    NotesFragment.click(listOfNotes[holder.adapterPosition])
                 }
                 noteTextDateTime.text = model.date
                 noteTitleItem.text = model.title
@@ -29,26 +27,6 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
             }
         }
     }
-
-//    override fun onViewAttachedToWindow(holder: NotesHolder) {
-//        holder.itemView.setOnClickListener {
-//            NotesFragment.click(listOfNotes[holder.adapterPosition])
-//        }
-//        holder.itemView.note_star_button_unchecked.setOnClickListener {
-//            isFavourite = !isFavourite
-//            if (isFavourite) {
-//                holder.itemView.note_star_button_unchecked.setImageResource(R.drawable.ic_note_star_checked)
-//            }
-//            if (!isFavourite) {
-//                holder.itemView.note_star_button_unchecked.setImageResource(R.drawable.ic_note_star_unchecked)
-//            }
-//        }
-//    }
-//
-//    override fun onViewDetachedFromWindow(holder: NotesHolder) {
-//        holder.itemView.setOnClickListener(null)
-//        super.onViewDetachedFromWindow(holder)
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotesHolder {
         return NotesHolder(
@@ -66,8 +44,8 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
 
     override fun getItemCount(): Int = listOfNotes.size
 
-    fun setList(list: List<NoteBody>) {
-//        listOfNotes = list
-//        notifyDataSetChanged()
+    fun setList(list: List<NoteBodyUiModel>) {
+        listOfNotes = list
+        notifyDataSetChanged()
     }
 }

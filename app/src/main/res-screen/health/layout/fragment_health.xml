@@ -6,6 +6,5 @@
     tools:context=".ui.HealthFragment">
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text=" HEALTH"/>
+        android:layout_height="wrap_content"/>
 </FrameLayout>

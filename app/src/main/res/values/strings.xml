@@ -48,7 +48,14 @@
     <string name="created">Created!</string>
     <string name="you_have_no_notes">You have no notes yet, click + to create new one</string>
     <string name="home">Home</string>
-    <string name="note_small_text">Some text written in the note Some text written in the note Some text written in the note Some text written in the note</string>
+    <string name="note_small_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</string>
+    <string name="logout">LogOut</string>
+    <string name="new_note">New note</string>
+    <string name="title">Title</string>
+    <string name="note_text">Note text</string>
+    <string name="cancel">cancel</string>
+    <string name="save">Save</string>
+    <string name="my_notes">My Notes</string>
 
 
 </resources>
