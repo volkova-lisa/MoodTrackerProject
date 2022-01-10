@@ -1,7 +1,5 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import timber.log.Timber
-
 data class NoteBodyUiModel(
     var noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
 
@@ -10,7 +8,7 @@ data class NoteBodyUiModel(
     var text: String = " ",
     var isChecked: Boolean = false,
 
-    var checkChanged: (String) -> Unit = { string -> Timber.d("HELLO") },
-    var openDetails: (String) -> Unit = { string -> Timber.d("HELLO") },
+    var checkChanged: ((String) -> Unit)? = null,
+    var openDetails: ((String) -> Unit)? = null
 
 )

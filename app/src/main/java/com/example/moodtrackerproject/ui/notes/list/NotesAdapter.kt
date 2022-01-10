@@ -16,7 +16,7 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
         fun bind(model: NoteBodyUiModel) {
             binding.run {
                 root.setOnClickListener {
-                    model.openDetails(model.noteId)
+                    model.openDetails?.invoke(model.noteId)
                 }
                 noteTextDateTime.text = model.date
                 noteTitleItem.text = model.title
@@ -26,7 +26,7 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
                     else R.drawable.ic_note_star_unchecked
                 )
                 noteStarButtonUnchecked.setOnClickListener {
-                    model.checkChanged(model.noteId)
+                    model.checkChanged?.invoke(model.noteId)
                 }
             }
         }

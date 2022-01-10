@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
+import com.example.moodtrackerproject.domain.map.NotesMapper
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
@@ -38,11 +39,11 @@ class NotesFragment : Fragment() {
 //                    notesAdapter.setList(list)
 //                }
 //            )
-            viewModel.getUiNotes().observe(
+            viewModel.uiModels.observe(
                 viewLifecycleOwner,
                 Observer {
                     val list = it!!.asReversed()
-                    notesAdapter.setList(list)
+                    notesAdapter.setList(list.map { NotesMapper().map(it) })
                 }
             )
             addNoteBtn.setOnClickListener {
