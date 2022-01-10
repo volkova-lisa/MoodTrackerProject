@@ -11,13 +11,12 @@ class NotesMapper : Mapper<NoteBody, NoteBodyUiModel> {
         it.title = title
         it.text = text
         it.isChecked = false
-        //TODO("change")
-        it.checkChanged = {changed -> Timber.d(changed)}
-        it.openDetails = {open -> Timber.d(open)}
-
+        // TODO("change")
+        it.checkChanged = { changed -> Timber.d(changed) }
+        it.openDetails = { open -> Timber.d(open) }
     }
 
     override fun map(from: NoteBody) = NoteBodyUiModel().apply {
-        //TODO("Not yet implemented")
+        // TODO("Not yet implemented")
     }
 }

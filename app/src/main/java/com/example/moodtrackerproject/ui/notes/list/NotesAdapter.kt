@@ -8,7 +8,7 @@ import com.example.moodtrackerproject.databinding.NoteItemBinding
 
 class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
-    //TODO("make with diffutils")
+    // TODO("make with diffutils")
 
     class NotesHolder(private val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: NoteBodyUiModel) {
