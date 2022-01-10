@@ -17,7 +17,4 @@ class NotesViewModel : ViewModel() {
     // fun getAllNotes
     // fun getFavNotes
 
-    fun initFavNotesListWithListInfo() {
-
-    }
 }

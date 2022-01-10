@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.data
 
 import androidx.lifecycle.MutableLiveData
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 import com.example.moodtrackerproject.utils.PreferenceManager
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -11,7 +12,7 @@ import java.lang.reflect.ParameterizedType
 
 // single source of truth
 object DataBaseRepository {
-    val allNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
+    val allNotes = MutableLiveData<MutableList<NoteBodyUiModel>>(mutableListOf())
     val favoriteNotes = MutableLiveData<MutableList<NoteBody>>(mutableListOf())
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val values: ParameterizedType =
