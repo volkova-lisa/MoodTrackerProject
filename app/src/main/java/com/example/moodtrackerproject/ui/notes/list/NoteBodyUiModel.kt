@@ -12,4 +12,5 @@ data class NoteBodyUiModel(
 
     var checkChanged: (String) -> Unit = { string -> Timber.d("HELLO") },
     var openDetails: (String) -> Unit = { string -> Timber.d("HELLO") },
+
 )

@@ -31,7 +31,14 @@ class NotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
             notesList.adapter = notesAdapter
-            viewModel.getAllNotes().observe(
+//            viewModel.getAllNotes().observe(
+//                viewLifecycleOwner,
+//                Observer {
+//                    val list = it!!.asReversed()
+//                    notesAdapter.setList(list)
+//                }
+//            )
+            viewModel.getUiNotes().observe(
                 viewLifecycleOwner,
                 Observer {
                     val list = it!!.asReversed()
