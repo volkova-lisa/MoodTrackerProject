@@ -8,6 +8,5 @@ data class NotesViewState(
 
 sealed class NotesListAction {
     class RemoveNote(val position: Int) : NotesListAction()
-    class ShowNotesList(val notesList: MutableList<NoteBodyUiModel>) : NotesListAction()
     object StartDetailsScreen : NotesListAction()
 }

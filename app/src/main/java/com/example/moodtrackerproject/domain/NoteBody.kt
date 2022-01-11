@@ -1,7 +1,7 @@
 package com.example.moodtrackerproject.domain
 
 import com.squareup.moshi.JsonClass
-// @serializable
+
 @JsonClass(generateAdapter = true)
 data class NoteBody(
     val noteId: String = System.currentTimeMillis().toString(),
