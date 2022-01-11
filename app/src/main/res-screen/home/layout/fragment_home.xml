@@ -6,6 +6,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.home.HomeFragment">
 
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline_left"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       app:layout_constraintGuide_percent="0.05" />
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline_right"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       app:layout_constraintGuide_percent="0.95" />
+
+   <com.google.android.material.appbar.AppBarLayout
+       android:id="@+id/toolbar_layout"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:elevation="5dp"
+       app:layout_constraintLeft_toLeftOf="parent"
+       app:layout_constraintRight_toRightOf="parent"
+       app:layout_constraintTop_toTopOf="parent">
+
+      <androidx.appcompat.widget.Toolbar
+          android:id="@+id/toolbar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:background="?attr/colorPrimary"
+          android:backgroundTint="@color/light_purple"
+          android:minHeight="?attr/actionBarSize"
+          android:theme="?attr/actionBarTheme"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:title="@string/my_notes"
+          app:titleTextColor="@color/white" />
+   </com.google.android.material.appbar.AppBarLayout>
+
+   <ImageView
+       android:id="@+id/toolbar_star"
+       android:layout_width="24dp"
+       android:layout_height="24dp"
+       android:layout_marginEnd="12dp"
+       android:elevation="5dp"
+       android:src="@drawable/notes_star_selector"
+       app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
+       app:layout_constraintEnd_toStartOf="@id/toolbar_calendar"
+       app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+   <ImageView
+       android:id="@+id/toolbar_calendar"
+       android:layout_width="24dp"
+       android:layout_height="26dp"
+       android:elevation="5dp"
+       android:src="@drawable/ic_more"
+       app:tint="@color/white"
+       app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
+       app:layout_constraintEnd_toEndOf="@id/guideline_right"
+       app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+
    <Button
        android:id="@+id/logout"
        android:layout_width="wrap_content"
