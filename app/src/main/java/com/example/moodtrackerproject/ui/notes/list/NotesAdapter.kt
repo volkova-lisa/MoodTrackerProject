@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,7 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
 
     // TODO("make with diffutils")
     val notesMapper = NotesMapper()
+    private val mCtx: Context? = null
 
     class NotesHolder(private val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: NoteBodyUiModel) {
@@ -27,6 +29,9 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : Recyc
                 )
                 noteStarButtonUnchecked.setOnClickListener {
                     model.checkChanged?.invoke(model.noteId)
+                }
+                buttonDeleteItem.setOnClickListener {
+                    model.deleteNote?.invoke(model.noteId)
                 }
             }
         }

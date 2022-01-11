@@ -8,5 +8,6 @@ data class NoteBody(
     val date: String = "",
     val title: String = "",
     val text: String = " ",
-    var isChecked: Boolean = false
+    var isChecked: Boolean = false,
+    var isDeleted: Boolean = false
 )

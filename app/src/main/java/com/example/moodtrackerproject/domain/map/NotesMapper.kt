@@ -12,11 +12,17 @@ class NotesMapper : Mapper<NoteBody, NoteBodyUiModel> {
         it.title = model.title
         it.text = model.text
         it.isChecked = model.isChecked
+        it.isDeleted = model.isDeleted
 
         it.checkChanged = { changed ->
             Timber.d(changed)
             DataBaseRepository.setFavorite(model)
         }
         it.openDetails = { open -> Timber.d(open) }
+        it.deleteNote = { deleted ->
+            Timber.d(deleted)
+            DataBaseRepository.setDeleted(model)
+            DataBaseRepository.removeDeletedNotes()
+        }
     }
 }

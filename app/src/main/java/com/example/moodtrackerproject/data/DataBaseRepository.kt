@@ -19,22 +19,31 @@ object DataBaseRepository {
 
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
         allNotes.value!!.add(noteBody)
+        PreferenceManager.setNotes(serializeNotes(allNotes))
+    }
+
+    // TODO("ask before delete")
+    fun setDeleted(noteBody: NoteBody) {
+        allNotes.value = allNotes.value?.map {
+            if (it.noteId == noteBody.noteId) it.copy(isDeleted = !it.isDeleted) else it
+        } as MutableList<NoteBody>?
+        PreferenceManager.setNotes(serializeNotes(allNotes))
+    }
+
+    fun removeDeletedNotes() {
+        allNotes.value = allNotes.value!!.filter { !it.isDeleted } as MutableList<NoteBody>?
+        PreferenceManager.setNotes(serializeNotes(allNotes))
+    }
+
+    private fun serializeNotes(list: MutableLiveData<MutableList<NoteBody>>): String {
         val notesList: List<NoteBody> = allNotes.value!!
-        val serNotes = jsonAdapter.toJson(notesList)
-        PreferenceManager.setNotes(serNotes)
-    }
-
-    fun delete(noteBody: NoteBody, onSuccess: () -> Unit) {
-    }
-
-    fun filterFavNotes() {
-        var filteredList = emptyList<NoteBody>()
-        filteredList = allNotes.value!!.filter { note -> note.isChecked }
+        return jsonAdapter.toJson(notesList)
     }
 
     fun setFavorite(noteBody: NoteBody) {
         allNotes.value = allNotes.value?.map {
             if (it.noteId == noteBody.noteId) it.copy(isChecked = !it.isChecked) else it
         } as MutableList<NoteBody>?
+        PreferenceManager.setNotes(serializeNotes(allNotes))
     }
 }

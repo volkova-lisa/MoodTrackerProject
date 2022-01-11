@@ -7,8 +7,10 @@ data class NoteBodyUiModel(
     var title: String = "",
     var text: String = " ",
     var isChecked: Boolean = false,
+    var isDeleted: Boolean = false,
 
     var checkChanged: ((String) -> Unit)? = null,
-    var openDetails: ((String) -> Unit)? = null
+    var openDetails: ((String) -> Unit)? = null,
+    var deleteNote: ((String) -> Unit)? = null
 
 )

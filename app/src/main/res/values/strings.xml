@@ -56,6 +56,7 @@
     <string name="cancel">cancel</string>
     <string name="save">Save</string>
     <string name="my_notes">My Notes</string>
+    <string name="delete">Delete</string>
 
 
 </resources>

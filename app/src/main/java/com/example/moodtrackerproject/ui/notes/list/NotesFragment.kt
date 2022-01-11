@@ -19,6 +19,7 @@ class NotesFragment : Fragment() {
         ViewModelProvider(this).get(NotesViewModel::class.java)
     }
 
+    var isFavoriteChecked = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,8 +44,9 @@ class NotesFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
             toolbarStar.setOnClickListener {
+                isFavoriteChecked = !isFavoriteChecked
                 // set here some value to edit list in repo
-                viewModel.onToolbarStarClicked(true)
+                viewModel.onToolbarStarClicked(isFavoriteChecked)
             }
         }
         viewModel.liveData.observe(viewLifecycleOwner, {
