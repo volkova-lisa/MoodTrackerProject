@@ -5,6 +5,7 @@ import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 import timber.log.Timber
 
+// TODO: move mapping to ViewModel
 class NotesMapper : Mapper<NoteBody, NoteBodyUiModel> {
     override fun map(model: NoteBody) = NoteBodyUiModel().also {
         it.noteId = model.noteId

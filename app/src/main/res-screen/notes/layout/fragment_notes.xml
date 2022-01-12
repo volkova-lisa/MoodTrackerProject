@@ -106,7 +106,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:src="@drawable/empty_notes"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
@@ -123,7 +122,6 @@
         android:textAlignment="center"
         android:textColor="@color/light_purple"
         android:textSize="17sp"
-        android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@id/pic_no_notes" />

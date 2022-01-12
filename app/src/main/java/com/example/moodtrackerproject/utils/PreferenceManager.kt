@@ -10,9 +10,9 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.ParameterizedType
 
 object PreferenceManager {
-    private const val INIT_USER = "init_user"
-    private const val PREF = "pref"
-    private const val NOTES = "all_notes"
+    private const val KEY_INIT_USER = "init_user"
+    private const val PREF_NAME = "pref"
+    private const val KEY_NOTES = "all_notes"
     private lateinit var preferences: SharedPreferences
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val values: ParameterizedType = Types.newParameterizedType(List::class.java, NoteBody::class.java)
@@ -20,29 +20,29 @@ object PreferenceManager {
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
-            preferences = context.getSharedPreferences(PREF, Context.MODE_PRIVATE)
+            preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)
         }
         return this
     }
 
     fun setInitUser(init: Boolean) {
         preferences.edit()
-            .putBoolean(INIT_USER, init)
+            .putBoolean(KEY_INIT_USER, init)
             .apply()
     }
 
     fun setNotes(notesList: String) {
         preferences.edit()
-            .putString(NOTES, notesList)
+            .putString(KEY_NOTES, notesList)
             .apply()
     }
 
     fun getInitUser(): Boolean {
-        return preferences.getBoolean(INIT_USER, false)
+        return preferences.getBoolean(KEY_INIT_USER, false)
     }
 
-    fun getNotes(): MutableList<NoteBody>? {
-        val str = preferences.getString(NOTES, null)
+    fun getNotes(): List<NoteBody>? {
+        val str = preferences.getString(KEY_NOTES, null)
         return if (str != null && str.isNotEmpty()) {
             val list = jsonAdapter.fromJson(str)
             list
@@ -53,6 +53,6 @@ object PreferenceManager {
     }
 
     fun getJsonNotes(): String? {
-        return preferences.getString(NOTES, null)
+        return preferences.getString(KEY_NOTES, null)
     }
 }

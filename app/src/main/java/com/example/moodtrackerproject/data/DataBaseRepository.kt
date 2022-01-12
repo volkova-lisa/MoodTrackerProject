@@ -11,7 +11,7 @@ import java.lang.reflect.ParameterizedType
 
 // single source of truth
 object DataBaseRepository {
-    var allNotes = MutableLiveData<MutableList<NoteBody>>(PreferenceManager.getNotes())
+    var allNotes = MutableLiveData<MutableList<NoteBody>>(PreferenceManager.getNotes()!!.toMutableList())
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val values: ParameterizedType =
         Types.newParameterizedType(List::class.java, NoteBody::class.java)

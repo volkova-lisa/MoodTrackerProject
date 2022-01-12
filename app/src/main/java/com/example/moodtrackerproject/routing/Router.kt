@@ -5,7 +5,7 @@ import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 
 class Router(private val activity: MainActivity) {
-
+    // TODO: use constants for routes
     private lateinit var navController: NavController // = activity.findNavController(R.id.nav_host_fragment)
 
     fun setNavigationController(controller: NavController) {

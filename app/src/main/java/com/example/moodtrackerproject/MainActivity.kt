@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            Log.d("HELLO", destination.toString())
             binding.bottomNavigation.visibility = when (destination.id) {
                 R.id.loginFragment -> View.GONE
                 R.id.welcomeFragment -> View.GONE

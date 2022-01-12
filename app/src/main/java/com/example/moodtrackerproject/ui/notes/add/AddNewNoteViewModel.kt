@@ -20,14 +20,13 @@ class AddNewNoteViewModel : ViewModel() {
         MutableLiveData<AddNewNoteViewState>().apply {
             value = state
         }
-    private val dateOfNote = DateUtils()
     val liveData get() = _addNewNoteStateLiveData
 
     @SuppressLint("SimpleDateFormat")
     fun checkNoteData(title: String, text: String) {
         if (title.isEmpty())
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
-        else insertNewNote(NoteBody(date = dateOfNote.getDateOfNote(), title = title, text = text))
+        else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = title, text = text))
     }
 
     private fun insertNewNote(note: NoteBody) =

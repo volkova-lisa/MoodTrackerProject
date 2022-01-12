@@ -1,18 +1,14 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.NoteItemBinding
-import com.example.moodtrackerproject.domain.map.NotesMapper
 
 class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) : RecyclerView.Adapter<NotesAdapter.NotesHolder>() {
 
     // TODO("make with diffutils")
-    val notesMapper = NotesMapper()
-    private val mCtx: Context? = null
 
     class NotesHolder(private val binding: NoteItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(model: NoteBodyUiModel) {

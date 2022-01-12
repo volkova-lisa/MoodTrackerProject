@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
@@ -35,8 +36,11 @@ class NotesFragment : Fragment() {
             viewModel.uiModels.observe(
                 viewLifecycleOwner, {
                     val list = it!!.asReversed()
-                    // ToDo (NotesMapper)
                     notesAdapter.setList(list.map { NotesMapper().map(it) })
+                    if (list.isNotEmpty()) {
+                        binding.picNoNotes.isInvisible = true
+                        binding.hintText.isInvisible = true
+                    }
                 }
             )
 
