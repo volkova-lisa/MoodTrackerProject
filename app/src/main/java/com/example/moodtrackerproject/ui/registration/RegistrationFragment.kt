@@ -12,11 +12,6 @@ import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
 import com.example.moodtrackerproject.ui.registration.RegistrationAction.StartLogInScreen
-import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowEmailInvalid
-import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowNameInvalid
-import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowNoInternet
-import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowPasswordInvalid
-import com.example.moodtrackerproject.ui.registration.RegistrationError.ShowRegistrationError
 import com.google.android.material.snackbar.Snackbar
 
 class RegistrationFragment : Fragment() {
@@ -66,6 +61,7 @@ class RegistrationFragment : Fragment() {
             binding.run {
                 progressBar.isVisible = true
                 registerButton.text = ""
+                binding.pass.isPasswordVisibilityToggleEnabled = true
             }
         } else {
             binding.run {
@@ -83,19 +79,20 @@ class RegistrationFragment : Fragment() {
 
     private fun handleError(registrationError: RegistrationError) {
         when (registrationError) {
-            is ShowNoInternet -> {
+            is RegistrationError.ShowNoInternet -> {
                 showNoInternetError()
             }
-            is ShowPasswordInvalid -> {
+            is RegistrationError.ShowPasswordInvalid -> {
+                binding.pass.isPasswordVisibilityToggleEnabled = false
                 binding.passInput.error = getString(R.string.invalid_password)
             }
-            is ShowEmailInvalid -> {
+            is RegistrationError.ShowEmailInvalid -> {
                 binding.emailInput.error = getString(R.string.invalid_email)
             }
-            is ShowRegistrationError -> {
+            is RegistrationError.ShowRegistrationError -> {
                 binding.emailInput.error = getString(R.string.email_address_collision)
             }
-            is ShowNameInvalid -> {
+            is RegistrationError.ShowNameInvalid -> {
                 binding.nameInput.error = getString(R.string.add_name)
             }
         }

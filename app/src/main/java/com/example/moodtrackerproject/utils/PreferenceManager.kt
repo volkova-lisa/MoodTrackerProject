@@ -42,10 +42,14 @@ object PreferenceManager {
     }
 
     fun getNotes(): MutableList<NoteBody>? {
-//        val list = jsonAdapter.fromJson(preferences.getString(NOTES, null))
-//        return if (list!!.isEmpty()) emptyList<NoteBody>()
-//        else list
-        return jsonAdapter.fromJson(preferences.getString(NOTES, null))
+        val str = preferences.getString(NOTES, null)
+        return if (str != null && str.isNotEmpty()) {
+            val list = jsonAdapter.fromJson(str)
+            list
+        } else {
+            mutableListOf()
+        }
+//        return jsonAdapter.fromJson(preferences.getString(NOTES, ""))
     }
 
     fun getJsonNotes(): String? {

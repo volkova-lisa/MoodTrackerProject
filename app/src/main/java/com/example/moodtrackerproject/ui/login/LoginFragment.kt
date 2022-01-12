@@ -10,12 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
-import com.example.moodtrackerproject.ui.login.LoginAction.StartNotesScreen
-import com.example.moodtrackerproject.ui.login.LoginAction.StartRegistrationScreen
-import com.example.moodtrackerproject.ui.login.LoginAction.StartResetPasswordScreen
-import com.example.moodtrackerproject.ui.login.LoginError.ShowEmailInvalid
-import com.example.moodtrackerproject.ui.login.LoginError.ShowNoInternet
-import com.example.moodtrackerproject.ui.login.LoginError.ShowPasswordInvalid
 import com.google.android.material.snackbar.Snackbar
 
 class LoginFragment : Fragment() {
@@ -81,21 +75,24 @@ class LoginFragment : Fragment() {
 
     private fun handleError(loginError: LoginError) {
         when (loginError) {
-            is ShowNoInternet -> showNoInternetError()
-            is ShowPasswordInvalid -> binding.passInput.error = getString(R.string.invalid_password)
-            is ShowEmailInvalid -> binding.emailInput.error = getString(R.string.invalid_email)
+            is LoginError.ShowNoInternet -> showNoInternetError()
+            is LoginError.ShowPasswordInvalid -> {
+                binding.pass.isPasswordVisibilityToggleEnabled = false
+                binding.passInput.error = getString(R.string.invalid_password)
+            }
+            is LoginError.ShowEmailInvalid -> binding.emailInput.error = getString(R.string.invalid_email)
         }
     }
 
     private fun handleAction(loginAction: LoginAction) {
         when (loginAction) {
-            is StartNotesScreen -> {
+            is LoginAction.StartNotesScreen -> {
                 (requireActivity() as MainActivity).router.openHome()
             }
-            is StartRegistrationScreen -> {
+            is LoginAction.StartRegistrationScreen -> {
                 (requireActivity() as MainActivity).router.openRegistration()
             }
-            is StartResetPasswordScreen -> {
+            is LoginAction.StartResetPasswordScreen -> {
                 (requireActivity() as MainActivity).router.openResetPassScreen()
             }
         }
