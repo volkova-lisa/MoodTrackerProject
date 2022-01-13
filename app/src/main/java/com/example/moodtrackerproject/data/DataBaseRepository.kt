@@ -16,6 +16,7 @@ object DataBaseRepository {
         Types.newParameterizedType(List::class.java, NoteBody::class.java)
     private val jsonAdapter: JsonAdapter<List<NoteBody>> = moshi.adapter(values)
 
+    var notesListener: (() -> Unit)? = null
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
         allNotes.add(noteBody)
         PreferenceManager.setNotes(serializeNotes(allNotes))
@@ -44,5 +45,6 @@ object DataBaseRepository {
             if (it.noteId == noteBody.noteId) it.copy(isChecked = !it.isChecked) else it
         } as MutableList<NoteBody>
         PreferenceManager.setNotes(serializeNotes(allNotes))
+        notesListener?.invoke()
     }
 }

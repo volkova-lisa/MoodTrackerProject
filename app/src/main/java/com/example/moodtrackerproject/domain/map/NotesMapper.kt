@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.domain.map
 
+import android.util.Log
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
@@ -15,8 +16,8 @@ class NotesMapper : Mapper<NoteBody, NoteBodyUiModel> {
         it.isChecked = model.isChecked
         it.isDeleted = model.isDeleted
 
-        it.checkChanged = { changed ->
-            Timber.d(changed)
+        it.checkChanged = {
+            Log.d("MAPPErMAPPPERmapper is called", model.toString())
             DataBaseRepository.setFavorite(model)
         }
         it.openDetails = { open -> Timber.d(open) }

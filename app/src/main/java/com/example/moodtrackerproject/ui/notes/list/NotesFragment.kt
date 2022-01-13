@@ -35,14 +35,12 @@ class NotesFragment : Fragment() {
             viewModel.notesLiveData.observe(
                 viewLifecycleOwner, {
                     notesAdapter.setList(it)
-                    // list.map { NotesMapper().map(it) }
                     if (it.isNotEmpty()) {
                         binding.picNoNotes.isInvisible = true
                         binding.hintText.isInvisible = true
                     }
                 }
             )
-
             addNoteBtn.setOnClickListener {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
