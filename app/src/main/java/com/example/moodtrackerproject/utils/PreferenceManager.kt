@@ -13,10 +13,12 @@ object PreferenceManager {
     private const val KEY_INIT_USER = "init_user"
     private const val PREF_NAME = "pref"
     private const val KEY_NOTES = "all_notes"
+
     private lateinit var preferences: SharedPreferences
+
     private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
     private val values: ParameterizedType = Types.newParameterizedType(List::class.java, NoteBody::class.java)
-    private val jsonAdapter: JsonAdapter<MutableList<NoteBody>> = moshi.adapter(values)
+    private val notesJsonAdapter: JsonAdapter<List<NoteBody>> = moshi.adapter(values)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -31,9 +33,10 @@ object PreferenceManager {
             .apply()
     }
 
-    fun setNotes(notesList: String) {
+    fun saveNotes(notesList: List<NoteBody>) {
+        val serializedNotes = notesJsonAdapter.toJson(notesList)
         preferences.edit()
-            .putString(KEY_NOTES, notesList)
+            .putString(KEY_NOTES, serializedNotes)
             .apply()
     }
 
@@ -41,18 +44,8 @@ object PreferenceManager {
         return preferences.getBoolean(KEY_INIT_USER, false)
     }
 
-    fun getNotes(): List<NoteBody>? {
-        val str = preferences.getString(KEY_NOTES, null)
-        return if (str != null && str.isNotEmpty()) {
-            val list = jsonAdapter.fromJson(str)
-            list
-        } else {
-            mutableListOf()
-        }
-//        return jsonAdapter.fromJson(preferences.getString(NOTES, ""))
-    }
-
-    fun getJsonNotes(): String? {
-        return preferences.getString(KEY_NOTES, null)
+    fun getNotes(): List<NoteBody> {
+        val notesJson = preferences.getString(KEY_NOTES, null)
+        return if (notesJson.isNullOrEmpty()) listOf() else notesJsonAdapter.fromJson(notesJson) ?: listOf()
     }
 }

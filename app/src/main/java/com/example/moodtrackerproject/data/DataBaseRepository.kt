@@ -2,49 +2,49 @@ package com.example.moodtrackerproject.data
 
 import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.utils.PreferenceManager
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import java.lang.reflect.ParameterizedType
 
 // single source of truth
 object DataBaseRepository {
-    var allNotes: MutableList<NoteBody> = PreferenceManager.getNotes()!!.toMutableList()
-    private val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
-    private val values: ParameterizedType =
-        Types.newParameterizedType(List::class.java, NoteBody::class.java)
-    private val jsonAdapter: JsonAdapter<List<NoteBody>> = moshi.adapter(values)
+    fun getNotes() = PreferenceManager.getNotes()
 
-    var notesListener: (() -> Unit)? = null
     fun insert(noteBody: NoteBody, onSuccess: () -> Unit) {
-        allNotes.add(noteBody)
-        PreferenceManager.setNotes(serializeNotes(allNotes))
+        val list = mutableListOf<NoteBody>().apply {
+            addAll(getNotes())
+            add(noteBody)
+        }
+        saveNotes(list)
     }
 
     // TODO("ask before delete")
     fun setDeleted(noteBody: NoteBody) {
-        allNotes = allNotes.map {
+        val list = getNotes().map {
             if (it.noteId == noteBody.noteId) it.copy(isDeleted = !it.isDeleted) else it
-        } as MutableList<NoteBody>
-        PreferenceManager.setNotes(serializeNotes(allNotes))
+        }
+        saveNotes(list)
     }
 
     fun removeDeletedNotes() {
-        allNotes = allNotes.filter { !it.isDeleted } as MutableList<NoteBody>
-        PreferenceManager.setNotes(serializeNotes(allNotes))
+        val list = getNotes().filter { !it.isDeleted }
+        saveNotes(list)
     }
 
-    private fun serializeNotes(list: MutableList<NoteBody>): String {
-        val notesList: List<NoteBody> = allNotes
-        return jsonAdapter.toJson(notesList)
+    private fun saveNotes(notesList: List<NoteBody>) {
+        PreferenceManager.saveNotes(notesList)
     }
 
-    fun setFavorite(noteBody: NoteBody) {
-        allNotes = allNotes.map {
-            if (it.noteId == noteBody.noteId) it.copy(isChecked = !it.isChecked) else it
-        } as MutableList<NoteBody>
-        PreferenceManager.setNotes(serializeNotes(allNotes))
-        notesListener?.invoke()
+    fun setFavorite(noteId: String, callback: (List<NoteBody>) -> Unit) {
+        val list = getNotes().map {
+            if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
+        }
+        saveNotes(list)
+        callback(list)
+    }
+
+    fun setFavorite(noteId: String): List<NoteBody> {
+        val list = getNotes().map {
+            if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
+        }
+        saveNotes(list)
+        return list
     }
 }

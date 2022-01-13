@@ -1,16 +1,13 @@
 package com.example.moodtrackerproject.ui.notes.list
 
 data class NoteBodyUiModel(
-    var noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
-
-    var date: String = "",
-    var title: String = "",
-    var text: String = " ",
-    var isChecked: Boolean = false,
-    var isDeleted: Boolean = false,
-
-    var checkChanged: ((String) -> Unit)? = null,
-    var openDetails: ((String) -> Unit)? = null,
-    var deleteNote: ((String) -> Unit)? = null
-
+    val noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
+    val date: String = "",
+    val title: String = "",
+    val text: String = " ",
+    val isChecked: Boolean = false,
+    val isDeleted: Boolean = false,
+    val checkChanged: ((String) -> Unit)? = null,
+    val openDetails: ((String) -> Unit)? = null,
+    val deleteNote: ((String) -> Unit)? = null
 )
