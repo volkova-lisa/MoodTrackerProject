@@ -9,14 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
-import com.example.moodtrackerproject.domain.map.NotesMapper
 
 class NotesFragment : Fragment() {
     private lateinit var binding: FragmentNotesBinding
 
     private val notesAdapter = NotesAdapter()
 
-    private val viewModel: NotesViewModel by lazy {
+    val viewModel: NotesViewModel by lazy {
         ViewModelProvider(this).get(NotesViewModel::class.java)
     }
 
@@ -33,11 +32,11 @@ class NotesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.run {
             notesList.adapter = notesAdapter
-            viewModel.uiModels.observe(
+            viewModel.notesLiveData.observe(
                 viewLifecycleOwner, {
-                    val list = it!!.asReversed()
-                    notesAdapter.setList(list.map { NotesMapper().map(it) })
-                    if (list.isNotEmpty()) {
+                    notesAdapter.setList(it)
+                    // list.map { NotesMapper().map(it) }
+                    if (it.isNotEmpty()) {
                         binding.picNoNotes.isInvisible = true
                         binding.hintText.isInvisible = true
                     }
@@ -49,7 +48,6 @@ class NotesFragment : Fragment() {
             }
             toolbarStar.setOnClickListener {
                 isFavoriteChecked = !isFavoriteChecked
-                // set here some value to edit list in repo
                 viewModel.onToolbarStarClicked(isFavoriteChecked)
             }
         }

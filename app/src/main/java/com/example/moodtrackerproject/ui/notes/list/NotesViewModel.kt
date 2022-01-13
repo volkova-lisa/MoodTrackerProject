@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.domain.map.NotesMapper
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 class NotesViewModel : ViewModel() {
@@ -13,10 +14,17 @@ class NotesViewModel : ViewModel() {
             value = state
         }
     val liveData get() = _notesStateLiveData
-    val uiModels: MutableLiveData<MutableList<NoteBody>> = DataBaseRepository.allNotes
+    var notesList: MutableList<NoteBody> = DataBaseRepository.allNotes
+    var notesLiveData: MutableLiveData<List<NoteBodyUiModel>> = MutableLiveData(mapNotesList())
 
     fun onToolbarStarClicked(checked: Boolean) {
-        if (checked) uiModels.value = uiModels.value!!.filter { it.isChecked }.toMutableList()
-        else uiModels.value = PreferenceManager.getNotes()!!.toMutableList()
+        if (checked) notesLiveData.value = notesLiveData.value!!.filter { it.isChecked }.toMutableList()
+        else notesLiveData.value = PreferenceManager.getNotes()!!.map { NotesMapper().map(it) }.toMutableList()
+    }
+
+    // notesList.reversed().map { NotesMapper().map(notesList)}
+
+    fun mapNotesList(): List<NoteBodyUiModel> {
+        return notesList.map { NotesMapper().map(it) }
     }
 }
