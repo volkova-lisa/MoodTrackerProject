@@ -50,7 +50,8 @@ class NotesViewModel : ViewModel() {
                     Timber.d(deleted)
                     // TODO: maybe combine these two functions because they are similar?
                     DataBaseRepository.setDeleted(model)
-                    DataBaseRepository.removeDeletedNotes()
+                    val list = DataBaseRepository.removeDeletedNotes()
+                    notesLiveData.value = map(list)
                 },
             )
         }

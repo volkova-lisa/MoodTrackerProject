@@ -23,9 +23,10 @@ object DataBaseRepository {
         saveNotes(list)
     }
 
-    fun removeDeletedNotes() {
+    fun removeDeletedNotes(): List<NoteBody> {
         val list = getNotes().filter { !it.isDeleted }
         saveNotes(list)
+        return list
     }
 
     private fun saveNotes(notesList: List<NoteBody>) {
