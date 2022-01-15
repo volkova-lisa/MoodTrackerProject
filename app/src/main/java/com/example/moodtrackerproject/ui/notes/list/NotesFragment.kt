@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,9 +56,9 @@ class NotesFragment : Fragment() {
                 lifecycleScope.launch {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
                         viewModel.fetchListOfNotes()
-                        viewModel.uiState.collect {
-                            it.copy(isFavoriteChecked = !it.isFavoriteChecked)
+                        viewModel.uiState.collect() {
                             viewModel.onToolbarStarClicked(it.isFavoriteChecked)
+                            Log.d("888888888888888888", it.isFavoriteChecked.toString())
                         }
                     }
                 }
@@ -75,6 +76,7 @@ class NotesFragment : Fragment() {
                 // (requireActivity() as MainActivity).router.openNotesScreen()
             }
             is NotesListAction.ChangeFavoriteStatus -> {
+                viewModel.changeStarState()
             }
         }
     }
