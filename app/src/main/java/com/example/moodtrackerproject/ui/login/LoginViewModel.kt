@@ -26,10 +26,12 @@ class LoginViewModel() : ViewModel() {
             email.isEmailValid() && password.isPasswordValid() -> {
                 loginUserWithEmailAndPassword(email, password)
             }
-            !email.isEmailValid() -> liveData.value =
-                state.copy(error = LoginError.ShowEmailInvalid)
-            !password.isPasswordValid() -> liveData.value =
-                state.copy(error = LoginError.ShowPasswordInvalid)
+            !email.isEmailValid() ->
+                liveData.value =
+                    state.copy(error = LoginError.ShowEmailInvalid)
+            !password.isPasswordValid() ->
+                liveData.value =
+                    state.copy(error = LoginError.ShowPasswordInvalid)
             !email.isEmailValid() && !password.isPasswordValid() -> {
                 liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
                 liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)

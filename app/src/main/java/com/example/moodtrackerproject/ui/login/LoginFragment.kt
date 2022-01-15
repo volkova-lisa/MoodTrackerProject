@@ -80,8 +80,9 @@ class LoginFragment : Fragment() {
                 binding.pass.isPasswordVisibilityToggleEnabled = false
                 binding.passInput.error = getString(R.string.invalid_password)
             }
-            is LoginError.ShowEmailInvalid -> binding.emailInput.error =
-                getString(R.string.invalid_email)
+            is LoginError.ShowEmailInvalid ->
+                binding.emailInput.error =
+                    getString(R.string.invalid_email)
         }
     }
 

@@ -24,7 +24,6 @@ class NotesFragment : Fragment() {
         ViewModelProvider(this).get(NotesViewModel::class.java)
     }
 
-    var isFavoriteChecked = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,8 +52,15 @@ class NotesFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
             toolbarStar.setOnClickListener {
-                isFavoriteChecked = !isFavoriteChecked
-                viewModel.onToolbarStarClicked(isFavoriteChecked)
+                lifecycleScope.launch {
+                    repeatOnLifecycle(Lifecycle.State.STARTED) {
+                        viewModel.fetchListOfNotes()
+                        viewModel.uiState.collect {
+                            it.copy(isFavoriteChecked = !it.isFavoriteChecked)
+                            viewModel.onToolbarStarClicked(it.isFavoriteChecked)
+                        }
+                    }
+                }
             }
         }
     }
@@ -67,6 +73,8 @@ class NotesFragment : Fragment() {
         when (noteAction) {
             is NotesListAction.RemoveNote -> {
                 // (requireActivity() as MainActivity).router.openNotesScreen()
+            }
+            is NotesListAction.ChangeFavoriteStatus -> {
             }
         }
     }
