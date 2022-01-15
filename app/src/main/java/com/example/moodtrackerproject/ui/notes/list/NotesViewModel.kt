@@ -1,28 +1,45 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class NotesViewModel : ViewModel() {
-    // проблема - тут notesLiveData обновляются лишь при нажатии onToolbarStarClicked
-    private val state = NotesViewState()
-    private val _notesStateLiveData: MutableLiveData<NotesViewState> =
-        MutableLiveData<NotesViewState>().apply {
-            value = state
-        }
-    val liveData get() = _notesStateLiveData
+    private val _uiState = MutableStateFlow(NotesViewState())
+    val uiState: StateFlow<NotesViewState> = _uiState.asStateFlow()
 
-    // TODO: move list to state - only one liveData per view model!
-    val notesLiveData: MutableLiveData<List<NoteBodyUiModel>> = MutableLiveData(map(DataBaseRepository.getNotes()))
+    private var fetchJob: Job? = null
+
+    fun fetchListOfNotes() {
+        fetchJob?.cancel()
+        fetchJob = viewModelScope.launch {
+            val notes = map(DataBaseRepository.getNotes())
+            _uiState.update {
+                it.copy(listOfNotes = notes)
+            }
+        }
+    }
 
     fun onToolbarStarClicked(checked: Boolean) {
-        notesLiveData.value = map(
-            if (checked) DataBaseRepository.getNotes().filter { it.isChecked }
-            else DataBaseRepository.getNotes()
-        )
+        fetchJob?.cancel()
+        fetchJob = viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    listOfNotes = map(
+                        if (checked) DataBaseRepository.getNotes().filter { it.isChecked }
+                        else DataBaseRepository.getNotes()
+                    )
+                )
+            }
+        }
     }
 
     private fun map(notesList: List<NoteBody>): List<NoteBodyUiModel> {
@@ -41,7 +58,12 @@ class NotesViewModel : ViewModel() {
 //                    }
                     // or without callback
                     val list = DataBaseRepository.setFavorite(it)
-                    notesLiveData.value = map(list)
+                    fetchJob?.cancel()
+                    fetchJob = viewModelScope.launch {
+                        _uiState.update {
+                            it.copy(listOfNotes = map(list))
+                        }
+                    }
 
                     // Note: both implementations are not perfect and will be revised in the future
                 },
@@ -51,7 +73,12 @@ class NotesViewModel : ViewModel() {
                     // TODO: maybe combine these two functions because they are similar?
                     DataBaseRepository.setDeleted(model)
                     val list = DataBaseRepository.removeDeletedNotes()
-                    notesLiveData.value = map(list)
+                    fetchJob?.cancel()
+                    fetchJob = viewModelScope.launch {
+                        _uiState.update {
+                            it.copy(listOfNotes = map(list))
+                        }
+                    }
                 },
             )
         }
