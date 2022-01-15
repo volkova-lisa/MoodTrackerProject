@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 class LoginViewModel() : ViewModel() {
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
@@ -25,13 +26,14 @@ class LoginViewModel() : ViewModel() {
             email.isEmailValid() && password.isPasswordValid() -> {
                 loginUserWithEmailAndPassword(email, password)
             }
-            !email.isEmailValid() -> liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
-            !password.isPasswordValid() -> liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)
-            !email.isEmailValid() && !password.isPasswordValid() ->
-                {
-                    liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
-                    liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)
-                }
+            !email.isEmailValid() -> liveData.value =
+                state.copy(error = LoginError.ShowEmailInvalid)
+            !password.isPasswordValid() -> liveData.value =
+                state.copy(error = LoginError.ShowPasswordInvalid)
+            !email.isEmailValid() && !password.isPasswordValid() -> {
+                liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
+                liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)
+            }
         }
     }
 

@@ -1,10 +1,10 @@
 package com.example.moodtrackerproject.ui.notes.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isInvisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -41,12 +41,14 @@ class NotesFragment : Fragment() {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     viewModel.fetchListOfNotes()
                     viewModel.uiState.collect {
+                        if (it.listOfNotes.isNotEmpty()) {
+                            picNoNotes.isInvisible = true
+                            hintText.isInvisible = true
+                        }
                         notesAdapter.setList(it.listOfNotes)
-                        Log.d("999999999999999", it.listOfNotes.toString())
                     }
                 }
             }
-
             addNoteBtn.setOnClickListener {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
