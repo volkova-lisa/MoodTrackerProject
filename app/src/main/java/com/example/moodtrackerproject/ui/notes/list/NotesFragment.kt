@@ -53,6 +53,7 @@ class NotesFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
             toolbarStar.setOnClickListener {
+                //here it works only once
                 lifecycleScope.launch {
                     repeatOnLifecycle(Lifecycle.State.STARTED) {
                         viewModel.fetchListOfNotes()

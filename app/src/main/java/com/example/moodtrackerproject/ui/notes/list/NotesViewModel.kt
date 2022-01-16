@@ -21,7 +21,6 @@ class NotesViewModel : ViewModel() {
     fun changeStarState() {
         fetchJob?.cancel()
         fetchJob = viewModelScope.launch {
-            val notes = map(DataBaseRepository.getNotes())
             _uiState.update {
                 it.copy(isFavoriteChecked = !it.isFavoriteChecked)
             }
