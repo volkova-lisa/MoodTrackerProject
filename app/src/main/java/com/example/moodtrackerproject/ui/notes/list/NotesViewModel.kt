@@ -1,54 +1,48 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.update
-import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class NotesViewModel : ViewModel() {
-    private val _uiState = MutableStateFlow(NotesViewState())
-    val uiState: StateFlow<NotesViewState> = _uiState.asStateFlow()
+    // TODO: should be val
+    private var state: NotesViewState
 
-    private var fetchJob: Job? = null
+    init {
+        state = NotesViewState(
+            addNewNote = ::addNewNote,
+            showFavourites = ::changeFavoriteStatus,
+        )
+    }
 
-    fun changeStarState() {
-        fetchJob?.cancel()
-        fetchJob = viewModelScope.launch {
-            _uiState.update {
-                it.copy(isFavoriteChecked = !it.isFavoriteChecked)
-            }
+    private val _notesStateLiveData: MutableLiveData<NotesViewState> =
+        MutableLiveData<NotesViewState>().apply {
+            value = state
         }
+    val liveData get() = _notesStateLiveData
+
+    private fun addNewNote() {
+        setState(state.copy(action = NotesListAction.AddNewNote))
+    }
+
+    private fun changeFavoriteStatus() {
+        val isFavoriteChecked = !state.isFavoriteChecked
+        setState(
+            state.copy(
+                isFavoriteChecked = isFavoriteChecked,
+                listOfNotes = map(
+                    if (isFavoriteChecked) DataBaseRepository.getNotes().filter { it.isChecked }
+                    else DataBaseRepository.getNotes()
+                )
+            )
+        )
     }
 
     fun fetchListOfNotes() {
-        fetchJob?.cancel()
-        fetchJob = viewModelScope.launch {
-            val notes = map(DataBaseRepository.getNotes())
-            _uiState.update {
-                it.copy(listOfNotes = notes)
-            }
-        }
-    }
-
-    fun onToolbarStarClicked(checked: Boolean) {
-        fetchJob?.cancel()
-        fetchJob = viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    listOfNotes = map(
-                        if (checked) DataBaseRepository.getNotes().filter { it.isChecked }
-                        else DataBaseRepository.getNotes()
-                    )
-                )
-            }
-        }
+        val notes = map(DataBaseRepository.getNotes())
+        setState(state.copy(listOfNotes = notes))
     }
 
     private fun map(notesList: List<NoteBody>): List<NoteBodyUiModel> {
@@ -61,20 +55,8 @@ class NotesViewModel : ViewModel() {
                 isChecked = model.isChecked,
                 isDeleted = model.isDeleted,
                 checkChanged = {
-                    // with callback
-//                    DataBaseRepository.setFavorite(it) {
-//                        notesLiveData.value = map(it)
-//                    }
-                    // or without callback
                     val list = DataBaseRepository.setFavorite(it)
-                    fetchJob?.cancel()
-                    fetchJob = viewModelScope.launch {
-                        _uiState.update {
-                            it.copy(listOfNotes = map(list))
-                        }
-                    }
-
-                    // Note: both implementations are not perfect and will be revised in the future
+                    setState(state.copy(listOfNotes = map(list)))
                 },
                 openDetails = { open -> Timber.d(open) },
                 deleteNote = { deleted ->
@@ -82,14 +64,15 @@ class NotesViewModel : ViewModel() {
                     // TODO: maybe combine these two functions because they are similar?
                     DataBaseRepository.setDeleted(model)
                     val list = DataBaseRepository.removeDeletedNotes()
-                    fetchJob?.cancel()
-                    fetchJob = viewModelScope.launch {
-                        _uiState.update {
-                            it.copy(listOfNotes = map(list))
-                        }
-                    }
+                    setState(state.copy(listOfNotes = map(list)))
                 },
             )
         }
+    }
+
+    // TODO: need to think on some "unification"
+    private fun setState(newState: NotesViewState) {
+        state = newState
+        _notesStateLiveData.value = state
     }
 }

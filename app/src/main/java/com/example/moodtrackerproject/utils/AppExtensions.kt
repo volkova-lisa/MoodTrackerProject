@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
+import android.os.SystemClock
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -43,4 +44,39 @@ fun String.isEmailValid() =
 fun String.isPasswordValid(): Boolean {
     val MIN_PASSWORD_LENGTH = 6
     return length >= MIN_PASSWORD_LENGTH && isNotEmpty()
+}
+
+// to prevent fantom-double taps
+fun View.click(action: () -> Unit) {
+    setOnClickListener(
+        object : View.OnClickListener {
+            private var lastClickTime: Long = 0
+
+            override fun onClick(v: View) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 300) return
+                else action()
+                lastClickTime = SystemClock.elapsedRealtime()
+            }
+        }
+    )
+}
+
+fun View.makeGone() {
+    this.visibility = View.GONE
+}
+
+fun View.makeInvisible() {
+    this.visibility = View.INVISIBLE
+}
+
+fun View.makeVisible() {
+    this.visibility = View.VISIBLE
+}
+
+fun View.visibleIf(condition: Boolean?) {
+    if (condition == true) {
+        this.makeVisible()
+    } else {
+        this.makeGone()
+    }
 }
