@@ -6,27 +6,35 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
-import com.example.moodtrackerproject.ui.notes.AddNewNoteViewState
-import com.example.moodtrackerproject.ui.notes.NewNoteAction
-import com.example.moodtrackerproject.ui.notes.NewNoteError
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AddNewNoteViewModel : ViewModel() {
 
-    private val state = AddNewNoteViewState()
+    private var state: AddNewNoteViewState
+    init {
+        state = AddNewNoteViewState(
+            cancelAdding = ::cancelAdding,
+            saveNewNote = ::insertNewNote,
+            checkNoteData = ::checkNoteData
+        )
+    }
     private val _addNewNoteStateLiveData: MutableLiveData<AddNewNoteViewState> =
         MutableLiveData<AddNewNoteViewState>().apply {
             value = state
         }
     val liveData get() = _addNewNoteStateLiveData
 
+    private fun cancelAdding() {
+        setState(state.copy(action = NewNoteAction.ShowNotesScreen))
+    }
+
     @SuppressLint("SimpleDateFormat")
-    fun checkNoteData(title: String, text: String) {
-        if (title.isEmpty())
+    fun checkNoteData(pair: Pair<String, String>) {
+        if (pair.first.isEmpty())
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
-        else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = title, text = text))
+        else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))
     }
 
     private fun insertNewNote(note: NoteBody) =
@@ -34,5 +42,10 @@ class AddNewNoteViewModel : ViewModel() {
             DataBaseRepository.insert(note) {
                 _addNewNoteStateLiveData.value = state.copy(action = NewNoteAction.ShowNotesScreen)
             }
+            setState(state.copy(action = NewNoteAction.ShowNotesScreen))
         }
+    private fun setState(newState: AddNewNoteViewState) {
+        state = newState
+        _addNewNoteStateLiveData.value = state
+    }
 }

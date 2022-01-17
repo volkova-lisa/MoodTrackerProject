@@ -14,10 +14,9 @@ import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.visibleIf
 
 class NotesFragment : Fragment() {
+
     private lateinit var binding: FragmentNotesBinding
-
     private val notesAdapter = NotesAdapter()
-
     val viewModel: NotesViewModel by lazy {
         ViewModelProvider(this).get(NotesViewModel::class.java)
     }

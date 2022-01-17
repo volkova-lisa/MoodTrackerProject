@@ -8,9 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentAddNewNoteBinding
-import com.example.moodtrackerproject.ui.notes.AddNewNoteViewState
-import com.example.moodtrackerproject.ui.notes.NewNoteAction
-import com.example.moodtrackerproject.ui.notes.NewNoteError
+import com.example.moodtrackerproject.utils.click
 
 class AddNewNoteFragment : Fragment() {
 
@@ -27,10 +25,31 @@ class AddNewNoteFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        viewModel.liveData.observe(viewLifecycleOwner, {
+            render(it)
+        })
+    }
+
+    private fun render(state: AddNewNoteViewState) {
+        state.action?.let { handleAction(it) }
+        state.error?.let { handleError(it) }
+        binding.run {
+            cancelButton.click(state.cancelAdding)
+            saveButton.click {
+                state.checkNoteData(Pair(title.text.toString(), noteText.text.toString()))
+            }
+            when (state.action) {
+                NewNoteAction.ShowNotesScreen -> (requireActivity() as MainActivity).router.openNotesScreen()
+                null -> {}
+            }
+        }
+    }
+
     private fun handleError(newNoteError: NewNoteError) {
         when (newNoteError) {
             is NewNoteError.ShowEmptyTitle -> {
-                // (requireActivity() as MainActivity).router.openNotesScreen()
             }
         }
     }
@@ -41,29 +60,5 @@ class AddNewNoteFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openNotesScreen()
             }
         }
-    }
-
-    private fun render(state: AddNewNoteViewState) {
-        state.action?.let { handleAction(it) }
-        state.error?.let { handleError(it) }
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.run {
-            cancelButton.setOnClickListener {
-                (requireActivity() as MainActivity).router.openNotesScreen()
-            }
-            saveButton.setOnClickListener {
-                viewModel.checkNoteData(
-                    title.text.toString(),
-                    noteText.text.toString()
-                )
-                (requireActivity() as MainActivity).router.openNotesScreen()
-            }
-        }
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
     }
 }
