@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -21,7 +22,7 @@ class NotesViewModel : ViewModel() {
         MutableLiveData<NotesViewState>().apply {
             value = state
         }
-    val liveData get() = _notesStateLiveData
+    val liveData: LiveData<NotesViewState> get() = _notesStateLiveData
 
     private fun addNewNote() {
         setState(state.copy(action = NotesListAction.AddNewNote))

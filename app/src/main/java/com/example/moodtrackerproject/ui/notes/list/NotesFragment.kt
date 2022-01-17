@@ -52,7 +52,7 @@ class NotesFragment : Fragment() {
             hintText.visibleIf(state.listOfNotes.isEmpty())
 
             notesAdapter.setList(state.listOfNotes)
-            
+
             when (state.action) {
                 AddNewNote -> (requireActivity() as MainActivity).router.openAddNewNote()
                 StartDetailsScreen -> TODO()
