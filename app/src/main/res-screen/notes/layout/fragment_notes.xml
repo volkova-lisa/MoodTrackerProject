@@ -1,8 +1,140 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.NotesFragment">
+    tools:context=".ui.notes.list.NotesFragment">
 
-</FrameLayout>
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:backgroundTint="@color/light_purple"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/my_notes"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/toolbar_search"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        android:elevation="5dp"
+        android:src="@drawable/ic_baseline_search"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintEnd_toStartOf="@id/toolbar_star"
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+
+    <ImageView
+        android:id="@+id/toolbar_star"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="18dp"
+        android:elevation="5dp"
+        android:src="@drawable/notes_star_selector"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintEnd_toStartOf="@id/toolbar_calendar"
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+
+    <ImageView
+        android:id="@+id/toolbar_calendar"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:elevation="5dp"
+        android:src="@drawable/ic_baseline_calendar"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+    <SearchView
+        android:id="@+id/search_field"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/notes_search_bg"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@+id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notes_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/search_field"
+        tools:layout_editor_absoluteX="0dp"
+        tools:listitem="@layout/note_item"
+        tools:visibility="visible" />
+
+    <ImageView
+        android:id="@+id/pic_no_notes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/empty_notes"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hint_text"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:elevation="3dp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="@string/you_have_no_notes"
+        android:textAlignment="center"
+        android:textColor="@color/light_purple"
+        android:textSize="17sp"
+        app:layout_constraintLeft_toLeftOf="@+id/guideline_left"
+        app:layout_constraintRight_toRightOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/pic_no_notes" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_note_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_add_note"
+        app:backgroundTint="@color/light_purple"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="@id/guideline_right" />
+</androidx.constraintlayout.widget.ConstraintLayout>

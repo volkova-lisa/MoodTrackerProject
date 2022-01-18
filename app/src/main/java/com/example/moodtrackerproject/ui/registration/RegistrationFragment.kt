@@ -2,25 +2,20 @@ package com.example.moodtrackerproject.ui.registration
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentRegistrationBinding
-import com.example.moodtrackerproject.routing.Routes
-import com.example.moodtrackerproject.ui.login.LoginFragment
-import com.example.moodtrackerproject.ui.registration.RegistrationAction.*
-import com.example.moodtrackerproject.ui.registration.RegistrationError.*
-import com.example.moodtrackerproject.ui.reset.ResetPasswordFragment
+import com.example.moodtrackerproject.ui.registration.RegistrationAction.StartLogInScreen
 import com.google.android.material.snackbar.Snackbar
 
 class RegistrationFragment : Fragment() {
     private lateinit var binding: FragmentRegistrationBinding
-
     private val viewModel: RegistrationViewModel by lazy {
         ViewModelProvider(this).get(RegistrationViewModel::class.java)
     }
@@ -47,21 +42,9 @@ class RegistrationFragment : Fragment() {
                 )
             }
             alreadyHaveTextButton.setOnClickListener {
-                Routes.goTo(requireActivity(), LoginFragment())
-            }
-
-            pass.setEndIconOnClickListener {
-                var timesPressed = true
-                // ("//how to change it normally?")
-                passInput.inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
-                if (passInput.inputType == InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD) {
-                    pass.endIconDrawable = resources.getDrawable(R.drawable.ic_welcome_lock)
-                } else {
-                    pass.endIconDrawable = resources.getDrawable(R.drawable.ic_welcome_unlock)
-                }
+                (requireActivity() as MainActivity).router.openLoginFromRegistration()
             }
         }
-
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
@@ -75,10 +58,10 @@ class RegistrationFragment : Fragment() {
 
     private fun showProgress(isLoading: Boolean) {
         if (isLoading) {
-            // ("//to start progress bar")
             binding.run {
                 progressBar.isVisible = true
                 registerButton.text = ""
+                binding.pass.isPasswordVisibilityToggleEnabled = true
             }
         } else {
             binding.run {
@@ -96,19 +79,20 @@ class RegistrationFragment : Fragment() {
 
     private fun handleError(registrationError: RegistrationError) {
         when (registrationError) {
-            is ShowNoInternet -> {
+            is RegistrationError.ShowNoInternet -> {
                 showNoInternetError()
             }
-            is ShowPasswordInvalid -> {
+            is RegistrationError.ShowPasswordInvalid -> {
+                binding.pass.isPasswordVisibilityToggleEnabled = false
                 binding.passInput.error = getString(R.string.invalid_password)
             }
-            is ShowEmailInvalid -> {
+            is RegistrationError.ShowEmailInvalid -> {
                 binding.emailInput.error = getString(R.string.invalid_email)
             }
-            is ShowRegistrationError -> {
+            is RegistrationError.ShowRegistrationError -> {
                 binding.emailInput.error = getString(R.string.email_address_collision)
             }
-            is ShowNameInvalid -> {
+            is RegistrationError.ShowNameInvalid -> {
                 binding.nameInput.error = getString(R.string.add_name)
             }
         }
@@ -117,11 +101,8 @@ class RegistrationFragment : Fragment() {
     private fun handleAction(registrationAction: RegistrationAction) {
         when (registrationAction) {
             is StartLogInScreen -> {
-                Routes.goTo(requireActivity(), LoginFragment())
-            }
-            is StartResetPasswordScreen -> {
-                Routes.goTo(requireActivity(), ResetPasswordFragment())
-                // https://github.com/JakeWharton/timber
+//                Router.getInstance(requireActivity() as MainActivity).goTo(requireActivity(), LoginFragment())
+                (requireActivity() as MainActivity).router.openLoginFromRegistration()
             }
         }
     }

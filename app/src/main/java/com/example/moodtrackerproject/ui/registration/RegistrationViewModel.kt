@@ -2,7 +2,10 @@ package com.example.moodtrackerproject.ui.registration
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.utils.*
+import com.example.moodtrackerproject.utils.NAME
+import com.example.moodtrackerproject.utils.PROFILE
+import com.example.moodtrackerproject.utils.isEmailValid
+import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -31,24 +34,17 @@ class RegistrationViewModel : ViewModel() {
     ) {
         when {
             fullName.isNotEmpty() && email.isEmailValid() && password.isPasswordValid() -> {
-
                 registerUserWithEmailAndPassword(fullName, email, password)
             }
             fullName.isEmpty() ->
                 liveData.value =
                     state.copy(error = RegistrationError.ShowNameInvalid)
-            !email.isEmailValid() ->
+            !email.isEmailValid() || email.isEmpty() ->
                 liveData.value =
                     state.copy(error = RegistrationError.ShowEmailInvalid)
-            !password.isPasswordValid() ->
+            !password.isPasswordValid() || password.isEmpty() ->
                 liveData.value =
                     state.copy(error = RegistrationError.ShowPasswordInvalid)
-            fullName.isEmpty() && !email.isEmailValid() && !password.isPasswordValid() ->
-                {
-                    state.copy(error = RegistrationError.ShowNameInvalid)
-                    state.copy(error = RegistrationError.ShowEmailInvalid)
-                    state.copy(error = RegistrationError.ShowEmailInvalid)
-                }
         }
     }
 

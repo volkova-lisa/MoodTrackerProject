@@ -8,7 +8,6 @@ data class RegistrationViewState(
 
 sealed class RegistrationAction {
     object StartLogInScreen : RegistrationAction()
-    object StartResetPasswordScreen : RegistrationAction()
 }
 
 sealed class RegistrationError {
