@@ -30,9 +30,10 @@ class AddNewNoteViewModel : ViewModel() {
     }
 
     private fun checkNoteData(pair: Pair<String, String>) {
-        if (pair.first.isEmpty())
+        if (pair.first.isEmpty()) {
+            setState(state.copy(error = NewNoteError.ShowEmptyTitle))
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
-        else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))
+        } else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))
     }
 
     private fun insertNewNote(note: NoteBody) =
@@ -42,6 +43,7 @@ class AddNewNoteViewModel : ViewModel() {
             }
             setState(state.copy(action = NewNoteAction.ShowNotesScreen))
         }
+
     private fun setState(newState: AddNewNoteViewState) {
         state = newState
         _addNewNoteStateLiveData.value = state

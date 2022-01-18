@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentAddNewNoteBinding
 import com.example.moodtrackerproject.utils.click
 
@@ -33,7 +34,6 @@ class AddNewNoteFragment : Fragment() {
     }
 
     private fun render(state: AddNewNoteViewState) {
-        state.action?.let { handleAction(it) }
         state.error?.let { handleError(it) }
         binding.run {
             cancelButton.click(state.cancelAdding)
@@ -50,14 +50,7 @@ class AddNewNoteFragment : Fragment() {
     private fun handleError(newNoteError: NewNoteError) {
         when (newNoteError) {
             is NewNoteError.ShowEmptyTitle -> {
-            }
-        }
-    }
-
-    private fun handleAction(newNoteAction: NewNoteAction) {
-        when (newNoteAction) {
-            is NewNoteAction.ShowNotesScreen -> {
-                (requireActivity() as MainActivity).router.openNotesScreen()
+                binding.title.error = getString(R.string.empty_title)
             }
         }
     }
