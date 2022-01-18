@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.notes.add
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,8 +29,7 @@ class AddNewNoteViewModel : ViewModel() {
         setState(state.copy(action = NewNoteAction.ShowNotesScreen))
     }
 
-    @SuppressLint("SimpleDateFormat")
-    fun checkNoteData(pair: Pair<String, String>) {
+    private fun checkNoteData(pair: Pair<String, String>) {
         if (pair.first.isEmpty())
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
         else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))

@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -43,12 +42,12 @@ class HomeFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.home_menu, menu)
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.logOut -> {
                 viewModel.logOut()
                 PreferenceManager.setInitUser(false)
-                Log.d("=======================", PreferenceManager.getInitUser().toString())
             }
         }
         return super.onOptionsItemSelected(item)
