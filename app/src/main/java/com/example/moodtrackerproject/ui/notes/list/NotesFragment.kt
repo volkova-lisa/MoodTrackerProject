@@ -54,7 +54,11 @@ class NotesFragment : Fragment() {
 
             when (state.action) {
                 AddNewNote -> (requireActivity() as MainActivity).router.openAddNewNote()
-                StartDetailsScreen -> TODO()
+                // StartDetailsScreen -> (requireActivity() as MainActivity).router.openDetails()
+                StartDetailsScreen -> {
+                    // here is a problem
+                    (requireActivity() as MainActivity).router.openDetails(state.currentId)
+                }
                 null -> {}
             }
         }

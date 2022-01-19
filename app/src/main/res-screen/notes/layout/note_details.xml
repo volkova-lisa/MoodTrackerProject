@@ -25,7 +25,7 @@
         android:elevation="3dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/note_title"
-        android:textColor="@color/black"
+        android:textColor="#7751E9"
         android:textSize="20sp"
         android:layout_marginTop="14dp"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
@@ -51,11 +51,11 @@
         android:text="@string/back"
         android:layout_marginEnd="10dp"
         android:textColor="@color/text_grey"
-        app:layout_constraintBottom_toBottomOf="@id/edit_button"
-        app:layout_constraintEnd_toStartOf="@id/edit_button" />
+        app:layout_constraintBottom_toBottomOf="@id/save_edited_button"
+        app:layout_constraintEnd_toStartOf="@id/save_edited_button" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/edit_button"
+        android:id="@+id/save_edited_button"
         android:layout_width="120dp"
         android:layout_height="50dp"
         android:layout_marginBottom="20dp"

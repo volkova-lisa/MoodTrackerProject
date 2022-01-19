@@ -13,6 +13,7 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) :
 
     class NotesHolder(private val binding: NoteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(model: NoteBodyUiModel) {
             binding.run {
                 root.setOnClickListener {

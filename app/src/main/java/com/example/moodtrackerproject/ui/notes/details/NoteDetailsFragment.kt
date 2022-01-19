@@ -7,13 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.databinding.FragmentNoteDetailsBinding
-import com.example.moodtrackerproject.ui.notes.list.NotesAdapter
-import com.example.moodtrackerproject.utils.click
 
 class NoteDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteDetailsBinding
-    private val notesAdapter = NotesAdapter()
     val viewModel: NoteDetailsViewModel by lazy {
         ViewModelProvider(this).get(NoteDetailsViewModel::class.java)
     }
@@ -36,8 +33,5 @@ class NoteDetailsFragment : Fragment() {
     }
 
     private fun render(state: DetailsViewState) {
-        binding.run {
-            noteEdit.editButton.click(state.editClicked)
-        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,7 +15,7 @@ class NotesViewModel : ViewModel() {
     init {
         state = NotesViewState(
             addNewNote = ::addNewNote,
-            showFavourites = ::changeFavoriteStatus,
+            showFavourites = ::changeFavoriteStatus
         )
     }
 
@@ -59,7 +60,11 @@ class NotesViewModel : ViewModel() {
                     val list = DataBaseRepository.setFavorite(it)
                     setState(state.copy(listOfNotes = map(list)))
                 },
-                openDetails = { open -> Timber.d(open) },
+                openDetails = { open ->
+                    setState(state.copy(action = NotesListAction.StartDetailsScreen))
+                    Log.d("-------------------", "0000000")
+                    setState(state.copy(currentId = open))
+                },
                 deleteNote = { deleted ->
                     Timber.d(deleted)
                     // TODO: maybe combine these two functions because they are similar?

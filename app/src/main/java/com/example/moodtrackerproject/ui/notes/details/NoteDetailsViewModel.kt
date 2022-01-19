@@ -22,16 +22,11 @@ class NoteDetailsViewModel : ViewModel() {
     val liveData: LiveData<DetailsViewState> get() = _detailsStateLiveData
 
     private fun saveEdited() {
-
     }
 
-
     private fun goToAllNotes() {
-
     }
 
     private fun editNote() {
-
     }
-
 }
