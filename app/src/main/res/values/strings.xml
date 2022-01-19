@@ -58,6 +58,11 @@
     <string name="home">Home</string>
     <string name="logout">LogOut</string>
     <string name="empty_title">Title cannot be empty</string>
+    <string name="note_details">Note details</string>
+    <string name="note_title">Note title</string>
+    <string name="note_text_long">Ryan Adams, whose new album Prisoner is out this Friday, was the latest guest on Marc Maron’s podcast “WTF.” Adams discussed encountering the Rolling Stones early in his career (and talking penny loafers with drummer Charlie Watts), his struggles with addiction in the Easy Tiger era</string>
+    <string name="back">Back</string>
+    <string name="edit">Edit</string>
 
 
 </resources>

@@ -15,4 +15,5 @@
     <color name="text_light_grey">#F2F2F2</color>
     <color name="edit_text_line_grey">#8AB8B8B8</color>
     <color name="icons_grey">#5F5F5F</color>
+    <color name="details_text">#97000000</color>
 </resources>
