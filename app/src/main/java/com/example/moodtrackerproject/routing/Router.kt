@@ -11,9 +11,14 @@ class Router(private val activity: MainActivity) {
 
     // TODO: i'm sure this shouldn't be here
     fun openDetails(id: String) {
-        val bundle = Bundle()
-        bundle.putString("ID", id)
+        val bundle = Bundle().apply {
+            putString("ID", id)
+        }
         navController.navigate(R.id.noteDetailsFragment, bundle)
+    }
+
+    fun openDetails() {
+        navController.navigate(R.id.noteDetailsFragment)
     }
 
     fun setNavigationController(controller: NavController) {

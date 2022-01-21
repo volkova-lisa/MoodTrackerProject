@@ -42,7 +42,7 @@
     <include
         android:id="@+id/note_edit"
         layout="@layout/note_edit_details"
-        android:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"

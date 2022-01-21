@@ -1,21 +1,27 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.Store
 import timber.log.Timber
 
 class NotesViewModel : ViewModel() {
     // TODO: should be val
-    private var state: NotesViewState
+    private val state: NotesViewState by lazy {
+        Store.appState.notesState
+    }
+
+    // private lateinit var
 
     init {
-        state = NotesViewState(
-            addNewNote = ::addNewNote,
-            showFavourites = ::changeFavoriteStatus
+        Store.appState.copy(
+            notesState = NotesViewState(
+                addNewNote = ::addNewNote,
+                showFavourites = ::changeFavoriteStatus
+            )
         )
     }
 
@@ -60,10 +66,9 @@ class NotesViewModel : ViewModel() {
                     val list = DataBaseRepository.setFavorite(it)
                     setState(state.copy(listOfNotes = map(list)))
                 },
-                openDetails = { open ->
+                openDetails = {
                     setState(state.copy(action = NotesListAction.StartDetailsScreen))
-                    Log.d("-------------------", "0000000")
-                    setState(state.copy(currentId = open))
+                    setState(state.copy(currentId = it))
                 },
                 deleteNote = { deleted ->
                     Timber.d(deleted)
@@ -78,7 +83,7 @@ class NotesViewModel : ViewModel() {
 
     // TODO: need to think on some "unification"
     private fun setState(newState: NotesViewState) {
-        state = newState
+        Store.setState(newState)
         _notesStateLiveData.value = state
     }
 }

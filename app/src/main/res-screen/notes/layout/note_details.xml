@@ -27,7 +27,7 @@
         android:text="@string/note_title"
         android:textColor="#7751E9"
         android:textSize="20sp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="70dp"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
