@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -10,34 +9,31 @@ import timber.log.Timber
 
 class NotesViewModel : ViewModel() {
     // TODO: should be val
-    private val state: NotesViewState by lazy {
-        Store.appState.notesState
-    }
-
-    // private lateinit var
-
+    private var state: NotesViewState
     init {
-        Store.appState.copy(
-            notesState = NotesViewState(
-                addNewNote = ::addNewNote,
-                showFavourites = ::changeFavoriteStatus
-            )
+        state = Store.appState.notesState.copy(
+            addNewNote = ::addNewNote,
+            showFavourites = ::changeFavoriteStatus
         )
+        Store.setState(state)
     }
+//    by lazy {
+//        Store.appState.notesState
+//    }
 
     private val _notesStateLiveData: MutableLiveData<NotesViewState> =
         MutableLiveData<NotesViewState>().apply {
             value = state
         }
-    val liveData: LiveData<NotesViewState> get() = _notesStateLiveData
+    val liveData get() = _notesStateLiveData
 
     private fun addNewNote() {
-        setState(state.copy(action = NotesListAction.AddNewNote))
+        liveData.value = state.copy(action = NotesListAction.AddNewNote)
     }
 
     private fun changeFavoriteStatus() {
-        val isFavoriteChecked = !state.isFavoriteChecked
-        setState(
+        val isFavoriteChecked = !Store.appState.notesState.isFavoriteChecked
+        liveData.value =
             state.copy(
                 isFavoriteChecked = isFavoriteChecked,
                 listOfNotes = map(
@@ -45,7 +41,8 @@ class NotesViewModel : ViewModel() {
                     else DataBaseRepository.getNotes()
                 )
             )
-        )
+
+        Store.setState(liveData.value!!)
     }
 
     fun fetchListOfNotes() {
@@ -84,6 +81,6 @@ class NotesViewModel : ViewModel() {
     // TODO: need to think on some "unification"
     private fun setState(newState: NotesViewState) {
         Store.setState(newState)
-        _notesStateLiveData.value = state
+        _notesStateLiveData.value = Store.appState.notesState
     }
 }

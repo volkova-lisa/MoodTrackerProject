@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +44,7 @@ class NotesFragment : Fragment() {
     }
 
     private fun render(state: NotesViewState) {
+
         binding.run {
             addNoteBtn.click(state.addNewNote)
             toolbarStar.click(state.showFavourites)
@@ -55,10 +55,8 @@ class NotesFragment : Fragment() {
 
             when (state.action) {
                 AddNewNote -> {
-                    Log.d("=====------======", state.toString())
                     (requireActivity() as MainActivity).router.openAddNewNote()
                 }
-                // StartDetailsScreen -> (requireActivity() as MainActivity).router.openDetails()
                 StartDetailsScreen -> {
                     // here is a problem
                     (requireActivity() as MainActivity).router.openDetails(state.currentId)

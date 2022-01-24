@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,7 +18,6 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) :
             binding.run {
                 root.setOnClickListener {
                     model.openDetails?.invoke(model.noteId)
-                    Log.d("-------------------", "111111111")
                 }
                 noteTextDateTime.text = model.date
                 noteTitleItem.text = model.title
