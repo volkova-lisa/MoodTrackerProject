@@ -16,15 +16,12 @@ class NoteDetailsFragment : Fragment() {
     val viewModel: NoteDetailsViewModel by lazy {
         ViewModelProvider(this).get(NoteDetailsViewModel::class.java)
     }
-    private lateinit var thisId: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         binding = FragmentNoteDetailsBinding.inflate(layoutInflater, container, false)
-        thisId = arguments?.getString("ID").toString()
         return binding.root
     }
 
@@ -35,14 +32,10 @@ class NoteDetailsFragment : Fragment() {
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
-
     private fun render(state: DetailsViewState) {
         binding.run {
             note.backButton.click(state.backClicked)
-
+            note.title.text = state.currentNote.toString()
             when (state.action) {
                 DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openNotesScreen()
                 null -> {}

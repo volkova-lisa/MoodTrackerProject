@@ -11,6 +11,10 @@ object Store {
         appState = appState.copy(notesState = newState)
     }
 
+    fun getNotesId(): String {
+        return appState.notesState.currentId
+    }
+
     fun setState(newState: DetailsViewState) {
         appState = appState.copy(noteDetailsState = newState)
     }
@@ -18,7 +22,7 @@ object Store {
 
 data class AppState(
     val notesState: NotesViewState = NotesViewState(0, false, null, {}, {}, "", listOf()),
-    val noteDetailsState: DetailsViewState = DetailsViewState({}, {}, {}, "", NoteBody(), {}, {}, {}, {}, null)
+    val noteDetailsState: DetailsViewState = DetailsViewState({}, {}, {}, "", NoteBody(), "", "", {}, {}, null)
 )
 
 // в NotesViewModel

@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -17,9 +18,6 @@ class NotesViewModel : ViewModel() {
         )
         Store.setState(state)
     }
-//    by lazy {
-//        Store.appState.notesState
-//    }
 
     private val _notesStateLiveData: MutableLiveData<NotesViewState> =
         MutableLiveData<NotesViewState>().apply {
@@ -66,12 +64,13 @@ class NotesViewModel : ViewModel() {
                 openDetails = {
                     setState(state.copy(action = NotesListAction.StartDetailsScreen))
                     setState(state.copy(currentId = it))
+                    // Store.setState
 
                     Timber.d("----ID sent by adapter to Notes-----", state.currentId)
-                    Timber.d(state.currentId)
+                    Log.d("66666666", state.currentId)
 
                     Timber.d("----ID stored in livedata Notes-----", liveData.value!!.currentId)
-                    Timber.d(liveData.value!!.currentId)
+                    Log.d("66666666", liveData.value!!.currentId)
                 },
                 deleteNote = { deleted ->
                     Timber.d(deleted)

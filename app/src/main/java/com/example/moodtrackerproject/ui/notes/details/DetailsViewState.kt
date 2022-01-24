@@ -9,11 +9,11 @@ data class DetailsViewState(
 
     val currentId: String = " ",
     val currentNote: NoteBody? = NoteBody(),
+    val currentTitle: String = " ",
+    val currentText: String = " ",
 
     val setId: () -> Unit,
     val setNote: () -> Unit,
-    val setTitle: () -> Unit,
-    val setText: () -> Unit,
 
     val action: DetailsAction? = null,
 )

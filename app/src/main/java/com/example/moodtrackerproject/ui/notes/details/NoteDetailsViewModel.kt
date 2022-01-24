@@ -2,27 +2,22 @@ package com.example.moodtrackerproject.ui.notes.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.Store
 
 class NoteDetailsViewModel : ViewModel() {
+
     private var state: DetailsViewState
 
-    private lateinit var curId: String
-
     init {
-        state = DetailsViewState(
+        state = Store.appState.noteDetailsState.copy(
             editClicked = ::editNote,
             backClicked = ::goToAllNotes,
             saveEdited = ::saveEdited,
             setId = ::setId,
-            setNote = ::setNote,
-            setText = ::setText,
-            setTitle = ::setTitle
+            setNote = ::setNote
         )
-    }
-
-    fun setNoteFromUI(id: String) {
-        curId = id
+        Store.setState(state)
     }
 
     private val _detailsStateLiveData: MutableLiveData<DetailsViewState> =
@@ -32,25 +27,19 @@ class NoteDetailsViewModel : ViewModel() {
     val liveData get() = _detailsStateLiveData
 
     private fun setId() {
-        setState(state.copy(currentId = curId))
+        liveData.value = state.copy(currentId = Store.getNotesId())
+        // Store.setState(liveData.value!!)
     }
 
     private fun setNote() {
-        val thisNote = DataBaseRepository.getNotes().find { it.noteId == state.currentId }
-        setState(state.copy(currentNote = thisNote))
-    }
-
-    private fun setTitle() {
-        if (state.currentNote != null) {
-            // setState(state.copy(action = DetailsAction.SetTitleField))
-        }
-    }
-
-    private fun setText() {
-        val currentNote = DataBaseRepository.getNotes().find { it.noteId == state.currentId }
-        if (currentNote != null) {
-            // setState(state.copy(action = DetailsAction.SetTextField))
-        }
+        // val thisNote = Store.appState.notesState.listOfNotes.find { it.noteId == state.currentId }
+        val thisNote = NoteBody("1111", "55", "999", "fvdfb", false, false)
+        liveData.value = Store.appState.noteDetailsState.copy(
+            currentNote = thisNote,
+            currentTitle = thisNote!!.title,
+            currentText = thisNote!!.text
+        )
+        Store.setState(liveData.value!!)
     }
 
     private fun saveEdited() {
@@ -62,8 +51,9 @@ class NoteDetailsViewModel : ViewModel() {
 
     private fun editNote() {
     }
+
     private fun setState(newState: DetailsViewState) {
         state = newState
-        _detailsStateLiveData.value = state
+        liveData.value = state
     }
 }
