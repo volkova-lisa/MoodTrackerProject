@@ -59,7 +59,7 @@ class NotesFragment : Fragment() {
                 }
                 StartDetailsScreen -> {
                     // here is a problem
-                    (requireActivity() as MainActivity).router.openDetails(state.currentId)
+                    (requireActivity() as MainActivity).router.openDetails()
                 }
                 null -> {}
             }

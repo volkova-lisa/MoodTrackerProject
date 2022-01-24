@@ -1,13 +1,14 @@
 package com.example.moodtrackerproject.ui.notes.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentNoteDetailsBinding
+import com.example.moodtrackerproject.utils.click
 
 class NoteDetailsFragment : Fragment() {
 
@@ -24,8 +25,6 @@ class NoteDetailsFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentNoteDetailsBinding.inflate(layoutInflater, container, false)
         thisId = arguments?.getString("ID").toString()
-        viewModel.setNoteFromUI(thisId)
-        Log.d("-------------------", thisId)
         return binding.root
     }
 
@@ -42,9 +41,10 @@ class NoteDetailsFragment : Fragment() {
 
     private fun render(state: DetailsViewState) {
         binding.run {
+            note.backButton.click(state.backClicked)
+
             when (state.action) {
-                DetailsAction.SetTitleField -> note.title.text = state.currentNote!!.title
-                DetailsAction.SetTextField -> note.text.text = state.currentNote!!.text
+                DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openNotesScreen()
                 null -> {}
             }
         }

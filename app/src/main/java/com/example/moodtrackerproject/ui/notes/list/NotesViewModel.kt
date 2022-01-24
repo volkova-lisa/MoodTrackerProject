@@ -66,6 +66,12 @@ class NotesViewModel : ViewModel() {
                 openDetails = {
                     setState(state.copy(action = NotesListAction.StartDetailsScreen))
                     setState(state.copy(currentId = it))
+
+                    Timber.d("----ID sent by adapter to Notes-----", state.currentId)
+                    Timber.d(state.currentId)
+
+                    Timber.d("----ID stored in livedata Notes-----", liveData.value!!.currentId)
+                    Timber.d(liveData.value!!.currentId)
                 },
                 deleteNote = { deleted ->
                     Timber.d(deleted)

@@ -12,7 +12,7 @@ object Store {
     }
 
     fun setState(newState: DetailsViewState) {
-        // appState = appState.copy(notesState = newState)
+        appState = appState.copy(noteDetailsState = newState)
     }
 }
 

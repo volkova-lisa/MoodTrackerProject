@@ -19,9 +19,7 @@ data class DetailsViewState(
 )
 
 sealed class DetailsAction {
+    object CancelEditing : DetailsAction()
     object SwitchToEditable : DetailsAction()
     object ShowAllNotes : DetailsAction()
-    object SetTitleField : DetailsAction()
-    object SetTextField : DetailsAction()
-    object SetId : DetailsAction()
 }
