@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
@@ -35,6 +36,15 @@ class NoteDetailsFragment : Fragment() {
     private fun render(state: DetailsViewState) {
         binding.run {
             note.backButton.click(state.backClicked)
+            note.editButton.click {
+                noteEdit.root.isVisible = true
+                note.root.isVisible = false
+            }
+            noteEdit.cancelButton.click {
+                noteEdit.root.isVisible = false
+                note.root.isVisible = true
+            }
+
             note.title.text = state.currentNote.toString()
 
             when (state.action) {
