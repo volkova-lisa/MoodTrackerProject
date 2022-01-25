@@ -36,6 +36,7 @@ class NoteDetailsFragment : Fragment() {
         binding.run {
             note.backButton.click(state.backClicked)
             note.title.text = state.currentNote.toString()
+
             when (state.action) {
                 DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openNotesScreen()
                 null -> {}
