@@ -46,5 +46,4 @@ class NoteDetailsViewModel : ViewModel() {
 
     private fun editNote() {
     }
-
 }

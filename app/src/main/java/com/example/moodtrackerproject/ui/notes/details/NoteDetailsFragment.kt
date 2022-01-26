@@ -50,6 +50,8 @@ class NoteDetailsFragment : Fragment() {
             }
             note.title.text = state.currentNote!!.title
             note.text.text = state.currentNote!!.text
+            note.date.text = state.currentNote!!.date
+
             when (state.action) {
                 DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openNotesScreen()
                 null -> {}
