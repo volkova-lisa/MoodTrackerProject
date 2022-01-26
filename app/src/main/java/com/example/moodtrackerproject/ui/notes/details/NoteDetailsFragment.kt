@@ -38,15 +38,22 @@ class NoteDetailsFragment : Fragment() {
     private fun render(state: DetailsViewState) {
         binding.run {
             note.backButton.click(state.backClicked)
-            note.editButton.click {
+            editButton.click {
                 noteEdit.root.isVisible = true
                 note.root.isVisible = false
+
+                noteEdit.title.setText(state.currentNote!!.title)
+                noteEdit.text.setText(state.currentNote!!.text)
             }
             noteEdit.cancelButton.click {
                 noteEdit.root.isVisible = false
                 note.root.isVisible = true
             }
             noteEdit.saveEditedButton.click {
+                val newTitle = noteEdit.title.toString()
+                val newText = noteEdit.text.toString()
+
+                viewModel.saveEdited(newTitle, newText)
             }
             note.title.text = state.currentNote!!.title
             note.text.text = state.currentNote!!.text

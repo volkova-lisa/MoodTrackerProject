@@ -6,6 +6,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.notes.details.NoteDetailsFragment">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_layout"
@@ -29,6 +42,18 @@
             app:title="@string/note_details"
             app:titleTextColor="@color/white" />
     </com.google.android.material.appbar.AppBarLayout>
+
+    <ImageView
+        android:id="@+id/edit_button"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:elevation="5dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/ic_edit_details"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
 
     <include
         android:id="@+id/note"

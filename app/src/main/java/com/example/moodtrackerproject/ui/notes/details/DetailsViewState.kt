@@ -6,7 +6,6 @@ import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 data class DetailsViewState(
     val editClicked: () -> Unit,
     val backClicked: () -> Unit,
-    val saveEdited: () -> Unit,
 
     val currentId: String = " ",
     val currentNote: NoteBodyUiModel? = NoteBodyUiModel(),

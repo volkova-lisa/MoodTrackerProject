@@ -12,7 +12,6 @@ class NoteDetailsViewModel : ViewModel() {
         state = Store.appState.noteDetailsState.copy(
             editClicked = ::editNote,
             backClicked = ::goToAllNotes,
-            saveEdited = ::saveEdited,
             setId = ::setId,
             setNote = ::setNote
         )
@@ -37,7 +36,8 @@ class NoteDetailsViewModel : ViewModel() {
         Store.setState(liveData.value!!)
     }
 
-    private fun saveEdited() {
+    fun saveEdited(title: String, text: String) {
+
     }
 
     private fun goToAllNotes() {

@@ -18,22 +18,23 @@
         app:layout_constraintGuide_percent="0.95" />
 
     <EditText
-        android:paddingTop="0dp"
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
+        android:backgroundTint="@color/light_purple"
         android:text="@string/note_title"
-        android:textColor="@color/black"
+        android:textColor="@color/light_purple"
         android:textSize="20sp"
         android:layout_marginTop="70dp"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintTop_toTopOf="parent"/>
     <EditText
-        android:paddingTop="0dp"
         android:id="@+id/text"
+        android:layout_marginTop="-8dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/light_purple"
         android:fontFamily="@font/raleway_regular"
         android:text="@string/note_text_long"
         android:textColor="@color/details_text"

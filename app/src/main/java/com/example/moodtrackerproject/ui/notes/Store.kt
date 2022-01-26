@@ -16,8 +16,8 @@ object Store {
         return appState.notesState.currentId
     }
 
-    fun getNotesList(): List<NoteBodyUiModel> {
-        return appState.notesState.listOfNotes
+    fun saveEdited() {
+        //appState = appState.notesState.copy()
     }
 
     fun setState(newState: DetailsViewState) {
@@ -27,8 +27,7 @@ object Store {
 
 data class AppState(
     val notesState: NotesViewState = NotesViewState(0, false, null, {}, {}, "", listOf()),
-    val noteDetailsState: DetailsViewState = DetailsViewState(
-        {}, {}, {}, "", NoteBodyUiModel(),
+    val noteDetailsState: DetailsViewState = DetailsViewState({}, {},"", NoteBodyUiModel(),
         NoteBody(), {}, {}, null
     )
 )
