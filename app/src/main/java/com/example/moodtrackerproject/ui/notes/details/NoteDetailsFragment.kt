@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.details
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,15 +46,10 @@ class NoteDetailsFragment : Fragment() {
                 noteEdit.root.isVisible = false
                 note.root.isVisible = true
             }
-
             noteEdit.saveEditedButton.click {
             }
-
             note.title.text = state.currentNote!!.title
             note.text.text = state.currentNote!!.text
-
-            Log.d("----------", state.currentNote.toString())
-
             when (state.action) {
                 DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openNotesScreen()
                 null -> {}

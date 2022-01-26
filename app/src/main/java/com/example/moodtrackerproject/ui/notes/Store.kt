@@ -32,7 +32,3 @@ data class AppState(
         NoteBody(), {}, {}, null
     )
 )
-
-// в NotesViewModel
-// privat val state: NotesViewState by lazy {
-//    Store.appState.notesState

@@ -58,7 +58,6 @@ class NotesFragment : Fragment() {
                     (requireActivity() as MainActivity).router.openAddNewNote()
                 }
                 StartDetailsScreen -> {
-                    // here is a problem
                     (requireActivity() as MainActivity).router.openDetails()
                 }
                 null -> {}

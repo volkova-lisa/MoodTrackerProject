@@ -1,9 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.details
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.ui.notes.Store
 
 class NoteDetailsViewModel : ViewModel() {
@@ -33,13 +31,7 @@ class NoteDetailsViewModel : ViewModel() {
     }
 
     private fun setNote() {
-        // val thisNote = PreferenceManager.getNotes().find { it.noteId == state.currentId }
-        val thisNote = NoteBody("1111", "55", "999", "fvdfb", false, false)
-        // val thisNote = Store.getNotesList()[1]
-        Log.d("----==------", Store.appState.notesState.toString())
-        Log.d("----------", Store.getNotesList().toString())
         liveData.value = Store.appState.noteDetailsState.copy(
-            // currentNote = thisNote
             currentNote = Store.appState.notesState.listOfNotes[0]
         )
         Store.setState(liveData.value!!)
@@ -55,8 +47,4 @@ class NoteDetailsViewModel : ViewModel() {
     private fun editNote() {
     }
 
-    private fun setState(newState: DetailsViewState) {
-        state = newState
-        liveData.value = state
-    }
 }
