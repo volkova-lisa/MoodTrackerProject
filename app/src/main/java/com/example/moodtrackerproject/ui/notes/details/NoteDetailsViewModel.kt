@@ -40,7 +40,7 @@ class NoteDetailsViewModel : ViewModel() {
         Log.d("----------", Store.getNotesList().toString())
         liveData.value = Store.appState.noteDetailsState.copy(
             // currentNote = thisNote
-            noteCurrent = thisNote
+            currentNote = Store.appState.notesState.listOfNotes[0]
         )
         Store.setState(liveData.value!!)
     }

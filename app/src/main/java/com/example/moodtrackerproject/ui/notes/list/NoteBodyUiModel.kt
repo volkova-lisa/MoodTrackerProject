@@ -8,6 +8,6 @@ data class NoteBodyUiModel(
     val isChecked: Boolean = false,
     val isDeleted: Boolean = false,
     val checkChanged: ((String) -> Unit)? = null,
-    val openDetails: ((String) -> Unit)? = null,
+    val openDetails: ((NoteBodyUiModel) -> Unit)? = null,
     val deleteNote: ((String) -> Unit)? = null
 )

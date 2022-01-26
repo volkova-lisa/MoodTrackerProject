@@ -51,7 +51,9 @@ class NoteDetailsFragment : Fragment() {
             noteEdit.saveEditedButton.click {
             }
 
-            note.title.text = state.noteCurrent!!.title
+            note.title.text = state.currentNote!!.title
+            note.text.text = state.currentNote!!.text
+
             Log.d("----------", state.currentNote.toString())
 
             when (state.action) {

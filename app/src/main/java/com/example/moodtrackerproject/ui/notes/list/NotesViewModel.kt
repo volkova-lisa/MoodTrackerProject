@@ -63,7 +63,12 @@ class NotesViewModel : ViewModel() {
                 },
                 openDetails = {
                     setState(state.copy(action = NotesListAction.StartDetailsScreen))
-                    setState(state.copy(currentId = it))
+                    setState(
+                        state.copy(
+                            currentId = it.noteId,
+                            listOfNotes = listOf(it)
+                        )
+                    )
                     // Store.setState
 
                     Timber.d("----ID sent by adapter to Notes-----", state.currentId)
