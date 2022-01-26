@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.details
 
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 
 data class DetailsViewState(
     val editClicked: () -> Unit,
@@ -8,9 +9,8 @@ data class DetailsViewState(
     val saveEdited: () -> Unit,
 
     val currentId: String = " ",
-    val currentNote: NoteBody? = NoteBody(),
-    val currentTitle: String = " ",
-    val currentText: String = " ",
+    val currentNote: NoteBodyUiModel? = NoteBodyUiModel(),
+    val noteCurrent: NoteBody? = NoteBody(),
 
     val setId: () -> Unit,
     val setNote: () -> Unit,
