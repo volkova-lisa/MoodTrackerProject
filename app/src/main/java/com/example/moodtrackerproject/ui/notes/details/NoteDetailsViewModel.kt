@@ -38,6 +38,7 @@ class NoteDetailsViewModel : ViewModel() {
     }
 
     fun saveEdited(title: String, text: String) {
+        Store.saveEdited(title, text)
     }
 
     private fun goToAllNotes() {

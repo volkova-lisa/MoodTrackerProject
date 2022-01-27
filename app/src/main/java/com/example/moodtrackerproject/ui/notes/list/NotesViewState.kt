@@ -7,7 +7,8 @@ data class NotesViewState(
     val addNewNote: () -> Unit,
     val showFavourites: () -> Unit,
     val currentId: String = "",
-    val listOfNotes: List<NoteBodyUiModel> = listOf()
+    val listOfNotes: List<NoteBodyUiModel> = listOf(),
+    val textEdited: Boolean = false
 )
 
 sealed class NotesListAction {

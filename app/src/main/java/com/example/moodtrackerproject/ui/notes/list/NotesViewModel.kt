@@ -25,6 +25,9 @@ class NotesViewModel : ViewModel() {
         }
     val liveData get() = _notesStateLiveData
 
+    private fun updateText() {
+    }
+
     private fun addNewNote() {
         liveData.value = state.copy(action = NotesListAction.AddNewNote)
     }
