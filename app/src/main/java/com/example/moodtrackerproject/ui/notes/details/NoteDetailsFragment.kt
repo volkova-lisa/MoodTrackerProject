@@ -37,10 +37,14 @@ class NoteDetailsFragment : Fragment() {
 
     private fun render(state: DetailsViewState) {
         binding.run {
+            note.title.text = state.currentNote!!.title
+            note.text.text = state.currentNote!!.text
+            note.date.text = state.currentNote!!.date
             note.backButton.click(state.backClicked)
             editButton.click {
                 noteEdit.root.isVisible = true
                 note.root.isVisible = false
+                editButton.isVisible = false
 
                 noteEdit.title.setText(state.currentNote!!.title)
                 noteEdit.text.setText(state.currentNote!!.text)
@@ -52,15 +56,18 @@ class NoteDetailsFragment : Fragment() {
             noteEdit.saveEditedButton.click {
                 val newTitle = noteEdit.title.toString()
                 val newText = noteEdit.text.toString()
+                editButton.isVisible = true
+                // viewModel.saveEdited(newTitle, newText)
 
-                viewModel.saveEdited(newTitle, newText)
+                note.title.text = newTitle
+                note.title.text = newText
+                viewModel.liveData.value?.cancelClicked?.invoke()
             }
-            note.title.text = state.currentNote!!.title
-            note.text.text = state.currentNote!!.text
-            note.date.text = state.currentNote!!.date
 
             when (state.action) {
-                DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openNotesScreen()
+                DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openDetails()
+                DetailsAction.ShowAllNotes -> (requireActivity() as MainActivity).router.openNotesScreen()
+
                 null -> {}
             }
         }
