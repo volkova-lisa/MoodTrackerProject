@@ -3,6 +3,7 @@ package com.example.moodtrackerproject.ui.notes.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.ui.notes.Store
+import com.example.moodtrackerproject.utils.PreferenceManager
 
 class NoteDetailsViewModel : ViewModel() {
 
@@ -39,6 +40,18 @@ class NoteDetailsViewModel : ViewModel() {
 
     fun saveEdited(title: String, text: String) {
         Store.saveEdited(title, text)
+        val neededItemFromPref = PreferenceManager.getNotes().find { it.noteId == state.currentNote!!.noteId }
+        val index = PreferenceManager.getNotes().indexOfFirst { it.noteId == state.currentNote!!.noteId }
+        val newNeeded =
+            neededItemFromPref?.copy(
+                title = Store.appState.notesState.listOfNotes[0].title,
+                text = Store.appState.notesState.listOfNotes[0].text
+            )
+
+        val newList = PreferenceManager.getNotes().toMutableList()
+        // newList[PreferenceManager.getNotes().indexOf(PreferenceManager.getNotes().find { it.noteId == state.currentNote!!.noteId })] = newNeeded!!
+        newList[index] = newNeeded!!
+        PreferenceManager.saveNotes(newList)
     }
 
     private fun goToAllNotes() {

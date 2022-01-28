@@ -44,8 +44,6 @@ class NotesFragment : Fragment() {
     }
 
     private fun render(state: NotesViewState) {
-        state.updateText.invoke()
-
         binding.run {
             addNoteBtn.click(state.addNewNote)
             toolbarStar.click(state.showFavourites)

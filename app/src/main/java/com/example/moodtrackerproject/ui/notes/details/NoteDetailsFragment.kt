@@ -28,7 +28,6 @@ class NoteDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.liveData.value?.setId?.invoke()
         viewModel.liveData.value?.setNote?.invoke()
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
