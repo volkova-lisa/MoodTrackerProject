@@ -33,6 +33,9 @@ object DataBaseRepository {
         PreferenceManager.saveNotes(notesList)
     }
 
+    fun updateNotes() {
+    }
+
     fun setFavorite(noteId: String): List<NoteBody> {
         val list = getNotes().map {
             if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
