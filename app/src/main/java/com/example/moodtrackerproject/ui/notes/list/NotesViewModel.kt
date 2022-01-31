@@ -53,6 +53,7 @@ class NotesViewModel : ViewModel() {
             NoteBodyUiModel(
                 noteId = model.noteId,
                 date = model.date,
+                editedDate = model.editDate,
                 title = model.title,
                 text = model.text,
                 isChecked = model.isChecked,

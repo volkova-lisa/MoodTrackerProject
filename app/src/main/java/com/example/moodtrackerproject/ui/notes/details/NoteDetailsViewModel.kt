@@ -1,10 +1,10 @@
 package com.example.moodtrackerproject.ui.notes.details
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.notes.Store
-import com.example.moodtrackerproject.utils.PreferenceManager
+import com.example.moodtrackerproject.utils.DateUtils
 
 class NoteDetailsViewModel : ViewModel() {
 
@@ -15,7 +15,6 @@ class NoteDetailsViewModel : ViewModel() {
             editClicked = ::editNote,
             backClicked = ::goToAllNotes,
             cancelClicked = ::cancelClicked,
-            setId = ::setId,
             setNote = ::setNote
         )
         Store.setState(state)
@@ -27,11 +26,6 @@ class NoteDetailsViewModel : ViewModel() {
         }
     val liveData get() = _detailsStateLiveData
 
-    private fun setId() {
-        liveData.value = state.copy(currentId = Store.getNoteId())
-        // Store.setState(liveData.value!!)
-    }
-
     private fun setNote() {
         liveData.value = Store.appState.noteDetailsState.copy(
             currentNote = Store.appState.notesState.listOfNotes[0]
@@ -41,27 +35,19 @@ class NoteDetailsViewModel : ViewModel() {
 
     fun saveEdited(title: String, text: String) {
         Store.saveEdited(title, text)
-        // studio is working bad so this state is not working
-        Log.d("===--------", Store.getState().currentId.toString())
-        Log.d("+++--------", state.noteCurrent!!.noteId)
-        val neededItemFromPref =
-            PreferenceManager.getNotes().find { it.noteId == Store.getState().currentId }
+        val neededItem =
+            DataBaseRepository.getNotes().find { it.noteId == Store.getState().currentId }
         val index =
-            PreferenceManager.getNotes().indexOfFirst { it.noteId == Store.getState().currentId }
+            DataBaseRepository.getNotes().indexOfFirst { it.noteId == Store.getState().currentId }
         val newNeeded =
-            neededItemFromPref?.copy(
+            neededItem?.copy(
                 title = Store.appState.notesState.listOfNotes[0].title,
-                text = Store.appState.notesState.listOfNotes[0].text
+                text = Store.appState.notesState.listOfNotes[0].text,
+                editDate = "edited " + DateUtils.getDateOfNote()
             )
-
-        Log.d("000--------", PreferenceManager.getNotes().toString())
-        Log.d("111--------", neededItemFromPref.toString())
-        Log.d("222--------", index.toString())
-        Log.d("333--------", newNeeded.toString())
-
-        val newList = PreferenceManager.getNotes().toMutableList()
+        val newList = DataBaseRepository.getNotes().toMutableList()
         newList[index] = newNeeded!!
-        PreferenceManager.saveNotes(newList)
+        DataBaseRepository.saveEditedNotes(newList)
     }
 
     private fun goToAllNotes() {

@@ -36,12 +36,11 @@ class NoteDetailsFragment : Fragment() {
 
     private fun render(state: DetailsViewState) {
         binding.run {
-            // here we set main text for details ui
-            note.title.text = state.currentNote!!.title + state.currentNote!!.noteId // change to title
+            note.title.text = state.currentNote!!.title
             note.text.text = state.currentNote!!.text
             note.date.text = state.currentNote!!.date
+            note.editedDate.text = state.currentNote!!.editedDate
 
-            // here back buttons on details screen behavior
             note.backButton.click(state.backClicked)
             noteEdit.cancelButton.click {
                 noteEdit.root.isVisible = false
@@ -64,8 +63,6 @@ class NoteDetailsFragment : Fragment() {
                 viewModel.saveEdited(newTitle, newText)
                 viewModel.liveData.value?.cancelClicked?.invoke()
             }
-            // note.title.text = newTitle
-            // note.title.text = newText
 
             when (state.action) {
                 DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openDetails()

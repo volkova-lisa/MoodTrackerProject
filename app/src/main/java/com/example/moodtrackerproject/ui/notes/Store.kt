@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.notes
 
-import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.ui.notes.details.DetailsViewState
 import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 import com.example.moodtrackerproject.ui.notes.list.NotesViewState
@@ -14,10 +13,6 @@ object Store {
 
     fun getState(): NotesViewState {
         return appState.notesState
-    }
-
-    fun getNoteId(): String {
-        return appState.notesState.currentId
     }
 
     fun saveEdited(title: String, text: String) {
@@ -43,7 +38,6 @@ object Store {
 data class AppState(
     val notesState: NotesViewState = NotesViewState(0, false, null, {}, {}, "", listOf(), false),
     val noteDetailsState: DetailsViewState = DetailsViewState(
-        {}, {}, {}, "", NoteBodyUiModel(),
-        NoteBody(), {}, {}, null
+        {}, {}, {}, NoteBodyUiModel(), {}, null
     )
 )

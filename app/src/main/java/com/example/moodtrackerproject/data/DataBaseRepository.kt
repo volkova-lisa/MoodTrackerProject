@@ -29,11 +29,11 @@ object DataBaseRepository {
         return list
     }
 
+    fun saveEditedNotes(notesList: List<NoteBody>) {
+        saveNotes(notesList)
+    }
     private fun saveNotes(notesList: List<NoteBody>) {
         PreferenceManager.saveNotes(notesList)
-    }
-
-    fun updateNotes() {
     }
 
     fun setFavorite(noteId: String): List<NoteBody> {
