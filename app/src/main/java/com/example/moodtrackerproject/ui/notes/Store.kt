@@ -27,7 +27,8 @@ object Store {
                 listOfNotes = listOf(
                     appState.notesState.listOfNotes[0].copy(
                         title = title,
-                        text = text
+                        text = text,
+                        noteId = appState.notesState.currentId
                     )
                 )
             )
