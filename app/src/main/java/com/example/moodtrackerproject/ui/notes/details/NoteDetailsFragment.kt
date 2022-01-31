@@ -37,7 +37,7 @@ class NoteDetailsFragment : Fragment() {
     private fun render(state: DetailsViewState) {
         binding.run {
             // here we set main text for details ui
-            note.title.text = state.currentNote!!.noteId // change to title
+            note.title.text = state.currentNote!!.title + state.currentNote!!.noteId // change to title
             note.text.text = state.currentNote!!.text
             note.date.text = state.currentNote!!.date
 

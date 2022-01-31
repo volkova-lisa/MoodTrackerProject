@@ -40,8 +40,10 @@ class NoteDetailsViewModel : ViewModel() {
 
     fun saveEdited(title: String, text: String) {
         Store.saveEdited(title, text)
-        val neededItemFromPref = PreferenceManager.getNotes().find { it.noteId == state.currentNote!!.noteId }
-        val index = PreferenceManager.getNotes().indexOfFirst { it.noteId == state.currentNote!!.noteId }
+        val neededItemFromPref =
+            PreferenceManager.getNotes().find { it.noteId == state.currentNote!!.noteId }
+        val index =
+            PreferenceManager.getNotes().indexOfFirst { it.noteId == state.currentNote!!.noteId }
         val newNeeded =
             neededItemFromPref?.copy(
                 title = Store.appState.notesState.listOfNotes[0].title,
@@ -49,7 +51,6 @@ class NoteDetailsViewModel : ViewModel() {
             )
 
         val newList = PreferenceManager.getNotes().toMutableList()
-        // newList[PreferenceManager.getNotes().indexOf(PreferenceManager.getNotes().find { it.noteId == state.currentNote!!.noteId })] = newNeeded!!
         newList[index] = newNeeded!!
         PreferenceManager.saveNotes(newList)
     }

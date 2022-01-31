@@ -15,7 +15,6 @@ class NotesViewModel : ViewModel() {
         state = Store.appState.notesState.copy(
             addNewNote = ::addNewNote,
             showFavourites = ::changeFavoriteStatus,
-            updateText = ::updateText
         )
         Store.setState(state)
     }
@@ -25,9 +24,6 @@ class NotesViewModel : ViewModel() {
             value = state
         }
     val liveData get() = _notesStateLiveData
-
-    fun updateText() {
-    }
 
     private fun addNewNote() {
         liveData.value = state.copy(action = NotesListAction.AddNewNote)
@@ -81,18 +77,6 @@ class NotesViewModel : ViewModel() {
                     val list = DataBaseRepository.removeDeletedNotes()
                     setState(state.copy(listOfNotes = map(list)))
                 },
-            )
-        }
-    }
-    private fun mapBack(notesList: List<NoteBodyUiModel>): List<NoteBody> {
-        return notesList.map { model ->
-            NoteBody(
-                noteId = model.noteId,
-                date = model.date,
-                title = model.title,
-                text = model.text,
-                isChecked = model.isChecked,
-                isDeleted = model.isDeleted
             )
         }
     }

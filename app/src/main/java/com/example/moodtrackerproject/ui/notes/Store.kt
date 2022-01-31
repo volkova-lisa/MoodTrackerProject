@@ -40,7 +40,7 @@ object Store {
 }
 
 data class AppState(
-    val notesState: NotesViewState = NotesViewState(0, false, null, {}, {}, {}, "", listOf(), false),
+    val notesState: NotesViewState = NotesViewState(0, false, null, {}, {}, "", listOf(), false),
     val noteDetailsState: DetailsViewState = DetailsViewState(
         {}, {}, {}, "", NoteBodyUiModel(),
         NoteBody(), {}, {}, null
