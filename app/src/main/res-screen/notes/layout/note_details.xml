@@ -21,16 +21,16 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="3dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/note_title"
         android:textColor="@color/light_purple"
         android:textSize="20sp"
-        android:maxWidth="300dp"
         android:layout_marginTop="70dp"
-        app:layout_constraintLeft_toLeftOf="@id/guideline_left"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="parent"/>
     <TextView
         android:id="@+id/text"
@@ -39,23 +39,23 @@
         android:elevation="3dp"
         android:fontFamily="@font/raleway_regular"
         android:text="@string/note_text_long"
-        android:textColor="@color/details_text"
-        android:textSize="18sp"
-        android:layout_marginTop="5dp"
+        android:textColor="@color/text_details_grey"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toBottomOf="@+id/date" />
     <TextView
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_regular"
         android:text="@string/note_title"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/text_grey"
         android:textSize="16sp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintTop_toTopOf="@id/title"/>
+        android:layout_marginTop="15dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/title"/>
     <TextView
         android:id="@+id/edited_date"
         android:layout_width="wrap_content"

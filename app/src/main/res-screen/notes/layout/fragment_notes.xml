@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:backgroundTint="@color/light_purple"
+            android:backgroundTint="@color/white"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/my_notes"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/light_purple" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
@@ -39,7 +39,8 @@
         android:src="@drawable/ic_baseline_search"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toStartOf="@id/toolbar_star"
-        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout"
+        app:tint="@color/light_purple" />
 
     <ImageView
         android:id="@+id/toolbar_star"
@@ -50,7 +51,8 @@
         android:src="@drawable/notes_star_selector"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toStartOf="@id/toolbar_calendar"
-        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout"
+        app:tint="@color/light_purple" />
 
     <ImageView
         android:id="@+id/toolbar_calendar"
@@ -58,6 +60,7 @@
         android:layout_height="24dp"
         android:elevation="5dp"
         android:src="@drawable/ic_baseline_calendar"
+        app:tint="@color/light_purple"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="@id/toolbar_layout" />

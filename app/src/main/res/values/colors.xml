@@ -11,9 +11,11 @@
     <color name="dark_purple">#4E43CD</color>
 
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">@color/light_purple</color>
-    <color name="text_grey">#B8B8B8</color>
+    <color name="text_grey">#CbCbCb</color>
     <color name="text_light_grey">#F2F2F2</color>
     <color name="edit_text_line_grey">#8AB8B8B8</color>
     <color name="icons_grey">#5F5F5F</color>
     <color name="details_text">#97000000</color>
+    <color name="grey_icons">#5f5f5f</color>
+    <color name="text_details_grey">#8A000000</color>
 </resources>
