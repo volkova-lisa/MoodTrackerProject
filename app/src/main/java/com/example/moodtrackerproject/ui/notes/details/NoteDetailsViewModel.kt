@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes.details
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -13,6 +14,7 @@ class NoteDetailsViewModel : ViewModel() {
     init {
         state = Store.appState.noteDetailsState.copy(
             editClicked = ::editNote,
+            changeEditVisibility = ::changeEditScreenVisibility,
             backClicked = ::goToAllNotes,
             cancelClicked = ::cancelClicked,
             setNote = ::setNote
@@ -36,9 +38,9 @@ class NoteDetailsViewModel : ViewModel() {
     fun saveEdited(title: String, text: String) {
         Store.saveEdited(title, text)
         val neededItem =
-            DataBaseRepository.getNotes().find { it.noteId == Store.getState().currentId }
+            DataBaseRepository.getNotes().find { it.noteId == Store.getNotesState().currentId }
         val index =
-            DataBaseRepository.getNotes().indexOfFirst { it.noteId == Store.getState().currentId }
+            DataBaseRepository.getNotes().indexOfFirst { it.noteId == Store.getNotesState().currentId }
         val newNeeded =
             neededItem?.copy(
                 title = Store.appState.notesState.listOfNotes[0].title,
@@ -47,7 +49,17 @@ class NoteDetailsViewModel : ViewModel() {
             )
         val newList = DataBaseRepository.getNotes().toMutableList()
         newList[index] = newNeeded!!
-        DataBaseRepository.saveEditedNotes(newList)
+        DataBaseRepository.saveNotes(newList)
+    }
+
+    private fun changeEditScreenVisibility() {
+        val isEditNoteVisible = !Store.appState.noteDetailsState.isEditNoteVisible
+        liveData.value =
+            state.copy(
+                isEditNoteVisible = isEditNoteVisible,
+            )
+        Log.d("--=====--------", state.isEditNoteVisible.toString())
+        Store.setState(liveData.value!!)
     }
 
     private fun goToAllNotes() {

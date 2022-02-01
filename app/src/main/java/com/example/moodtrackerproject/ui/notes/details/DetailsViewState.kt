@@ -3,11 +3,14 @@ package com.example.moodtrackerproject.ui.notes.details
 import com.example.moodtrackerproject.ui.notes.list.NoteBodyUiModel
 
 data class DetailsViewState(
-    val editClicked: () -> Unit,
-    val backClicked: () -> Unit,
-    val cancelClicked: () -> Unit,
+    val editClicked: () -> Unit = {},
+    val isEditNoteVisible: Boolean = false,
+    val changeEditVisibility: () -> Unit = {},
+
+    val backClicked: () -> Unit = {},
+    val cancelClicked: () -> Unit = {},
     val currentNote: NoteBodyUiModel? = NoteBodyUiModel(),
-    val setNote: () -> Unit,
+    val setNote: () -> Unit = {},
     val action: DetailsAction? = null,
 )
 

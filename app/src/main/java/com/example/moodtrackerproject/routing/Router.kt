@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.routing
 
-import android.os.Bundle
 import androidx.navigation.NavController
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
@@ -8,14 +7,6 @@ import com.example.moodtrackerproject.R
 class Router(private val activity: MainActivity) {
     // TODO: use constants for routes
     private lateinit var navController: NavController // = activity.findNavController(R.id.nav_host_fragment)
-
-    // TODO: i'm sure this shouldn't be here
-    fun openDetails(id: String) {
-        val bundle = Bundle().apply {
-            putString("ID", id)
-        }
-        navController.navigate(R.id.noteDetailsFragment, bundle)
-    }
 
     fun openDetails() {
         navController.navigate(R.id.noteDetailsFragment)
