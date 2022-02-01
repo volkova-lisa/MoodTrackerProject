@@ -14,7 +14,8 @@ import com.example.moodtrackerproject.utils.click
 class NoteDetailsFragment : Fragment() {
 
     private lateinit var binding: FragmentNoteDetailsBinding
-    val viewModel: NoteDetailsViewModel by lazy {
+
+    private val viewModel: NoteDetailsViewModel by lazy {
         ViewModelProvider(this).get(NoteDetailsViewModel::class.java)
     }
 

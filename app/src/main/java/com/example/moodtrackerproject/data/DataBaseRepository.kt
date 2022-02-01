@@ -29,10 +29,7 @@ object DataBaseRepository {
         return list
     }
 
-    fun saveEditedNotes(notesList: List<NoteBody>) {
-        saveNotes(notesList)
-    }
-    private fun saveNotes(notesList: List<NoteBody>) {
+    fun saveNotes(notesList: List<NoteBody>) {
         PreferenceManager.saveNotes(notesList)
     }
 
