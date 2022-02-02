@@ -53,8 +53,13 @@ class NotesFragment : Fragment() {
             notesAdapter.setList(state.listOfNotes)
 
             when (state.action) {
-                AddNewNote -> (requireActivity() as MainActivity).router.openAddNewNote()
-                StartDetailsScreen -> TODO()
+                AddNewNote -> {
+                    (requireActivity() as MainActivity).router.openAddNewNote()
+                }
+                StartDetailsScreen -> {
+                    // maybe here i should refresh notes  --- nono what if ill need it before opening
+                    (requireActivity() as MainActivity).router.openDetails()
+                }
                 null -> {}
             }
         }

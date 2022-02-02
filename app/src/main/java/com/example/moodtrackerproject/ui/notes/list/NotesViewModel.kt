@@ -1,10 +1,10 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.ui.notes.Store
 import timber.log.Timber
 
 class NotesViewModel : ViewModel() {
@@ -12,25 +12,26 @@ class NotesViewModel : ViewModel() {
     private var state: NotesViewState
 
     init {
-        state = NotesViewState(
+        state = Store.appState.notesState.copy(
             addNewNote = ::addNewNote,
             showFavourites = ::changeFavoriteStatus,
         )
+        Store.setState(state)
     }
 
     private val _notesStateLiveData: MutableLiveData<NotesViewState> =
         MutableLiveData<NotesViewState>().apply {
             value = state
         }
-    val liveData: LiveData<NotesViewState> get() = _notesStateLiveData
+    val liveData get() = _notesStateLiveData
 
     private fun addNewNote() {
-        setState(state.copy(action = NotesListAction.AddNewNote))
+        liveData.value = state.copy(action = NotesListAction.AddNewNote)
     }
 
     private fun changeFavoriteStatus() {
-        val isFavoriteChecked = !state.isFavoriteChecked
-        setState(
+        val isFavoriteChecked = !Store.appState.notesState.isFavoriteChecked
+        liveData.value =
             state.copy(
                 isFavoriteChecked = isFavoriteChecked,
                 listOfNotes = map(
@@ -38,7 +39,8 @@ class NotesViewModel : ViewModel() {
                     else DataBaseRepository.getNotes()
                 )
             )
-        )
+
+        Store.setState(liveData.value!!)
     }
 
     fun fetchListOfNotes() {
@@ -51,6 +53,7 @@ class NotesViewModel : ViewModel() {
             NoteBodyUiModel(
                 noteId = model.noteId,
                 date = model.date,
+                editedDate = model.editDate,
                 title = model.title,
                 text = model.text,
                 isChecked = model.isChecked,
@@ -59,7 +62,15 @@ class NotesViewModel : ViewModel() {
                     val list = DataBaseRepository.setFavorite(it)
                     setState(state.copy(listOfNotes = map(list)))
                 },
-                openDetails = { open -> Timber.d(open) },
+                openDetails = {
+                    setState(state.copy(action = NotesListAction.StartDetailsScreen))
+                    setState(
+                        state.copy(
+                            currentId = it.noteId,
+                            listOfNotes = listOf(it)
+                        )
+                    )
+                },
                 deleteNote = { deleted ->
                     Timber.d(deleted)
                     // TODO: maybe combine these two functions because they are similar?
@@ -73,7 +84,7 @@ class NotesViewModel : ViewModel() {
 
     // TODO: need to think on some "unification"
     private fun setState(newState: NotesViewState) {
-        state = newState
-        _notesStateLiveData.value = state
+        Store.setState(newState)
+        _notesStateLiveData.value = Store.appState.notesState
     }
 }

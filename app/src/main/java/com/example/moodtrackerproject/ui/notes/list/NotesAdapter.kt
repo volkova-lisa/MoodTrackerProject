@@ -13,10 +13,11 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) :
 
     class NotesHolder(private val binding: NoteItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(model: NoteBodyUiModel) {
             binding.run {
                 root.setOnClickListener {
-                    model.openDetails?.invoke(model.noteId)
+                    model.openDetails?.invoke(model)
                 }
                 noteTextDateTime.text = model.date
                 noteTitleItem.text = model.title

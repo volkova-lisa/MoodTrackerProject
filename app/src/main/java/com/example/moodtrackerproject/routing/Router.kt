@@ -8,6 +8,10 @@ class Router(private val activity: MainActivity) {
     // TODO: use constants for routes
     private lateinit var navController: NavController // = activity.findNavController(R.id.nav_host_fragment)
 
+    fun openDetails() {
+        navController.navigate(R.id.noteDetailsFragment)
+    }
+
     fun setNavigationController(controller: NavController) {
         navController = controller
     }
