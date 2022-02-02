@@ -29,10 +29,11 @@ class NoteDetailsViewModel : ViewModel() {
     val liveData get() = _detailsStateLiveData
 
     private fun setNote() {
-        liveData.value = Store.appState.noteDetailsState.copy(
+        val state = Store.appState.noteDetailsState.copy(
             currentNote = Store.appState.notesState.listOfNotes[0]
         )
-        Store.setState(liveData.value!!)
+        liveData.value = state
+        Store.setState(state)
     }
 
     fun saveEdited(title: String, text: String) {
@@ -45,21 +46,24 @@ class NoteDetailsViewModel : ViewModel() {
             neededItem?.copy(
                 title = Store.appState.notesState.listOfNotes[0].title,
                 text = Store.appState.notesState.listOfNotes[0].text,
-                editDate = "edited " + DateUtils.getDateOfNote()
+                editDate = DateUtils.getDateOfNote()
             )
         val newList = DataBaseRepository.getNotes().toMutableList()
-        newList[index] = newNeeded!!
+        if (newNeeded != null) newList[index] = newNeeded
         DataBaseRepository.saveNotes(newList)
     }
 
     private fun changeEditScreenVisibility() {
+        Log.d("-----VM--before", state.isEditNoteVisible.toString())
         val isEditNoteVisible = !Store.appState.noteDetailsState.isEditNoteVisible
-        liveData.value =
-            state.copy(
-                isEditNoteVisible = isEditNoteVisible,
-            )
-        Log.d("--=====--------", state.isEditNoteVisible.toString())
-        Store.setState(liveData.value!!)
+        val stateNew = state.copy(
+            isEditNoteVisible = isEditNoteVisible,
+        )
+        liveData.value = stateNew
+
+        Log.d("-----VM", state.isEditNoteVisible.toString())
+        Store.setState(stateNew)
+        Log.d("-----VM_setted", state.isEditNoteVisible.toString())
     }
 
     private fun goToAllNotes() {
