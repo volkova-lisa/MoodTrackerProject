@@ -45,9 +45,10 @@
 
     <ImageView
         android:id="@+id/edit_button"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:elevation="5dp"
+        android:padding="10dp"
         android:layout_marginBottom="20dp"
         android:src="@drawable/ic_edit_details"
         app:layout_constraintTop_toTopOf="parent"
