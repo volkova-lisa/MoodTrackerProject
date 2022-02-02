@@ -42,14 +42,9 @@ class NoteDetailsFragment : Fragment() {
                 note.title.text = state.currentNote.title
                 note.text.text = state.currentNote.text
                 note.date.text = state.currentNote.date
-                note.editedDate.text = "edited" + state.currentNote.editedDate
+                if (state.currentNote.editedDate.isNotEmpty()) note.editedDate.text = "edited " + state.currentNote.editedDate
             }
             note.backButton.click(state.backClicked)
-            noteEdit.cancelButton.click {
-                noteEdit.root.isVisible = false
-                note.root.isVisible = true
-            }
-
             editButton.click {
                 noteEdit.root.isVisible = true
                 note.root.isVisible = false

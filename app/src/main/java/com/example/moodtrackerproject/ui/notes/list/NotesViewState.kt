@@ -7,6 +7,7 @@ data class NotesViewState(
     val addNewNote: () -> Unit = {},
     val showFavourites: () -> Unit = {},
     val currentId: String = "",
+    // TODO: List<NoteBodyUiModel> should become List<NoteBody>
     val listOfNotes: List<NoteBodyUiModel> = listOf(),
     val textEdited: Boolean = false
 )
