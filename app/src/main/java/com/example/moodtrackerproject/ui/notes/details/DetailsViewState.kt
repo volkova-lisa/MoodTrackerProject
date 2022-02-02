@@ -8,6 +8,7 @@ data class DetailsViewState(
     val changeEditVisibility: () -> Unit = {},
     val backClicked: () -> Unit = {},
     val cancelClicked: () -> Unit = {},
+    //TODO: NoteBodyUiModel replace with NoteBody
     val currentNote: NoteBodyUiModel? = NoteBodyUiModel(),
     val setNote: () -> Unit = {},
     val action: DetailsAction? = null,
