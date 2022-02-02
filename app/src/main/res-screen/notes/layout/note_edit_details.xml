@@ -17,6 +17,26 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.34" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.63" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.66" />
+
+
     <EditText
         android:id="@+id/title"
         android:paddingBottom="15dp"
@@ -44,16 +64,17 @@
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/title" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_button"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:background="@drawable/round_grey_button"
         android:text="@string/cancel"
-        android:layout_marginEnd="10dp"
         android:textColor="@color/text_grey"
         app:layout_constraintBottom_toBottomOf="@id/save_edited_button"
-        app:layout_constraintEnd_toStartOf="@id/save_edited_button" />
+        app:layout_constraintStart_toStartOf="@id/guideline_one"
+        app:layout_constraintEnd_toStartOf="@id/guideline_two" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_edited_button"
@@ -64,5 +85,6 @@
         android:textColor="@color/white"
         android:background="@drawable/round_purple_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_three"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
