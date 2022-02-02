@@ -37,11 +37,13 @@ class NoteDetailsFragment : Fragment() {
 
     private fun render(state: DetailsViewState) {
         binding.run {
-            note.title.text = state.currentNote!!.title
-            note.text.text = state.currentNote!!.text
-            note.date.text = state.currentNote!!.date
-            note.editedDate.text = state.currentNote!!.editedDate
-
+            // TODO: make it via state.isEditNoteVisible
+            if (state.currentNote != null) {
+                note.title.text = state.currentNote.title
+                note.text.text = state.currentNote.text
+                note.date.text = state.currentNote.date
+                note.editedDate.text = "edited" + state.currentNote.editedDate
+            }
             note.backButton.click(state.backClicked)
             noteEdit.cancelButton.click {
                 noteEdit.root.isVisible = false
@@ -52,9 +54,10 @@ class NoteDetailsFragment : Fragment() {
                 noteEdit.root.isVisible = true
                 note.root.isVisible = false
                 editButton.isVisible = false
-
-                noteEdit.title.setText(state.currentNote!!.title)
-                noteEdit.text.setText(state.currentNote!!.text)
+                state.currentNote?.let {
+                    noteEdit.title.setText(state.currentNote.title)
+                    noteEdit.text.setText(state.currentNote.text)
+                }
             }
 
             noteEdit.saveEditedButton.click {
@@ -68,7 +71,6 @@ class NoteDetailsFragment : Fragment() {
             when (state.action) {
                 DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openDetails()
                 DetailsAction.ShowAllNotes -> (requireActivity() as MainActivity).router.openNotesScreen()
-
                 null -> {}
             }
         }
