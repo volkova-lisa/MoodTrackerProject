@@ -54,16 +54,13 @@ class NoteDetailsViewModel : ViewModel() {
     }
 
     private fun changeEditScreenVisibility() {
-        Log.d("-----VM--before", state.isEditNoteVisible.toString())
         val isEditNoteVisible = !Store.appState.noteDetailsState.isEditNoteVisible
         val stateNew = state.copy(
             isEditNoteVisible = isEditNoteVisible,
         )
         liveData.value = stateNew
 
-        Log.d("-----VM", state.isEditNoteVisible.toString())
         Store.setState(stateNew)
-        Log.d("-----VM_setted", state.isEditNoteVisible.toString())
     }
 
     private fun goToAllNotes() {
