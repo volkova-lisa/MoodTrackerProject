@@ -45,22 +45,11 @@
     <ImageView
         android:id="@+id/more_button"
         android:layout_width="wrap_content"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
         app:tint="@color/grey_icons"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_more"
-        app:layout_constraintEnd_toStartOf="@id/note_star_button_unchecked"
-        app:layout_constraintTop_toTopOf="@id/note_title_item"
-        app:layout_constraintBottom_toBottomOf="@id/note_title_item" />
-
-
-    <ImageView
-        android:id="@+id/button_delete_item"
-        android:layout_width="wrap_content"
-        android:layout_height="24dp"
-        app:tint="@color/grey_icons"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/ic_delete_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/note_title_item"
         app:layout_constraintBottom_toBottomOf="@id/note_title_item" />
@@ -69,9 +58,9 @@
         android:id="@+id/note_star_button_unchecked"
         android:layout_width="24dp"
         android:layout_height="24dp"
-        android:layout_marginEnd="35dp"
+        android:layout_marginEnd="40dp"
         android:src="@drawable/ic_note_star_unchecked"
-        app:layout_constraintEnd_toEndOf="@id/button_delete_item"
+        app:layout_constraintEnd_toEndOf="@id/more_button"
         app:layout_constraintTop_toTopOf="@id/note_title_item"
         app:layout_constraintBottom_toBottomOf="@id/note_title_item"/>
 
