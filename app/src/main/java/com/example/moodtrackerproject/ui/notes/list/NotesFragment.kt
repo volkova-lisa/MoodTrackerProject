@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
 import com.example.moodtrackerproject.ui.notes.list.NotesListAction.AddNewNote
 import com.example.moodtrackerproject.ui.notes.list.NotesListAction.StartDetailsScreen
@@ -46,7 +47,17 @@ class NotesFragment : Fragment() {
     private fun render(state: NotesViewState) {
         binding.run {
             addNoteBtn.click(state.addNewNote)
-            toolbarStar.click(state.showFavourites)
+            toolbarStar.click {
+                state.showFavourites.invoke()
+                if (!state.isFavoriteChecked) {
+                    toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
+                    toolbar.title = "Favorite notes"
+                } else {
+                    toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
+                    toolbar.title = "My notes"
+                }
+            }
+
             picNoNotes.visibleIf(state.listOfNotes.isEmpty())
             hintText.visibleIf(state.listOfNotes.isEmpty())
 
