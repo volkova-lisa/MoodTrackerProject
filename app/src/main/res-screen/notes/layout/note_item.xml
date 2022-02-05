@@ -64,11 +64,12 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="@id/note_title_item"
         app:layout_constraintBottom_toBottomOf="@id/note_title_item" />
-
+    bottom_navigation
     <ImageView
         android:id="@+id/note_star_button_unchecked"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="5dp"
         android:layout_marginEnd="40dp"
         android:src="@drawable/ic_note_star_unchecked"
         app:layout_constraintEnd_toEndOf="@id/more_button"
