@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="@id/note_title_item"
         app:layout_constraintBottom_toBottomOf="@id/note_title_item" />
-    bottom_navigation
+
     <ImageView
         android:id="@+id/note_star_button_unchecked"
         android:layout_width="wrap_content"
