@@ -68,6 +68,16 @@
     <string name="today_s_moods">Today’s moods</string>
     <string name="sad">Sad</string>
     <string name="at_10_20">at 10:20</string>
+    <string name="mental_health">Mental Health</string>
+    <string name="disgust">Disgust</string>
+    <string name="pleasure">Pleasure</string>
+    <string name="sadness">Sad</string>
+    <string name="happiness">Happy</string>
+    <string name="anger">Anger</string>
+    <string name="joy">Joy</string>
+    <string name="body_health">Body Health</string>
+    <string name="water">Water</string>
+    <string name="_600_ml">600 ml</string>
 
 
 </resources>
