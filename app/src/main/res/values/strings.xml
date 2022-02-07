@@ -78,6 +78,12 @@
     <string name="body_health">Body Health</string>
     <string name="water">Water</string>
     <string name="_600_ml">600 ml</string>
+    <string name="steps">Steps</string>
+    <string name="_2367">2367</string>
+    <string name="sleep">Sleep</string>
+    <string name="_7h">7h</string>
+    <string name="kcal">Kcal</string>
+    <string name="_1200">1200</string>
 
 
 </resources>
