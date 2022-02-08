@@ -8,22 +8,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.03" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.97" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_three"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.73"/>
-
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_three"
@@ -37,11 +29,13 @@
         android:id="@+id/title"
         android:paddingBottom="15dp"
         android:layout_width="0dp"
-        android:inputType="textCapSentences"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
-        android:textSize="18sp"
-        android:theme="@style/EditTextTheme"
+        android:backgroundTint="@color/light_purple"
+        android:hint="@string/note_title"
+        android:textColorHint="@color/light_purple"
+        android:textColor="@color/light_purple"
+        android:textSize="20sp"
         android:layout_marginTop="70dp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -49,12 +43,10 @@
     <EditText
         android:id="@+id/text"
         android:paddingBottom="15dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="8dp"
         android:layout_width="0dp"
-        android:lineHeight="25dp"
-        android:inputType="text|textMultiLine|textCapSentences"
         android:layout_height="wrap_content"
-        android:theme="@style/EditTextTheme"
+        android:backgroundTint="@color/light_purple"
         android:fontFamily="@font/raleway_regular"
         android:textColor="@color/text_details_grey"
         android:textSize="16sp"
@@ -64,15 +56,13 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_edited_button"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="20dp"
         android:text="@string/save"
-        android:textAllCaps="false"
         android:textColor="@color/white"
         android:background="@drawable/round_purple_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toEndOf="@id/guideline_three"/>
-
+        app:layout_constraintStart_toStartOf="@id/guideline_three"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
