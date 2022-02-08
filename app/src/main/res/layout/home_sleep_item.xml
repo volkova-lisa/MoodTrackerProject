@@ -1,82 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sleep_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sleep_bg"
-        android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="false"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-8dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="-8dp"
-        android:background="@drawable/home_mood_item_bg"
-        android:paddingBottom="20dp"
-        android:shape="rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="16dp">
+        <!--        android:background="@drawable/home_mood_item_bg"-->
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/line_one_sleep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/line_two_sleep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
-
-
-        <ImageView
-            android:id="@+id/icon_sleep"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/ic_sleep"
-            app:layout_constraintStart_toStartOf="@id/line_one_sleep"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/sleep_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
+            android:layout_gravity="start"
+            android:drawableStart="@drawable/ic_sleep"
+            android:drawablePadding="8dp"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/sleep"
             android:textColor="@color/light_purple"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@id/icon_sleep"
-            app:layout_constraintStart_toEndOf="@id/icon_sleep"
-            app:layout_constraintTop_toTopOf="@id/icon_sleep" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/sleep_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/_7h"
             android:textColor="@color/light_purple"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/icon_sleep"
-            app:layout_constraintEnd_toEndOf="@id/line_two_sleep"
-            app:layout_constraintTop_toTopOf="@id/icon_sleep" />
+            android:textSize="14sp" />
 
         <ProgressBar
-            android:id="@+id/sleep_bar"
+            android:id="@+id/water_bar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="5dp"
-            android:progress="90"
+            android:layout_marginTop="28dp"
+            android:progress="65"
             android:progressBackgroundTint="@color/light_purple"
-            android:progressTint="@color/light_purple"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="@id/line_two_sleep"
-            app:layout_constraintStart_toStartOf="@id/line_one_sleep"
-            app:layout_constraintTop_toBottomOf="@id/icon_sleep" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:progressTint="@color/light_purple" />
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -7,7 +7,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         tools:context=".ui.home.HomeFragment">
 
         <androidx.constraintlayout.widget.Guideline
@@ -349,10 +349,11 @@
             android:id="@+id/kcal_item"
             layout="@layout/home_kcal_item"
             android:layout_width="0dp"
+            android:paddingBottom="5dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_two"
-            app:layout_constraintTop_toBottomOf="@id/steps_item" />
+            app:layout_constraintTop_toTopOf="@id/sleep_item"/>
 
         <include
             android:id="@+id/steps_item"
@@ -361,14 +362,17 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/guideline_right"
             app:layout_constraintStart_toStartOf="@id/guideline_two"
-            app:layout_constraintTop_toBottomOf="@id/body_title"/>
+            app:layout_constraintTop_toTopOf="@id/water_item"/>
 
         <include
             android:id="@+id/sleep_item"
             layout="@layout/home_sleep_item"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingBottom="50dp"
             app:layout_constraintEnd_toEndOf="@id/guideline_one"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/water_item" />
 
@@ -376,10 +380,17 @@
             android:id="@+id/water_item"
             layout="@layout/home_water_item"
             android:layout_width="0dp"
+            android:layout_marginTop="9dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@id/guideline_one"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/guideline_left"
             app:layout_constraintTop_toBottomOf="@id/body_title" />
+        <Space
+            android:layout_height="10dp"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/sleep_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
