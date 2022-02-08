@@ -1,82 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/water_bg"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/water_bg"
-        android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:cardBackgroundColor="@color/white"
+    app:cardUseCompatPadding="false"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="-8dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginRight="-8dp"
-        android:background="@drawable/home_mood_item_bg"
-        android:paddingBottom="20dp"
-        android:shape="rectangle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="16dp">
+        <!--        android:background="@drawable/home_mood_item_bg"-->
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/line_one"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.05" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/line_two"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.95" />
-
-
-        <ImageView
-            android:id="@+id/icon_water"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:src="@drawable/ic_water"
-            app:layout_constraintStart_toStartOf="@id/line_one"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/water_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="9dp"
+            android:layout_gravity="start"
+            android:drawableStart="@drawable/ic_water"
+            android:drawablePadding="8dp"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/water"
             android:textColor="@color/light_purple"
-            android:textSize="10sp"
-            app:layout_constraintBottom_toBottomOf="@id/icon_water"
-            app:layout_constraintStart_toEndOf="@id/icon_water"
-            app:layout_constraintTop_toTopOf="@id/icon_water" />
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/water_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="end"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/_600_ml"
             android:textColor="@color/light_purple"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/icon_water"
-            app:layout_constraintEnd_toEndOf="@id/line_two"
-            app:layout_constraintTop_toTopOf="@id/icon_water" />
+            android:textSize="14sp" />
 
         <ProgressBar
             android:id="@+id/water_bar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="5dp"
+            android:layout_marginTop="28dp"
             android:progress="65"
             android:progressBackgroundTint="@color/light_purple"
-            android:progressTint="@color/light_purple"
-            android:layout_marginTop="10dp"
-            app:layout_constraintEnd_toEndOf="@id/line_two"
-            app:layout_constraintStart_toStartOf="@id/line_one"
-            app:layout_constraintTop_toBottomOf="@id/icon_water" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:progressTint="@color/light_purple" />
+    </FrameLayout>
+</com.google.android.material.card.MaterialCardView>

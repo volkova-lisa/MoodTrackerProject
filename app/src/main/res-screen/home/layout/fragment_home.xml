@@ -93,7 +93,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:scaleType="centerCrop"
-                android:src="@color/light_purple"></ImageView>
+                android:src="@color/light_purple"/>
         </androidx.cardview.widget.CardView>
 
         <TextView
