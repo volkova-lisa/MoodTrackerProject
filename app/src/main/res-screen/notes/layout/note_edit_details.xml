@@ -64,5 +64,5 @@
         android:background="@drawable/round_purple_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_three"/>
+        app:layout_constraintStart_toEndOf="@id/guideline_three"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

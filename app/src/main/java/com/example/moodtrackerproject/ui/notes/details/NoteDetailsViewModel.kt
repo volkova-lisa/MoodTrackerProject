@@ -61,9 +61,7 @@ class NoteDetailsViewModel : ViewModel() {
         )
         liveData.value = stateNew
 
-        Log.d("-----VM", state.isEditNoteVisible.toString())
         Store.setState(stateNew)
-        Log.d("-----VM_setted", state.isEditNoteVisible.toString())
     }
 
     private fun goToAllNotes() {
