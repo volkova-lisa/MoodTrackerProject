@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/steps_bg"
+    android:id="@+id/water_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/white"
-    app:cardUseCompatPadding="false"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp">
+        <!--        android:background="@drawable/home_mood_item_bg"-->
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/steps_title"
+            android:id="@+id/water_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
-            android:drawableStart="@drawable/ic_steps"
+            android:drawableStart="@drawable/ic_water"
             android:drawablePadding="8dp"
             android:fontFamily="@font/raleway_bold"
-            android:text="@string/steps"
+            android:text="@string/water"
             android:textColor="@color/light_purple"
             android:textSize="14sp" />
 
         <TextView
-            android:id="@+id/steps_value"
+            android:id="@+id/water_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:fontFamily="@font/raleway_bold"
-            android:text="@string/_2367"
+            android:text="@string/_600_ml"
             android:textColor="@color/light_purple"
             android:textSize="14sp" />
 
-
         <ProgressBar
-            android:id="@+id/steps_bar"
+            android:id="@+id/water_bar"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="5dp"
