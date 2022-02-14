@@ -9,7 +9,7 @@
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -35,6 +35,8 @@
             android:text="@string/your_anxiety_level"
             android:textSize="14sp"
             android:layout_marginTop="5dp"
+            android:layout_marginStart="14dp"
+            android:layout_below="@id/main_title"
             android:fontFamily="@font/raleway_regular"
             android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/main_title"
@@ -44,13 +46,14 @@
             android:layout_width="35dp"
             android:layout_height="35dp"
             android:layout_marginEnd="18dp"
-            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
             android:background="@drawable/ic_play_test"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 
-    </LinearLayout
+    </RelativeLayout
      >
 
 </com.google.android.material.card.MaterialCardView>
