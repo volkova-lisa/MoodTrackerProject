@@ -94,6 +94,9 @@
     <string name="check_your_stress">Take a test to check your Stress level</string>
     <string name="anxiety_level_test">Anxiety level test</string>
     <string name="your_anxiety_level">Take a test to check your Anxiety level</string>
+    <string name="how_do_you_feel">How do you feel now?</string>
+    <string name="choose_an">Choose an emoji that represent your current mood best!</string>
+    <string name="traumatised">Traumatised</string>
 
 
 </resources>
