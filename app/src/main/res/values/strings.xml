@@ -84,6 +84,19 @@
     <string name="_7h">7h</string>
     <string name="kcal">Kcal</string>
     <string name="_1200">1200</string>
+    <string name="add_new_mood">Add new mood</string>
+    <string name="what_s_your_mood_now">What’s your mood now?</string>
+    <string name="choose_emojis">Choose emojis that represent your mood</string>
+    <string name="add_mood">Add mood</string>
+    <string name="moods_of_the_day">Moods of the day</string>
+    <string name="tests">Tests</string>
+    <string name="stress_level_test">Stress level test</string>
+    <string name="check_your_stress">Take a test to check your Stress level</string>
+    <string name="anxiety_level_test">Anxiety level test</string>
+    <string name="your_anxiety_level">Take a test to check your Anxiety level</string>
+    <string name="how_do_you_feel">How do you feel now?</string>
+    <string name="choose_an">Choose an emoji that represent your current mood best!</string>
+    <string name="traumatised">Traumatised</string>
 
 
 </resources>

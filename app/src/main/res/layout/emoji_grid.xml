@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:columnCount="4"
+    android:useDefaultMargins="true">
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_anger" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_awesome" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_calm" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_concentrated" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_cool" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_crying" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_crying_inside" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_great" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_furious" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_puking" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_sad" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_sick" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_sleepy" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_excited" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_traumatised" />
+
+    <ImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:background="@drawable/emoji_unchecked_bg"
+        android:padding="10dp"
+        android:src="@drawable/emoji_shocked" />
+
+
+</GridLayout>
