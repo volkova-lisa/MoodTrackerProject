@@ -1,7 +1,9 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.NoteItemBinding
@@ -29,8 +31,20 @@ class NotesAdapter(var listOfNotes: List<NoteBodyUiModel> = emptyList()) :
                 noteStarButtonUnchecked.setOnClickListener {
                     model.checkChanged?.invoke(model.noteId)
                 }
-                buttonDeleteItem.setOnClickListener {
-                    model.deleteNote?.invoke(model.noteId)
+
+                val popupMenu = PopupMenu(root.context, moreButton, Gravity.RIGHT)
+                popupMenu.inflate(R.menu.note_item_menu)
+                popupMenu.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        R.id.delete -> {
+                            model.deleteNote?.invoke(model.noteId)
+                            true
+                        }
+                        else -> true
+                    }
+                }
+                moreButton.setOnClickListener {
+                    popupMenu.show()
                 }
             }
         }

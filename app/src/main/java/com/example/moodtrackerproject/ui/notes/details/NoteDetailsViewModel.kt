@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.notes.details
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository

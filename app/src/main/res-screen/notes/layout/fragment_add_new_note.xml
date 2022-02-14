@@ -31,21 +31,24 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:id="@+id/toolbar_search"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
-        android:layout_marginEnd="18dp"
+        android:id="@+id/toolbar_calendar_add"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginEnd="24dp"
         android:elevation="5dp"
         android:src="@drawable/ic_baseline_calendar"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toStartOf="@id/toolbar_star"
-        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout"
+        app:tint="@color/light_purple" />
 
     <ImageView
         android:id="@+id/toolbar_star"
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:elevation="5dp"
+        app:tint="@color/light_purple"
+        android:padding="0dp"
         android:src="@drawable/ic_note_star_unchecked"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toStartOf="@id/guideline_right"
@@ -56,7 +59,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.03" />
+        app:layout_constraintGuide_percent="0.03"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_one"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.45"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_two"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.70"/>
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.73"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
@@ -68,15 +89,15 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/title"
         android:layout_width="0dp"
+        android:inputType="text|textMultiLine|textCapSentences"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/edit_text_line_grey"
-        android:defaultFocusHighlightEnabled="true"
         android:fontFamily="@font/raleway_bold"
         android:hint="@string/title"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:theme="@style/EditTextTheme"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
@@ -84,38 +105,44 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/note_text"
         android:layout_width="0dp"
+        android:lineHeight="25dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:backgroundTint="@color/edit_text_line_grey"
         android:fontFamily="@font/raleway_regular"
         android:hint="@string/note_text"
         android:textColorHint="@color/black"
-        android:textSize="16sp"
+        android:textSize="18sp"
+        android:inputType="text|textMultiLine|textCapSentences"
+        android:theme="@style/EditTextTheme"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:background="@drawable/round_grey_button"
         android:text="@string/cancel"
-        android:layout_marginEnd="10dp"
+        android:textAllCaps="false"
+        android:textSize="14dp"
         android:textColor="@color/text_grey"
         app:layout_constraintBottom_toBottomOf="@id/save_button"
-        app:layout_constraintEnd_toStartOf="@id/save_button" />
+        app:layout_constraintStart_toEndOf="@id/guideline_one"
+        app:layout_constraintEnd_toStartOf="@id/guideline_two"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:layout_marginBottom="20dp"
         android:text="@string/save"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:background="@drawable/round_purple_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toEndOf="@id/guideline_three"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

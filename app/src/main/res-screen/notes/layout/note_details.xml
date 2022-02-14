@@ -10,25 +10,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
+        app:layout_constraintGuide_percent="0.03" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
+        app:layout_constraintGuide_percent="0.97" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_three"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.73" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="3dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/note_title"
-        android:textColor="@color/light_purple"
-        android:textSize="20sp"
-        android:layout_marginTop="70dp"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginTop="74dp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -36,12 +42,12 @@
         android:id="@+id/text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:elevation="3dp"
         android:fontFamily="@font/raleway_regular"
         android:text="@string/note_text_long"
         android:textColor="@color/text_details_grey"
         android:textSize="16sp"
         android:layout_marginTop="15dp"
+        android:lineHeight="25dp"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/date" />
@@ -70,15 +76,17 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_button"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
         android:background="@drawable/round_grey_button"
         android:text="@string/back"
+        android:textAllCaps="false"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="30dp"
         android:textColor="@color/text_grey"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_three"/>
 
 
 
