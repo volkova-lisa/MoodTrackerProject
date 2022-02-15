@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/moodFragment"
-        android:name="com.example.moodtrackerproject.ui.MoodFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.list.MoodFragment"
         android:label="fragment_mood"
         tools:layout="@layout/fragment_mood">
         <action
@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMoodFragment"
-        android:name="com.example.moodtrackerproject.ui.AddMoodFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.add.AddMoodFragment"
         android:label="fragment_add_mood"
         tools:layout="@layout/fragment_add_mood">
         <action
