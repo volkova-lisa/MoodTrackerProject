@@ -38,7 +38,7 @@ class AddNewNoteViewModel : ViewModel() {
 
     private fun insertNewNote(note: NoteBody) =
         viewModelScope.launch(Dispatchers.Main) {
-            DataBaseRepository.insert(note) {
+            DataBaseRepository.insertNote(note) {
                 _addNewNoteStateLiveData.value = state.copy(action = NewNoteAction.ShowNotesScreen)
             }
             setState(state.copy(action = NewNoteAction.ShowNotesScreen))

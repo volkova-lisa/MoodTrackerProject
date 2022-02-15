@@ -21,11 +21,8 @@ class AddMoodViewModel : ViewModel() {
     val liveData get() = _addMoodStateLiveData
 
     private fun cancelAdding() {
-
     }
 
     private fun addNewMood(mood: MoodBody) {
-
     }
-
 }

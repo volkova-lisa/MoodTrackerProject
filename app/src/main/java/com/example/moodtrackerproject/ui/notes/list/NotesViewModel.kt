@@ -74,7 +74,7 @@ class NotesViewModel : ViewModel() {
                 deleteNote = { deleted ->
                     Timber.d(deleted)
                     // TODO: maybe combine these two functions because they are similar?
-                    DataBaseRepository.setDeleted(model)
+                    DataBaseRepository.setNoteDeleted(model)
                     val list = DataBaseRepository.removeDeletedNotes()
                     setState(state.copy(listOfNotes = map(list)))
                 },

@@ -22,6 +22,4 @@ class AddMoodFragment : Fragment() {
         binding = FragmentAddMoodBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
-
-
 }
