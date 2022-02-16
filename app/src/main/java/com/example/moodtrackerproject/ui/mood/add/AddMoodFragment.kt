@@ -38,15 +38,11 @@ class AddMoodFragment : Fragment() {
 
     private fun render(state: AddMoodViewState) {
         // remove from here later
-        val emojiList: List<Int> = listOf(
-            R.drawable.emoji_anger, R.drawable.emoji_awesome,
-            R.drawable.emoji_calm, R.drawable.emoji_concentrated,
-            R.drawable.emoji_cool, R.drawable.emoji_crying,
-            R.drawable.emoji_crying_inside, R.drawable.emoji_excited,
-            R.drawable.emoji_furious, R.drawable.emoji_great,
-            R.drawable.emoji_puking, R.drawable.emoji_sad,
-            R.drawable.emoji_shocked, R.drawable.emoji_sick,
-            R.drawable.emoji_sleepy, R.drawable.emoji_traumatised
+        val emojiList: List<EmojiBody> = listOf(
+            EmojiBody(R.drawable.emoji_anger), EmojiBody(R.drawable.emoji_awesome), EmojiBody(R.drawable.emoji_calm), EmojiBody(R.drawable.emoji_concentrated),
+            EmojiBody(R.drawable.emoji_cool), EmojiBody(R.drawable.emoji_crying), EmojiBody(R.drawable.emoji_crying_inside), EmojiBody(R.drawable.emoji_excited),
+            EmojiBody(R.drawable.emoji_furious), EmojiBody(R.drawable.emoji_great), EmojiBody(R.drawable.emoji_puking), EmojiBody(R.drawable.emoji_sad),
+            EmojiBody(R.drawable.emoji_shocked), EmojiBody(R.drawable.emoji_sick), EmojiBody(R.drawable.emoji_sleepy), EmojiBody(R.drawable.emoji_traumatised),
         )
         addMoodAdapter.setList(emojiList)
         Log.d("========", "---")

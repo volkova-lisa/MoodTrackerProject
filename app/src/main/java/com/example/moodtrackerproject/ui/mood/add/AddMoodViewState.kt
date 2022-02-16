@@ -4,5 +4,5 @@ import com.example.moodtrackerproject.ui.mood.list.MoodBody
 
 data class AddMoodViewState(
     val cancelAdding: () -> Unit = {},
-    val saveMood: (MoodBody) -> Unit = {}
+    val saveMood: (MoodBody) -> Unit = {},
 )

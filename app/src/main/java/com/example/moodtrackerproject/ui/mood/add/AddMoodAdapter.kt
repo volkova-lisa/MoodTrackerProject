@@ -6,14 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.databinding.EmojiItemBinding
 
-class AddMoodAdapter(var listOfEmoji: List<Int> = emptyList()) :
+class AddMoodAdapter(var listOfEmoji: List<EmojiBody> = emptyList()) :
     RecyclerView.Adapter<AddMoodAdapter.AddMoodHolder>() {
 
     class AddMoodHolder(private val binding: EmojiItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(image: Int) {
+        fun bind(emoji: EmojiBody) {
             binding.run {
-                emojiImage.setImageResource(image)
+                emojiImage.setImageResource(emoji.image)
+
+                root.setOnClickListener {
+                }
             }
         }
     }
@@ -35,7 +38,7 @@ class AddMoodAdapter(var listOfEmoji: List<Int> = emptyList()) :
 
     override fun getItemCount(): Int = listOfEmoji.size
 
-    fun setList(list: List<Int>) {
+    fun setList(list: List<EmojiBody>) {
         listOfEmoji = list
         notifyDataSetChanged()
         Log.d("----========", listOfEmoji.toString())
