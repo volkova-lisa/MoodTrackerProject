@@ -6,16 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.databinding.EmojiItemBinding
 
-class AddMoodAdapter(var listOfEmoji: List<EmojiBody> = emptyList()) :
+class AddMoodAdapter(var listOfEmojiUIModel: List<EmojiBodyUIModel> = emptyList()) :
     RecyclerView.Adapter<AddMoodAdapter.AddMoodHolder>() {
 
     class AddMoodHolder(private val binding: EmojiItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(emoji: EmojiBody) {
+        fun bind(emojiUIModel: EmojiBodyUIModel) {
             binding.run {
-                emojiImage.setImageResource(emoji.image)
+                emojiImage.setImageResource(emojiUIModel.image)
 
                 root.setOnClickListener {
+                    emojiUIModel.emojiChecked.invoke(emojiUIModel)
                 }
             }
         }
@@ -32,15 +33,15 @@ class AddMoodAdapter(var listOfEmoji: List<EmojiBody> = emptyList()) :
     }
 
     override fun onBindViewHolder(holder: AddMoodHolder, position: Int) {
-        holder.bind(listOfEmoji[position])
-        Log.d("++++++++", listOfEmoji[position].toString())
+        holder.bind(listOfEmojiUIModel[position])
+        Log.d("++++++++", listOfEmojiUIModel[position].toString())
     }
 
-    override fun getItemCount(): Int = listOfEmoji.size
+    override fun getItemCount(): Int = listOfEmojiUIModel.size
 
-    fun setList(list: List<EmojiBody>) {
-        listOfEmoji = list
+    fun setList(list: List<EmojiBodyUIModel>) {
+        listOfEmojiUIModel = list
         notifyDataSetChanged()
-        Log.d("----========", listOfEmoji.toString())
+        Log.d("----========", listOfEmojiUIModel.toString())
     }
 }
