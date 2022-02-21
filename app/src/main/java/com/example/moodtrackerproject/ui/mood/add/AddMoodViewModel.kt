@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.add
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.R
@@ -13,14 +14,14 @@ class AddMoodViewModel : ViewModel() {
             cancelAdding = ::cancelAdding,
             saveMood = ::addNewMood,
             listOfMoods = listOf(
-                EmojiBody(R.drawable.emoji_anger), EmojiBody(R.drawable.emoji_awesome),
-                EmojiBody(R.drawable.emoji_calm), EmojiBody(R.drawable.emoji_concentrated),
-                EmojiBody(R.drawable.emoji_cool), EmojiBody(R.drawable.emoji_crying),
-                EmojiBody(R.drawable.emoji_crying_inside), EmojiBody(R.drawable.emoji_excited),
-                EmojiBody(R.drawable.emoji_furious), EmojiBody(R.drawable.emoji_great),
-                EmojiBody(R.drawable.emoji_puking), EmojiBody(R.drawable.emoji_sad),
-                EmojiBody(R.drawable.emoji_shocked), EmojiBody(R.drawable.emoji_sick),
-                EmojiBody(R.drawable.emoji_sleepy), EmojiBody(R.drawable.emoji_traumatised),
+                EmojiBody(R.drawable.emoji_anger, "anger"), EmojiBody(R.drawable.emoji_awesome, "awesome"),
+                EmojiBody(R.drawable.emoji_calm, "calm"), EmojiBody(R.drawable.emoji_concentrated, "concentrated"),
+                EmojiBody(R.drawable.emoji_cool, "cool"), EmojiBody(R.drawable.emoji_crying, "crying"),
+                EmojiBody(R.drawable.emoji_crying_inside, "crying inside"), EmojiBody(R.drawable.emoji_excited, "excited"),
+                EmojiBody(R.drawable.emoji_furious, "furious"), EmojiBody(R.drawable.emoji_great, "great"),
+                EmojiBody(R.drawable.emoji_puking, "puking"), EmojiBody(R.drawable.emoji_sad, "sad"),
+                EmojiBody(R.drawable.emoji_shocked, "shocked"), EmojiBody(R.drawable.emoji_sick, "sick"),
+                EmojiBody(R.drawable.emoji_sleepy, "sleepy"), EmojiBody(R.drawable.emoji_traumatised, "traumatised"),
             )
         )
     }
@@ -35,10 +36,14 @@ class AddMoodViewModel : ViewModel() {
             EmojiBodyUIModel(
                 image = model.image,
                 title = model.title,
-                emojiChecked = {
-                    setState(state.copy(chosenEmojiUIModel = it))
-                    val list = state.listOfMoods
+                isChecked = model.isChecked,
+                checkChanged = {
+                    val list = state.listOfMoods.map {
+                        if (it.title == state.chosenEmojiUIModel.title) it.copy(isChecked = !it.isChecked)
+                        else it
+                    }
                     setState(state.copy(listWithChosenMood = map(list)))
+                    Log.d("-----checkChanged", list.toString())
                 }
             )
         }
