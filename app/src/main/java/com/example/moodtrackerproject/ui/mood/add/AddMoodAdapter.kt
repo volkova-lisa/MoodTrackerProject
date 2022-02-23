@@ -15,15 +15,15 @@ class AddMoodAdapter(var listOfModels: List<EmojiBodyUIModel> = emptyList()) :
         fun bind(emojiUIModel: EmojiBodyUIModel) {
             binding.run {
                 emojiImage.setImageResource(emojiUIModel.image)
+                emojiImage.setBackgroundResource(
+                    if (emojiUIModel.isChecked) R.drawable.bg_color
+                    else R.drawable.emoji_unchecked_bg
+                )
                 root.setOnClickListener {
                     // emojiUIModel.emojiChecked.invoke(emojiUIModel)
                     emojiUIModel.checkChanged.invoke(emojiUIModel)
                     Log.d("-----ADAPTER", "CLICKED")
                 }
-                emojiImage.setBackgroundResource(
-                    if (emojiUIModel.isChecked) R.drawable.bg_color
-                    else R.drawable.emoji_unchecked_bg
-                )
             }
         }
     }

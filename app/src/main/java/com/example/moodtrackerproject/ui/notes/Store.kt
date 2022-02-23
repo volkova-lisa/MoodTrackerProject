@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.notes
 
+import com.example.moodtrackerproject.ui.mood.add.AddMoodViewState
 import com.example.moodtrackerproject.ui.notes.details.DetailsViewState
 import com.example.moodtrackerproject.ui.notes.list.NotesViewState
 
@@ -8,6 +9,10 @@ object Store {
 
     fun setState(newState: NotesViewState) {
         appState = appState.copy(notesState = newState)
+    }
+
+    fun setState(newState: AddMoodViewState) {
+        appState = appState.copy(addMoodState = newState)
     }
 
     fun getNotesState(): NotesViewState {
@@ -37,5 +42,6 @@ object Store {
 
 data class AppState(
     val notesState: NotesViewState = NotesViewState(),
-    val noteDetailsState: DetailsViewState = DetailsViewState()
+    val noteDetailsState: DetailsViewState = DetailsViewState(),
+    val addMoodState: AddMoodViewState = AddMoodViewState()
 )
