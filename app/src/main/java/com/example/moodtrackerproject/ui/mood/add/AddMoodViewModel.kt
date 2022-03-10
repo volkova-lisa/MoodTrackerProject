@@ -38,7 +38,7 @@ class AddMoodViewModel : ViewModel() {
                 checkChanged = {
                     val newList = DataBaseRepository.setChosenEmoji(it.title)
                     setState(state.copy(listWithChosenMood = moodMap(newList)))
-                    Log.d("-----checkChanged", newList.toString())
+                    Log.d("-----checkChanged", state.listWithChosenMood.toString())
                 }
             )
         }

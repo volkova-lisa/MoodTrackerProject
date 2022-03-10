@@ -16,7 +16,7 @@ class AddMoodAdapter(var listOfModels: List<EmojiBodyUIModel> = emptyList()) :
             binding.run {
                 emojiImage.setImageResource(emojiUIModel.image)
                 emojiImage.setBackgroundResource(
-                    if (emojiUIModel.isChecked) R.drawable.bg_color
+                    if (emojiUIModel.isChecked) R.drawable.emoji_checked_bg
                     else R.drawable.emoji_unchecked_bg
                 )
                 root.setOnClickListener {

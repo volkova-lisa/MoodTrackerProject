@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.add
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,7 @@ class AddMoodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentAddMoodBinding.inflate(layoutInflater, container, false)
-        viewModel.fetchListOfMoods()
+        // viewModel.fetchListOfMoods()
         return binding.root
     }
 
@@ -42,5 +43,19 @@ class AddMoodFragment : Fragment() {
 
     private fun render(state: AddMoodViewState) {
         addMoodAdapter.setList(state.listWithChosenMood)
+        binding.run {
+            val text = state.listWithChosenMood.find {
+                it.isChecked
+            }
+            emojiName.text = text?.title ?: ""
+
+//            val el = state.listWithChosenMood.filter {
+//                it.isChecked
+//            }
+            Log.d("-----fragment", state.listWithChosenMood.toString())
+            Log.d("-----fragment", text.toString())
+            Log.d("-----text", emojiName.text.toString())
+            // Log.d("-----elem", el.toString())
+        }
     }
 }
