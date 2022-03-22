@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.ui.mood.list.MoodBody
 import com.example.moodtrackerproject.ui.notes.Store
 
 class AddMoodViewModel : ViewModel() {
@@ -47,7 +46,7 @@ class AddMoodViewModel : ViewModel() {
     private fun cancelAdding() {
     }
 
-    private fun addNewMood(mood: MoodBody) {
+    private fun addNewMood(pair: Pair<Int, String>) {
     }
 
     private fun setState(newState: AddMoodViewState) {

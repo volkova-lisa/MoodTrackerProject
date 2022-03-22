@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moodtrackerproject.databinding.FragmentAddMoodBinding
+import com.example.moodtrackerproject.utils.DateUtils
+import com.example.moodtrackerproject.utils.click
 
 class AddMoodFragment : Fragment() {
 
@@ -47,15 +49,13 @@ class AddMoodFragment : Fragment() {
             val text = state.listWithChosenMood.find {
                 it.isChecked
             }
-            emojiName.text = text?.title ?: ""
+            emojiName.text = text?.title ?: "Mood title"
 
-//            val el = state.listWithChosenMood.filter {
-//                it.isChecked
-//            }
-            Log.d("-----fragment", state.listWithChosenMood.toString())
-            Log.d("-----fragment", text.toString())
-            Log.d("-----text", emojiName.text.toString())
-            // Log.d("-----elem", el.toString())
+            saveButton.click {
+                state.saveMood(Pair(state.listWithChosenMood[0].image, emojiName.text.toString()))
+                Log.d("------", state.listWithChosenMood[0].image.toString())
+                Log.d("------", DateUtils.getDateOfNote())
+            }
         }
     }
 }
