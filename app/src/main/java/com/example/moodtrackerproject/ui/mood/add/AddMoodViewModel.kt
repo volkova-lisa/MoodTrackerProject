@@ -3,8 +3,14 @@ package com.example.moodtrackerproject.ui.mood.add
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.ui.mood.list.MoodBody
 import com.example.moodtrackerproject.ui.notes.Store
+import com.example.moodtrackerproject.utils.DateUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.actor
+import kotlinx.coroutines.launch
 
 class AddMoodViewModel : ViewModel() {
     private var state: AddMoodViewState
@@ -46,8 +52,15 @@ class AddMoodViewModel : ViewModel() {
     private fun cancelAdding() {
     }
 
-    private fun addNewMood(pair: Pair<Int, String>) {
-    }
+    private fun addNewMood(pair: Pair<Int, String>) =
+        viewModelScope.launch(Dispatchers.Main) {
+            val mood = MoodBody(pair.first, pair.second, DateUtils.getDateOfNote())
+            DataBaseRepository.insertMood(mood) {
+                _addMoodStateLiveData.value = state.copy(action = NewMoodAction.ShowMoodsScreen)
+            }
+            setState(state.copy(action = NewMoodAction.ShowMoodsScreen))
+        }
+
 
     private fun setState(newState: AddMoodViewState) {
         Store.setState(newState)
