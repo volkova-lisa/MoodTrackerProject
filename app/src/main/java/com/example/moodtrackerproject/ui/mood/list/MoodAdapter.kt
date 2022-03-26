@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -37,6 +38,7 @@ class MoodAdapter(var listOfMoods: List<MoodBody> = emptyList()) :
 
     fun setList(list: List<MoodBody>) {
         listOfMoods = list
+        Log.d("+++++++", listOfMoods.toString())
         notifyDataSetChanged()
     }
 }

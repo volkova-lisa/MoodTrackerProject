@@ -20,6 +20,10 @@ class Router(private val activity: MainActivity) {
         navController = controller
     }
 
+    fun openMood() {
+        navController.navigate(R.id.moodFragment)
+    }
+
     fun openWelcome() {
         navController.navigate(R.id.welcomeFragment)
     }

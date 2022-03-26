@@ -3,6 +3,8 @@ package com.example.moodtrackerproject.ui.mood.list
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.ui.notes.Store
 
 class MoodViewModel : ViewModel() {
 
@@ -12,11 +14,7 @@ class MoodViewModel : ViewModel() {
         state = MoodViewState(
             addNewMood = ::addNewMood
         )
-    }
-
-    private fun addNewMood() {
-        liveData.value = state.copy(action = MoodScreenActions.StartAddMoodScreen)
-        Log.d("----------------", "CLICKED")
+        Store.setState(state)
     }
 
     private val _moodViewStateLiveData: MutableLiveData<MoodViewState> =
@@ -24,4 +22,18 @@ class MoodViewModel : ViewModel() {
             value = state
         }
     val liveData get() = _moodViewStateLiveData
+
+    private fun addNewMood() {
+        liveData.value = state.copy(action = MoodScreenActions.StartAddMoodScreen)
+        Log.d("----------------", "CLICKED")
+    }
+
+    fun fetchListOfMoods() {
+        val moods = DataBaseRepository.getMoods()
+        setState(state.copy(listOfMoods = moods))
+    }
+    private fun setState(newState: MoodViewState) {
+        Store.setState(newState)
+        _moodViewStateLiveData.value = Store.appState.moodState
+    }
 }

@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,6 +24,7 @@ class MoodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentMoodBinding.inflate(layoutInflater, container, false)
+        viewModel.fetchListOfMoods()
         return binding.root
     }
 
@@ -39,6 +41,8 @@ class MoodFragment : Fragment() {
             moodInclude.addMoodBtn.setOnClickListener {
                 state.addNewMood.invoke()
             }
+            moodsAdapter.setList(state.listOfMoods)
+            Log.d(";;;;;;;;;", state.listOfMoods.toString())
         }
         when (state.action) {
             StartAddMoodScreen -> {

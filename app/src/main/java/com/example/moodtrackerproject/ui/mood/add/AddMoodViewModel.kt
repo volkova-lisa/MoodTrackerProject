@@ -9,7 +9,6 @@ import com.example.moodtrackerproject.ui.mood.list.MoodBody
 import com.example.moodtrackerproject.ui.notes.Store
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.channels.actor
 import kotlinx.coroutines.launch
 
 class AddMoodViewModel : ViewModel() {
@@ -60,7 +59,6 @@ class AddMoodViewModel : ViewModel() {
             }
             setState(state.copy(action = NewMoodAction.ShowMoodsScreen))
         }
-
 
     private fun setState(newState: AddMoodViewState) {
         Store.setState(newState)
