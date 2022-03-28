@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentMoodBinding
-import com.example.moodtrackerproject.ui.mood.list.MoodScreenActions.StartAddMoodScreen
 
 class MoodFragment : Fragment() {
 
@@ -40,15 +39,10 @@ class MoodFragment : Fragment() {
         binding.run {
             moodInclude.addMoodBtn.setOnClickListener {
                 state.addNewMood.invoke()
+                (requireActivity() as MainActivity).router.openAddMood()
             }
             moodsAdapter.setList(state.listOfMoods)
             Log.d(";;;;;;;;;", state.listOfMoods.toString())
-        }
-        when (state.action) {
-            StartAddMoodScreen -> {
-                (requireActivity() as MainActivity).router.openAddMood()
-            }
-            null -> {}
         }
     }
 }

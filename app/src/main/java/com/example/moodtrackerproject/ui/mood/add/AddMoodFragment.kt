@@ -55,7 +55,7 @@ class AddMoodFragment : Fragment() {
             emojiName.text = text?.title ?: "Mood title"
 
             saveButton.click {
-                state.saveMood(Pair(state.listWithChosenMood[0].image, emojiName.text.toString()))
+                state.saveMood(Pair(state.listWithChosenMood[1].image, emojiName.text.toString()))
                 Log.d("------", state.listWithChosenMood[0].image.toString())
                 Log.d("------", DateUtils.getDateOfNote())
             }
