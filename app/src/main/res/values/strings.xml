@@ -99,6 +99,7 @@
     <string name="traumatised">Traumatised</string>
     <string name="stress_q_one">Which emoji describes your current mood best?</string>
     <string name="stress_title">Stress level test</string>
+    <string name="next">Next</string>
 
 
 </resources>

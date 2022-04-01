@@ -56,6 +56,10 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.action_loginFragment_to_resetPasswordFragment)
     }
 
+    fun openStressTest() {
+        navController.navigate(R.id.stressTest)
+    }
+
     fun openInsideNote() {
         navController.navigate(R.id.noteDetailsFragment)
     }

@@ -43,6 +43,9 @@ class MoodFragment : Fragment() {
             }
             moodsAdapter.setList(state.listOfMoods)
             Log.d(";;;;;;;;;", state.listOfMoods.toString())
+            stressInclude.root.setOnClickListener {
+                (requireActivity() as MainActivity).router.openStressTest()
+            }
         }
     }
 }
