@@ -9,9 +9,7 @@ class StressTestViewModel : ViewModel() {
     private var state: StressTestState
 
     init {
-        state = StressTestState(
-
-        )
+        state = StressTestState()
         Store.setState(state)
     }
     private val _stressStateLiveData: MutableLiveData<StressTestState> =
@@ -24,5 +22,4 @@ class StressTestViewModel : ViewModel() {
         Store.setState(newState)
         _stressStateLiveData.value = Store.appState.stressTestState
     }
-
 }

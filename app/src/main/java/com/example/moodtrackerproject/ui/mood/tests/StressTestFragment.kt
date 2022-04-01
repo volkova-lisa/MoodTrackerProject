@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,5 +29,16 @@ class StressTestFragment : Fragment() {
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
+    }
+
+    private fun render(state: StressTestState) {
+        binding.run {
+            question.text = state.question.text
+
+            o1.root.setOnClickListener {
+                // (requireActivity() as MainActivity).router.openStressTest()
+                Log.d("======", "00000")
+            }
+        }
     }
 }
