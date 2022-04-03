@@ -4,6 +4,7 @@ import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.NoteBody
 import com.example.moodtrackerproject.ui.mood.add.EmojiBody
 import com.example.moodtrackerproject.ui.mood.list.MoodBody
+import com.example.moodtrackerproject.ui.mood.tests.QuestionBody
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 // single source of truth
@@ -19,6 +20,14 @@ object DataBaseRepository {
         EmojiBody(R.drawable.emoji_shocked, "shocked"), EmojiBody(R.drawable.emoji_sick, "sick"),
         EmojiBody(R.drawable.emoji_sleepy, "sleepy"), EmojiBody(R.drawable.emoji_traumatised, "traumatised"),
     )
+
+    val listOfStressQs = listOf(
+        QuestionBody("Been upset because of something that happened unexpectedly?"),
+        QuestionBody("Felt that you were unable to control important things in your life?"),
+        QuestionBody("Felt nervous and 'stressed"),
+        QuestionBody("Felt confident about your ability to handle your personal problems?"),
+        QuestionBody("Felt that things were going your way?")
+        )
 
     fun getEmojiList() = listOfEmojis
 

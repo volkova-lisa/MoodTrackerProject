@@ -5,4 +5,5 @@ data class StressTestState(
     val question: QuestionBody = QuestionBody(),
     val questionNum: Int = 0,
     val points: Int = 0,
+    val setQuestion: (Int) -> Unit = {}
 )
