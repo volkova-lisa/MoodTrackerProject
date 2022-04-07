@@ -27,7 +27,15 @@ object DataBaseRepository {
         QuestionBody("Felt nervous and 'stressed"),
         QuestionBody("Felt confident about your ability to handle your personal problems?"),
         QuestionBody("Felt that things were going your way?")
-        )
+    )
+
+    val lisOfOptions = listOf<String>(
+        "Never",
+        "Almost Never",
+        "Sometimes",
+        "Fairly Often",
+        "Very Often"
+    )
 
     fun getEmojiList() = listOfEmojis
 

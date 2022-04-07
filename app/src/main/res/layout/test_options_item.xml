@@ -5,22 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="70dp"
     android:background="@drawable/stress_bg"
+    app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
         <LinearLayout
+            android:id="@+id/card"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/stress_bg">
+            android:layout_height="match_parent">
         <TextView
-            android:id="@+id/o1"
+            android:id="@+id/option"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/water"
-            android:textColor="@color/white"
+            android:textColor="@color/red_stress"
             android:textSize="16sp" />
         </LinearLayout>
 
