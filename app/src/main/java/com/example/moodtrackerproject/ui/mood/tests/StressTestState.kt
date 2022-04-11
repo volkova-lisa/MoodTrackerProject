@@ -1,9 +1,9 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 data class StressTestState(
-    val chosenAnswer: Int = 0,
+    val chosenAnswer: OptionUiModel = OptionUiModel(),
     val question: QuestionBody = QuestionBody(),
-    val questionNum: Int = 0,
+    val listOfNotes: List<OptionUiModel> = listOf(),
     val points: Int = 0,
     val setQuestion: (Int) -> Unit = {}
 )

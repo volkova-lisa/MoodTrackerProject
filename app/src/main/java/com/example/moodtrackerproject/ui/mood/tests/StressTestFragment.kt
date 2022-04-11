@@ -39,7 +39,7 @@ class StressTestFragment : Fragment() {
         binding.run {
 
             question.text = state.question.text
-            testAdapter.setList(DataBaseRepository.lisOfOptions)
+            testAdapter.setList()
 
             Log.d("1111111", state.question.text)
 

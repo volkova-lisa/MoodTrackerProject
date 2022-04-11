@@ -85,14 +85,13 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/option_list"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/question"
         tools:listitem="@layout/test_options_item"
-        tools:visibility="visible"
-        android:paddingBottom="56dp"
-        android:layout_marginBottom="40dp"/>
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/save_button"
