@@ -48,6 +48,8 @@ object DataBaseRepository {
 
     fun getEmojiList() = listOfEmojis
 
+    fun getOptions() = lisOfOptions
+
     fun setChosenEmoji(title: String): List<EmojiBody> {
         val list = getEmojiList().map {
             if (it.title == title) it.copy(isChecked = !it.isChecked) else it
@@ -90,9 +92,9 @@ object DataBaseRepository {
         saveNotes(list)
         return list
     }
-    //option----------
+    // option----------
 
-    fun setSelected(title: String) : List<OptionBody> {
+    fun setSelected(title: String): List<OptionBody> {
         val list = lisOfOptions.map {
             if (it.text == title) it.copy(isChecked = !it.isChecked) else it
         }

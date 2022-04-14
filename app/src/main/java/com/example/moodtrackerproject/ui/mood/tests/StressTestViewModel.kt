@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -30,7 +31,14 @@ class StressTestViewModel : ViewModel() {
         Store.setState(liveData.value!!)
     }
 
-    private fun optionMap(option: List<OptionBody>) : List<OptionUiModel> {
+    fun fetchListOfOptions() {
+        val options = optionMap(DataBaseRepository.getOptions())
+        Log.d("----state------", DataBaseRepository.getOptions().toString())
+        Log.d("====state------", state.listOfOptions.toString())
+        setState(state.copy(listOfOptions = options))
+    }
+
+    private fun optionMap(option: List<OptionBody>): List<OptionUiModel> {
         return option.map { model ->
             OptionUiModel(
                 text = model.text,
@@ -41,7 +49,6 @@ class StressTestViewModel : ViewModel() {
                     setState(state.copy(chosenAnswer = optionMap(list)[0]))
                 }
             )
-
         }
     }
 

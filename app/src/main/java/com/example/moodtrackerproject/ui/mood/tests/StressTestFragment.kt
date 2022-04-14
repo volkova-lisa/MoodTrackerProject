@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 
 class StressTestFragment : Fragment() {
@@ -23,6 +22,7 @@ class StressTestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStressTestBinding.inflate(layoutInflater, container, false)
+        viewModel.fetchListOfOptions()
         return binding.root
     }
 
@@ -39,7 +39,7 @@ class StressTestFragment : Fragment() {
         binding.run {
 
             question.text = state.question.text
-            testAdapter.setList()
+            testAdapter.setList(state.listOfOptions)
 
             Log.d("1111111", state.question.text)
 
