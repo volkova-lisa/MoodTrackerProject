@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +44,7 @@ class StressTestFragment : Fragment() {
         binding.run {
             question.text = state.question.text
             testAdapter.setList(state.listOfOptions)
+            Log.d("5555555", state.listOfOptions.toString())
         }
     }
 }

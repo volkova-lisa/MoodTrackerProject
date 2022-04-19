@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,9 +20,14 @@ class TestAdapter(var listOfOptions: List<OptionUiModel> = emptyList()) :
                 option.text = opt.text
                 root.setOnClickListener {
                     opt.checkChanged?.invoke(opt.text)
+                    Log.d("333333", opt.isChecked.toString())
                 }
-                if (opt.isChecked) card.setBackgroundResource(R.drawable.stress_bg)
-                else option.setTextColor(R.color.white)
+                card.setBackgroundResource(
+                    if (opt.isChecked) R.drawable.stress_bg
+                    else R.drawable.add_mood_text_bg
+                )
+
+
             }
         }
     }
