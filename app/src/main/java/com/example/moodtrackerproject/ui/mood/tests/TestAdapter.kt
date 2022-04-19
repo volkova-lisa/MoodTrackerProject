@@ -18,9 +18,10 @@ class TestAdapter(var listOfOptions: List<OptionUiModel> = emptyList()) :
             binding.run {
                 option.text = opt.text
                 root.setOnClickListener {
-                    card.setBackgroundResource(R.drawable.stress_bg)
-                    option.setTextColor(R.color.white)
+                    opt.checkChanged?.invoke(opt.text)
                 }
+                if (opt.isChecked) card.setBackgroundResource(R.drawable.stress_bg)
+                else option.setTextColor(R.color.white)
             }
         }
     }

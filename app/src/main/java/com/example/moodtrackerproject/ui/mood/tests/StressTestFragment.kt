@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +21,6 @@ class StressTestFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentStressTestBinding.inflate(layoutInflater, container, false)
-        viewModel.fetchListOfOptions()
         return binding.root
     }
 
@@ -30,23 +28,21 @@ class StressTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.liveData.value?.setQuestion?.invoke(0)
         binding.optionList.adapter = testAdapter
+        viewModel.fetchListOfOptions()
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchListOfOptions()
+    }
+
     private fun render(state: StressTestState) {
         binding.run {
-
             question.text = state.question.text
             testAdapter.setList(state.listOfOptions)
-
-            Log.d("1111111", state.question.text)
-
-//            o1.root.setOnClickListener {
-//                o1.card.setBackgroundResource(R.drawable.stress_bg)
-//                o1.option.setTextColor(resources.getColor(R.color.white))
-//            }
         }
     }
 }

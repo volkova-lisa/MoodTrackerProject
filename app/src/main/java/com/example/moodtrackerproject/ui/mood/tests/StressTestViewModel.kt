@@ -34,7 +34,6 @@ class StressTestViewModel : ViewModel() {
     fun fetchListOfOptions() {
         val options = optionMap(DataBaseRepository.getOptions())
         Log.d("----state------", DataBaseRepository.getOptions().toString())
-        Log.d("====state------", state.listOfOptions.toString())
         setState(state.copy(listOfOptions = options))
     }
 
@@ -46,6 +45,8 @@ class StressTestViewModel : ViewModel() {
                 isChecked = model.isChecked,
                 checkChanged = {
                     val list = DataBaseRepository.setSelected(it)
+                    Log.d("000000list", list.toString())
+                    Log.d("111111list", optionMap(list)[0].toString())
                     setState(state.copy(chosenAnswer = optionMap(list)[0]))
                 }
             )
