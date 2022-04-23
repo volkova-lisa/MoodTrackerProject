@@ -39,12 +39,17 @@ object DataBaseRepository {
     )
 
     val lisOfOptions = listOf(
-        OptionBody("Never"),
-        OptionBody("Almost Never"),
-        OptionBody("Sometimes"),
-        OptionBody("Fairly Often"),
-        OptionBody("Very Often")
+        OptionBody("Never", 1),
+        OptionBody("Almost Never", 2),
+        OptionBody("Sometimes", 3),
+        OptionBody("Fairly Often", 4),
+        OptionBody("Very Often", 5)
     )
+
+    var points = 0
+    fun savePoints(p: Int) {
+        points = p
+    }
 
     fun getEmojiList() = listOfEmojis
 

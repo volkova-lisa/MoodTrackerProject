@@ -33,7 +33,6 @@ class StressTestViewModel : ViewModel() {
 
     fun fetchListOfOptions() {
         val options = optionMap(DataBaseRepository.getOptions())
-        Log.d("----state------", DataBaseRepository.getOptions().toString())
         liveData.value = state.copy(listOfOptions = options)
         Store.setState(liveData.value!!)
     }
@@ -46,13 +45,24 @@ class StressTestViewModel : ViewModel() {
                 isChecked = model.isChecked,
                 checkChanged = {
                     val list = DataBaseRepository.setSelected(it)
-                    Log.d("000000list", list.toString())
-                    Log.d("111111list", optionMap(list)[0].toString())
-                    // setState(state.copy(chosenAnswer = optionMap(list)[0]))
+                    val filtered = optionMap(list).filter { it.isChecked == true }
+                    setState(
+                        state.copy(
+                            chosenAnswer = filtered[0]
+                        )
+                    )
+                    addPoints(state.chosenAnswer.points)
+                    Log.d("----state0000------", state.chosenAnswer.points.toString())
                     setState(state.copy(listOfOptions = optionMap(list)))
                 }
             )
         }
+    }
+
+    private fun addPoints(point: Int) {
+        val newPoint = DataBaseRepository.points + point
+        Log.d("----999------", newPoint.toString())
+        DataBaseRepository.savePoints(newPoint)
     }
 
     private fun setState(newState: StressTestState) {
