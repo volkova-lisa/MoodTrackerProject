@@ -5,5 +5,7 @@ data class StressTestState(
     val question: QuestionBody = QuestionBody(),
     val listOfOptions: List<OptionUiModel> = listOf(),
     val points: Int = 0,
-    val setQuestion: (Int) -> Unit = {}
+    val setQuestion: (Int) -> Unit = {},
+    val currQuestionNum: Int = 0,
+    val moveQuestion: (Int) -> Unit = {},
 )

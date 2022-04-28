@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 
 class StressTestFragment : Fragment() {
@@ -29,7 +28,10 @@ class StressTestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.liveData.value?.setQuestion?.invoke(0)
+        val num = viewModel.liveData.value?.currQuestionNum!!
+        if (num != null) {
+            viewModel.liveData.value?.setQuestion?.invoke(num)
+        }
         binding.optionList.adapter = testAdapter
         binding.question.text = viewModel.liveData.value?.question?.text
         viewModel.fetchListOfOptions()
@@ -56,9 +58,9 @@ class StressTestFragment : Fragment() {
             }
             nextButton.setOnClickListener {
                 // val nextQuestNum =
-                //state.setQuestion?.invoke(1)
-                DataBaseRepository.savePoints(state.chosenAnswer.points)
-                Log.d("------", state.chosenAnswer.toString())
+                state.moveQuestion.invoke(state.currQuestionNum)
+                // DataBaseRepository.savePoints(state.chosenAnswer.points)
+                Log.d("------", state.currQuestionNum.toString())
             }
         }
     }

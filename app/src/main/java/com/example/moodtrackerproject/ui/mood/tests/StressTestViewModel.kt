@@ -13,6 +13,7 @@ class StressTestViewModel : ViewModel() {
     init {
         state = StressTestState(
             setQuestion = ::setQuestion,
+            moveQuestion = ::nextQuestion
         )
         Store.setState(state)
     }
@@ -26,13 +27,16 @@ class StressTestViewModel : ViewModel() {
         liveData.value =
             state.copy(
                 question = DataBaseRepository.listOfStressQs[num],
-                points = num
+                points = num,
+                currQuestionNum = num
             )
         Store.setState(liveData.value!!)
         Log.d("=========", state.question.toString())
         Log.d(")))", num.toString())
         Log.d("====", DataBaseRepository.listOfStressQs[num].toString())
     }
+
+    private fun nextQuestion(num: Int) = num + 1
 
     fun fetchListOfOptions() {
         val options = optionMap(DataBaseRepository.getOptions())
