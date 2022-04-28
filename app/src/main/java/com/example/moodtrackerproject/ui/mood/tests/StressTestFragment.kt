@@ -31,6 +31,7 @@ class StressTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.liveData.value?.setQuestion?.invoke(0)
         binding.optionList.adapter = testAdapter
+        binding.question.text = viewModel.liveData.value?.question?.text
         viewModel.fetchListOfOptions()
         binding.nextButton.isEnabled = false
         binding.nextButton.isClickable = false
@@ -46,17 +47,18 @@ class StressTestFragment : Fragment() {
 
     private fun render(state: StressTestState) {
         binding.run {
-            question.text = state.question.text
             testAdapter.setList(state.listOfOptions)
-
+            Log.d("88888", state.question.text.toString())
             if (state.chosenAnswer.text != "") {
                 nextButton.isEnabled = true
                 nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
             nextButton.setOnClickListener {
-                nextButton.setBackgroundResource(R.drawable.stress_bg)
+                // val nextQuestNum =
+                //state.setQuestion?.invoke(1)
                 DataBaseRepository.savePoints(state.chosenAnswer.points)
+                Log.d("------", state.chosenAnswer.toString())
             }
         }
     }
