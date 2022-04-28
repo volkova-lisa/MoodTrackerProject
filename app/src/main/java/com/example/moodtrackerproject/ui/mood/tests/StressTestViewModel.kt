@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -51,20 +50,11 @@ class StressTestViewModel : ViewModel() {
                             chosenAnswer = filtered[0]
                         )
                     )
-                    addPoints(state.chosenAnswer.points)
-                    Log.d("----state0000------", state.chosenAnswer.points.toString())
                     setState(state.copy(listOfOptions = optionMap(list)))
                 }
             )
         }
     }
-
-    private fun addPoints(point: Int) {
-        val newPoint = DataBaseRepository.points + point
-        Log.d("----999------", newPoint.toString())
-        DataBaseRepository.savePoints(newPoint)
-    }
-
     private fun setState(newState: StressTestState) {
         Store.setState(newState)
         _stressStateLiveData.value = Store.appState.stressTestState

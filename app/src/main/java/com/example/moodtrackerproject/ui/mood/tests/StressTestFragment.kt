@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 
 class StressTestFragment : Fragment() {
@@ -31,6 +32,8 @@ class StressTestFragment : Fragment() {
         viewModel.liveData.value?.setQuestion?.invoke(0)
         binding.optionList.adapter = testAdapter
         viewModel.fetchListOfOptions()
+        binding.nextButton.isEnabled = false
+        binding.nextButton.isClickable = false
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
@@ -45,17 +48,16 @@ class StressTestFragment : Fragment() {
         binding.run {
             question.text = state.question.text
             testAdapter.setList(state.listOfOptions)
-            nextButton.isEnabled = false
 
             if (state.chosenAnswer.text != "") {
                 nextButton.isEnabled = true
+                nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
-                nextButton.setTextColor(R.color.white)
             }
             nextButton.setOnClickListener {
                 nextButton.setBackgroundResource(R.drawable.stress_bg)
+                DataBaseRepository.savePoints(state.chosenAnswer.points)
             }
-            Log.d("----opti------", state.chosenAnswer.toString())
         }
     }
 }
