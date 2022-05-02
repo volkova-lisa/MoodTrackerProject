@@ -44,6 +44,9 @@ class TestAdapter(var listOfOptions: List<OptionUiModel> = emptyList()) :
 
     override fun getItemCount(): Int = listOfOptions.size
 
+    fun clearChosen() {
+    }
+
     fun setList(list: List<OptionUiModel>) {
         listOfOptions = list
         notifyDataSetChanged()

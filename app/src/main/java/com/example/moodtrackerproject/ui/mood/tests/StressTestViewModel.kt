@@ -36,7 +36,13 @@ class StressTestViewModel : ViewModel() {
         Log.d("====", DataBaseRepository.listOfStressQs[num].toString())
     }
 
-    private fun nextQuestion(num: Int) = num + 1
+    private fun nextQuestion(num: Int) {
+        liveData.value =
+            state.copy(
+                currQuestionNum = num + 1
+            )
+        Store.setState(liveData.value!!)
+    }
 
     fun fetchListOfOptions() {
         val options = optionMap(DataBaseRepository.getOptions())
