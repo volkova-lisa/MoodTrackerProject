@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -31,9 +30,6 @@ class StressTestViewModel : ViewModel() {
                 currQuestionNum = num
             )
         Store.setState(liveData.value!!)
-        Log.d("=========", state.question.toString())
-        Log.d(")))", num.toString())
-        Log.d("====", DataBaseRepository.listOfStressQs[num].toString())
     }
 
     private fun nextQuestion(num: Int) {
