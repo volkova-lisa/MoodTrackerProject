@@ -11,7 +11,7 @@ class StressTestViewModel : ViewModel() {
 
     init {
         state = Store.appState.stressTestState.copy(
-            setQuestion = ::setQuestion,
+            setQuestion = ::setNextQuestion,
             moveQuestion = ::nextQuestion
         )
         Store.setState(state)
@@ -23,12 +23,12 @@ class StressTestViewModel : ViewModel() {
         }
     val liveData get() = _stressStateLiveData
 
-    private fun setQuestion(num: Int) {
+    private fun setNextQuestion() {
+        val num = Store.appState.stressTestState.currQuestionNum
         val state =
             Store.appState.stressTestState.copy(
                 question = DataBaseRepository.listOfStressQs[num],
-                points = num,
-                currQuestionNum = num
+                points = num
             )
         liveData.value = state
         Store.setState(state)

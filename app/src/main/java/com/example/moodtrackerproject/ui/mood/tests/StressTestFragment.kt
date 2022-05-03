@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.R
@@ -32,7 +33,7 @@ class StressTestFragment : Fragment() {
         binding.optionList.adapter = testAdapter
         binding.nextButton.isEnabled = false
         binding.nextButton.isClickable = false
-        Log.d("onViewCr---------", viewModel.liveData.value?.currQuestionNum.toString())
+        binding.question.setText(viewModel.liveData!!.value!!.question.text)
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
@@ -45,20 +46,26 @@ class StressTestFragment : Fragment() {
 
     private fun render(state: StressTestState) {
         binding.run {
-            // question.setText(state.question.text)
+            Log.d("outside---------", state.currQuestionNum.toString())
+
+            question.setText(state.question.text)
             testAdapter.setList(state.listOfOptions)
             if (state.chosenAnswer.text != "") {
                 nextButton.isEnabled = true
                 nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
-            nextButton.setOnClickListener {
-                // state.setQuestion(state.currQuestionNum)
-                Log.d("========", state.currQuestionNum.toString())
-                Log.d("55555555", num.toString())
-                state.moveQuestion.invoke()
-                question.setText(state.currQuestionNum.toString())
-                viewModel.fetchListOfOptions()
+            if (state.currQuestionNum < 4) {
+                nextButton.setOnClickListener {
+                    state.moveQuestion.invoke()
+                    state.setQuestion.invoke()
+                    question.setText(state.question.text.toString())
+                    Log.d("inside---------", state.currQuestionNum.toString())
+                    viewModel.fetchListOfOptions()
+                }
+            } else {
+                question.setText("finish")
+                nextButton.isVisible = false
             }
         }
     }
