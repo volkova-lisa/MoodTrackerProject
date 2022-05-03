@@ -10,12 +10,13 @@ class StressTestViewModel : ViewModel() {
     private var state: StressTestState
 
     init {
-        state = StressTestState(
+        state = Store.appState.stressTestState.copy(
             setQuestion = ::setQuestion,
             moveQuestion = ::nextQuestion
         )
         Store.setState(state)
     }
+
     private val _stressStateLiveData: MutableLiveData<StressTestState> =
         MutableLiveData<StressTestState>().apply {
             value = state
@@ -23,27 +24,31 @@ class StressTestViewModel : ViewModel() {
     val liveData get() = _stressStateLiveData
 
     private fun setQuestion(num: Int) {
-        liveData.value =
-            state.copy(
+        val state =
+            Store.appState.stressTestState.copy(
                 question = DataBaseRepository.listOfStressQs[num],
                 points = num,
                 currQuestionNum = num
             )
-        Store.setState(liveData.value!!)
+        liveData.value = state
+        Store.setState(state)
     }
 
-    private fun nextQuestion(num: Int) {
-        liveData.value =
-            state.copy(
+    private fun nextQuestion() {
+        val num = Store.appState.stressTestState.currQuestionNum
+        val state =
+            Store.appState.stressTestState.copy(
                 currQuestionNum = num + 1
             )
-        Store.setState(liveData.value!!)
+        liveData.value = state
+        Store.setState(state)
     }
 
     fun fetchListOfOptions() {
         val options = optionMap(DataBaseRepository.getOptions())
-        liveData.value = state.copy(listOfOptions = options)
-        Store.setState(liveData.value!!)
+        val state = Store.appState.stressTestState.copy(listOfOptions = options)
+        liveData.value = state
+        Store.setState(state)
     }
 
     private fun optionMap(option: List<OptionBody>): List<OptionUiModel> {
@@ -56,15 +61,16 @@ class StressTestViewModel : ViewModel() {
                     val list = DataBaseRepository.setSelected(it)
                     val filtered = optionMap(list).filter { it.isChecked == true }
                     setState(
-                        state.copy(
+                        Store.appState.stressTestState.copy(
                             chosenAnswer = filtered[0]
                         )
                     )
-                    setState(state.copy(listOfOptions = optionMap(list)))
+                    setState(Store.appState.stressTestState.copy(listOfOptions = optionMap(list)))
                 }
             )
         }
     }
+
     private fun setState(newState: StressTestState) {
         Store.setState(newState)
         _stressStateLiveData.value = Store.appState.stressTestState

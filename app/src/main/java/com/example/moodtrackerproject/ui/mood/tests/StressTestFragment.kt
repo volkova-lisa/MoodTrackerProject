@@ -53,13 +53,11 @@ class StressTestFragment : Fragment() {
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
             nextButton.setOnClickListener {
-                val num = state.currQuestionNum + 1
-                state.copy(currQuestionNum = num)
-                state.setQuestion(state.currQuestionNum)
                 // state.setQuestion(state.currQuestionNum)
                 Log.d("========", state.currQuestionNum.toString())
                 Log.d("55555555", num.toString())
-                question.setText(state.question.text)
+                state.moveQuestion.invoke()
+                question.setText(state.currQuestionNum.toString())
                 viewModel.fetchListOfOptions()
             }
         }

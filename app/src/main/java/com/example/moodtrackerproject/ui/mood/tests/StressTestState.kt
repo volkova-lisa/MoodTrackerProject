@@ -9,5 +9,5 @@ data class StressTestState(
     val points: Int = 0,
     val setQuestion: (Int) -> Unit = {},
     val currQuestionNum: Int = 0,
-    val moveQuestion: (Int) -> Unit = {},
+    val moveQuestion: () -> Unit = {},
 )
