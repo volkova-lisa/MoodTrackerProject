@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 
 class StressTestFragment : Fragment() {
@@ -31,6 +33,8 @@ class StressTestFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.optionList.adapter = testAdapter
+        binding.progressBar.progress = 0
+        binding.progressBar.max = 4
         binding.nextButton.isEnabled = false
         binding.nextButton.isClickable = false
         binding.question.setText(viewModel.liveData!!.value!!.question.text)
@@ -50,6 +54,8 @@ class StressTestFragment : Fragment() {
 
             question.setText(state.question.text)
             testAdapter.setList(state.listOfOptions)
+            progressBar.progress = state.currQuestionNum
+
             if (state.chosenAnswer.text != "") {
                 nextButton.isEnabled = true
                 nextButton.isClickable = true
@@ -57,15 +63,27 @@ class StressTestFragment : Fragment() {
             }
             if (state.currQuestionNum < 4) {
                 nextButton.setOnClickListener {
+                    val qusNumTop = state.currQuestionNum + 1
+                    num.setText(qusNumTop.toString())
+                    num.append("/4")
+                    progressBar.progress = qusNumTop
                     state.moveQuestion.invoke()
                     state.setQuestion.invoke()
+                    DataBaseRepository.savePoints(state.currQuestionNum)
                     question.setText(state.question.text.toString())
                     Log.d("inside---------", state.currQuestionNum.toString())
                     viewModel.fetchListOfOptions()
                 }
             } else {
-                question.setText("finish")
+                question.setText("The test is finished! Your results are: ")
+                resultNum.isVisible = true
+                resultNum.setText(DataBaseRepository.points.toString())
+                resultNum.append(" out of 30")
+                optionList.isVisible = false
                 nextButton.isVisible = false
+            }
+            backButt.setOnClickListener {
+                (requireActivity() as MainActivity).router.openMood()
             }
         }
     }

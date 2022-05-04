@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.mood.tests.StressTestFragment">
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="wrap_content"
@@ -50,74 +51,86 @@
         android:progress="65"
         android:progressBackgroundTint="@color/light_purple"
         android:progressTint="@color/red_stress"
-        app:layout_constraintTop_toBottomOf="@id/num"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"/>
+        app:layout_constraintTop_toBottomOf="@id/num" />
 
     <TextView
         android:id="@+id/num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="3/5"
+        android:layout_marginTop="16dp"
         android:fontFamily="@font/raleway_bold"
+        android:text="1/4"
         android:textColor="@color/red_stress"
         android:textSize="16sp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        />
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
-        android:maxWidth="360dp"
         android:layout_height="wrap_content"
-        android:text="@string/stress_q_one"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/raleway_bold"
+        android:maxWidth="360dp"
+        android:text="@string/stress_q_one"
         android:textColor="@color/red_stress"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        />
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+
+    <TextView
+        android:id="@+id/result_num"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/raleway_bold"
+        android:maxWidth="360dp"
+        android:text="@string/stress_q_one"
+        android:textColor="@color/red_stress"
+        android:textSize="25sp"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/question" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/option_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintTop_toBottomOf="@id/question"
-        tools:listitem="@layout/test_options_item"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"/>
+        app:layout_constraintTop_toBottomOf="@id/question"
+        tools:listitem="@layout/test_options_item" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/next_button"
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/round_grey_button"
         android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/text_grey"
-        android:background="@drawable/round_grey_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"/>
+        app:layout_constraintEnd_toEndOf="@id/guideline_right" />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_butt"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginEnd="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/round_grey_button"
         android:text="@string/back"
         android:textAllCaps="false"
         android:textColor="@color/text_grey"
-        android:background="@drawable/round_grey_button"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/next_button"/>
-
-
+        app:layout_constraintEnd_toStartOf="@id/next_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

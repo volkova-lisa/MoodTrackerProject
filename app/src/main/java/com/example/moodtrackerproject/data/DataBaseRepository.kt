@@ -48,7 +48,7 @@ object DataBaseRepository {
 
     var points = 0
     fun savePoints(p: Int) {
-        points = p
+        points = points + p
     }
 
     fun getEmojiList() = listOfEmojis
