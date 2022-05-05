@@ -35,6 +35,7 @@ object DataBaseRepository {
         QuestionBody("Felt that you were unable to control important things in your life?"),
         QuestionBody("Felt nervous and 'stressed"),
         QuestionBody("Felt confident about your ability to handle your personal problems?"),
+        QuestionBody("Felt that things were going your way?"),
         QuestionBody("Felt that things were going your way?")
     )
 

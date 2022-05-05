@@ -34,7 +34,7 @@ class StressTestFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.optionList.adapter = testAdapter
         binding.progressBar.progress = 0
-        binding.progressBar.max = 4
+        binding.progressBar.max = 5
         binding.nextButton.isEnabled = false
         binding.nextButton.isClickable = false
         binding.question.setText(viewModel.liveData!!.value!!.question.text)
@@ -52,7 +52,10 @@ class StressTestFragment : Fragment() {
         binding.run {
             Log.d("outside---------", state.currQuestionNum.toString())
 
-            question.setText(state.question.text)
+            if (state.currQuestionNum < 5) {
+                question.setText(state.question.text)
+            } else question.setText("The test is finished! Your results are: ")
+
             testAdapter.setList(state.listOfOptions)
             progressBar.progress = state.currQuestionNum
 
@@ -61,11 +64,12 @@ class StressTestFragment : Fragment() {
                 nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
-            if (state.currQuestionNum < 4) {
+            if (state.currQuestionNum < 5) {
                 nextButton.setOnClickListener {
                     val qusNumTop = state.currQuestionNum + 1
+                    Log.d("||||||||", state.currQuestionNum.toString())
                     num.setText(qusNumTop.toString())
-                    num.append("/4")
+                    num.append("/5")
                     progressBar.progress = qusNumTop
                     state.moveQuestion.invoke()
                     state.setQuestion.invoke()
@@ -75,7 +79,6 @@ class StressTestFragment : Fragment() {
                     viewModel.fetchListOfOptions()
                 }
             } else {
-                question.setText("The test is finished! Your results are: ")
                 resultNum.isVisible = true
                 resultNum.setText(DataBaseRepository.points.toString())
                 resultNum.append(" out of 30")
