@@ -100,6 +100,7 @@
     <string name="stress_q_one">Which emoji describes your current mood best?</string>
     <string name="stress_title">Stress level test</string>
     <string name="next">Next</string>
+    <string name="result_is">The test is finished! Your results are:</string>
 
 
 </resources>

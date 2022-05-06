@@ -12,6 +12,10 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.action_moodFragment_to_addMoodFragment)
     }
 
+    fun openResults() {
+        navController.navigate(R.id.testResults)
+    }
+
     fun openDetails() {
         navController.navigate(R.id.noteDetailsFragment)
     }

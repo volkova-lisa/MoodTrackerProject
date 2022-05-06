@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
@@ -64,6 +63,7 @@ class StressTestFragment : Fragment() {
                 nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
+            if (state.currQuestionNum == 5) nextButton.setText("Finish")
             if (state.currQuestionNum < 5) {
                 nextButton.setOnClickListener {
                     val qusNumTop = state.currQuestionNum + 1
@@ -73,17 +73,13 @@ class StressTestFragment : Fragment() {
                     progressBar.progress = qusNumTop
                     state.moveQuestion.invoke()
                     state.setQuestion.invoke()
-                    DataBaseRepository.savePoints(state.currQuestionNum)
-                    question.setText(state.question.text.toString())
-                    Log.d("inside---------", state.currQuestionNum.toString())
+                    DataBaseRepository.savePoints(state.chosenAnswer.points)
+                    question.setText(state.question.text)
+                    Log.d("777777777", DataBaseRepository.points.toString())
                     viewModel.fetchListOfOptions()
                 }
             } else {
-                resultNum.isVisible = true
-                resultNum.setText(DataBaseRepository.points.toString())
-                resultNum.append(" out of 30")
-                optionList.isVisible = false
-                nextButton.isVisible = false
+                (requireActivity() as MainActivity).router.openResults()
             }
             backButt.setOnClickListener {
                 (requireActivity() as MainActivity).router.openMood()

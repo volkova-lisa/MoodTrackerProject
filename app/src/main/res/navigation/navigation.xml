@@ -109,5 +109,18 @@
         android:id="@+id/stressTest"
         android:name="com.example.moodtrackerproject.ui.mood.tests.StressTestFragment"
         android:label="fragment_stress_test"
-        tools:layout="@layout/fragment_stress_test" />
+        tools:layout="@layout/fragment_stress_test" >
+        <action
+            android:id="@+id/action_stressTest_to_testResults"
+            app:destination="@id/testResults" />
+    </fragment>
+    <fragment
+        android:id="@+id/testResults"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.TestResults"
+        android:label="fragment_test_results"
+        tools:layout="@layout/fragment_test_results" >
+        <action
+            android:id="@+id/action_testResults_to_moodFragment"
+            app:destination="@id/moodFragment" />
+    </fragment>
 </navigation>
