@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentTestResultsBinding
 
@@ -21,7 +21,15 @@ class TestResults : Fragment() {
         binding.stressBar.max = 25
         binding.stressBar.progress = DataBaseRepository.points
         val resultPer: Int = (DataBaseRepository.points * 100) / 25
-        binding.resultNum.text = "---"
-        return inflater.inflate(R.layout.fragment_test_results, container, false)
+        binding.resultNum.setText("$resultPer")
+        binding.resultNum.append("%")
+        binding.backButt.setOnClickListener {
+            (requireActivity() as MainActivity).router.openMood()
+        }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }

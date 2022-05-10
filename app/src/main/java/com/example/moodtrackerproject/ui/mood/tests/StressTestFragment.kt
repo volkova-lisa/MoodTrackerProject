@@ -31,6 +31,7 @@ class StressTestFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.liveData.value!!.again.invoke()
         binding.optionList.adapter = testAdapter
         binding.progressBar.progress = 0
         binding.progressBar.max = 5
@@ -82,6 +83,7 @@ class StressTestFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openResults()
             }
             backButt.setOnClickListener {
+                state.again.invoke()
                 (requireActivity() as MainActivity).router.openMood()
             }
         }
