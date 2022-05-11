@@ -98,7 +98,6 @@ object DataBaseRepository {
         saveNotes(list)
         return list
     }
-    // option----------
 
     fun setSelected(title: String): List<OptionBody> {
         val list = lisOfOptions.map {
@@ -107,7 +106,6 @@ object DataBaseRepository {
         return list
     }
 
-    // MOODS-------
     fun getMoods() = PreferenceManager.getMoods()
 
     fun saveMoods(moodsList: List<MoodBody>) {

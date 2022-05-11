@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.mood.list
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -25,7 +24,6 @@ class MoodViewModel : ViewModel() {
 
     private fun addNewMood() {
         liveData.value = state.copy(action = MoodScreenActions.StartAddMoodScreen)
-        Log.d("----------------", "CLICKED")
     }
 
     fun fetchListOfMoods() {

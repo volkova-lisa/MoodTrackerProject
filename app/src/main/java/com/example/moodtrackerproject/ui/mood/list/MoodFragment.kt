@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +41,6 @@ class MoodFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openAddMood()
             }
             moodsAdapter.setList(state.listOfMoods)
-            Log.d(";;;;;;;;;", state.listOfMoods.toString())
             stressInclude.root.setOnClickListener {
                 (requireActivity() as MainActivity).router.openStressTest()
             }
