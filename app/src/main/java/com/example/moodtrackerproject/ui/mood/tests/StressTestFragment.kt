@@ -37,7 +37,7 @@ class StressTestFragment : Fragment() {
         binding.progressBar.max = 5
         binding.nextButton.isEnabled = false
         binding.nextButton.isClickable = false
-        binding.question.setText(viewModel.liveData!!.value!!.question.text)
+        viewModel.liveData.value?.let { binding.question.setText(it.question.text) }
         viewModel.liveData.observe(viewLifecycleOwner, {
             render(it)
         })
