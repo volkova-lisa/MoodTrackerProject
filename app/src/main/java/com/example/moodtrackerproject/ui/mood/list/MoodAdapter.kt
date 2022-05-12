@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.databinding.HomeMoodItemBinding
 
-class MoodAdapter(var listOfMoods: List<MoodBody> = emptyList()) :
+class MoodAdapter(val listOfMoods: MutableList<MoodBody> = mutableListOf()) :
     RecyclerView.Adapter<MoodAdapter.MoodHolder>() {
 
     class MoodHolder(private val binding: HomeMoodItemBinding) :
@@ -36,7 +36,8 @@ class MoodAdapter(var listOfMoods: List<MoodBody> = emptyList()) :
     override fun getItemCount(): Int = listOfMoods.size
 
     fun setList(list: List<MoodBody>) {
-        listOfMoods = list
+        listOfMoods.clear()
+        listOfMoods.addAll(list)
         notifyDataSetChanged()
     }
 }

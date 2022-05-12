@@ -44,7 +44,6 @@ object PreferenceManager {
         return preferences.getBoolean(KEY_INIT_USER, false)
     }
 
-    // NOTES----------------
     fun saveNotes(notesList: List<NoteBody>) {
         val serializedNotes = notesJsonAdapter.toJson(notesList)
         preferences.edit()
@@ -58,7 +57,6 @@ object PreferenceManager {
             ?: listOf()
     }
 
-    // MOODS---------
     fun saveMoods(moodList: List<MoodBody>) {
         val serializedMoods = moodsJsonAdapter.toJson(moodList)
         Log.d("=======", serializedMoods.toString())

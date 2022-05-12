@@ -59,7 +59,7 @@ class NotesViewModel : ViewModel() {
                 isChecked = model.isChecked,
                 isDeleted = model.isDeleted,
                 checkChanged = {
-                    val list = DataBaseRepository.setFavorite(it)
+                    val list = DataBaseRepository.saveFavorite(it)
                     setState(state.copy(listOfNotes = notesMap(list)))
                 },
                 openDetails = {

@@ -30,7 +30,7 @@ class StressTestViewModel : ViewModel() {
                 currQuestionNum = 0,
                 points = 0
             )
-        DataBaseRepository.points = 0
+        DataBaseRepository.stressPoints = 0
         liveData.value = state
         Store.setState(state)
     }
@@ -70,7 +70,7 @@ class StressTestViewModel : ViewModel() {
                 points = model.points,
                 isChecked = model.isChecked,
                 checkChanged = {
-                    val list = DataBaseRepository.setSelected(it)
+                    val list = DataBaseRepository.saveSelected(it)
                     val filtered = optionMap(list).filter { it.isChecked == true }
                     setState(
                         Store.appState.stressTestState.copy(

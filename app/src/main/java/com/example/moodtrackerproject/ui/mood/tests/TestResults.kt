@@ -18,9 +18,11 @@ class TestResults : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentTestResultsBinding.inflate(layoutInflater, container, false)
-        binding.stressBar.max = 25
-        binding.stressBar.progress = DataBaseRepository.points
-        val resultPer: Int = (DataBaseRepository.points * 100) / 25
+        val maxPoint = DataBaseRepository.getOptions().size
+        val sumStressPoints = maxPoint * (DataBaseRepository.listOfStressQs.size - 1)
+        binding.stressBar.max = sumStressPoints
+        binding.stressBar.progress = DataBaseRepository.stressPoints
+        val resultPer: Int = (DataBaseRepository.stressPoints * 100) / 25
         binding.resultNum.setText("$resultPer")
         binding.resultNum.append("%")
         binding.backButt.setOnClickListener {

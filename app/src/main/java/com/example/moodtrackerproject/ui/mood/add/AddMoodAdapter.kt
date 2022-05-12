@@ -1,17 +1,18 @@
 package com.example.moodtrackerproject.ui.mood.add
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.EmojiItemBinding
+import com.example.moodtrackerproject.utils.click
 
-class AddMoodAdapter(var listOfModels: List<EmojiBodyUIModel> = emptyList()) :
+class AddMoodAdapter(val listOfModels: MutableList<EmojiBodyUIModel> = mutableListOf()) :
     RecyclerView.Adapter<AddMoodAdapter.AddMoodHolder>() {
 
     class AddMoodHolder(private val binding: EmojiItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(emojiUIModel: EmojiBodyUIModel) {
             binding.run {
                 emojiImage.setImageResource(emojiUIModel.image)
@@ -19,10 +20,8 @@ class AddMoodAdapter(var listOfModels: List<EmojiBodyUIModel> = emptyList()) :
                     if (emojiUIModel.isChecked) R.drawable.emoji_checked_bg
                     else R.drawable.emoji_unchecked_bg
                 )
-                root.setOnClickListener {
-                    // emojiUIModel.emojiChecked.invoke(emojiUIModel)
+                root.click {
                     emojiUIModel.checkChanged.invoke(emojiUIModel)
-                    Log.d("-----ADAPTER", "CLICKED")
                 }
             }
         }
@@ -45,7 +44,8 @@ class AddMoodAdapter(var listOfModels: List<EmojiBodyUIModel> = emptyList()) :
     override fun getItemCount(): Int = listOfModels.size
 
     fun setList(list: List<EmojiBodyUIModel>) {
-        listOfModels = list
+        listOfModels.clear()
+        listOfModels.addAll(list)
         notifyDataSetChanged()
     }
 }

@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +10,7 @@ import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
+import com.example.moodtrackerproject.utils.click
 
 class StressTestFragment : Fragment() {
 
@@ -50,39 +50,38 @@ class StressTestFragment : Fragment() {
 
     private fun render(state: StressTestState) {
         binding.run {
-            Log.d("outside---------", state.currQuestionNum.toString())
 
-            if (state.currQuestionNum < 5) {
+            // TODO: less BL
+            val questListSize: Int = DataBaseRepository.listOfStressQs.size - 1
+            if (state.currQuestionNum < questListSize) {
                 question.setText(state.question.text)
-            } else question.setText("The test is finished! Your results are: ")
+            } else question.setText(getString(R.string.test_finished))
 
             testAdapter.setList(state.listOfOptions)
             progressBar.progress = state.currQuestionNum
 
-            if (state.chosenAnswer.text != "") {
+            if (state.chosenAnswer.text.isNotBlank()) {
                 nextButton.isEnabled = true
                 nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
-            if (state.currQuestionNum == 5) nextButton.setText("Finish")
-            if (state.currQuestionNum < 5) {
+            if (state.currQuestionNum == questListSize) nextButton.setText(getString(R.string.finish))
+            if (state.currQuestionNum < questListSize) {
                 nextButton.setOnClickListener {
                     val qusNumTop = state.currQuestionNum + 1
-                    Log.d("||||||||", state.currQuestionNum.toString())
                     num.setText(qusNumTop.toString())
-                    num.append("/5")
+                    num.append("/$questListSize")
                     progressBar.progress = qusNumTop
                     state.moveQuestion.invoke()
                     state.setQuestion.invoke()
                     DataBaseRepository.savePoints(state.chosenAnswer.points)
                     question.setText(state.question.text)
-                    Log.d("777777777", DataBaseRepository.points.toString())
                     viewModel.fetchListOfOptions()
                 }
             } else {
                 (requireActivity() as MainActivity).router.openResults()
             }
-            backButt.setOnClickListener {
+            backButt.click {
                 state.again.invoke()
                 (requireActivity() as MainActivity).router.openMood()
             }

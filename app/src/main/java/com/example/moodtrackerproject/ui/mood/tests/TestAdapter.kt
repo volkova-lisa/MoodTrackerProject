@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.TestOptionsItemBinding
 
-class TestAdapter(var listOfOptions: List<OptionUiModel> = emptyList()) :
+class TestAdapter(val listOfOptions: MutableList<OptionUiModel> = mutableListOf()) :
     RecyclerView.Adapter<TestAdapter.TestHolder>() {
 
     class TestHolder(private val binding: TestOptionsItemBinding) :
@@ -44,11 +44,9 @@ class TestAdapter(var listOfOptions: List<OptionUiModel> = emptyList()) :
 
     override fun getItemCount(): Int = listOfOptions.size
 
-    fun clearChosen() {
-    }
-
     fun setList(list: List<OptionUiModel>) {
-        listOfOptions = list
+        listOfOptions.clear()
+        listOfOptions.addAll(list)
         notifyDataSetChanged()
     }
 }

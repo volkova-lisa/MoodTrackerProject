@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.mood.add
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -40,7 +39,7 @@ class AddMoodViewModel : ViewModel() {
                 title = model.title,
                 isChecked = model.isChecked,
                 checkChanged = {
-                    val newList = DataBaseRepository.setChosenEmoji(it.title)
+                    val newList = DataBaseRepository.saveChosenEmoji(it.title)
                     setState(state.copy(listWithChosenMood = moodMap(newList)))
                 }
             )

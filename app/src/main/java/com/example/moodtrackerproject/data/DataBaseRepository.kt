@@ -11,7 +11,7 @@ import com.example.moodtrackerproject.utils.PreferenceManager
 // single source of truth
 object DataBaseRepository {
 
-    val listOfEmojis = listOf(
+    private val listOfEmojis = listOf(
         EmojiBody(R.drawable.emoji_anger, "anger"),
         EmojiBody(R.drawable.emoji_awesome, "awesome"),
         EmojiBody(R.drawable.emoji_calm, "calm"),
@@ -39,7 +39,7 @@ object DataBaseRepository {
         QuestionBody("Felt that things were going your way?")
     )
 
-    val lisOfOptions = listOf(
+    private val lisOfOptions = listOf(
         OptionBody("Never", 1),
         OptionBody("Almost Never", 2),
         OptionBody("Sometimes", 3),
@@ -47,16 +47,16 @@ object DataBaseRepository {
         OptionBody("Very Often", 5)
     )
 
-    var points = 0
+    var stressPoints = 0
     fun savePoints(p: Int) {
-        points = points + p
+        stressPoints = stressPoints + p
     }
 
     fun getEmojiList() = listOfEmojis
 
     fun getOptions() = lisOfOptions
 
-    fun setChosenEmoji(title: String): List<EmojiBody> {
+    fun saveChosenEmoji(title: String): List<EmojiBody> {
         val list = getEmojiList().map {
             if (it.title == title) it.copy(isChecked = !it.isChecked) else it
         }
@@ -91,7 +91,7 @@ object DataBaseRepository {
         PreferenceManager.saveNotes(notesList)
     }
 
-    fun setFavorite(noteId: String): List<NoteBody> {
+    fun saveFavorite(noteId: String): List<NoteBody> {
         val list = getNotes().map {
             if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
         }
@@ -99,7 +99,7 @@ object DataBaseRepository {
         return list
     }
 
-    fun setSelected(title: String): List<OptionBody> {
+    fun saveSelected(title: String): List<OptionBody> {
         val list = lisOfOptions.map {
             if (it.text == title) it.copy(isChecked = !it.isChecked) else it
         }
