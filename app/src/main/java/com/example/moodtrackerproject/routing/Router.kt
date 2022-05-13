@@ -8,12 +8,24 @@ class Router(private val activity: MainActivity) {
     // TODO: use constants for routes
     private lateinit var navController: NavController // = activity.findNavController(R.id.nav_host_fragment)
 
+    fun openAddMood() {
+        navController.navigate(R.id.action_moodFragment_to_addMoodFragment)
+    }
+
+    fun openResults() {
+        navController.navigate(R.id.testResults)
+    }
+
     fun openDetails() {
         navController.navigate(R.id.noteDetailsFragment)
     }
 
     fun setNavigationController(controller: NavController) {
         navController = controller
+    }
+
+    fun openMood() {
+        navController.navigate(R.id.moodFragment)
     }
 
     fun openWelcome() {
@@ -46,6 +58,10 @@ class Router(private val activity: MainActivity) {
 
     fun openResetPassScreen() {
         navController.navigate(R.id.action_loginFragment_to_resetPasswordFragment)
+    }
+
+    fun openStressTest() {
+        navController.navigate(R.id.stressTest)
     }
 
     fun openInsideNote() {

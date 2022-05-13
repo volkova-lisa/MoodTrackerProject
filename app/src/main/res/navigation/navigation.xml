@@ -21,12 +21,15 @@
     </fragment>
     <fragment
         android:id="@+id/moodFragment"
-        android:name="com.example.moodtrackerproject.ui.MoodFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.list.MoodFragment"
         android:label="fragment_mood"
         tools:layout="@layout/fragment_mood">
         <action
             android:id="@+id/action_moodFragment_to_addMoodFragment"
             app:destination="@id/addMoodFragment" />
+        <action
+            android:id="@+id/action_moodFragment_to_stressTest"
+            app:destination="@id/stressTest" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
@@ -44,7 +47,7 @@
     </fragment>
     <fragment
         android:id="@+id/addMoodFragment"
-        android:name="com.example.moodtrackerproject.ui.AddMoodFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.add.AddMoodFragment"
         android:label="fragment_add_mood"
         tools:layout="@layout/fragment_add_mood">
         <action
@@ -102,4 +105,22 @@
         android:name="com.example.moodtrackerproject.ui.notes.details.NoteDetailsFragment"
         android:label="fragment_note_details"
         tools:layout="@layout/fragment_note_details" />
+    <fragment
+        android:id="@+id/stressTest"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.StressTestFragment"
+        android:label="fragment_stress_test"
+        tools:layout="@layout/fragment_stress_test" >
+        <action
+            android:id="@+id/action_stressTest_to_testResults"
+            app:destination="@id/testResults" />
+    </fragment>
+    <fragment
+        android:id="@+id/testResults"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.TestResults"
+        android:label="fragment_test_results"
+        tools:layout="@layout/fragment_test_results" >
+        <action
+            android:id="@+id/action_testResults_to_moodFragment"
+            app:destination="@id/moodFragment" />
+    </fragment>
 </navigation>

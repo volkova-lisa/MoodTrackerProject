@@ -97,6 +97,13 @@
     <string name="how_do_you_feel">How do you feel now?</string>
     <string name="choose_an">Choose an emoji that represent your current mood best!</string>
     <string name="traumatised">Traumatised</string>
+    <string name="stress_q_one">Which emoji describes your current mood best?</string>
+    <string name="stress_title">Stress level test</string>
+    <string name="next">Next</string>
+    <string name="result_is">The test is finished! Your results are:</string>
+    <string name="mood_t">Mood title</string>
+    <string name="test_finished">\"The test is finished! Your results are: \"</string>
+    <string name="finish">Finish</string>
 
 
 </resources>

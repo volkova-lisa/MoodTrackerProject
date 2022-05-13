@@ -47,6 +47,7 @@
             app:layout_constraintStart_toStartOf="@id/main_title"
             />
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/add_mood_btn"
             android:layout_width="100dp"
             android:layout_height="35dp"
             android:layout_marginTop="10dp"

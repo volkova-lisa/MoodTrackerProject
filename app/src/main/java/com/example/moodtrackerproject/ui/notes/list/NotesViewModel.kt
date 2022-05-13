@@ -34,7 +34,7 @@ class NotesViewModel : ViewModel() {
         liveData.value =
             state.copy(
                 isFavoriteChecked = isFavoriteChecked,
-                listOfNotes = map(
+                listOfNotes = notesMap(
                     if (isFavoriteChecked) DataBaseRepository.getNotes().filter { it.isChecked }
                     else DataBaseRepository.getNotes()
                 )
@@ -44,11 +44,11 @@ class NotesViewModel : ViewModel() {
     }
 
     fun fetchListOfNotes() {
-        val notes = map(DataBaseRepository.getNotes())
+        val notes = notesMap(DataBaseRepository.getNotes())
         setState(state.copy(listOfNotes = notes))
     }
 
-    private fun map(notesList: List<NoteBody>): List<NoteBodyUiModel> {
+    private fun notesMap(notesList: List<NoteBody>): List<NoteBodyUiModel> {
         return notesList.map { model ->
             NoteBodyUiModel(
                 noteId = model.noteId,
@@ -59,8 +59,8 @@ class NotesViewModel : ViewModel() {
                 isChecked = model.isChecked,
                 isDeleted = model.isDeleted,
                 checkChanged = {
-                    val list = DataBaseRepository.setFavorite(it)
-                    setState(state.copy(listOfNotes = map(list)))
+                    val list = DataBaseRepository.saveFavorite(it)
+                    setState(state.copy(listOfNotes = notesMap(list)))
                 },
                 openDetails = {
                     setState(state.copy(action = NotesListAction.StartDetailsScreen))
@@ -74,9 +74,9 @@ class NotesViewModel : ViewModel() {
                 deleteNote = { deleted ->
                     Timber.d(deleted)
                     // TODO: maybe combine these two functions because they are similar?
-                    DataBaseRepository.setDeleted(model)
+                    DataBaseRepository.setNoteDeleted(model)
                     val list = DataBaseRepository.removeDeletedNotes()
-                    setState(state.copy(listOfNotes = map(list)))
+                    setState(state.copy(listOfNotes = notesMap(list)))
                 },
             )
         }

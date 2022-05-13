@@ -1,7 +1,7 @@
 package com.example.moodtrackerproject.utils
 
 import android.annotation.SuppressLint
-import android.icu.text.SimpleDateFormat
+import java.text.SimpleDateFormat
 import java.util.*
 
 object DateUtils {
@@ -9,6 +9,7 @@ object DateUtils {
     fun getDateOfNote(): String {
         val calendar: Calendar = Calendar.getInstance()
         val month = SimpleDateFormat("MMM").format(calendar.get(Calendar.MONTH))
+//        val month = calendar.get(Calendar.MONTH)
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
         val minute = calendar.get(Calendar.MINUTE)
