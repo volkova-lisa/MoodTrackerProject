@@ -53,7 +53,6 @@ class NoteDetailsViewModel : ViewModel() {
     }
 
     private fun changeEditScreenVisibility() {
-        Log.d("-----VM--before", state.isEditNoteVisible.toString())
         val isEditNoteVisible = !Store.appState.noteDetailsState.isEditNoteVisible
         val stateNew = state.copy(
             isEditNoteVisible = isEditNoteVisible,
