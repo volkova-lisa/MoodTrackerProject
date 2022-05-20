@@ -31,10 +31,10 @@ class MainActivity : AppCompatActivity() {
         router.setNavigationController(navController)
 
         if (PreferenceManager.getPreference(this).getInitUser()) {
-            navController.graph.startDestination = R.id.homeFragment
+            navController.graph.setStartDestination(R.id.homeFragment)
             router.openHome()
         } else {
-            navController.graph.startDestination = R.id.welcomeFragment
+            navController.graph.setStartDestination(R.id.welcomeFragment)
             router.openWelcome()
         }
 
