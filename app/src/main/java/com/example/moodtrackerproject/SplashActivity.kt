@@ -9,9 +9,9 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // Routes.getInstance(this).goToMainActivity(this)
 
-        var intent = Intent(this.applicationContext, MainActivity::class.java)
+        val intent = Intent(this.applicationContext, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        this.startActivity(intent)
+        startActivity(intent)
         finish()
     }
 }
