@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
         android:layout_width="wrap_content"
@@ -17,7 +18,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.97" />
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_three"
         android:layout_width="wrap_content"
@@ -25,32 +25,32 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.66" />
 
-
     <EditText
         android:id="@+id/title"
-        android:paddingBottom="15dp"
         android:layout_width="0dp"
-        android:inputType="textCapSentences"
         android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
         android:fontFamily="@font/raleway_bold"
+        android:inputType="textCapSentences"
+        android:paddingBottom="15dp"
         android:textSize="18sp"
         android:theme="@style/EditTextTheme"
-        android:layout_marginTop="70dp"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/text"
-        android:paddingBottom="15dp"
-        android:layout_marginTop="17dp"
         android:layout_width="0dp"
-        android:lineHeight="25dp"
-        android:inputType="text|textMultiLine|textCapSentences"
         android:layout_height="wrap_content"
-        android:theme="@style/EditTextTheme"
+        android:layout_marginTop="17dp"
         android:fontFamily="@font/raleway_regular"
+        android:inputType="text|textMultiLine|textCapSentences"
+        android:lineHeight="25dp"
+        android:paddingBottom="15dp"
         android:textColor="@color/text_details_grey"
         android:textSize="16sp"
+        android:theme="@style/EditTextTheme"
         app:layout_constraintLeft_toLeftOf="@id/guideline_left"
         app:layout_constraintRight_toRightOf="@id/guideline_right"
         app:layout_constraintTop_toBottomOf="@+id/title" />
@@ -60,12 +60,12 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginBottom="20dp"
+        android:background="@drawable/round_purple_button"
         android:text="@string/save"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:background="@drawable/round_purple_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toEndOf="@id/guideline_three"/>
+        app:layout_constraintStart_toEndOf="@id/guideline_three" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.notes.list.NotesFragment">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_layout"
         android:layout_width="match_parent"
@@ -46,9 +45,9 @@
         android:id="@+id/toolbar_star"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="5dp"
         android:layout_marginEnd="24dp"
         android:elevation="5dp"
+        android:padding="5dp"
         android:src="@drawable/notes_star_selector"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toStartOf="@id/toolbar_calendar"
@@ -61,11 +60,10 @@
         android:layout_height="20dp"
         android:elevation="5dp"
         android:src="@drawable/ic_baseline_calendar"
-        app:tint="@color/light_purple"
         app:layout_constraintBottom_toBottomOf="@id/toolbar_layout"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintTop_toTopOf="@id/toolbar_layout" />
-
+        app:layout_constraintTop_toTopOf="@id/toolbar_layout"
+        app:tint="@color/light_purple" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -93,17 +91,16 @@
         app:layout_constraintStart_toStartOf="@+id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
 
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/notes_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:paddingBottom="56dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/search_field"
         tools:listitem="@layout/note_item"
-        tools:visibility="visible"
-        android:paddingBottom="56dp"
-        android:layout_marginBottom="40dp"/>
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/pic_no_notes"
@@ -142,4 +139,5 @@
         app:backgroundTint="@color/light_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="@id/guideline_right" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

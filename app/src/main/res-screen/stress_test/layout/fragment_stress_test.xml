@@ -82,8 +82,6 @@
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/progress_bar" />
 
-
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/option_list"
         android:layout_width="0dp"
@@ -118,6 +116,5 @@
         android:textColor="@color/text_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/next_button" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

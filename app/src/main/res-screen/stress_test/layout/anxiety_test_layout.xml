@@ -12,45 +12,39 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/stress_bg">
+        android:background="@drawable/anxiety_bg"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/main_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/stress_level_test"
-            android:textSize="16sp"
-            android:fontFamily="@font/raleway_bold"
-            android:textColor="@color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="14dp"
             android:layout_marginStart="14dp"
-            />
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/anxiety_level_test"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
         <TextView
             android:id="@+id/subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/check_your_stress"
-            android:textSize="14sp"
-            android:layout_marginTop="5dp"
             android:layout_below="@id/main_title"
-            android:fontFamily="@font/raleway_regular"
             android:layout_marginStart="14dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/your_anxiety_level"
             android:textColor="@color/white"
-            app:layout_constraintTop_toBottomOf="@id/main_title"
-            app:layout_constraintStart_toStartOf="@id/main_title"
-            />
+            android:textSize="14sp" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:layout_marginEnd="18dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/ic_play_test"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/ic_play_test" />
 
     </RelativeLayout>
 
