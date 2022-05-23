@@ -1,58 +1,67 @@
 package com.example.moodtrackerproject.ui.login
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.login.LoginProps.LoginAction
+import com.example.moodtrackerproject.ui.login.LoginProps.LoginError
 import com.example.moodtrackerproject.utils.PreferenceManager
 import com.example.moodtrackerproject.utils.isEmailValid
 import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
-class LoginViewModel() : ViewModel() {
+class LoginViewModel : BaseViewModel<LoginProps>() {
+
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val state = LoginViewState()
+    private val props = LoginProps(
+        checkLogInData = ::checkLogInData,
+        action = null,
+        isLoading = false,
+        error = null,
+        openRegistration = ::openRegistration,
+        openResetPassword = ::openResetPassword,
+    )
 
-    private val _loginStateLiveData: MutableLiveData<LoginViewState> =
-        MutableLiveData<LoginViewState>().apply {
-            value = state
-        }
-    val liveData get() = _loginStateLiveData
+    init {
+        liveData.value = props
+    }
 
-    fun checkLogInData(email: String, password: String) {
+    private fun checkLogInData(email: String, password: String) {
         when {
             email.isEmailValid() && password.isPasswordValid() -> {
                 loginUserWithEmailAndPassword(email, password)
             }
             !email.isEmailValid() ->
                 liveData.value =
-                    state.copy(error = LoginError.ShowEmailInvalid)
+                    props.copy(error = LoginError.ShowEmailInvalid)
             !password.isPasswordValid() ->
                 liveData.value =
-                    state.copy(error = LoginError.ShowPasswordInvalid)
+                    props.copy(error = LoginError.ShowPasswordInvalid)
             !email.isEmailValid() && !password.isPasswordValid() -> {
-                liveData.value = state.copy(error = LoginError.ShowEmailInvalid)
-                liveData.value = state.copy(error = LoginError.ShowPasswordInvalid)
+                liveData.value = props.copy(error = LoginError.ShowEmailInvalid)
+                liveData.value = props.copy(error = LoginError.ShowPasswordInvalid)
             }
         }
     }
 
+    private fun openRegistration() {
+        liveData.value = props.copy(action = LoginAction.StartRegistrationScreen)
+    }
+
+    private fun openResetPassword() {
+        liveData.value = props.copy(action = LoginAction.StartResetPasswordScreen)
+    }
+
     private fun loginUserWithEmailAndPassword(email: String, password: String) {
-        CoroutineScope(Dispatchers.Main).launch {
-            liveData.value = state.copy(isLoading = true)
-            auth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener {
-                    liveData.value = state.copy(isLoading = false)
-                    if (it.isSuccessful) {
-                        liveData.value = state.copy(action = LoginAction.StartNotesScreen)
-                        PreferenceManager.setInitUser(true)
-                    } else {
-                        // Toast.makeText(context.applicationContext, context.getString(R.string.login_failed), Toast.LENGTH_SHORT).show()
-                        // liveData.value = state.copy(error = LoginError.ShowLoginError)
-                    }
+        liveData.value = props.copy(isLoading = true)
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener {
+                liveData.value = props.copy(isLoading = false)
+                if (it.isSuccessful) {
+                    liveData.value = props.copy(action = LoginAction.StartNotesScreen)
+                    PreferenceManager.setInitUser(true)
+                } else {
+                    liveData.value = props.copy(error = LoginError.ShowNoInternet)
                 }
-        }
+            }
     }
 }

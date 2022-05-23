@@ -1,88 +1,59 @@
 package com.example.moodtrackerproject.ui.login
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import com.example.moodtrackerproject.BuildConfig
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.login.LoginProps.LoginAction
+import com.example.moodtrackerproject.ui.login.LoginProps.LoginError
+import com.example.moodtrackerproject.utils.click
+import com.example.moodtrackerproject.utils.snackBar
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, LoginProps>(
+    LoginViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentLoginScreenBinding
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentLoginScreenBinding = FragmentLoginScreenBinding.inflate(inflater, container, false)
 
-    private val viewModel: LoginViewModel by lazy {
-        ViewModelProvider(this).get(LoginViewModel::class.java)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentLoginScreenBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding.run {
-            createNewAccountTextButton.setOnClickListener {
-                (requireActivity() as MainActivity).router.openRegistration()
+    override fun render(props: LoginProps) {
+        binding?.run {
+            if (BuildConfig.DEBUG) {
+                emailInput.setText(BuildConfig.USERNAME)
+                passInput.setText(BuildConfig.PASSWORD)
             }
-            loginButton.setOnClickListener {
-                removeInputsErrors()
-                viewModel.checkLogInData(
-                    binding.emailInput.text.toString(),
-                    binding.passInput.text.toString()
-                )
-            }
-        }
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
-    }
+            progressBar.isVisible = props.isLoading
+            loginButton.text = if (props.isLoading) "" else getString(R.string.login_screen_login)
 
-    private fun render(state: LoginViewState) {
-        showProgress(state.isLoading)
-        state.action?.let { handleAction(it) }
-        state.error?.let { handleError(it) }
-    }
-
-    private fun showProgress(isLoading: Boolean) {
-        if (isLoading) {
-            binding.run {
-                progressBar.isVisible = true
-                loginButton.text = ""
+            createNewAccountTextButton.click(props.openRegistration)
+            forgotPassTextButton.click(props.openResetPassword)
+            loginButton.click {
+                emailInput.error = null
+                passInput.error = null
+                props.checkLogInData(emailInput.text.toString(), passInput.text.toString())
             }
-        } else {
-            binding.run {
-                progressBar.isVisible = false
-            }
+            props.action?.let { handleAction(it) }
+            props.error?.let { handleError(it) }
         }
     }
 
-    private fun removeInputsErrors() {
-        binding.run {
-            emailInput.error = null
-            passInput.error = null
-        }
-    }
-
+    @Suppress("DEPRECATION")
     private fun handleError(loginError: LoginError) {
-        when (loginError) {
-            is LoginError.ShowNoInternet -> showNoInternetError()
-            is LoginError.ShowPasswordInvalid -> {
-                binding.pass.isPasswordVisibilityToggleEnabled = false
-                binding.passInput.error = getString(R.string.invalid_password)
+        binding?.run {
+            when (loginError) {
+                is LoginError.ShowNoInternet -> requireActivity().snackBar(getString(R.string.no_internet_connection_warning))
+                is LoginError.ShowPasswordInvalid -> {
+                    pass.isPasswordVisibilityToggleEnabled = false
+                    passInput.error = getString(R.string.invalid_password)
+                }
+                is LoginError.ShowEmailInvalid ->
+                    emailInput.error = getString(R.string.invalid_email)
             }
-            is LoginError.ShowEmailInvalid ->
-                binding.emailInput.error =
-                    getString(R.string.invalid_email)
         }
     }
 
@@ -98,13 +69,5 @@ class LoginFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openResetPassScreen()
             }
         }
-    }
-
-    private fun showNoInternetError() {
-        Snackbar.make(
-            binding.loginScreen,
-            resources.getString(R.string.no_internet_connection_warning),
-            Snackbar.LENGTH_LONG
-        ).show()
     }
 }
