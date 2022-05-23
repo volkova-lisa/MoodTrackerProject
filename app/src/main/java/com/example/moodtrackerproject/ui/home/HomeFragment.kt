@@ -3,40 +3,31 @@ package com.example.moodtrackerproject.ui.home
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
-import com.example.moodtrackerproject.utils.PreferenceManager
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 
-class HomeFragment : Fragment() {
+class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>(
+    HomeViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentHomeBinding
-    private val viewModel: HomeViewModel by lazy {
-        ViewModelProvider(this).get(HomeViewModel::class.java)
-    }
+    private lateinit var props: HomeProps
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-        val toolbar = binding.toolbar
-        (activity as AppCompatActivity?)!!.setSupportActionBar(toolbar)
-        setHasOptionsMenu(true)
-        return binding.root
-    }
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
+        (activity as? AppCompatActivity)?.setSupportActionBar(binding?.toolbar)
+        setHasOptionsMenu(true)
     }
 
-    private fun render(state: HomeViewState) {
-        state.action?.let { handleAction(it) }
+    override fun render(props: HomeProps) {
+        this.props = props
+        props.action?.let { handleAction(it) }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -45,19 +36,14 @@ class HomeFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.logOut -> {
-                viewModel.logOut()
-                PreferenceManager.setInitUser(false)
-            }
+            R.id.logOut -> props.logout()
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun handleAction(homeAction: HomeAction) {
         when (homeAction) {
-            is HomeAction.LogOut -> {
-                (requireActivity() as MainActivity).router.openWelcome()
-            }
+            is HomeAction.LogOut -> (requireActivity() as MainActivity).router.openWelcome()
         }
     }
 }
