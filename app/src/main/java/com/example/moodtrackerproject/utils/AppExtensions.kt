@@ -12,6 +12,8 @@ import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
 
+private const val MIN_PASSWORD_LENGTH = 6
+
 val Context.inflater: LayoutInflater get() = LayoutInflater.from(this)
 
 fun Context.isNetworkAvailable(): Boolean {
@@ -30,21 +32,23 @@ fun Context.hideKeyboard(view: View?) {
     }
 }
 
+fun Fragment.hideKeyboard(view: View?) {
+    activity?.hideKeyboard(view)
+}
+
+fun Fragment.hideKeyboard() {
+    hideKeyboard(view)
+}
+
 fun Activity.snackBar(text: String) {
     Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG)
         .show()
-}
-
-fun Fragment.ifNetworkIsAvailable(): Boolean {
-    TODO("Check if internet works")
-    return true
 }
 
 fun String.isEmailValid() =
     isNotEmpty() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
 
 fun String.isPasswordValid(): Boolean {
-    val MIN_PASSWORD_LENGTH = 6
     return length >= MIN_PASSWORD_LENGTH && isNotEmpty()
 }
 
