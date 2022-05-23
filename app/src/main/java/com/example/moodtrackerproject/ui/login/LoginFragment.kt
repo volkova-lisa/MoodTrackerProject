@@ -43,17 +43,15 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
     }
 
     @Suppress("DEPRECATION")
-    private fun handleError(loginError: LoginError) {
-        binding?.run {
-            when (loginError) {
-                is LoginError.ShowNoInternet -> requireActivity().snackBar(getString(R.string.no_internet_connection_warning))
-                is LoginError.ShowPasswordInvalid -> {
-                    pass.isPasswordVisibilityToggleEnabled = false
-                    passInput.error = getString(R.string.invalid_password)
-                }
-                is LoginError.ShowEmailInvalid ->
-                    emailInput.error = getString(R.string.invalid_email)
+    private fun FragmentLoginScreenBinding.handleError(loginError: LoginError) {
+        when (loginError) {
+            is LoginError.ShowNoInternet -> requireActivity().snackBar(getString(R.string.no_internet_connection_warning))
+            is LoginError.ShowPasswordInvalid -> {
+                pass.isPasswordVisibilityToggleEnabled = false
+                passInput.error = getString(R.string.invalid_password)
             }
+            is LoginError.ShowEmailInvalid ->
+                emailInput.error = getString(R.string.invalid_email)
         }
     }
 
