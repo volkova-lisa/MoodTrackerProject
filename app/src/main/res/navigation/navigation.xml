@@ -85,7 +85,7 @@
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/resetPasswordFragment"
-        android:name="com.example.moodtrackerproject.ui.reset.ResetPasswordFragment"
+        android:name="com.example.moodtrackerproject.ui.reset_password.ResetPasswordFragment"
         android:label="ResetPasswordFragment">
         <action
             android:id="@+id/action_resetPasswordFragment_to_loginFragment"
