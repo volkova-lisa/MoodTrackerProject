@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.registration
 
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.registration.RegistrationProps.RegistrationAction
 import com.example.moodtrackerproject.ui.registration.RegistrationProps.RegistrationError
@@ -70,5 +72,9 @@ class RegistrationViewModel : BaseViewModel<RegistrationProps>() {
                         props.copy(error = RegistrationError.ShowRegistrationError)
                 }
             }
+    }
+
+    override fun map(appState: AppState, action: MviAction?): RegistrationProps {
+        TODO("Not yet implemented")
     }
 }

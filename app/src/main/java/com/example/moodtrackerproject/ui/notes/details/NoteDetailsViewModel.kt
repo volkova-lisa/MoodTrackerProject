@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.details
 
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.app.notes.NoteDetailsState
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -16,9 +18,10 @@ class NoteDetailsViewModel : BaseViewModel<NoteDetailsProps>() {
         setState(Store.appState.noteDetailsState)
     }
 
-    private fun map(state: NoteDetailsState, action: DetailsAction?): NoteDetailsProps {
+    override fun map(appState: AppState, action: MviAction?): NoteDetailsProps {
+        val state = appState.noteDetailsState
         return NoteDetailsProps(
-            action = action,
+            action = action as? DetailsAction,
             editClicked = {},
             changeEditVisibility = {
                 setState(state.copy(isEditNoteVisible = !state.isEditNoteVisible))
@@ -83,7 +86,6 @@ class NoteDetailsViewModel : BaseViewModel<NoteDetailsProps>() {
     }
 
     private fun setState(state: NoteDetailsState, action: DetailsAction? = null) {
-        Store.setState(state)
-        liveData.value = map(state, action)
+        setState(Store.appState.copy(noteDetailsState = state), action)
     }
 }

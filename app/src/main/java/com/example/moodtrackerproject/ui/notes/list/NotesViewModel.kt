@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.app.notes.NotesState
 import com.example.moodtrackerproject.data.DataBaseRepository
@@ -13,10 +15,11 @@ class NotesViewModel : BaseViewModel<NotesListProps>() {
         setState(Store.appState.notesState)
     }
 
-    private fun map(state: NotesState, action: NotesListAction?): NotesListProps {
+    override fun map(appState: AppState, action: MviAction?): NotesListProps {
+        val state = appState.notesState
         return NotesListProps(
             isFavoriteChecked = state.isFavoriteChecked,
-            action = action,
+            action = action as? NotesListAction,
             addNewNote = {
                 setState(state, action = NotesListAction.AddNewNote)
             },
@@ -70,7 +73,6 @@ class NotesViewModel : BaseViewModel<NotesListProps>() {
 
     // TODO: need to think on some "unification"
     private fun setState(state: NotesState, action: NotesListAction? = null) {
-        Store.setState(state)
-        liveData.value = map(state, action)
+        setState(Store.appState.copy(notesState = state), action)
     }
 }

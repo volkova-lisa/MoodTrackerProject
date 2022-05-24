@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.list
 
+import com.example.moodtrackerproject.app.MviAction
+
 data class NotesListProps(
     val isFavoriteChecked: Boolean = false,
     val action: NotesListAction? = null,
@@ -8,7 +10,7 @@ data class NotesListProps(
     val fetchListOfNotes: () -> Unit = {},
     val listOfNotes: List<NoteItemProps> = listOf(),
 ) {
-    sealed class NotesListAction {
+    sealed class NotesListAction : MviAction {
         object AddNewNote : NotesListAction()
         object StartDetailsScreen : NotesListAction()
     }

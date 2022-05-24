@@ -1,51 +1,57 @@
 package com.example.moodtrackerproject.ui.notes.add
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.NoteModel
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.notes.add.AddNewNoteProps.NewNoteAction
+import com.example.moodtrackerproject.ui.notes.add.AddNewNoteProps.NewNoteError
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class AddNewNoteViewModel : ViewModel() {
+class AddNewNoteViewModel : BaseViewModel<AddNewNoteProps>() {
 
-    private var state: AddNewNoteViewState
+    private val props = AddNewNoteProps(
+        cancelAdding = ::cancelAdding,
+        checkNoteData = ::checkNoteData,
+        action = null,
+        error = null,
+    )
+
     init {
-        state = AddNewNoteViewState(
-            cancelAdding = ::cancelAdding,
-            saveNewNote = ::insertNewNote,
-            checkNoteData = ::checkNoteData
-        )
+        liveData.value = props
     }
-    private val _addNewNoteStateLiveData: MutableLiveData<AddNewNoteViewState> =
-        MutableLiveData<AddNewNoteViewState>().apply {
-            value = state
-        }
-    val liveData get() = _addNewNoteStateLiveData
 
     private fun cancelAdding() {
-        setState(state.copy(action = NewNoteAction.ShowNotesScreen))
+        liveData.value = props.copy(action = NewNoteAction.ShowNotesScreen)
     }
 
-    private fun checkNoteData(pair: Pair<String, String>) {
-        if (pair.first.isEmpty()) {
-            setState(state.copy(error = NewNoteError.ShowEmptyTitle))
-            liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
-        } else insertNewNote(NoteModel(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))
-    }
-
-    private fun insertNewNote(note: NoteModel) =
-        viewModelScope.launch(Dispatchers.Main) {
-            DataBaseRepository.insertNote(note) {
-                _addNewNoteStateLiveData.value = state.copy(action = NewNoteAction.ShowNotesScreen)
-            }
-            setState(state.copy(action = NewNoteAction.ShowNotesScreen))
+    private fun checkNoteData(title: String, text: String) {
+        if (title.isEmpty()) {
+            liveData.value = props.copy(error = NewNoteError.ShowEmptyTitle)
+        } else {
+            val noteModel = NoteModel(
+                date = DateUtils.getDateOfNote(),
+                title = title,
+                text = text,
+            )
+            insertNewNote(noteModel)
         }
+    }
 
-    private fun setState(newState: AddNewNoteViewState) {
-        state = newState
-        _addNewNoteStateLiveData.value = state
+    private fun insertNewNote(note: NoteModel) {
+        launch {
+            withContext(Dispatchers.IO) {
+                DataBaseRepository.insertNote(note)
+            }
+            liveData.value = props.copy(action = NewNoteAction.ShowNotesScreen)
+        }
+    }
+
+    override fun map(appState: AppState, action: MviAction?): AddNewNoteProps {
+        TODO("Not yet implemented")
     }
 }

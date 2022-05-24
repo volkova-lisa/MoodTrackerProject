@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.home
 
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -23,5 +25,9 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
         auth.signOut()
         PreferenceManager.setInitUser(false)
         liveData.value = props.copy(action = HomeAction.LogOut)
+    }
+
+    override fun map(appState: AppState, action: MviAction?): HomeProps {
+        TODO("Not yet implemented")
     }
 }

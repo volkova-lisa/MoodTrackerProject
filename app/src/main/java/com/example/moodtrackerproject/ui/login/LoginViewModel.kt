@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.login
 
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.login.LoginProps.LoginAction
 import com.example.moodtrackerproject.ui.login.LoginProps.LoginError
@@ -63,5 +65,9 @@ class LoginViewModel : BaseViewModel<LoginProps>() {
                     liveData.value = props.copy(error = LoginError.ShowNoInternet)
                 }
             }
+    }
+
+    override fun map(appState: AppState, action: MviAction?): LoginProps {
+        TODO("Not yet implemented")
     }
 }

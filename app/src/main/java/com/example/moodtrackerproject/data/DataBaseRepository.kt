@@ -65,13 +65,12 @@ object DataBaseRepository {
 
     fun getNotes() = PreferenceManager.getNotes()
 
-    fun insertNote(noteBody: NoteModel, onSuccess: () -> Unit) {
+    fun insertNote(noteBody: NoteModel) {
         val list = mutableListOf<NoteModel>().apply {
             addAll(getNotes())
             add(noteBody)
         }
         saveNotes(list)
-        onSuccess()
     }
 
     // TODO("ask before delete")

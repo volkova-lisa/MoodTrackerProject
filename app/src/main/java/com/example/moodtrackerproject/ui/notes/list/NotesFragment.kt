@@ -16,7 +16,7 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding, NotesLi
     NotesViewModel::class.java
 ) {
 
-    private lateinit var props: NotesListProps
+    private lateinit var props: NotesListProps // FIXME: this is a "crutch" to get notes list
 
     override fun getFragmentBinding(
         inflater: LayoutInflater, container: ViewGroup?

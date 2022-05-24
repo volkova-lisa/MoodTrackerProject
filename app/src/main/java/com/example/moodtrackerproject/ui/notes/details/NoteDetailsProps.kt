@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.ui.notes.details
 
+import com.example.moodtrackerproject.app.MviAction
+
 data class NoteDetailsProps(
     val noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
     val date: String = "",
@@ -15,7 +17,7 @@ data class NoteDetailsProps(
     val setNote: () -> Unit,
     val action: DetailsAction? = null,
 ) {
-    sealed class DetailsAction {
+    sealed class DetailsAction : MviAction {
         object CancelEditing : DetailsAction()
         object ShowAllNotes : DetailsAction()
     }
