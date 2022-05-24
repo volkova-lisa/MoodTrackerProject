@@ -1,37 +1,54 @@
 package com.example.moodtrackerproject.ui.mood.list
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.app.mood.MoodState
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.mood.list.MoodProps.MoodItemProps
+import com.example.moodtrackerproject.ui.mood.list.MoodProps.MoodScreenActions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class MoodViewModel : ViewModel() {
-
-    private var state: MoodViewState
+class MoodViewModel : BaseViewModel<MoodProps>() {
 
     init {
-        state = MoodViewState(
-            addNewMood = ::addNewMood
+        setState(Store.appState.moodState)
+    }
+
+    override fun map(appState: AppState, action: MviAction?): MoodProps {
+        val state = appState.moodState
+        return MoodProps(
+            action = action as? MoodScreenActions,
+            listOfMoods = state.listOfMoods.map {
+                MoodItemProps(
+                    emojiSrc = it.emojiSrc,
+                    moodTitle = it.moodTitle,
+                    moodTime = it.moodTime,
+                )
+            },
+            addNewMood = {
+                setState(state, action = MoodScreenActions.StartAddMoodScreen)
+            },
+            openStressTestScreen = {
+                setState(state, action = MoodScreenActions.StartStressTestScreen)
+            },
+            fetchListOfMoods = ::fetchListOfMoods
         )
-        Store.setState(state)
     }
 
-    private val _moodViewStateLiveData: MutableLiveData<MoodViewState> =
-        MutableLiveData<MoodViewState>().apply {
-            value = state
+    private fun fetchListOfMoods() {
+        launch {
+            val moods = withContext(Dispatchers.IO) {
+                DataBaseRepository.getMoods()
+            }
+            setState(Store.appState.moodState.copy(listOfMoods = moods))
         }
-    val liveData get() = _moodViewStateLiveData
-
-    private fun addNewMood() {
-        liveData.value = state.copy(action = MoodScreenActions.StartAddMoodScreen)
     }
 
-    fun fetchListOfMoods() {
-        val moods = DataBaseRepository.getMoods()
-        setState(state.copy(listOfMoods = moods))
-    }
-    private fun setState(newState: MoodViewState) {
-        Store.setState(newState)
-        _moodViewStateLiveData.value = Store.appState.moodState
+    private fun setState(state: MoodState, action: MoodScreenActions? = null) {
+        setState(Store.appState.copy(moodState = state), action)
     }
 }

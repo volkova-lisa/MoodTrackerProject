@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.ui.mood.list.MoodBody
+import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -51,7 +51,7 @@ class AddMoodViewModel : ViewModel() {
 
     private fun addNewMood(pair: Pair<Int, String>) =
         viewModelScope.launch(Dispatchers.Main) {
-            val mood = MoodBody(pair.first, pair.second, DateUtils.getDateOfNote())
+            val mood = MoodModel(pair.first, pair.second, DateUtils.getDateOfNote())
             DataBaseRepository.insertMood(mood) {
                 _addMoodStateLiveData.value = state.copy(action = NewMoodAction.ShowMoodsScreen)
             }

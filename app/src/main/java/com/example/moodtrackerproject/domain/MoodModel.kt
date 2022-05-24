@@ -1,6 +1,6 @@
-package com.example.moodtrackerproject.ui.mood.list
+package com.example.moodtrackerproject.domain
 
-data class MoodBody(
+data class MoodModel(
     val emojiSrc: Int = 0,
     val moodTitle: String = "",
     val moodTime: String = " "

@@ -1,9 +1,9 @@
 package com.example.moodtrackerproject.data
 
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
 import com.example.moodtrackerproject.ui.mood.add.EmojiBody
-import com.example.moodtrackerproject.ui.mood.list.MoodBody
 import com.example.moodtrackerproject.ui.mood.tests.OptionBody
 import com.example.moodtrackerproject.ui.mood.tests.QuestionBody
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -108,16 +108,12 @@ object DataBaseRepository {
 
     fun getMoods() = PreferenceManager.getMoods()
 
-    fun saveMoods(moodsList: List<MoodBody>) {
-        PreferenceManager.saveMoods(moodsList)
-    }
-
-    fun insertMood(moodBody: MoodBody, onSuccess: () -> Unit) {
-        val list = mutableListOf<MoodBody>().apply {
+    fun insertMood(moodModel: MoodModel, onSuccess: () -> Unit) {
+        val list = mutableListOf<MoodModel>().apply {
             addAll(getMoods())
-            add(moodBody)
+            add(moodModel)
         }
-        saveMoods(list)
+        PreferenceManager.saveMoods(list)
         onSuccess()
     }
 }

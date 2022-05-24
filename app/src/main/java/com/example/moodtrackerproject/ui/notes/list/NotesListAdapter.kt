@@ -27,9 +27,7 @@ class NotesListAdapter : ListAdapter<NoteItemProps, NotesListAdapter.NoteItemVie
 
         fun bind(props: NoteItemProps) {
             binding.run {
-                root.click {
-                    props.openDetails?.invoke(props)
-                }
+                root.click(props.openDetails)
                 noteTextDateTime.text = props.date
                 noteTitleItem.text = props.title
                 noteTextItem.text = props.text

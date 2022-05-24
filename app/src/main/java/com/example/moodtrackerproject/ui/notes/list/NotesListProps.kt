@@ -24,7 +24,7 @@ data class NotesListProps(
         val isChecked: Boolean = false,
         val isDeleted: Boolean = false,
         val checkChanged: ((String) -> Unit)? = null,
-        val openDetails: ((NoteItemProps) -> Unit)? = null,
+        val openDetails: () -> Unit,
         val deleteNote: ((String) -> Unit)? = null
     ) {
         override fun equals(other: Any?): Boolean {

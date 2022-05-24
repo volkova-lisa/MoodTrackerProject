@@ -4,45 +4,47 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentMoodBinding
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.mood.list.MoodProps.MoodScreenActions
+import com.example.moodtrackerproject.utils.click
 
-class MoodFragment : Fragment() {
+class MoodFragment : BaseFragment<MoodViewModel, FragmentMoodBinding, MoodProps>(
+    MoodViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentMoodBinding
-    private val moodsAdapter = MoodAdapter()
-    val viewModel: MoodViewModel by lazy {
-        ViewModelProvider(this).get(MoodViewModel::class.java)
-    }
+    private lateinit var props: MoodProps
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentMoodBinding.inflate(layoutInflater, container, false)
-        viewModel.fetchListOfMoods()
-        return binding.root
-    }
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentMoodBinding = FragmentMoodBinding.inflate(inflater, container, false)
+
+    private val moodsAdapter = MoodsListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.emojiList.adapter = moodsAdapter
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
+        binding?.emojiList?.adapter = moodsAdapter
     }
 
-    private fun render(state: MoodViewState) {
-        binding.run {
-            moodInclude.addMoodBtn.setOnClickListener {
-                state.addNewMood.invoke()
-                (requireActivity() as MainActivity).router.openAddMood()
-            }
-            moodsAdapter.setList(state.listOfMoods)
-            stressInclude.root.setOnClickListener {
+    override fun onResume() {
+        super.onResume()
+        if (::props.isInitialized) {
+            props.fetchListOfMoods()
+        }
+    }
+
+    override fun render(props: MoodProps) {
+        this.props = props
+        binding?.run {
+            moodsAdapter.submitList(props.listOfMoods)
+            moodInclude.addMoodBtn.click(props.addNewMood)
+            stressInclude.root.click(props.openStressTestScreen)
+            if (props.action == MoodScreenActions.StartStressTestScreen) {
                 (requireActivity() as MainActivity).router.openStressTest()
+            }
+            if (props.action == MoodScreenActions.StartAddMoodScreen) {
+                (requireActivity() as MainActivity).router.openAddMood()
             }
         }
     }
