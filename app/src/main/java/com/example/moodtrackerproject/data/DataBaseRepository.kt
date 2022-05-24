@@ -1,7 +1,7 @@
 package com.example.moodtrackerproject.data
 
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.domain.NoteModel
 import com.example.moodtrackerproject.ui.mood.add.EmojiBody
 import com.example.moodtrackerproject.ui.mood.list.MoodBody
 import com.example.moodtrackerproject.ui.mood.tests.OptionBody
@@ -65,33 +65,34 @@ object DataBaseRepository {
 
     fun getNotes() = PreferenceManager.getNotes()
 
-    fun insertNote(noteBody: NoteBody, onSuccess: () -> Unit) {
-        val list = mutableListOf<NoteBody>().apply {
+    fun insertNote(noteBody: NoteModel, onSuccess: () -> Unit) {
+        val list = mutableListOf<NoteModel>().apply {
             addAll(getNotes())
             add(noteBody)
         }
         saveNotes(list)
+        onSuccess()
     }
 
     // TODO("ask before delete")
-    fun setNoteDeleted(noteBody: NoteBody) {
+    fun setNoteDeleted(noteBody: NoteModel) {
         val list = getNotes().map {
             if (it.noteId == noteBody.noteId) it.copy(isDeleted = !it.isDeleted) else it
         }
         saveNotes(list)
     }
 
-    fun removeDeletedNotes(): List<NoteBody> {
+    fun removeDeletedNotes(): List<NoteModel> {
         val list = getNotes().filter { !it.isDeleted }
         saveNotes(list)
         return list
     }
 
-    fun saveNotes(notesList: List<NoteBody>) {
+    fun saveNotes(notesList: List<NoteModel>) {
         PreferenceManager.saveNotes(notesList)
     }
 
-    fun saveFavorite(noteId: String): List<NoteBody> {
+    fun saveFavorite(noteId: String): List<NoteModel> {
         val list = getNotes().map {
             if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
         }
@@ -118,5 +119,6 @@ object DataBaseRepository {
             add(moodBody)
         }
         saveMoods(list)
+        onSuccess()
     }
 }

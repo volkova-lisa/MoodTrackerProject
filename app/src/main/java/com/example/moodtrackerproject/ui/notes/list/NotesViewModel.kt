@@ -1,90 +1,76 @@
 package com.example.moodtrackerproject.ui.notes.list
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.app.notes.NotesState
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.domain.NoteBody
-import com.example.moodtrackerproject.ui.notes.Store
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.notes.list.NotesListProps.NotesListAction
 import timber.log.Timber
 
-class NotesViewModel : ViewModel() {
-    // TODO: should be val
-    private var state: NotesViewState
+class NotesViewModel : BaseViewModel<NotesListProps>() {
 
     init {
-        state = Store.appState.notesState.copy(
-            addNewNote = ::addNewNote,
-            showFavourites = ::changeFavoriteStatus,
-        )
-        Store.setState(state)
+        setState(Store.appState.notesState)
     }
 
-    private val _notesStateLiveData: MutableLiveData<NotesViewState> =
-        MutableLiveData<NotesViewState>().apply {
-            value = state
-        }
-    val liveData get() = _notesStateLiveData
+    private fun map(state: NotesState, action: NotesListAction?): NotesListProps {
+        return NotesListProps(
+            isFavoriteChecked = state.isFavoriteChecked,
+            action = action,
+            addNewNote = {
+                setState(state, action = NotesListAction.AddNewNote)
+            },
+            showFavourites = {
+                val isFavoriteChecked = !state.isFavoriteChecked
+                val noteModels = DataBaseRepository.getNotes()
+                    .filter { if (isFavoriteChecked) it.isChecked else true }
 
-    private fun addNewNote() {
-        liveData.value = state.copy(action = NotesListAction.AddNewNote)
-    }
-
-    private fun changeFavoriteStatus() {
-        val isFavoriteChecked = !Store.appState.notesState.isFavoriteChecked
-        liveData.value =
-            state.copy(
-                isFavoriteChecked = isFavoriteChecked,
-                listOfNotes = notesMap(
-                    if (isFavoriteChecked) DataBaseRepository.getNotes().filter { it.isChecked }
-                    else DataBaseRepository.getNotes()
-                )
-            )
-
-        Store.setState(liveData.value!!)
-    }
-
-    fun fetchListOfNotes() {
-        val notes = notesMap(DataBaseRepository.getNotes())
-        setState(state.copy(listOfNotes = notes))
-    }
-
-    private fun notesMap(notesList: List<NoteBody>): List<NoteBodyUiModel> {
-        return notesList.map { model ->
-            NoteBodyUiModel(
-                noteId = model.noteId,
-                date = model.date,
-                editedDate = model.editDate,
-                title = model.title,
-                text = model.text,
-                isChecked = model.isChecked,
-                isDeleted = model.isDeleted,
-                checkChanged = {
-                    val list = DataBaseRepository.saveFavorite(it)
-                    setState(state.copy(listOfNotes = notesMap(list)))
-                },
-                openDetails = {
-                    setState(state.copy(action = NotesListAction.StartDetailsScreen))
-                    setState(
-                        state.copy(
-                            currentId = it.noteId,
-                            listOfNotes = listOf(it)
-                        )
+                setState(
+                    state.copy(
+                        listOfNotes = noteModels,
+                        isFavoriteChecked = isFavoriteChecked,
                     )
-                },
-                deleteNote = { deleted ->
-                    Timber.d(deleted)
-                    // TODO: maybe combine these two functions because they are similar?
-                    DataBaseRepository.setNoteDeleted(model)
-                    val list = DataBaseRepository.removeDeletedNotes()
-                    setState(state.copy(listOfNotes = notesMap(list)))
-                },
-            )
-        }
+                )
+            },
+            fetchListOfNotes = {
+                val noteModels = DataBaseRepository.getNotes()
+                setState(state.copy(listOfNotes = noteModels))
+            },
+            listOfNotes = state.listOfNotes
+                .map { model ->
+                    NotesListProps.NoteItemProps(
+                        noteId = model.noteId,
+                        date = model.date,
+                        editedDate = model.editDate,
+                        title = model.title,
+                        text = model.text,
+                        isChecked = model.isChecked,
+                        isDeleted = model.isDeleted,
+                        checkChanged = {
+                            val list = DataBaseRepository.saveFavorite(it)
+                            setState(state.copy(listOfNotes = list))
+                        },
+                        openDetails = {
+                            setState(
+                                state.copy(currentId = model.noteId),
+                                action = NotesListAction.StartDetailsScreen
+                            )
+                        },
+                        deleteNote = { deleted ->
+                            Timber.d(deleted)
+                            // TODO: maybe combine these two functions because they are similar?
+                            DataBaseRepository.setNoteDeleted(model)
+                            val list = DataBaseRepository.removeDeletedNotes()
+                            setState(state.copy(listOfNotes = list))
+                        },
+                    )
+                }
+        )
     }
 
     // TODO: need to think on some "unification"
-    private fun setState(newState: NotesViewState) {
-        Store.setState(newState)
-        _notesStateLiveData.value = Store.appState.notesState
+    private fun setState(state: NotesState, action: NotesListAction? = null) {
+        Store.setState(state)
+        liveData.value = map(state, action)
     }
 }

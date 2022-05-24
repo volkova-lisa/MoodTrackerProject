@@ -4,74 +4,67 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentNotesBinding
-import com.example.moodtrackerproject.ui.notes.list.NotesListAction.AddNewNote
-import com.example.moodtrackerproject.ui.notes.list.NotesListAction.StartDetailsScreen
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.notes.list.NotesListProps.NotesListAction
 import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.visibleIf
 
-class NotesFragment : Fragment() {
+class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding, NotesListProps>(
+    NotesViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentNotesBinding
-    private val notesAdapter = NotesAdapter()
-    val viewModel: NotesViewModel by lazy {
-        ViewModelProvider(this).get(NotesViewModel::class.java)
-    }
+    private lateinit var props: NotesListProps
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentNotesBinding.inflate(layoutInflater, container, false)
-        viewModel.fetchListOfNotes()
-        return binding.root
-    }
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentNotesBinding = FragmentNotesBinding.inflate(inflater, container, false)
+
+    private val notesAdapter = NotesListAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.notesList.adapter = notesAdapter
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
+        binding?.notesList?.adapter = notesAdapter
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchListOfNotes()
+        if (::props.isInitialized) {
+            props.fetchListOfNotes()
+        }
     }
 
-    private fun render(state: NotesViewState) {
-        binding.run {
-            addNoteBtn.click(state.addNewNote)
-            toolbarStar.click {
-                state.showFavourites.invoke()
-                if (!state.isFavoriteChecked) {
-                    toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
-                    toolbar.title = "Favorite notes"
-                } else {
-                    toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
-                    toolbar.title = "My notes"
-                }
+    override fun render(props: NotesListProps) {
+        this.props = props
+        binding?.run {
+            addNoteBtn.click(props.addNewNote)
+            toolbarStar.click(props.showFavourites)
+            if (!props.isFavoriteChecked) {
+                toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
+                toolbar.title = "Favorite notes"
+            } else {
+                toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
+                toolbar.title = "My notes"
             }
+            picNoNotes.visibleIf(props.listOfNotes.isEmpty())
+            hintText.visibleIf(props.listOfNotes.isEmpty())
 
-            picNoNotes.visibleIf(state.listOfNotes.isEmpty())
-            hintText.visibleIf(state.listOfNotes.isEmpty())
+            notesAdapter.submitList(props.listOfNotes)
 
-            notesAdapter.setList(state.listOfNotes)
+            props.action?.let { handleAction(it) }
+        }
+    }
 
-            when (state.action) {
-                AddNewNote -> {
-                    (requireActivity() as MainActivity).router.openAddNewNote()
-                }
-                StartDetailsScreen -> {
-                    // maybe here i should refresh notes  --- nono what if ill need it before opening
-                    (requireActivity() as MainActivity).router.openDetails()
-                }
-                null -> {}
+    private fun handleAction(action: NotesListAction) {
+        when (action) {
+            NotesListAction.AddNewNote -> {
+                (requireActivity() as MainActivity).router.openAddNewNote()
+            }
+            NotesListAction.StartDetailsScreen -> {
+                // maybe here i should refresh notes  --- nono what if ill need it before opening
+                (requireActivity() as MainActivity).router.openDetails()
             }
         }
     }

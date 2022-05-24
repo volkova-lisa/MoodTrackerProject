@@ -3,7 +3,7 @@ package com.example.moodtrackerproject.domain
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class NoteBody(
+data class NoteModel(
     val noteId: String = System.currentTimeMillis().toString(),
     val date: String = "",
     val editDate: String = "",

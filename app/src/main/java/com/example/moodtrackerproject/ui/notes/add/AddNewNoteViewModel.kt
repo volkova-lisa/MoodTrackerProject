@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.domain.NoteBody
+import com.example.moodtrackerproject.domain.NoteModel
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -33,10 +33,10 @@ class AddNewNoteViewModel : ViewModel() {
         if (pair.first.isEmpty()) {
             setState(state.copy(error = NewNoteError.ShowEmptyTitle))
             liveData.value = state.copy(error = NewNoteError.ShowEmptyTitle)
-        } else insertNewNote(NoteBody(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))
+        } else insertNewNote(NoteModel(date = DateUtils.getDateOfNote(), title = pair.first, text = pair.second))
     }
 
-    private fun insertNewNote(note: NoteBody) =
+    private fun insertNewNote(note: NoteModel) =
         viewModelScope.launch(Dispatchers.Main) {
             DataBaseRepository.insertNote(note) {
                 _addNewNoteStateLiveData.value = state.copy(action = NewNoteAction.ShowNotesScreen)
