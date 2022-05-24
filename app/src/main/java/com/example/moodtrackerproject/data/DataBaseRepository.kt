@@ -1,9 +1,9 @@
 package com.example.moodtrackerproject.data
 
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.domain.EmojiModel
 import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.ui.mood.add.EmojiBody
 import com.example.moodtrackerproject.ui.mood.tests.OptionBody
 import com.example.moodtrackerproject.ui.mood.tests.QuestionBody
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -12,22 +12,22 @@ import com.example.moodtrackerproject.utils.PreferenceManager
 object DataBaseRepository {
 
     private val listOfEmojis = listOf(
-        EmojiBody(R.drawable.emoji_anger, "anger"),
-        EmojiBody(R.drawable.emoji_awesome, "awesome"),
-        EmojiBody(R.drawable.emoji_calm, "calm"),
-        EmojiBody(R.drawable.emoji_concentrated, "concentrated"),
-        EmojiBody(R.drawable.emoji_cool, "cool"),
-        EmojiBody(R.drawable.emoji_crying, "crying"),
-        EmojiBody(R.drawable.emoji_crying_inside, "crying inside"),
-        EmojiBody(R.drawable.emoji_excited, "excited"),
-        EmojiBody(R.drawable.emoji_furious, "furious"),
-        EmojiBody(R.drawable.emoji_great, "great"),
-        EmojiBody(R.drawable.emoji_puking, "puking"),
-        EmojiBody(R.drawable.emoji_sad, "sad"),
-        EmojiBody(R.drawable.emoji_shocked, "shocked"),
-        EmojiBody(R.drawable.emoji_sick, "sick"),
-        EmojiBody(R.drawable.emoji_sleepy, "sleepy"),
-        EmojiBody(R.drawable.emoji_traumatised, "traumatised"),
+        EmojiModel(R.drawable.emoji_anger, "anger"),
+        EmojiModel(R.drawable.emoji_awesome, "awesome"),
+        EmojiModel(R.drawable.emoji_calm, "calm"),
+        EmojiModel(R.drawable.emoji_concentrated, "concentrated"),
+        EmojiModel(R.drawable.emoji_cool, "cool"),
+        EmojiModel(R.drawable.emoji_crying, "crying"),
+        EmojiModel(R.drawable.emoji_crying_inside, "crying inside"),
+        EmojiModel(R.drawable.emoji_excited, "excited"),
+        EmojiModel(R.drawable.emoji_furious, "furious"),
+        EmojiModel(R.drawable.emoji_great, "great"),
+        EmojiModel(R.drawable.emoji_puking, "puking"),
+        EmojiModel(R.drawable.emoji_sad, "sad"),
+        EmojiModel(R.drawable.emoji_shocked, "shocked"),
+        EmojiModel(R.drawable.emoji_sick, "sick"),
+        EmojiModel(R.drawable.emoji_sleepy, "sleepy"),
+        EmojiModel(R.drawable.emoji_traumatised, "traumatised"),
     )
 
     val listOfStressQs = listOf(
@@ -56,7 +56,7 @@ object DataBaseRepository {
 
     fun getOptions() = lisOfOptions
 
-    fun saveChosenEmoji(title: String): List<EmojiBody> {
+    fun saveChosenEmoji(title: String): List<EmojiModel> {
         val list = getEmojiList().map {
             if (it.title == title) it.copy(isChecked = !it.isChecked) else it
         }
@@ -108,12 +108,11 @@ object DataBaseRepository {
 
     fun getMoods() = PreferenceManager.getMoods()
 
-    fun insertMood(moodModel: MoodModel, onSuccess: () -> Unit) {
+    fun insertMood(moodModel: MoodModel) {
         val list = mutableListOf<MoodModel>().apply {
             addAll(getMoods())
             add(moodModel)
         }
         PreferenceManager.saveMoods(list)
-        onSuccess()
     }
 }

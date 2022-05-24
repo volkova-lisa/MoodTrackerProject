@@ -1,9 +1,9 @@
 package com.example.moodtrackerproject.app
 
+import com.example.moodtrackerproject.app.mood.AddMoodState
 import com.example.moodtrackerproject.app.mood.MoodState
 import com.example.moodtrackerproject.app.notes.NoteDetailsState
 import com.example.moodtrackerproject.app.notes.NotesState
-import com.example.moodtrackerproject.ui.mood.add.AddMoodViewState
 import com.example.moodtrackerproject.ui.mood.tests.StressTestState
 
 object Store {
@@ -13,7 +13,7 @@ object Store {
         appState = appState.copy(notesState = newState)
     }
 
-    fun setState(newState: AddMoodViewState) {
+    fun setState(newState: AddMoodState) {
         appState = appState.copy(addMoodState = newState)
     }
 
