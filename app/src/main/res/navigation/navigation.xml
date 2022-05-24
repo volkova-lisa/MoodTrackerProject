@@ -116,7 +116,7 @@
     </fragment>
     <fragment
         android:id="@+id/testResults"
-        android:name="com.example.moodtrackerproject.ui.mood.tests.TestResults"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.TestResultsFragment"
         android:label="fragment_test_results"
         tools:layout="@layout/fragment_test_results" >
         <action

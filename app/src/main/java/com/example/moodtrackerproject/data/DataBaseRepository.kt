@@ -4,8 +4,8 @@ import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.EmojiModel
 import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.ui.mood.tests.OptionBody
-import com.example.moodtrackerproject.ui.mood.tests.QuestionBody
+import com.example.moodtrackerproject.domain.OptionModel
+import com.example.moodtrackerproject.domain.QuestionModel
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 // single source of truth
@@ -31,20 +31,20 @@ object DataBaseRepository {
     )
 
     val listOfStressQs = listOf(
-        QuestionBody("Been upset because of something that happened unexpectedly?"),
-        QuestionBody("Felt that you were unable to control important things in your life?"),
-        QuestionBody("Felt nervous and 'stressed"),
-        QuestionBody("Felt confident about your ability to handle your personal problems?"),
-        QuestionBody("Felt that things were going your way?"),
-        QuestionBody("Felt that things were going your way?")
+        QuestionModel("Been upset because of something that happened unexpectedly?"),
+        QuestionModel("Felt that you were unable to control important things in your life?"),
+        QuestionModel("Felt nervous and 'stressed"),
+        QuestionModel("Felt confident about your ability to handle your personal problems?"),
+        QuestionModel("Felt that things were going your way?"),
+        QuestionModel("Felt that things were going your way?")
     )
 
     private val lisOfOptions = listOf(
-        OptionBody("Never", 1),
-        OptionBody("Almost Never", 2),
-        OptionBody("Sometimes", 3),
-        OptionBody("Fairly Often", 4),
-        OptionBody("Very Often", 5)
+        OptionModel("Never", 1),
+        OptionModel("Almost Never", 2),
+        OptionModel("Sometimes", 3),
+        OptionModel("Fairly Often", 4),
+        OptionModel("Very Often", 5)
     )
 
     var stressPoints = 0
@@ -99,7 +99,7 @@ object DataBaseRepository {
         return list
     }
 
-    fun saveSelected(title: String): List<OptionBody> {
+    fun saveSelected(title: String): List<OptionModel> {
         val list = lisOfOptions.map {
             if (it.text == title) it.copy(isChecked = !it.isChecked) else it
         }

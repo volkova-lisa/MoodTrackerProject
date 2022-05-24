@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
     android:orientation="vertical"
-    tools:context=".ui.mood.tests.TestResults">
+    tools:context=".ui.mood.tests.TestResultsFragment">
 
     <TextView
         android:id="@+id/result_title"

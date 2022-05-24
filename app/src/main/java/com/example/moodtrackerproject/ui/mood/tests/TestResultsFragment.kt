@@ -9,7 +9,7 @@ import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentTestResultsBinding
 
-class TestResults : Fragment() {
+class TestResultsFragment : Fragment() {
 
     private lateinit var binding: FragmentTestResultsBinding
 

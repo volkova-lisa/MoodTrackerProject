@@ -1,90 +1,88 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.app.tests.StressTestState
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.StressTestActions
 
-class StressTestViewModel : ViewModel() {
-
-    private var state: StressTestState
+class StressTestViewModel : BaseViewModel<StressTestProps>() {
 
     init {
-        state = Store.appState.stressTestState.copy(
-            setQuestion = ::setNextQuestion,
-            moveQuestion = ::nextQuestion,
-            again = ::startAgain
-        )
-        Store.setState(state)
+        setState(Store.appState.stressTestState)
     }
 
-    private val _stressStateLiveData: MutableLiveData<StressTestState> =
-        MutableLiveData<StressTestState>().apply {
-            value = state
-        }
-    val liveData get() = _stressStateLiveData
+    override fun map(appState: AppState, action: MviAction?): StressTestProps {
+        val state = appState.stressTestState
+        return StressTestProps(
+            setQuestion = ::setNextQuestion,
+            moveQuestion = ::nextQuestion,
+            again = ::startAgain,
+            fetchListOfOptions = ::fetchListOfOptions,
+            questionText = state.question.text.ifBlank { DataBaseRepository.listOfStressQs[0].text },
+            listOfOptions = state.listOfOptions.map { model ->
+                StressTestProps.OptionItemProps(
+                    text = model.text,
+                    points = model.points,
+                    isChecked = model.isChecked,
+                    checkChanged = {
+                        val list = DataBaseRepository.saveSelected(model.text)
+                        setState(state.copy(listOfOptions = list))
+                    }
+                )
+            },
+            stressQuestionsQty = DataBaseRepository.listOfStressQs.size - 1,
+            points = state.points,
+            currQuestionNum = state.currQuestionNum,
+            openMood = {
+                setState(state, action = StressTestActions.OpenMood)
+            },
+            openResults = {
+                setState(state, action = StressTestActions.OpenMood)
+            },
+            savePoints = ::savePoints,
+            action = action as? StressTestActions,
+        )
+    }
 
     private fun startAgain() {
-        val state =
+        DataBaseRepository.stressPoints = 0
+        setState(
             Store.appState.stressTestState.copy(
                 currQuestionNum = 0,
                 points = 0
             )
-        DataBaseRepository.stressPoints = 0
-        liveData.value = state
-        Store.setState(state)
+        )
     }
 
     private fun setNextQuestion() {
-        val num = Store.appState.stressTestState.currQuestionNum
-        val state =
-            Store.appState.stressTestState.copy(
-                question = DataBaseRepository.listOfStressQs[num],
-                points = num
+        val state = Store.appState.stressTestState
+        setState(
+            state.copy(
+                question = DataBaseRepository.listOfStressQs[state.currQuestionNum],
+                points = state.currQuestionNum
             )
-        liveData.value = state
-        Store.setState(state)
+        )
+    }
+
+    private fun savePoints(points: Int) {
+        DataBaseRepository.savePoints(points)
+        setState(Store.appState.stressTestState.copy(points = points))
     }
 
     private fun nextQuestion() {
-        val num = Store.appState.stressTestState.currQuestionNum
-        val state =
-            Store.appState.stressTestState.copy(
-                currQuestionNum = num + 1
-            )
-        liveData.value = state
-        Store.setState(state)
+        val state = Store.appState.stressTestState
+        setState(state.copy(currQuestionNum = (state.currQuestionNum + 1)))
     }
 
-    fun fetchListOfOptions() {
-        val options = optionMap(DataBaseRepository.getOptions())
-        val state = Store.appState.stressTestState.copy(listOfOptions = options)
-        liveData.value = state
-        Store.setState(state)
+    private fun fetchListOfOptions() {
+        val options = DataBaseRepository.getOptions()
+        setState(Store.appState.stressTestState.copy(listOfOptions = options))
     }
 
-    private fun optionMap(option: List<OptionBody>): List<OptionUiModel> {
-        return option.map { model ->
-            OptionUiModel(
-                text = model.text,
-                points = model.points,
-                isChecked = model.isChecked,
-                checkChanged = {
-                    val list = DataBaseRepository.saveSelected(it)
-                    val filtered = optionMap(list).filter { it.isChecked == true }
-                    setState(
-                        Store.appState.stressTestState.copy(
-                            chosenAnswer = filtered[0]
-                        )
-                    )
-                    setState(Store.appState.stressTestState.copy(listOfOptions = optionMap(list)))
-                }
-            )
-        }
-    }
-
-    private fun setState(newState: StressTestState) {
-        Store.setState(newState)
-        _stressStateLiveData.value = Store.appState.stressTestState
+    private fun setState(state: StressTestState, action: StressTestActions? = null) {
+        setState(Store.appState.copy(stressTestState = state), action)
     }
 }
