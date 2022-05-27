@@ -4,86 +4,87 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.StressTestActions
 import com.example.moodtrackerproject.utils.click
 
-class StressTestFragment : Fragment() {
+class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestBinding, StressTestProps>(
+    StressTestViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentStressTestBinding
-    private val testAdapter = TestAdapter()
-    val viewModel: StressTestViewModel by lazy {
-        ViewModelProvider(this).get(StressTestViewModel::class.java)
-    }
+    private lateinit var props: StressTestProps
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentStressTestBinding.inflate(layoutInflater, container, false)
-        viewModel.fetchListOfOptions()
-        return binding.root
-    }
+    private val testAdapter = TestListAdapter()
+
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentStressTestBinding = FragmentStressTestBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.liveData.value!!.again.invoke()
-        binding.optionList.adapter = testAdapter
-        binding.progressBar.progress = 0
-        binding.progressBar.max = 5
-        binding.nextButton.isEnabled = false
-        binding.nextButton.isClickable = false
-        viewModel.liveData.value?.let { binding.question.setText(it.question.text) }
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
+        binding?.run {
+            optionList.adapter = testAdapter
+            progressBar.progress = 0
+            progressBar.max = 5
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchListOfOptions()
+        if (::props.isInitialized) {
+            props.fetchListOfOptions()
+            props.again()
+        }
     }
 
-    private fun render(state: StressTestState) {
-        binding.run {
+    override fun render(props: StressTestProps) {
+        this.props = props
+        binding?.run {
+            val chosenAnswer = props.listOfOptions.find { it.isChecked }
 
-            // TODO: less BL
-            val questListSize: Int = DataBaseRepository.listOfStressQs.size - 1
-            if (state.currQuestionNum < questListSize) {
-                question.setText(state.question.text)
-            } else question.setText(getString(R.string.test_finished))
+            question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText
+            else getString(R.string.test_finished)
 
-            testAdapter.setList(state.listOfOptions)
-            progressBar.progress = state.currQuestionNum
+            testAdapter.submitList(props.listOfOptions)
+            progressBar.progress = props.currQuestionNum
 
-            if (state.chosenAnswer.text.isNotBlank()) {
-                nextButton.isEnabled = true
-                nextButton.isClickable = true
+            nextButton.isEnabled = !chosenAnswer?.text.isNullOrBlank()
+            nextButton.isClickable = !chosenAnswer?.text.isNullOrBlank()
+
+            num.text = "${props.currQuestionNum}/${props.stressQuestionsQty}"
+            progressBar.progress = props.currQuestionNum
+
+            if (!chosenAnswer?.text.isNullOrBlank()) {
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
-            if (state.currQuestionNum == questListSize) nextButton.setText(getString(R.string.finish))
-            if (state.currQuestionNum < questListSize) {
-                nextButton.setOnClickListener {
-                    val qusNumTop = state.currQuestionNum + 1
-                    num.setText(qusNumTop.toString())
-                    num.append("/$questListSize")
-                    progressBar.progress = qusNumTop
-                    state.moveQuestion.invoke()
-                    state.setQuestion.invoke()
-                    DataBaseRepository.savePoints(state.chosenAnswer.points)
-                    question.setText(state.question.text)
-                    viewModel.fetchListOfOptions()
+            when {
+                props.currQuestionNum == props.stressQuestionsQty -> {
+                    nextButton.text = getString(R.string.finish)
                 }
-            } else {
-                (requireActivity() as MainActivity).router.openResults()
+                props.currQuestionNum < props.stressQuestionsQty -> {
+                    nextButton.click {
+                        props.moveQuestion()
+                        props.setQuestion()
+                        props.savePoints(chosenAnswer?.points ?: 0)
+                        props.fetchListOfOptions()
+                    }
+                }
+                else -> props.openResults()
             }
+
             backButt.click {
-                state.again.invoke()
+                props.again()
+                props.openMood()
+            }
+
+            if (props.action == StressTestActions.OpenMood) {
                 (requireActivity() as MainActivity).router.openMood()
+            }
+            if (props.action == StressTestActions.OpenResults) {
+                (requireActivity() as MainActivity).router.openResults()
             }
         }
     }

@@ -1,75 +1,91 @@
 package com.example.moodtrackerproject.ui.notes.details
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.app.notes.NoteDetailsState
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.ui.notes.Store
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.notes.details.NoteDetailsProps.DetailsAction
 import com.example.moodtrackerproject.utils.DateUtils
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class NoteDetailsViewModel : ViewModel() {
-
-    private var state: DetailsViewState
+class NoteDetailsViewModel : BaseViewModel<NoteDetailsProps>() {
 
     init {
-        state = Store.appState.noteDetailsState.copy(
-            editClicked = ::editNote,
-            changeEditVisibility = ::changeEditScreenVisibility,
-            backClicked = ::goToAllNotes,
-            cancelClicked = ::cancelClicked,
-            setNote = ::setNote
-        )
-        Store.setState(state)
+        setState(Store.appState.noteDetailsState)
     }
 
-    private val _detailsStateLiveData: MutableLiveData<DetailsViewState> =
-        MutableLiveData<DetailsViewState>().apply {
-            value = state
-        }
-    val liveData get() = _detailsStateLiveData
+    override fun map(appState: AppState, action: MviAction?): NoteDetailsProps {
+        val state = appState.noteDetailsState
+        return NoteDetailsProps(
+            action = action as? DetailsAction,
+            editClicked = {},
+            changeEditVisibility = {
+                setState(state.copy(isEditNoteVisible = !state.isEditNoteVisible))
+            },
+            backClicked = {
+                setState(state, action = DetailsAction.ShowAllNotes)
+            },
+            cancelClicked = {
+                setState(state, action = DetailsAction.CancelEditing)
+            },
+            setNote = ::setNote,
+            saveEdited = ::saveEditedInStore,
+            noteId = state.noteModel.noteId,
+            date = state.noteModel.date,
+            editedDate = state.noteModel.editDate,
+            title = state.noteModel.title,
+            text = state.noteModel.text,
+            isEditNoteVisible = state.isEditNoteVisible,
+        )
+    }
 
     private fun setNote() {
-        val state = Store.appState.noteDetailsState.copy(
-            currentNote = Store.appState.notesState.listOfNotes[0]
-        )
-        liveData.value = state
-        Store.setState(state)
-    }
-
-    fun saveEdited(title: String, text: String) {
-        Store.saveEdited(title, text)
-        val neededItem =
-            DataBaseRepository.getNotes().find { it.noteId == Store.getNotesState().currentId }
-        val index =
-            DataBaseRepository.getNotes().indexOfFirst { it.noteId == Store.getNotesState().currentId }
-        val newNeeded =
-            neededItem?.copy(
-                title = Store.appState.notesState.listOfNotes[0].title,
-                text = Store.appState.notesState.listOfNotes[0].text,
-                editDate = DateUtils.getDateOfNote()
+        val notesState = Store.appState.notesState
+        val note = notesState.listOfNotes.find { it.noteId == notesState.currentId }
+        if (note != null) {
+            setState(
+                Store.appState.noteDetailsState.copy(
+                    noteModel = note,
+                )
             )
-        val newList = DataBaseRepository.getNotes().toMutableList()
-        if (newNeeded != null) newList[index] = newNeeded
-        DataBaseRepository.saveNotes(newList)
+        }
     }
 
-    private fun changeEditScreenVisibility() {
-        val isEditNoteVisible = !Store.appState.noteDetailsState.isEditNoteVisible
-        val stateNew = state.copy(
-            isEditNoteVisible = isEditNoteVisible,
-        )
-        liveData.value = stateNew
-
-        Store.setState(stateNew)
+    private fun saveEditedInStore(title: String, text: String) {
+        launch {
+            val notesState = Store.appState.notesState
+            val detailsState = Store.appState.noteDetailsState
+            withContext(Dispatchers.Default) {
+                val listOfNotes = notesState.listOfNotes.map {
+                    if (it.noteId == detailsState.noteModel.noteId) {
+                        it.copy(
+                            title = title,
+                            text = text,
+                            editDate = DateUtils.getDateOfNote(),
+                        )
+                    } else it
+                }
+                Store.setState(notesState.copy(listOfNotes = listOfNotes))
+                DataBaseRepository.saveNotes(listOfNotes)
+            }
+            setState(
+                detailsState.copy(
+                    isEditNoteVisible = false,
+                    noteModel = detailsState.noteModel.copy(
+                        title = title,
+                        text = text,
+                        editDate = DateUtils.getDateOfNote(),
+                    )
+                ),
+            )
+        }
     }
 
-    private fun goToAllNotes() {
-        liveData.value = state.copy(action = DetailsAction.ShowAllNotes)
-    }
-
-    private fun cancelClicked() {
-        liveData.value = state.copy(action = DetailsAction.CancelEditing)
-    }
-
-    private fun editNote() {
+    private fun setState(state: NoteDetailsState, action: DetailsAction? = null) {
+        setState(Store.appState.copy(noteDetailsState = state), action)
     }
 }

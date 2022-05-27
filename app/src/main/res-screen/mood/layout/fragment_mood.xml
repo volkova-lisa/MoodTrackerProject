@@ -126,5 +126,4 @@
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/stress_include" />
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

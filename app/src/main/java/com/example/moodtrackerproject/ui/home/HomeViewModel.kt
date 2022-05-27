@@ -1,23 +1,33 @@
 package com.example.moodtrackerproject.ui.home
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import com.example.moodtrackerproject.ui.home.HomeAction.LogOut
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
+import com.example.moodtrackerproject.utils.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 
-class HomeViewModel() : ViewModel() {
-    private val state = HomeViewState()
+class HomeViewModel : BaseViewModel<HomeProps>() {
+
+    private val props = HomeProps(
+        action = null,
+        logout = ::logOut,
+    )
+
+    init {
+        liveData.value = props
+    }
+
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val _homeStateLiveData: MutableLiveData<HomeViewState> =
-        MutableLiveData<HomeViewState>().apply {
-            value = state
-        }
-    val liveData get() = _homeStateLiveData
-
-    fun logOut() {
-        liveData.value = state.copy(isLoggedIn = false)
+    private fun logOut() {
+        liveData.value = props.copy(isLoggedIn = false)
         auth.signOut()
-        liveData.value = state.copy(action = LogOut)
+        PreferenceManager.setInitUser(false)
+        liveData.value = props.copy(action = HomeAction.LogOut)
+    }
+
+    override fun map(appState: AppState, action: MviAction?): HomeProps {
+        TODO("Not yet implemented")
     }
 }

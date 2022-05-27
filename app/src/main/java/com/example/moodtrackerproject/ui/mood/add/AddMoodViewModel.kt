@@ -1,65 +1,80 @@
 package com.example.moodtrackerproject.ui.mood.add
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import com.example.moodtrackerproject.app.AppState
+import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.app.mood.AddMoodState
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.ui.mood.list.MoodBody
-import com.example.moodtrackerproject.ui.notes.Store
+import com.example.moodtrackerproject.domain.MoodModel
+import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.ui.mood.add.AddMoodProps.NewMoodAction
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class AddMoodViewModel : ViewModel() {
-    private var state: AddMoodViewState
+class AddMoodViewModel : BaseViewModel<AddMoodProps>() {
 
     init {
-        state = Store.appState.addMoodState.copy(
-            cancelAdding = ::cancelAdding,
-            saveMood = ::addNewMood
+        setState(Store.appState.addMoodState)
+    }
+
+    override fun map(appState: AppState, action: MviAction?): AddMoodProps {
+        val state = appState.addMoodState
+        return AddMoodProps(
+            action = action as? NewMoodAction,
+            fetchListOfMoods = ::fetchListOfMoods,
+            cancelAdding = {},
+            saveMood = ::addNewMood,
+            moodItems = state.moods.map {
+                AddMoodProps.MoodItemProps(
+                    image = it.image,
+                    title = it.title,
+                    isChecked = it.isChecked,
+                    checkChanged = {
+                        saveChosenEmoji(it.title)
+                    }
+                )
+            },
         )
-        Store.setState(state)
     }
 
-    private val _addMoodStateLiveData: MutableLiveData<AddMoodViewState> =
-        MutableLiveData<AddMoodViewState>().apply {
-            value = state
+    private fun fetchListOfMoods() {
+        launch {
+            val moodsList = withContext(Dispatchers.IO) {
+                DataBaseRepository.getEmojiList()
+            }
+            setState(Store.appState.addMoodState.copy(moods = moodsList))
         }
-    val liveData get() = _addMoodStateLiveData
-
-    fun fetchListOfMoods() {
-        val moodsList = moodMap(DataBaseRepository.getEmojiList())
-        setState(state.copy(listWithChosenMood = moodsList))
     }
 
-    private fun moodMap(emojiList: List<EmojiBody>): List<EmojiBodyUIModel> {
-        return emojiList.map { model ->
-            EmojiBodyUIModel(
-                image = model.image,
-                title = model.title,
-                isChecked = model.isChecked,
-                checkChanged = {
-                    val newList = DataBaseRepository.saveChosenEmoji(it.title)
-                    setState(state.copy(listWithChosenMood = moodMap(newList)))
-                }
+    private fun saveChosenEmoji(title: String) {
+        launch {
+            val moodsList = withContext(Dispatchers.IO) {
+                DataBaseRepository.saveChosenEmoji(title)
+            }
+            setState(Store.appState.addMoodState.copy(moods = moodsList))
+        }
+    }
+
+    private fun addNewMood(emojiSrc: Int, title: String) {
+        launch {
+            val mood = MoodModel(
+                emojiSrc = emojiSrc,
+                moodTitle = title,
+                moodTime = DateUtils.getDateOfNote(),
+            )
+            withContext(Dispatchers.IO) {
+                DataBaseRepository.insertMood(mood)
+            }
+            setState(
+                Store.appState.addMoodState,
+                action = NewMoodAction.ShowMoodsScreen
             )
         }
     }
 
-    private fun cancelAdding() {
-    }
-
-    private fun addNewMood(pair: Pair<Int, String>) =
-        viewModelScope.launch(Dispatchers.Main) {
-            val mood = MoodBody(pair.first, pair.second, DateUtils.getDateOfNote())
-            DataBaseRepository.insertMood(mood) {
-                _addMoodStateLiveData.value = state.copy(action = NewMoodAction.ShowMoodsScreen)
-            }
-            setState(state.copy(action = NewMoodAction.ShowMoodsScreen))
-        }
-
-    private fun setState(newState: AddMoodViewState) {
-        Store.setState(newState)
-        _addMoodStateLiveData.value = Store.appState.addMoodState
+    private fun setState(state: AddMoodState, action: NewMoodAction? = null) {
+        setState(Store.appState.copy(addMoodState = state), action)
     }
 }

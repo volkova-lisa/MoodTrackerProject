@@ -4,60 +4,52 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentAddMoodBinding
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.mood.add.AddMoodProps.NewMoodAction
 import com.example.moodtrackerproject.utils.click
 
-class AddMoodFragment : Fragment() {
+class AddMoodFragment : BaseFragment<AddMoodViewModel, FragmentAddMoodBinding, AddMoodProps>(
+    AddMoodViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentAddMoodBinding
+    private lateinit var props: AddMoodProps
+
     private val addMoodAdapter = AddMoodAdapter()
-    private val viewModel: AddMoodViewModel by lazy {
-        ViewModelProvider(this).get(AddMoodViewModel::class.java)
-    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAddMoodBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentAddMoodBinding = FragmentAddMoodBinding.inflate(inflater, container, false)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.emojiInclude.emojiGrid.layoutManager = GridLayoutManager(context, 4)
-        binding.emojiInclude.emojiGrid.adapter = addMoodAdapter
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
+        binding?.run {
+            emojiInclude.emojiGrid.layoutManager = GridLayoutManager(context, 4)
+            emojiInclude.emojiGrid.adapter = addMoodAdapter
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchListOfMoods()
+        if (::props.isInitialized) {
+            props.fetchListOfMoods()
+        }
     }
 
-    private fun render(state: AddMoodViewState) {
-        addMoodAdapter.setList(state.listWithChosenMood)
-
-        // TODO: refactor
-        binding.run {
-            val text = state.listWithChosenMood.find {
-                it.isChecked
-            }
-            emojiName.text = text?.title ?: getString(R.string.mood_t)
-            // TODO: fix image with firebase
+    override fun render(props: AddMoodProps) {
+        this.props = props
+        binding?.run {
+            addMoodAdapter.submitList(props.moodItems)
+            val mood = props.moodItems.find { it.isChecked }
+            emojiName.text = mood?.title ?: getString(R.string.mood_t)
             saveButton.click {
-                state.saveMood(Pair(state.listWithChosenMood[1].image, emojiName.text.toString()))
+                mood?.let { props.saveMood(it.image, emojiName.text.toString()) }
             }
-            when (state.action) {
-                NewMoodAction.ShowMoodsScreen -> (requireActivity() as MainActivity).router.openMood()
-                null -> {}
+            if (props.action == NewMoodAction.ShowMoodsScreen) {
+                (requireActivity() as MainActivity).router.openMood()
             }
         }
     }

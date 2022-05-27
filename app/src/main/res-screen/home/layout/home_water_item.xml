@@ -47,4 +47,5 @@
             android:progressBackgroundTint="@color/light_purple"
             android:progressTint="@color/light_purple" />
     </FrameLayout>
+
 </com.google.android.material.card.MaterialCardView>

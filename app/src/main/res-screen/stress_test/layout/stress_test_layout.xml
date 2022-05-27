@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/water_bg"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    app:cardBackgroundColor="@color/light_purple"
+    app:cardCornerRadius="5dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/stress_bg">
+
+        <TextView
+            android:id="@+id/main_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="14dp"
+            android:fontFamily="@font/raleway_bold"
+            android:text="@string/stress_level_test"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/main_title"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/raleway_regular"
+            android:text="@string/check_your_stress"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="18dp"
+            android:background="@drawable/ic_play_test" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

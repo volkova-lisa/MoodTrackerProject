@@ -1,73 +1,62 @@
 package com.example.moodtrackerproject.ui.notes.details
 
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentNoteDetailsBinding
+import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.ui.notes.details.NoteDetailsProps.DetailsAction
 import com.example.moodtrackerproject.utils.click
 
-class NoteDetailsFragment : Fragment() {
+class NoteDetailsFragment : BaseFragment<NoteDetailsViewModel, FragmentNoteDetailsBinding, NoteDetailsProps>(
+    NoteDetailsViewModel::class.java
+) {
 
-    private lateinit var binding: FragmentNoteDetailsBinding
+    private lateinit var props: NoteDetailsProps
 
-    private val viewModel: NoteDetailsViewModel by lazy {
-        ViewModelProvider(this).get(NoteDetailsViewModel::class.java)
+    override fun getFragmentBinding(
+        inflater: LayoutInflater, container: ViewGroup?
+    ): FragmentNoteDetailsBinding = FragmentNoteDetailsBinding.inflate(inflater, container, false)
+
+    override fun onResume() {
+        super.onResume()
+        if (::props.isInitialized) {
+            props.setNote()
+        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentNoteDetailsBinding.inflate(layoutInflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        viewModel.liveData.value?.setNote?.invoke()
-        viewModel.liveData.observe(viewLifecycleOwner, {
-            render(it)
-        })
-    }
-
-    private fun render(state: DetailsViewState) {
-        binding.run {
-            // TODO: make it via state.isEditNoteVisible
-            if (state.currentNote != null) {
-                note.title.text = state.currentNote.title
-                note.text.text = state.currentNote.text
-                note.date.text = state.currentNote.date
-                if (state.currentNote.editedDate.isNotEmpty()) note.editedDate.text = "edited " + state.currentNote.editedDate
+    override fun render(props: NoteDetailsProps) {
+        this.props = props
+        binding?.run {
+            note.title.text = props.title
+            note.text.text = props.text
+            note.date.text = props.date
+            if (props.editedDate.isNotEmpty()) {
+                note.editedDate.text = "edited ${props.editedDate}"
             }
-            note.backButton.click(state.backClicked)
-            editButton.click {
-                noteEdit.root.isVisible = true
-                note.root.isVisible = false
-                editButton.isVisible = false
-                state.currentNote?.let {
-                    noteEdit.title.setText(state.currentNote.title)
-                    noteEdit.text.setText(state.currentNote.text)
-                }
-            }
+
+            noteEdit.root.isVisible = props.isEditNoteVisible
+            note.root.isVisible = !props.isEditNoteVisible
+            editButton.isVisible = !props.isEditNoteVisible
+            noteEdit.title.setText(props.title)
+            noteEdit.text.setText(props.text)
+
+            note.backButton.click(props.backClicked)
+            editButton.click(props.changeEditVisibility)
 
             noteEdit.saveEditedButton.click {
-                val newTitle = noteEdit.title.text.toString()
-                val newText = noteEdit.text.text.toString()
-
-                viewModel.saveEdited(newTitle, newText)
-                viewModel.liveData.value?.cancelClicked?.invoke()
+                props.saveEdited(noteEdit.title.text.toString(), noteEdit.text.text.toString())
             }
 
-            when (state.action) {
-                DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openDetails()
-                DetailsAction.ShowAllNotes -> (requireActivity() as MainActivity).router.openNotesScreen()
-                null -> {}
-            }
+            props.action?.let { handleAction(it) }
+        }
+    }
+
+    private fun handleAction(action: DetailsAction) {
+        when (action) {
+            DetailsAction.CancelEditing -> (requireActivity() as MainActivity).router.openDetails()
+            DetailsAction.ShowAllNotes -> (requireActivity() as MainActivity).router.openNotesScreen()
         }
     }
 }
