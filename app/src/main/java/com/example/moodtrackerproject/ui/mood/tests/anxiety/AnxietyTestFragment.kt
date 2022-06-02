@@ -1,4 +1,4 @@
-package com.example.moodtrackerproject.ui.mood.tests
+package com.example.moodtrackerproject.ui.mood.tests.anger
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,22 +9,23 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
+import com.example.moodtrackerproject.databinding.FragmentAnxietyTestBinding
+import com.example.moodtrackerproject.ui.mood.tests.TestAdapter
 import com.example.moodtrackerproject.utils.click
 
-class StressTestFragment : Fragment() {
+class AnxietyTestFragment : Fragment() {
 
-    private lateinit var binding: FragmentStressTestBinding
+    private lateinit var binding: FragmentAnxietyTestBinding
     private val testAdapter = TestAdapter()
-    val viewModel: StressTestViewModel by lazy {
-        ViewModelProvider(this).get(StressTestViewModel::class.java)
+    val viewModel: AnxietyTestViewModel by lazy {
+        ViewModelProvider(this).get(AnxietyTestViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentStressTestBinding.inflate(layoutInflater, container, false)
+        binding = FragmentAnxietyTestBinding.inflate(layoutInflater, container, false)
         viewModel.fetchListOfOptions()
         return binding.root
     }
@@ -48,7 +49,7 @@ class StressTestFragment : Fragment() {
         viewModel.fetchListOfOptions()
     }
 
-    private fun render(state: StressTestState) {
+    private fun render(state: AnxietyTestState) {
         binding.run {
 
             // TODO: less BL

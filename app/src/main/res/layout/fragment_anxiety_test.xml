@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.mood.tests.anger.StressTestFragment">
+    android:layout_height="match_parent">
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_left"
@@ -50,7 +50,7 @@
         android:layout_marginTop="16dp"
         android:progress="65"
         android:progressBackgroundTint="@color/light_purple"
-        android:progressTint="@color/red_stress"
+        android:progressTint="@color/light_purple"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/num" />
@@ -62,7 +62,7 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/raleway_bold"
         android:text="0/5"
-        android:textColor="@color/red_stress"
+        android:textColor="@color/light_purple"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -76,7 +76,7 @@
         android:fontFamily="@font/raleway_bold"
         android:maxWidth="360dp"
         android:text="@string/stress_q_one"
-        android:textColor="@color/red_stress"
+        android:textColor="@color/light_purple"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -118,6 +118,7 @@
         android:textColor="@color/text_grey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/next_button" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

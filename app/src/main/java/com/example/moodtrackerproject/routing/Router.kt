@@ -63,6 +63,9 @@ class Router(private val activity: MainActivity) {
     fun openStressTest() {
         navController.navigate(R.id.stressTest)
     }
+    fun openAnxietyTest() {
+        navController.navigate(R.id.anxietyTestFragment)
+    }
 
     fun openInsideNote() {
         navController.navigate(R.id.noteDetailsFragment)

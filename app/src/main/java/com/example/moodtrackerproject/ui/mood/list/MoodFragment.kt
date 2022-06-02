@@ -49,6 +49,9 @@ class MoodFragment : Fragment() {
             angerInclude.root.setOnClickListener {
                 (requireActivity() as MainActivity).router.openStressTest()
             }
+            anxietyInclude.root.setOnClickListener {
+                (requireActivity() as MainActivity).router.openAnxietyTest()
+            }
         }
     }
 }

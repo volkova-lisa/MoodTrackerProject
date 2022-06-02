@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.mood.list.HomeNotesAdapter
 import com.example.moodtrackerproject.ui.mood.list.MoodAdapter
@@ -47,6 +48,7 @@ class HomeFragment : Fragment() {
         state.action?.let { handleAction(it) }
         todayMoodsAdapter.setList(state.listOfMoods)
         todayNotesAdapter.setList(state.listOfNotes)
+        binding.angerInclude.angerBar.progress = DataBaseRepository.angerResults
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

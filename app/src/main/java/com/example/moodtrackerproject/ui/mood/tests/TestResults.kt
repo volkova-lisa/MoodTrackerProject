@@ -25,6 +25,7 @@ class TestResults : Fragment() {
         val resultPer: Int = (DataBaseRepository.stressPoints * 100) / 25
         binding.resultNum.setText("$resultPer")
         binding.resultNum.append("%")
+        DataBaseRepository.saveAngerResults(resultPer)
         binding.backButt.setOnClickListener {
             (requireActivity() as MainActivity).router.openMood()
         }

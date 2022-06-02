@@ -1,6 +1,8 @@
-package com.example.moodtrackerproject.ui.mood.tests
+package com.example.moodtrackerproject.ui.mood.tests.anger
 
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.ui.mood.tests.OptionUiModel
+import com.example.moodtrackerproject.ui.mood.tests.QuestionBody
 
 data class StressTestState(
     val chosenAnswer: OptionUiModel = OptionUiModel(),

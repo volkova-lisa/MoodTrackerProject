@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_moodFragment_to_stressTest"
             app:destination="@id/stressTest" />
+        <action
+            android:id="@+id/action_moodFragment_to_anxietyTestFragment"
+            app:destination="@id/anxietyTestFragment" />
     </fragment>
     <fragment
         android:id="@+id/statisticsFragment"
@@ -107,7 +110,7 @@
         tools:layout="@layout/fragment_note_details" />
     <fragment
         android:id="@+id/stressTest"
-        android:name="com.example.moodtrackerproject.ui.mood.tests.StressTestFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.anger.StressTestFragment"
         android:label="fragment_stress_test"
         tools:layout="@layout/fragment_stress_test" >
         <action
@@ -122,5 +125,13 @@
         <action
             android:id="@+id/action_testResults_to_moodFragment"
             app:destination="@id/moodFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/anxietyTestFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.anger.AnxietyTestFragment"
+        android:label="AnxietyTestFragment" >
+        <action
+            android:id="@+id/action_anxietyTestFragment_to_testResults"
+            app:destination="@id/testResults" />
     </fragment>
 </navigation>

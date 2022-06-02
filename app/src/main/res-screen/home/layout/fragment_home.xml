@@ -149,11 +149,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mental_title">
-                <include layout="@layout/layout_anger_joy_item" />
-                <include layout="@layout/layout_anxiety_pleasure_item" />
-                <include layout="@layout/layout_sad_happy_item" />
-
-
+                <include
+                    android:id="@+id/anger_include"
+                    layout="@layout/layout_anger_joy_item" />
+                <include
+                    android:id="@+id/anxiety_include"
+                    layout="@layout/layout_anxiety_pleasure_item" />
+                <include
+                    android:id="@+id/happiness_include"
+                    layout="@layout/layout_sad_happy_item" />
             </LinearLayout>
 
             <TextView
