@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/anger"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/red_stress"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -34,13 +34,13 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:progress="80"
+        android:progress="0"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         android:progressBackgroundTint="@color/light_purple"
-        android:progressTint="@color/light_purple" />
+        android:progressTint="@color/red_stress" />
 
     <TextView
         android:id="@+id/pleasure_title"
@@ -48,7 +48,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/joy"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/red_stress"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>

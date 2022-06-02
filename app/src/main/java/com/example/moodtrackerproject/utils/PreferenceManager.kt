@@ -70,4 +70,11 @@ object PreferenceManager {
         return if (moodsJson.isNullOrEmpty()) listOf() else moodsJsonAdapter.fromJson(moodsJson)
             ?: listOf()
     }
+
+    fun saveAngerResults(res: Int) {
+    }
+    fun saveAnxietyResults(res: Int) {
+    }
+    fun saveHappinessResults(res: Int) {
+    }
 }

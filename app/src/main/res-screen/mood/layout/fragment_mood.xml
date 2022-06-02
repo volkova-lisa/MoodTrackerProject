@@ -105,8 +105,8 @@
         app:layout_constraintTop_toBottomOf="@id/emoji_list" />
 
     <include
-        android:id="@+id/stress_include"
-        layout="@layout/stress_test_layout"
+        android:id="@+id/anger_include"
+        layout="@layout/anger_test_layout"
         android:layout_width="0dp"
         android:layout_height="90dp"
         android:layout_marginLeft="-5dp"
@@ -124,7 +124,7 @@
         android:layout_marginRight="-5dp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/stress_include" />
+        app:layout_constraintTop_toBottomOf="@id/anger_include" />
 
     <Button
         android:id="@+id/delete_button"

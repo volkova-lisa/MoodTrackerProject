@@ -46,7 +46,7 @@ class MoodFragment : Fragment() {
                 (requireActivity() as MainActivity).router.openAddMood()
             }
             moodsAdapter.setList(state.listOfMoods)
-            stressInclude.root.setOnClickListener {
+            angerInclude.root.setOnClickListener {
                 (requireActivity() as MainActivity).router.openStressTest()
             }
         }

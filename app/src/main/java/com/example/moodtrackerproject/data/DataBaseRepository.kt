@@ -48,6 +48,9 @@ object DataBaseRepository {
     )
 
     var stressPoints = 0
+    var angerResults = 0
+    var anxietyResults = 0
+    var happinessResults = 0
     fun savePoints(p: Int) {
         stressPoints = stressPoints + p
     }
@@ -120,5 +123,15 @@ object DataBaseRepository {
             add(moodBody)
         }
         saveMoods(list)
+    }
+
+    fun saveAngerResults(res: Int) {
+        angerResults = res
+    }
+    fun saveAnxietyResults(res: Int) {
+        anxietyResults = res
+    }
+    fun saveHappinessResults(res: Int) {
+        happinessResults = res
     }
 }

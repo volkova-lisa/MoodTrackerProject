@@ -69,7 +69,7 @@
     <string name="sad">Sad</string>
     <string name="at_10_20">at 10:20</string>
     <string name="mental_health">Mental Health</string>
-    <string name="disgust">Disgust</string>
+    <string name="anxious">Anxiety</string>
     <string name="pleasure">Pleasure</string>
     <string name="sadness">Sadness</string>
     <string name="happiness">Happy</string>
@@ -90,7 +90,7 @@
     <string name="add_mood">Add mood</string>
     <string name="moods_of_the_day">Moods of the day</string>
     <string name="tests">Tests</string>
-    <string name="stress_level_test">Stress level test</string>
+    <string name="stress_level_test">Anger level test</string>
     <string name="check_your_stress">Take a test to check your Stress level</string>
     <string name="anxiety_level_test">Anxiety level test</string>
     <string name="your_anxiety_level">Take a test to check your Anxiety level</string>
@@ -105,6 +105,8 @@
     <string name="test_finished">\"The test is finished! Your results are: \"</string>
     <string name="finish">Finish</string>
     <string name="clear_all">Clear all</string>
+    <string name="some_text_for">Some text for</string>
+    <string name="have_to_coete_several_tasks_at_work_and_r">Have to coete several tasks at work and r ...</string>
 
 
 </resources>

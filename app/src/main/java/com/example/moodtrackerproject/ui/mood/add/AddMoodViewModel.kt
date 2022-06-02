@@ -30,12 +30,6 @@ class AddMoodViewModel : ViewModel() {
 
     fun fetchListOfMoods() {
         val moodsList = moodMap(DataBaseRepository.getEmojiList())
-//        var storageRef = FirebaseStorage.getInstance().reference
-//        val mountainsRef = storageRef.child("emojis/emoji_anger.png")
-//        mountainsRef.getBytes(2840000000000)
-//            .addOnCompleteListener {
-//                it.getResult()
-//            }
         setState(state.copy(listWithChosenMood = moodsList))
     }
 
