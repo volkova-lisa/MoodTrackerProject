@@ -104,6 +104,7 @@
     <string name="mood_t">Mood title</string>
     <string name="test_finished">\"The test is finished! Your results are: \"</string>
     <string name="finish">Finish</string>
+    <string name="clear_all">Clear all</string>
 
 
 </resources>

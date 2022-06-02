@@ -2,15 +2,19 @@ package com.example.moodtrackerproject.utils
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.storage.FirebaseStorage
+import java.io.File
 
 val Context.inflater: LayoutInflater get() = LayoutInflater.from(this)
 
@@ -33,6 +37,24 @@ fun Context.hideKeyboard(view: View?) {
 fun Activity.snackBar(text: String) {
     Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG)
         .show()
+}
+
+fun getImageFromCloud(title: String) {
+    val storageRef = FirebaseStorage.getInstance().reference
+    Log.d("22222222", title.toString())
+    val emojiRef = storageRef.child("emojis/emoji_anger.png")
+    emojiRef.getBytes(2840000000000)
+        .addOnCompleteListener {
+            it.getResult()
+        }
+    val localFile = File.createTempFile("tempImage", "png")
+    storageRef.getFile(localFile).addOnSuccessListener {
+        val bitmap = BitmapFactory.decodeFile(localFile.absolutePath)
+        Log.d("success", bitmap.toString())
+    }
+        .addOnFailureListener {
+            Log.d("failure", "faaaail")
+        }
 }
 
 fun Fragment.ifNetworkIsAvailable(): Boolean {

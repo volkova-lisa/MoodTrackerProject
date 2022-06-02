@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.add
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,9 +52,16 @@ class AddMoodFragment : Fragment() {
                 it.isChecked
             }
             emojiName.text = text?.title ?: getString(R.string.mood_t)
+
             // TODO: fix image with firebase
             saveButton.click {
-                state.saveMood(Pair(state.listWithChosenMood[1].image, emojiName.text.toString()))
+                val pic = state.listWithChosenMood.find {
+                    it.isChecked
+                }?.image
+                val drawName = resources.getResourceEntryName(pic!!)
+                Log.d("PIIIIC", pic.toString())
+                Log.d("NAAME", drawName.toString())
+                state.saveMood(Pair(drawName.toString(), emojiName.text.toString()))
             }
             when (state.action) {
                 NewMoodAction.ShowMoodsScreen -> (requireActivity() as MainActivity).router.openMood()

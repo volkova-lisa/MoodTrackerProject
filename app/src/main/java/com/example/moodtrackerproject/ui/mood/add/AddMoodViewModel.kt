@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.add
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -29,6 +30,12 @@ class AddMoodViewModel : ViewModel() {
 
     fun fetchListOfMoods() {
         val moodsList = moodMap(DataBaseRepository.getEmojiList())
+//        var storageRef = FirebaseStorage.getInstance().reference
+//        val mountainsRef = storageRef.child("emojis/emoji_anger.png")
+//        mountainsRef.getBytes(2840000000000)
+//            .addOnCompleteListener {
+//                it.getResult()
+//            }
         setState(state.copy(listWithChosenMood = moodsList))
     }
 
@@ -49,12 +56,13 @@ class AddMoodViewModel : ViewModel() {
     private fun cancelAdding() {
     }
 
-    private fun addNewMood(pair: Pair<Int, String>) =
+    private fun addNewMood(pair: Pair<String, String>) =
         viewModelScope.launch(Dispatchers.Main) {
             val mood = MoodBody(pair.first, pair.second, DateUtils.getDateOfNote())
             DataBaseRepository.insertMood(mood) {
                 _addMoodStateLiveData.value = state.copy(action = NewMoodAction.ShowMoodsScreen)
             }
+            Log.d("=====", pair.first.toString())
             setState(state.copy(action = NewMoodAction.ShowMoodsScreen))
         }
 

@@ -112,6 +112,8 @@ object DataBaseRepository {
         PreferenceManager.saveMoods(moodsList)
     }
 
+    fun clearMoods() = PreferenceManager.saveMoods(emptyList())
+
     fun insertMood(moodBody: MoodBody, onSuccess: () -> Unit) {
         val list = mutableListOf<MoodBody>().apply {
             addAll(getMoods())

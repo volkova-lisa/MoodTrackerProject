@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.list
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,9 @@ class MoodAdapter(val listOfMoods: MutableList<MoodBody> = mutableListOf()) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(mood: MoodBody) {
             binding.run {
-                emoji.setImageResource(mood.emojiSrc)
+                Log.d("IMAGESRC", mood.emojiSrc)
+                // getImageFromCloud(mood.emojiSrc)
+                // emoji.setImageBitmap(mood.emojiSrc.getImageFromCloud())
                 emojiTitle.text = mood.moodTitle
                 emojiTime.text = mood.moodTime
             }

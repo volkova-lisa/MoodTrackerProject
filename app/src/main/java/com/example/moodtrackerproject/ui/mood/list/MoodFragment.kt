@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentMoodBinding
 
 class MoodFragment : Fragment() {
@@ -36,6 +37,10 @@ class MoodFragment : Fragment() {
 
     private fun render(state: MoodViewState) {
         binding.run {
+            deleteButton.setOnClickListener {
+                DataBaseRepository.clearMoods()
+                viewModel.fetchListOfMoods()
+            }
             moodInclude.addMoodBtn.setOnClickListener {
                 state.addNewMood.invoke()
                 (requireActivity() as MainActivity).router.openAddMood()
