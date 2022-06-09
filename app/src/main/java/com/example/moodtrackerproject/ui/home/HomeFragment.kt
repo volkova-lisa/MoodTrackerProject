@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.mood.list.HomeNotesAdapter
 import com.example.moodtrackerproject.ui.mood.list.MoodAdapter
+import com.example.moodtrackerproject.utils.DateUtils
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 class HomeFragment : Fragment() {
@@ -48,7 +50,11 @@ class HomeFragment : Fragment() {
         state.action?.let { handleAction(it) }
         todayMoodsAdapter.setList(state.listOfMoods)
         todayNotesAdapter.setList(state.listOfNotes)
+        Log.d("anger---", DataBaseRepository.angerResults.toString())
         binding.angerInclude.angerBar.progress = DataBaseRepository.angerResults
+        binding.anxietyInclude.disgustBar.progress = DataBaseRepository.anxietyResults
+        binding.happinessInclude.disgustBar.progress = DataBaseRepository.happinessResults
+        binding.date.text = DateUtils.getToday()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

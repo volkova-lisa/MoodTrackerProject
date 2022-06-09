@@ -15,7 +15,7 @@ class MoodAdapter(val listOfMoods: MutableList<MoodBody> = mutableListOf()) :
             binding.run {
                 Log.d("IMAGESRC", mood.emojiSrc)
                 // getImageFromCloud(mood.emojiSrc)
-                // emoji.setImageBitmap(mood.emojiSrc.getImageFromCloud())
+                // emoji.setImageBitmap(mood.emojiSrc.)
                 emojiTitle.text = mood.moodTitle
                 emojiTime.text = mood.moodTime
             }

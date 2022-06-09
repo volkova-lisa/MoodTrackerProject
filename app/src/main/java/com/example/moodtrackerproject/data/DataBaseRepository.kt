@@ -47,14 +47,20 @@ object DataBaseRepository {
         OptionBody("Very Often", 5)
     )
 
-    var stressPoints = 0
+    var stressResults = 0
     var angerResults = 0
     var anxietyResults = 0
     var happinessResults = 0
-    fun savePoints(p: Int) {
-        stressPoints = stressPoints + p
+    fun saveStressPoints(p: Int) {
+        stressResults += p
+    }
+    fun saveAnxietyPoints(p: Int) {
+        anxietyResults += p
     }
 
+    fun saveHappinessPoints(p: Int) {
+        happinessResults += p
+    }
     fun getEmojiList() = listOfEmojis
 
     fun getOptions() = lisOfOptions
@@ -127,6 +133,7 @@ object DataBaseRepository {
 
     fun saveAngerResults(res: Int) {
         angerResults = res
+        PreferenceManager.saveAngerPoints(res)
     }
     fun saveAnxietyResults(res: Int) {
         anxietyResults = res

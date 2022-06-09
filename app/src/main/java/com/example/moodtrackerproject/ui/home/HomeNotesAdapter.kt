@@ -15,10 +15,9 @@ class HomeNotesAdapter(val listOfNotes: MutableList<NoteBody> = mutableListOf())
         fun bind(note: NoteBody) {
             binding.run {
                 Log.d("IMAGESRC", note.title)
-                // getImageFromCloud(mood.emojiSrc)
-                // emoji.setImageBitmap(mood.emojiSrc.getImageFromCloud())
                 titleOfNote.text = note.title
                 textOfNote.text = note.text
+                timeOfNote.text = note.date
             }
         }
     }

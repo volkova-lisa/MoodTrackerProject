@@ -119,7 +119,7 @@
     </fragment>
     <fragment
         android:id="@+id/testResults"
-        android:name="com.example.moodtrackerproject.ui.mood.tests.TestResults"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.anger.StressTestResults"
         android:label="fragment_test_results"
         tools:layout="@layout/fragment_test_results" >
         <action
@@ -133,5 +133,20 @@
         <action
             android:id="@+id/action_anxietyTestFragment_to_testResults"
             app:destination="@id/testResults" />
+        <action
+            android:id="@+id/action_anxietyTestFragment_to_anxietyTestResults"
+            app:destination="@id/anxietyTestResults" />
     </fragment>
+    <fragment
+        android:id="@+id/anxietyTestResults"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.anger.AnxietyTestResults"
+        android:label="AnxietyTestResults" />
+    <fragment
+        android:id="@+id/happinessTestFragment"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.anger.HappinessTestFragment"
+        android:label="HappinessTestFragment" />
+    <fragment
+        android:id="@+id/happinessTestResults"
+        android:name="com.example.moodtrackerproject.ui.mood.tests.anger.HappinessTestResults"
+        android:label="HappinessTestResults" />
 </navigation>

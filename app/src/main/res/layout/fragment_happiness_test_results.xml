@@ -6,7 +6,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.mood.tests.anger.StressTestResults">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/result_title"
@@ -15,7 +15,7 @@
         android:layout_marginTop="30dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/result_is"
-        android:textColor="@color/red_stress"
+        android:textColor="@color/blue_anxiety"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,7 +28,7 @@
         android:layout_marginTop="60dp"
         android:layout_gravity="center_horizontal"
         android:indeterminateOnly="false"
-        android:progressDrawable="@drawable/result_circle"
+        android:progressDrawable="@drawable/anxiety_result_circle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/result_title"
@@ -41,7 +41,7 @@
         android:fontFamily="@font/raleway_bold"
         android:maxWidth="360dp"
         android:text="0%"
-        android:textColor="@color/red_stress"
+        android:textColor="@color/blue_anxiety"
         android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="@+id/stress_bar"
         app:layout_constraintEnd_toEndOf="@+id/stress_bar"
@@ -60,7 +60,5 @@
         android:textColor="@color/text_grey"
         app:layout_constraintTop_toBottomOf="@id/stress_bar"
         app:layout_constraintEnd_toEndOf="parent" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

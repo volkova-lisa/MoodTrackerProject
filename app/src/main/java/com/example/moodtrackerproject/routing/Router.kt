@@ -12,8 +12,16 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.action_moodFragment_to_addMoodFragment)
     }
 
-    fun openResults() {
+    fun openStressResults() {
         navController.navigate(R.id.testResults)
+    }
+
+    fun openAnxietyResults() {
+        navController.navigate(R.id.anxietyTestResults)
+    }
+
+    fun openHappinessResults() {
+        navController.navigate(R.id.happinessTestResults)
     }
 
     fun openDetails() {
@@ -67,7 +75,7 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.anxietyTestFragment)
     }
 
-    fun openInsideNote() {
-        navController.navigate(R.id.noteDetailsFragment)
+    fun openHappinessTest() {
+        navController.navigate(R.id.happinessTestFragment)
     }
 }

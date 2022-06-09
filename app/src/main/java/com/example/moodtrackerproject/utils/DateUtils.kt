@@ -16,4 +16,10 @@ object DateUtils {
         val noteDate = "$month $day, $hour:$minute"
         return noteDate
     }
+
+    fun getToday(): String {
+        val sdf = SimpleDateFormat("dd MMM")
+        val currentDate = sdf.format(Date())
+        return "Today is $currentDate"
+    }
 }

@@ -27,6 +27,14 @@ object PreferenceManager {
     private val notesJsonAdapter: JsonAdapter<List<NoteBody>> = moshi.adapter(valuesNote)
     private val moodsJsonAdapter: JsonAdapter<List<MoodBody>> = moshi.adapter(valuesMood)
 
+    fun saveAngerPoints(points: Int) {
+        preferences.edit().putInt("anger_points", points)
+    }
+
+    fun getAngerPoints(): Int {
+        return preferences.getInt("anger_points", -1)
+    }
+
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
             preferences = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE)

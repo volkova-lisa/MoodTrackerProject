@@ -75,12 +75,12 @@ class AnxietyTestFragment : Fragment() {
                     progressBar.progress = qusNumTop
                     state.moveQuestion.invoke()
                     state.setQuestion.invoke()
-                    DataBaseRepository.savePoints(state.chosenAnswer.points)
+                    DataBaseRepository.saveAnxietyPoints(state.chosenAnswer.points)
                     question.setText(state.question.text)
                     viewModel.fetchListOfOptions()
                 }
             } else {
-                (requireActivity() as MainActivity).router.openResults()
+                (requireActivity() as MainActivity).router.openAnxietyResults()
             }
             backButt.click {
                 state.again.invoke()

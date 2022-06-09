@@ -7,12 +7,11 @@ import com.example.moodtrackerproject.ui.mood.tests.OptionBody
 import com.example.moodtrackerproject.ui.mood.tests.OptionUiModel
 import com.example.moodtrackerproject.ui.notes.Store
 
-class StressTestViewModel : ViewModel() {
-
-    private var state: StressTestState
+class HappinesViewModel : ViewModel() {
+    private var state: HappinesTestState
 
     init {
-        state = Store.appState.stressTestState.copy(
+        state = Store.appState.happinessTestState.copy(
             setQuestion = ::setNextQuestion,
             moveQuestion = ::nextQuestion,
             again = ::startAgain
@@ -20,27 +19,27 @@ class StressTestViewModel : ViewModel() {
         Store.setState(state)
     }
 
-    private val _stressStateLiveData: MutableLiveData<StressTestState> =
-        MutableLiveData<StressTestState>().apply {
+    private val _happinesStateLiveData: MutableLiveData<HappinesTestState> =
+        MutableLiveData<HappinesTestState>().apply {
             value = state
         }
-    val liveData get() = _stressStateLiveData
+    val liveData get() = _happinesStateLiveData
 
     private fun startAgain() {
         val state =
-            Store.appState.stressTestState.copy(
+            Store.appState.happinessTestState.copy(
                 currQuestionNum = 0,
                 points = 0
             )
-        DataBaseRepository.stressResults = 0
+        DataBaseRepository.happinessResults = 0
         liveData.value = state
         Store.setState(state)
     }
 
     private fun setNextQuestion() {
-        val num = Store.appState.stressTestState.currQuestionNum
+        val num = Store.appState.happinessTestState.currQuestionNum
         val state =
-            Store.appState.stressTestState.copy(
+            Store.appState.happinessTestState.copy(
                 question = DataBaseRepository.listOfStressQs[num],
                 points = num
             )
@@ -49,9 +48,9 @@ class StressTestViewModel : ViewModel() {
     }
 
     private fun nextQuestion() {
-        val num = Store.appState.stressTestState.currQuestionNum
+        val num = Store.appState.happinessTestState.currQuestionNum
         val state =
-            Store.appState.stressTestState.copy(
+            Store.appState.happinessTestState.copy(
                 currQuestionNum = num + 1
             )
         liveData.value = state
@@ -60,7 +59,7 @@ class StressTestViewModel : ViewModel() {
 
     fun fetchListOfOptions() {
         val options = optionMap(DataBaseRepository.getOptions())
-        val state = Store.appState.stressTestState.copy(listOfOptions = options)
+        val state = Store.appState.happinessTestState.copy(listOfOptions = options)
         liveData.value = state
         Store.setState(state)
     }
@@ -75,18 +74,18 @@ class StressTestViewModel : ViewModel() {
                     val list = DataBaseRepository.saveSelected(it)
                     val filtered = optionMap(list).filter { it.isChecked == true }
                     setState(
-                        Store.appState.stressTestState.copy(
+                        Store.appState.happinessTestState.copy(
                             chosenAnswer = filtered[0]
                         )
                     )
-                    setState(Store.appState.stressTestState.copy(listOfOptions = optionMap(list)))
+                    setState(Store.appState.happinessTestState.copy(listOfOptions = optionMap(list)))
                 }
             )
         }
     }
 
-    private fun setState(newState: StressTestState) {
+    private fun setState(newState: HappinesTestState) {
         Store.setState(newState)
-        _stressStateLiveData.value = Store.appState.stressTestState
+        _happinesStateLiveData.value = Store.appState.happinessTestState
     }
 }

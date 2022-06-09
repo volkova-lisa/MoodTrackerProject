@@ -31,7 +31,7 @@ class AnxietyTestViewModel : ViewModel() {
                 currQuestionNum = 0,
                 points = 0
             )
-        DataBaseRepository.stressPoints = 0
+        DataBaseRepository.anxietyResults = 0
         liveData.value = state
         Store.setState(state)
     }

@@ -38,7 +38,7 @@
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/anx_test"
+            app:title="@string/hap_test"
             app:titleTextColor="@color/light_purple" />
     </com.google.android.material.appbar.AppBarLayout>
 

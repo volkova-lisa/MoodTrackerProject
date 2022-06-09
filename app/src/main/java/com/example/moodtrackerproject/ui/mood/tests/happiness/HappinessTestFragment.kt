@@ -9,23 +9,23 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
+import com.example.moodtrackerproject.databinding.FragmentHappinessTestBinding
 import com.example.moodtrackerproject.ui.mood.tests.TestAdapter
 import com.example.moodtrackerproject.utils.click
 
-class StressTestFragment : Fragment() {
+class HappinessTestFragment : Fragment() {
 
-    private lateinit var binding: FragmentStressTestBinding
+    private lateinit var binding: FragmentHappinessTestBinding
     private val testAdapter = TestAdapter()
-    val viewModel: StressTestViewModel by lazy {
-        ViewModelProvider(this).get(StressTestViewModel::class.java)
+    val viewModel: HappinesViewModel by lazy {
+        ViewModelProvider(this).get(HappinesViewModel::class.java)
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentStressTestBinding.inflate(layoutInflater, container, false)
+        binding = FragmentHappinessTestBinding.inflate(layoutInflater, container, false)
         viewModel.fetchListOfOptions()
         return binding.root
     }
@@ -49,7 +49,7 @@ class StressTestFragment : Fragment() {
         viewModel.fetchListOfOptions()
     }
 
-    private fun render(state: StressTestState) {
+    private fun render(state: HappinesTestState) {
         binding.run {
 
             // TODO: less BL
@@ -75,12 +75,12 @@ class StressTestFragment : Fragment() {
                     progressBar.progress = qusNumTop
                     state.moveQuestion.invoke()
                     state.setQuestion.invoke()
-                    DataBaseRepository.saveStressPoints(state.chosenAnswer.points)
+                    DataBaseRepository.saveHappinessPoints(state.chosenAnswer.points)
                     question.setText(state.question.text)
                     viewModel.fetchListOfOptions()
                 }
             } else {
-                (requireActivity() as MainActivity).router.openStressResults()
+                (requireActivity() as MainActivity).router.openHappinessResults()
             }
             backButt.click {
                 state.again.invoke()

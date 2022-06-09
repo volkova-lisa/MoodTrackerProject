@@ -94,6 +94,7 @@
     <string name="check_your_stress">Take a test to check your Stress level</string>
     <string name="anxiety_level_test">Anxiety level test</string>
     <string name="your_anxiety_level">Take a test to check your Anxiety level</string>
+    <string name="your_hap_level">Take a test to check your Happiness level</string>
     <string name="how_do_you_feel">How do you feel now?</string>
     <string name="choose_an">Choose an emoji that represent your current mood best!</string>
     <string name="traumatised">Traumatised</string>
@@ -107,6 +108,8 @@
     <string name="clear_all">Clear all</string>
     <string name="some_text_for">Some text for</string>
     <string name="have_to_coete_several_tasks_at_work_and_r">Have to coete several tasks at work and r ...</string>
+    <string name="hap_test">Happiness test level</string>
+    <string name="anx_test">Anxiety test level</string>
 
 
 </resources>

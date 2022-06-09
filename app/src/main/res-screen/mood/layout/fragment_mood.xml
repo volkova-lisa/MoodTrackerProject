@@ -1,24 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.mood.list.MoodFragment">
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_left"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.04" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_right"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.96" />
+    android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_layout"
@@ -42,99 +27,139 @@
             app:titleTextColor="@color/light_purple" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/add_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/add_new_mood"
-        android:textColor="@color/light_purple"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="?android:actionBarSize">
 
-    <include
-        android:id="@+id/mood_include"
-        layout="@layout/layout_whats_your_mood"
-        android:layout_width="0dp"
-        android:layout_height="125dp"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/add_title" />
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.mood.list.MoodFragment">
 
-    <TextView
-        android:id="@+id/mood_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/moods_of_the_day"
-        android:textColor="@color/light_purple"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/mood_include" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_left"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.04" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/emoji_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-8dp"
-        android:layout_marginTop="8dp"
-        android:orientation="horizontal"
-        android:paddingStart="20dp"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mood_title"
-        tools:ignore="RtlSymmetry"
-        tools:listitem="@layout/home_mood_item"
-        tools:visibility="visible" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.96" />
 
-    <TextView
-        android:id="@+id/test_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/raleway_bold"
-        android:text="@string/tests"
-        android:textColor="@color/light_purple"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/emoji_list" />
 
-    <include
-        android:id="@+id/anger_include"
-        layout="@layout/anger_test_layout"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/test_title" />
+            <TextView
+                android:id="@+id/add_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:fontFamily="@font/raleway_bold"
+                android:text="@string/add_new_mood"
+                android:textColor="@color/light_purple"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintBaseline_toTopOf="parent" />
 
-    <include
-        android:id="@+id/anxiety_include"
-        layout="@layout/anxiety_test_layout"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginLeft="-5dp"
-        android:layout_marginRight="-5dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
-        app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/anger_include" />
+            <include
+                android:id="@+id/mood_include"
+                layout="@layout/layout_whats_your_mood"
+                android:layout_width="0dp"
+                android:layout_height="125dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="-5dp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/add_title" />
 
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12sp"
-        android:textAllCaps="false"
-        android:padding="0dp"
-        android:text="@string/clear_all"
-        app:layout_constraintBottom_toTopOf="@+id/emoji_list"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_right"
-        app:layout_constraintTop_toBottomOf="@+id/mood_include" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/mood_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/raleway_bold"
+                android:text="@string/moods_of_the_day"
+                android:textColor="@color/light_purple"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/mood_include" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/emoji_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-8dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingStart="20dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mood_title"
+                tools:ignore="RtlSymmetry"
+                tools:listitem="@layout/home_mood_item"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/test_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/raleway_bold"
+                android:text="@string/tests"
+                android:textColor="@color/light_purple"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/emoji_list" />
+
+            <include
+                android:id="@+id/anger_include"
+                layout="@layout/anger_test_layout"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="-5dp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/test_title" />
+
+            <include
+                android:id="@+id/anxiety_include"
+                layout="@layout/anxiety_test_layout"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="-5dp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/anger_include" />
+
+            <include
+                android:id="@+id/happiness_include"
+                layout="@layout/happiness_test_layout"
+                android:layout_width="0dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginRight="-5dp"
+                app:layout_constraintEnd_toEndOf="@id/guideline_right"
+                app:layout_constraintStart_toStartOf="@id/guideline_left"
+                app:layout_constraintTop_toBottomOf="@id/anxiety_include" />
+
+            <Button
+                android:id="@+id/delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="0dp"
+                android:text="@string/clear_all"
+                android:textAllCaps="false"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toTopOf="@+id/emoji_list"
+                app:layout_constraintEnd_toStartOf="@+id/guideline_right"
+                app:layout_constraintTop_toBottomOf="@+id/mood_include" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
