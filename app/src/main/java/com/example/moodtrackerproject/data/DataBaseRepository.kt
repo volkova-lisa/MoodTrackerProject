@@ -2,10 +2,10 @@ package com.example.moodtrackerproject.data
 
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.EmojiModel
-import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
 import com.example.moodtrackerproject.domain.OptionModel
 import com.example.moodtrackerproject.domain.QuestionModel
+import com.example.moodtrackerproject.ui.mood.list.MoodProps
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 // single source of truth
@@ -108,8 +108,8 @@ object DataBaseRepository {
 
     fun getMoods() = PreferenceManager.getMoods()
 
-    fun insertMood(moodModel: MoodModel) {
-        val list = mutableListOf<MoodModel>().apply {
+    fun insertMood(moodModel: MoodProps.MoodItemProps) {
+        val list = mutableListOf<MoodProps.MoodItemProps>().apply {
             addAll(getMoods())
             add(moodModel)
         }

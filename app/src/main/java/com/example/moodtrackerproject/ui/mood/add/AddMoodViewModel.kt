@@ -5,9 +5,9 @@ import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.app.mood.AddMoodState
 import com.example.moodtrackerproject.data.DataBaseRepository
-import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.mood.add.AddMoodProps.NewMoodAction
+import com.example.moodtrackerproject.ui.mood.list.MoodProps
 import com.example.moodtrackerproject.utils.DateUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -59,7 +59,7 @@ class AddMoodViewModel : BaseViewModel<AddMoodProps>() {
 
     private fun addNewMood(emojiSrc: Int, title: String) {
         launch {
-            val mood = MoodModel(
+            val mood = MoodProps.MoodItemProps(
                 emojiSrc = emojiSrc,
                 moodTitle = title,
                 moodTime = DateUtils.getDateOfNote(),
