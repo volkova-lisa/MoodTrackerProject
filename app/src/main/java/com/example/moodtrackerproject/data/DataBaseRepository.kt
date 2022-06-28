@@ -1,11 +1,8 @@
 package com.example.moodtrackerproject.data
 
+import android.util.Log
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.domain.EmojiModel
-import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.domain.OptionModel
-import com.example.moodtrackerproject.domain.QuestionModel
-import com.example.moodtrackerproject.ui.mood.list.MoodProps
+import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 // single source of truth
@@ -108,11 +105,17 @@ object DataBaseRepository {
 
     fun getMoods() = PreferenceManager.getMoods()
 
-    fun insertMood(moodModel: MoodProps.MoodItemProps) {
-        val list = mutableListOf<MoodProps.MoodItemProps>().apply {
-            addAll(getMoods())
+    fun insertMood(moodModel: MoodModel) {
+        Log.d("INSERT---- MOOD", moodModel.toString())
+
+        val list = mutableListOf<MoodModel>().apply {
+            Log.d("--INSERT MOOD", moodModel.toString())
+            // addAll(getMoods())
+            Log.d("----", moodModel.toString())
             add(moodModel)
+            Log.d("======", moodModel.toString())
         }
         PreferenceManager.saveMoods(list)
+        Log.d("----INSERT MOOD", list.toString())
     }
 }

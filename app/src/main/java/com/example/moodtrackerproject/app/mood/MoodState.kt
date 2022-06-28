@@ -1,7 +1,7 @@
 package com.example.moodtrackerproject.app.mood
 
-import com.example.moodtrackerproject.ui.mood.list.MoodProps
+import com.example.moodtrackerproject.domain.MoodModel
 
 data class MoodState(
-    val listOfMoods: List<MoodProps.MoodItemProps> = listOf(),
+    val listOfMoods: List<MoodModel> = listOf(),
 )
