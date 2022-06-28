@@ -30,7 +30,7 @@ class MoodFragment : BaseFragment<MoodViewModel, FragmentMoodBinding, MoodProps>
     override fun onResume() {
         super.onResume()
         if (::props.isInitialized) {
-            // props.fetchListOfMoods()
+            props.fetchListOfMoods()
         }
     }
 

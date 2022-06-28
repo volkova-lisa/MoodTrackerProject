@@ -110,7 +110,7 @@ object DataBaseRepository {
 
         val list = mutableListOf<MoodModel>().apply {
             Log.d("--INSERT MOOD", moodModel.toString())
-            // addAll(getMoods())
+            addAll(getMoods())
             Log.d("----", moodModel.toString())
             add(moodModel)
             Log.d("======", moodModel.toString())
