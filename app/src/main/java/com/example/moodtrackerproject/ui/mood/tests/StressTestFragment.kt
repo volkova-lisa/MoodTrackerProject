@@ -1,11 +1,13 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.StressTestActions
@@ -45,9 +47,12 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
         binding?.run {
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
 
+            Log.d("CUUR QUES NUM", props.currQuestionNum.toString())
+            Log.d("STR QUES QUAN", props.stressQuestionsQty.toString())
+            Log.d("QUES TEXT", props.questionText.toString())
+
             question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText
             else getString(R.string.test_finished)
-
             testAdapter.submitList(props.listOfOptions)
             progressBar.progress = props.currQuestionNum
 
@@ -65,10 +70,21 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
                     nextButton.text = getString(R.string.finish)
                 }
                 props.currQuestionNum < props.stressQuestionsQty -> {
-                    nextButton.click {
-                        props.moveQuestion()
-                        props.setQuestion()
-                        props.savePoints(chosenAnswer?.points ?: 0)
+                    nextButton.setOnClickListener {
+//                        props.moveQuestion()
+//                        Log.d("changed curr num---", props.currQuestionNum.toString())
+//                        props.setQuestion()
+//                        props.savePoints(chosenAnswer?.points ?: 0)
+//                        props.fetchListOfOptions()
+                        val questListSize: Int = DataBaseRepository.listOfStressQs.size - 1
+                        val qusNumTop = props.currQuestionNum + 1
+                        num.setText(qusNumTop.toString())
+                        num.append("/$questListSize")
+                        progressBar.progress = qusNumTop
+                        props.moveQuestion.invoke()
+                        props.setQuestion.invoke()
+                        DataBaseRepository.saveStressPoints(chosenAnswer?.points ?: 0)
+                        question.setText(props.questionText)
                         props.fetchListOfOptions()
                     }
                 }

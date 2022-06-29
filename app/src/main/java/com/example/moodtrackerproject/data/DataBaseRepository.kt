@@ -45,7 +45,7 @@ object DataBaseRepository {
     )
 
     var stressPoints = 0
-    fun savePoints(p: Int) {
+    fun saveStressPoints(p: Int) {
         stressPoints = stressPoints + p
     }
 
