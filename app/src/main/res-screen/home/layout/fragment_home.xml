@@ -161,9 +161,9 @@
 
                 <include layout="@layout/layout_disgust_pleasure_item" />
 
-                <include layout="@layout/layout_sad_happy_item" />
+                <include layout="@layout/layout_sad_happy_item"/>
 
-                <include layout="@layout/layout_anger_joy_item" />
+                <include layout="@layout/layout_anger_joy_item"/>
             </LinearLayout>
 
             <TextView
