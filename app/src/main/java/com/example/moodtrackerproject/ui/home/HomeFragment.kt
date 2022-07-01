@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
@@ -29,10 +30,18 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         binding?.emojiList?.adapter = moodsAdapter
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (::props.isInitialized) {
+            props.fetchListOfMoods()
+        }
+    }
+
     override fun render(props: HomeProps) {
         this.props = props
         props.action?.let { handleAction(it) }
         moodsAdapter.submitList(props.listOfMoodsToday)
+        Log.d(")))))))))))", props.listOfMoodsToday.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

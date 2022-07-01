@@ -7,7 +7,7 @@ data class HomeProps(
     val logout: () -> Unit,
     val action: HomeAction? = null,
     val listOfMoodsToday: List<MoodProps.MoodItemProps> = listOf(),
-
+    val fetchListOfMoods: () -> Unit = {}
 ) {
     sealed class HomeAction {
         object LogOut : HomeAction()
