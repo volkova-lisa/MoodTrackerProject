@@ -10,6 +10,7 @@ import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 import com.example.moodtrackerproject.ui.mood.list.MoodProps
+import com.example.moodtrackerproject.ui.notes.list.NotesListProps
 import com.example.moodtrackerproject.utils.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,8 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
     private val props = HomeProps(
         action = null,
         logout = ::logOut,
-        fetchListOfMoods = ::fetchListOfMoods
+        fetchListOfMoods = ::fetchListOfMoods,
+        fetchListOfNotes = ::fetchListOfNotes
     )
 
     init {
@@ -42,9 +44,24 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     moodTime = it.moodTime,
                 )
             },
+            listOfNotesToday = state.listOfNotes.map {
+                NotesListProps.NoteItemProps(
+                    noteId = it.noteId,
+                    date = it.date,
+                    editedDate = it.editDate,
+                    title = it.title,
+                    text = it.text,
+                    isChecked = it.isChecked,
+                    isDeleted = it.isDeleted,
+                    checkChanged = {},
+                    openDetails = {},
+                    deleteNote = {}
+                )
+            },
             isLoggedIn = state.isLoggedIn,
             logout = ::logOut,
-            fetchListOfMoods = ::fetchListOfMoods
+            fetchListOfMoods = ::fetchListOfMoods,
+            fetchListOfNotes = ::fetchListOfNotes
         )
         Log.d("88888888", props.listOfMoodsToday.toString())
     }
@@ -62,6 +79,17 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                 DataBaseRepository.getMoods()
             }
             setState(Store.appState.homeState.copy(listOfMoods = moods))
+        }
+    }
+
+    private fun fetchListOfNotes() {
+        launch {
+            val notes = withContext(Dispatchers.IO) {
+                DataBaseRepository.getNotes()
+            }
+            Log.d("66666666", appState.homeState.listOfNotes.toString())
+            setState(Store.appState.homeState.copy(listOfNotes = notes))
+            Log.d("33333333", appState.homeState.listOfNotes.toString())
         }
     }
 

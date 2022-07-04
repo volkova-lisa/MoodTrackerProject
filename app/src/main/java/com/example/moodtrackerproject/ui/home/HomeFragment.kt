@@ -16,6 +16,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
 ) {
 
     private val moodsAdapter = MoodsListAdapter()
+    private val notesAdapter = HomeNotesAdapter()
 
     private lateinit var props: HomeProps
 
@@ -28,20 +29,24 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         (activity as? AppCompatActivity)?.setSupportActionBar(binding?.toolbar)
         setHasOptionsMenu(true)
         binding?.emojiList?.adapter = moodsAdapter
+        binding?.notesList?.adapter = notesAdapter
     }
 
     override fun onResume() {
         super.onResume()
         if (::props.isInitialized) {
             props.fetchListOfMoods()
+            props.fetchListOfNotes()
+            Log.d("111111111", props.listOfMoodsToday.toString())
         }
     }
 
     override fun render(props: HomeProps) {
         this.props = props
         props.action?.let { handleAction(it) }
+        notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
-        Log.d(")))))))))))", props.listOfMoodsToday.toString())
+        Log.d(")))))))))))", props.listOfNotesToday.toString())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
