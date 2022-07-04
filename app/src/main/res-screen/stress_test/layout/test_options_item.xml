@@ -4,7 +4,6 @@
     android:id="@+id/water_bg"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    android:background="@drawable/stress_bg"
     app:cardBackgroundColor="@color/white"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
@@ -22,8 +21,8 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/raleway_bold"
-            android:text=""
-            android:textColor="@color/red_stress"
+            android:text="knk"
+            android:textColor="@color/light_purple"
             android:textSize="16sp" />
     </LinearLayout>
 

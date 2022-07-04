@@ -75,8 +75,10 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
 
     private fun nextQuestion() {
         val state = Store.appState.stressTestState
-        setState(state.copy(currQuestionNum = (state.currQuestionNum + 1)))
+        val num = Store.appState.stressTestState.currQuestionNum
+        setState(state.copy(currQuestionNum = num + 1))
         Log.d("++++++++", state.currQuestionNum.toString())
+        // Store.setState(state)
     }
 
     private fun fetchListOfOptions() {

@@ -46,46 +46,50 @@
         android:id="@+id/progress_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
-        android:layout_height="5dp"
+        android:layout_height="6dp"
         android:layout_marginTop="16dp"
         android:progress="65"
         android:progressBackgroundTint="@color/light_purple"
         android:progressTint="@color/red_stress"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/num" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
 
     <TextView
         android:id="@+id/num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="6dp"
         android:fontFamily="@font/raleway_bold"
         android:text="0/5"
-        android:textColor="@color/red_stress"
+        android:visibility="visible"
+        android:textColor="@color/light_purple"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_layout" />
+        app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
 
     <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/raleway_bold"
         android:maxWidth="360dp"
         android:text="@string/stress_q_one"
-        android:textColor="@color/red_stress"
+        android:textColor="@color/light_purple"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/progress_bar" />
+        app:layout_constraintTop_toBottomOf="@id/num" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/option_list"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="-5dp"
+        android:layout_marginRight="-5dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -97,7 +101,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/round_grey_button"
+        android:background="@drawable/grey_outline_button"
         android:text="@string/next"
         android:textAllCaps="false"
         android:textColor="@color/text_grey"
@@ -110,10 +114,10 @@
         android:layout_height="40dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/round_grey_button"
+        android:background="@drawable/round_purp_button"
         android:text="@string/back"
         android:textAllCaps="false"
-        android:textColor="@color/text_grey"
+        android:textColor="@color/light_purple"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/next_button" />
 

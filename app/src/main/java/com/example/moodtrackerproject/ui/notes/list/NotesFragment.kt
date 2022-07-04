@@ -42,11 +42,11 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding, NotesLi
             addNoteBtn.click(props.addNewNote)
             toolbarStar.click(props.showFavourites)
             if (!props.isFavoriteChecked) {
-                toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
-                toolbar.title = "Favorite notes"
-            } else {
                 toolbarStar.setImageResource(R.drawable.ic_note_star_unchecked)
                 toolbar.title = "My notes"
+            } else {
+                toolbarStar.setImageResource(R.drawable.ic_note_star_checked)
+                toolbar.title = "Favorite notes"
             }
             picNoNotes.visibleIf(props.listOfNotes.isEmpty())
             hintText.visibleIf(props.listOfNotes.isEmpty())

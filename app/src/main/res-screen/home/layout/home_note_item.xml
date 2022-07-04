@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_regular"
         android:gravity="center"
+        android:lines="1"
         android:text="Some text for"
         android:textColor="@color/white"
         android:textSize="14sp" />
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
+        android:maxLines="3"
         android:fontFamily="@font/raleway_regular"
         android:text="Have to coete several tasks at work  and r ..."
         android:textColor="@color/light_purple_text"

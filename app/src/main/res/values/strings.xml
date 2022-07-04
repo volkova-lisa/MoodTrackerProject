@@ -88,6 +88,7 @@
     <string name="what_s_your_mood_now">What’s your mood now?</string>
     <string name="choose_emojis">Choose emojis that represent your mood</string>
     <string name="add_mood">Add mood</string>
+    <string name="save_mood">Save mood</string>
     <string name="moods_of_the_day">Moods of the day</string>
     <string name="tests">Tests</string>
     <string name="stress_level_test">Stress level test</string>
