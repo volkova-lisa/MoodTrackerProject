@@ -10,7 +10,6 @@ import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 import com.example.moodtrackerproject.ui.BaseFragment
-import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.StressTestActions
 import com.example.moodtrackerproject.utils.click
 
 class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestBinding, StressTestProps>(
@@ -46,33 +45,27 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
     override fun render(props: StressTestProps) {
         this.props = props
         binding?.run {
+            // TODO: less BL
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
-            question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText
-            else getString(R.string.test_finished)
-
-//            if (props.currQuestionNum < props.stressQuestionsQty) {
-//                question.setText(props.questionText)
-//            } else question.setText(getString(R.string.test_finished))
+            val questListSize: Int = DataBaseRepository.listOfStressQs.size - 1
+            if (props.currQuestionNum < questListSize) {
+                question.setText(props.questionText)
+            } else question.setText(getString(R.string.test_finished))
 
             testAdapter.submitList(props.listOfOptions)
             progressBar.progress = props.currQuestionNum
 
-            nextButton.isEnabled = !chosenAnswer?.text.isNullOrBlank()
-            nextButton.isClickable = !chosenAnswer?.text.isNullOrBlank()
-
-            num.text = "${props.currQuestionNum}/${props.stressQuestionsQty}"
-            progressBar.progress = props.currQuestionNum
-
-            if (!chosenAnswer?.text.isNullOrBlank()) {
+            if (chosenAnswer?.text.isNullOrBlank()) {
+                nextButton.isEnabled = true
+                nextButton.isClickable = true
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
-            if (props.currQuestionNum == props.stressQuestionsQty) nextButton.setText(getString(R.string.finish))
-            if (props.currQuestionNum < props.stressQuestionsQty) {
+            if (props.currQuestionNum == questListSize) nextButton.setText(getString(R.string.finish))
+            if (props.currQuestionNum < questListSize) {
                 nextButton.setOnClickListener {
                     val qusNumTop = props.currQuestionNum + 1
-                    val qty = props.stressQuestionsQty
                     num.setText(qusNumTop.toString())
-                    num.append("/$qty")
+                    num.append("/$questListSize")
                     progressBar.progress = qusNumTop
                     props.moveQuestion.invoke()
                     props.setQuestion.invoke()
@@ -83,14 +76,13 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
             } else props.openResults()
 
             backButt.click {
-                props.again()
-                props.openMood()
-            }
-
-            if (props.action == StressTestActions.OpenMood) {
+                props.again.invoke()
                 (requireActivity() as MainActivity).router.openMood()
             }
-            if (props.action == StressTestActions.OpenResults) {
+            if (props.action == StressTestProps.StressTestActions.OpenMood) {
+                (requireActivity() as MainActivity).router.openMood()
+            }
+            if (props.action == StressTestProps.StressTestActions.OpenResults) {
                 (requireActivity() as MainActivity).router.openResults()
             }
         }

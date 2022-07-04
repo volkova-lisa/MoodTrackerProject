@@ -29,24 +29,24 @@ data class StressTestProps(
         val isChecked: Boolean = false,
         val checkChanged: () -> Unit,
     ) {
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
-
-            other as OptionItemProps
-
-            if (text != other.text) return false
-            if (points != other.points) return false
-            if (isChecked != other.isChecked) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = text.hashCode()
-            result = 31 * result + points
-            result = 31 * result + isChecked.hashCode()
-            return result
-        }
+//        override fun equals(other: Any?): Boolean {
+//            if (this === other) return true
+//            if (javaClass != other?.javaClass) return false
+//
+//            other as OptionItemProps
+//
+//            if (text != other.text) return false
+//            if (points != other.points) return false
+//            if (isChecked != other.isChecked) return false
+//
+//            return true
+//        }
+//
+//        override fun hashCode(): Int {
+//            var result = text.hashCode()
+//            result = 31 * result + points
+//            result = 31 * result + isChecked.hashCode()
+//            return result
+//        }
     }
 }
