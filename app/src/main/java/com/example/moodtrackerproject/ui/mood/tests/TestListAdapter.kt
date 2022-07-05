@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -10,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.TestOptionsItemBinding
 import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.OptionItemProps
+import com.example.moodtrackerproject.utils.click
 
 class TestListAdapter : ListAdapter<OptionItemProps, TestListAdapter.TestHolder>(OptionItemDiffCallback()) {
 
@@ -34,10 +34,7 @@ class TestListAdapter : ListAdapter<OptionItemProps, TestListAdapter.TestHolder>
         fun bind(props: OptionItemProps) {
             binding.run {
                 option.text = props.text
-                root.setOnClickListener {
-                    props.checkChanged.invoke()
-                    Log.d("thee fuuuck ====", props.points.toString())
-                }
+                root.click(props.checkChanged)
                 card.setBackgroundResource(
                     if (props.isChecked) R.drawable.stress_bg
                     else R.drawable.add_mood_text_bg

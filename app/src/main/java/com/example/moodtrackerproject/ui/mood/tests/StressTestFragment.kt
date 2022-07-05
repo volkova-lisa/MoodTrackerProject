@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
@@ -45,40 +44,44 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
     override fun render(props: StressTestProps) {
         this.props = props
         binding?.run {
-            // TODO: less BL
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
-            val questListSize: Int = DataBaseRepository.listOfStressQs.size - 1
-            if (props.currQuestionNum < questListSize) {
-                question.setText(props.questionText)
-            } else question.setText(getString(R.string.test_finished))
+
+            question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText
+            else getString(R.string.test_finished)
 
             testAdapter.submitList(props.listOfOptions)
             progressBar.progress = props.currQuestionNum
 
-            if (chosenAnswer?.text.isNullOrBlank()) {
-                nextButton.isEnabled = true
-                nextButton.isClickable = true
+            nextButton.isEnabled = !chosenAnswer?.text.isNullOrBlank()
+            nextButton.isClickable = !chosenAnswer?.text.isNullOrBlank()
+
+            num.text = "${props.currQuestionNum}/${props.stressQuestionsQty}"
+            progressBar.progress = props.currQuestionNum
+
+            if (!chosenAnswer?.text.isNullOrBlank()) {
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
-            if (props.currQuestionNum == questListSize) nextButton.setText(getString(R.string.finish))
-            if (props.currQuestionNum < questListSize) {
-                nextButton.setOnClickListener {
-                    val qusNumTop = props.currQuestionNum + 1
-                    num.setText(qusNumTop.toString())
-                    num.append("/$questListSize")
-                    progressBar.progress = qusNumTop
-                    props.moveQuestion.invoke()
-                    props.setQuestion.invoke()
-                    DataBaseRepository.saveStressPoints(chosenAnswer?.points ?: 0)
-                    question.setText(props.questionText)
-                    props.fetchListOfOptions()
+            when {
+                props.currQuestionNum == props.stressQuestionsQty - 1 -> {
+                    nextButton.text = getString(R.string.finish)
+                    nextButton.click { props.openResults() }
                 }
-            } else props.openResults()
+                props.currQuestionNum < props.stressQuestionsQty -> {
+                    nextButton.click {
+                        props.moveQuestion()
+                        props.setQuestion()
+                        props.savePoints(chosenAnswer?.points ?: 0)
+                        props.fetchListOfOptions()
+                    }
+                }
+                else -> props.openResults()
+            }
 
             backButt.click {
-                props.again.invoke()
-                (requireActivity() as MainActivity).router.openMood()
+                props.again()
+                props.openMood()
             }
+
             if (props.action == StressTestProps.StressTestActions.OpenMood) {
                 (requireActivity() as MainActivity).router.openMood()
             }

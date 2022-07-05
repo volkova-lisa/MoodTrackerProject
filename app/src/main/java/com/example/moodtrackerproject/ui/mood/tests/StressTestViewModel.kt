@@ -41,7 +41,7 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
                 setState(state, action = StressTestActions.OpenMood)
             },
             openResults = {
-                setState(state, action = StressTestActions.OpenMood)
+                setState(state, action = StressTestActions.OpenResults)
             },
             savePoints = ::savePoints,
             action = action as? StressTestActions,
