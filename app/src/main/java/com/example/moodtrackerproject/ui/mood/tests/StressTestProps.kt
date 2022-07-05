@@ -14,8 +14,10 @@ data class StressTestProps(
     val again: () -> Unit = {},
     val openMood: () -> Unit = {},
     val openResults: () -> Unit = {},
+    val setQuestionList: () -> Unit = {},
     val savePoints: (Int) -> Unit = {},
     val action: StressTestActions? = null,
+    val curTestType: Int = 0
 ) {
 
     sealed class StressTestActions : MviAction {

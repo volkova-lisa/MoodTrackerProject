@@ -35,15 +35,16 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
     override fun onResume() {
         super.onResume()
         if (::props.isInitialized) {
+            props.setQuestionList()
             props.fetchListOfOptions()
             props.again()
-            Log.d("AGAIN---", props.currQuestionNum.toString())
         }
     }
 
     override fun render(props: StressTestProps) {
         this.props = props
         binding?.run {
+            Log.d("-----------------", props.curTestType.toString())
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
 
             question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText

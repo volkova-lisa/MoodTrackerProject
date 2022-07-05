@@ -22,7 +22,10 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
             moveQuestion = ::nextQuestion,
             again = ::startAgain,
             fetchListOfOptions = ::fetchListOfOptions,
-            questionText = state.question.text.ifBlank { DataBaseRepository.listOfStressQs[0].text },
+            setQuestionList = ::setTestQuestions,
+            questionText = state.question.text.ifBlank {
+                state.questionList[0].text
+            },
             listOfOptions = state.listOfOptions.map { model ->
                 StressTestProps.OptionItemProps(
                     text = model.text,
@@ -45,6 +48,8 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
             },
             savePoints = ::savePoints,
             action = action as? StressTestActions,
+            curTestType = state.testType,
+
         )
     }
 
@@ -60,12 +65,34 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
 
     private fun setNextQuestion() {
         val state = Store.appState.stressTestState
+        val list = state.questionList
+
+        Log.d("++++66666+++", list.toString())
+
         setState(
             state.copy(
-                question = DataBaseRepository.listOfStressQs[state.currQuestionNum],
+                question = list[state.currQuestionNum],
                 points = state.currQuestionNum
             )
         )
+    }
+
+    private fun setTestQuestions() {
+        val state = Store.appState.stressTestState
+        Log.d("++++00000+++", state.testType.toString())
+        if (state.testType == 1) {
+            setState(
+                state.copy(
+                    questionList = DataBaseRepository.listOfAnxietyQs
+                )
+            )
+        } else {
+            setState(
+                state.copy(
+                    questionList = DataBaseRepository.listOfStressQs
+                )
+            )
+        }
     }
 
     private fun savePoints(points: Int) {

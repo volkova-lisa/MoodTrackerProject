@@ -35,6 +35,9 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
             openStressTestScreen = {
                 setState(state, action = MoodScreenActions.StartStressTestScreen)
             },
+            openAnxietyTestScreen = {
+                setState(state, action = MoodScreenActions.StartStressTestScreen)
+            },
             fetchListOfMoods = ::fetchListOfMoods
         )
     }

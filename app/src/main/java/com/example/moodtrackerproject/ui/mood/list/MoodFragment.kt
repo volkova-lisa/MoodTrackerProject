@@ -1,10 +1,12 @@
 package com.example.moodtrackerproject.ui.mood.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.databinding.FragmentMoodBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.mood.list.MoodProps.MoodScreenActions
@@ -39,7 +41,16 @@ class MoodFragment : BaseFragment<MoodViewModel, FragmentMoodBinding, MoodProps>
         binding?.run {
             moodsAdapter.submitList(props.listOfMoods)
             moodInclude.addMoodBtn.click(props.addNewMood)
-            stressInclude.root.click(props.openStressTestScreen)
+            stressInclude.root.click {
+                Store.setState(Store.appState.stressTestState.copy(testType = 0))
+                Log.d("++++4444+++", Store.appState.stressTestState.testType.toString())
+                props.openStressTestScreen()
+            }
+            anxietyInclude.root.click {
+                Store.setState(Store.appState.stressTestState.copy(testType = 1))
+                Log.d("++++44444+++", Store.appState.stressTestState.testType.toString())
+                props.openStressTestScreen()
+            }
             if (props.action == MoodScreenActions.StartStressTestScreen) {
                 (requireActivity() as MainActivity).router.openStressTest()
             }

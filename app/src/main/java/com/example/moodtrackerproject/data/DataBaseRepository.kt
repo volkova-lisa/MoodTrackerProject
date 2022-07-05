@@ -35,6 +35,14 @@ object DataBaseRepository {
         QuestionModel("Felt that things were going your way?"),
         QuestionModel("Felt that things were going your way?")
     )
+    val listOfAnxietyQs = listOf(
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------")
+    )
 
     private val lisOfOptions = listOf(
         OptionModel("Never", 1),

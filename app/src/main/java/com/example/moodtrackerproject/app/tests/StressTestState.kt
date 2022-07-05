@@ -8,4 +8,6 @@ data class StressTestState(
     val listOfOptions: List<OptionModel> = listOf(),
     val points: Int = 0,
     val currQuestionNum: Int = 0,
+    val testType: Int = 0,
+    val questionList: List<QuestionModel> = listOf()
 )
