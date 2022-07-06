@@ -51,19 +51,11 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
 
     private fun shareTestType(type: Int) {
         val state = Store.appState.testResultsState
-        if (type == 1) {
-            Store.setState(
-                state.copy(
-                    questionList = DataBaseRepository.listOfAnxietyQs
-                )
+        Store.setState(
+            state.copy(
+                testType = type
             )
-        } else {
-            Store.setState(
-                state.copy(
-                    questionList = DataBaseRepository.listOfStressQs
-                )
-            )
-        }
+        )
     }
 
     private fun startAgain() {
@@ -89,8 +81,13 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
     }
 
     private fun savePoints(points: Int) {
-        DataBaseRepository.saveStressPoints(points)
-        setState(Store.appState.stressTestState.copy(points = points))
+        if (Store.appState.stressTestState.testType == 0) {
+            DataBaseRepository.saveStressPoints(points)
+            setState(Store.appState.stressTestState.copy(points = points))
+        } else {
+            DataBaseRepository.saveAnxietyPoints(points)
+            setState(Store.appState.stressTestState.copy(points = points))
+        }
     }
 
     private fun nextQuestion() {

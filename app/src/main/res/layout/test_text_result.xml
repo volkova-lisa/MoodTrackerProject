@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/water_bg"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="wrap_content"
     app:cardBackgroundColor="@color/light_purple"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
@@ -32,8 +32,10 @@
             android:layout_below="@id/main_title"
             android:layout_marginStart="14dp"
             android:layout_marginTop="5dp"
+            android:layout_marginBottom="14dp"
+            android:layout_marginEnd="14dp"
             android:fontFamily="@font/raleway_regular"
-            android:text="@string/check_your_stress"
+            android:text="Киянин Максим Козленко вже понад 20 років живе та працює веброзробником в Австралії. Почавши з верстки газет і розробки перших сайтів наприкінці 90-х у Києві, згодом він переїхав спочатку до Ірландії, а звідти в Австралію, де останні дев’ять років працює на посаді Senior Software Engineer в Domain Group та веде блог на Medium. В інтерв’ю DOU він розповів, з чого починалася його кар’єра в Україні, як відпустка в Австралії обернулась переїздом і пошуком роботи після «бульбашки доткомів», а також про переваги й недоліки життя за 14 тисяч кілометрів від України."
             android:textColor="@color/white"
             android:textSize="14sp" />
 

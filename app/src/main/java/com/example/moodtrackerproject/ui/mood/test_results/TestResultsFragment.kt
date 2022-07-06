@@ -3,6 +3,7 @@ package com.example.moodtrackerproject.ui.mood.test_results
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentTestResultsBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.mood.test_results.TestResultsProps.TestResultsActions
@@ -18,10 +19,19 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
 
     override fun render(props: TestResultsProps) {
         binding?.run {
-            stressBar.max = props.sumStressPoints
-            stressBar.progress = props.stressPoints
-            resultNum.text = "${props.resultPer}%"
-            backButt.click(props.openMood)
+            if (props.testType == 0) {
+                val pers = (DataBaseRepository.stressPoints * 100) / 25
+                stressBar.max = props.sumTestPoints
+                stressBar.progress = DataBaseRepository.stressPoints
+                resultNum.text = "$pers%"
+                backButt.click(props.openMood)
+            } else {
+                val pers = (DataBaseRepository.anxietyPoints * 100) / 25
+                stressBar.max = props.sumTestPoints
+                stressBar.progress = DataBaseRepository.anxietyPoints
+                resultNum.text = "$pers%"
+                backButt.click(props.openMood)
+            }
             if (props.action == TestResultsActions.OpenMood) {
                 (requireActivity() as MainActivity).router.openMood()
             }

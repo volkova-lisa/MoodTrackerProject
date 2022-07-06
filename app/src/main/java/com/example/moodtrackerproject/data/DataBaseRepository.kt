@@ -53,8 +53,13 @@ object DataBaseRepository {
     )
 
     var stressPoints = 0
+    var anxietyPoints = 0
+
     fun saveStressPoints(p: Int) {
-        stressPoints = stressPoints + p
+        stressPoints += p
+    }
+    fun saveAnxietyPoints(p: Int) {
+        anxietyPoints += p
     }
 
     fun getEmojiList() = listOfEmojis

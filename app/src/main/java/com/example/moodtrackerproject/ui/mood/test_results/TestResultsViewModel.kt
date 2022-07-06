@@ -17,13 +17,13 @@ class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
     override fun map(appState: AppState, action: MviAction?): TestResultsProps {
         val state = appState.testResultsState
         return TestResultsProps(
-            sumStressPoints = (DataBaseRepository.getOptions().size * (DataBaseRepository.listOfStressQs.size - 1)),
-            stressPoints = DataBaseRepository.stressPoints,
+            sumTestPoints = (DataBaseRepository.getOptions().size * (DataBaseRepository.listOfStressQs.size - 1)),
             resultPer = (DataBaseRepository.stressPoints * 100) / 25,
             action = action as? TestResultsActions,
             openMood = {
                 setState(state, action = TestResultsActions.OpenMood)
-            }
+            },
+            testType = state.testType
         )
     }
 

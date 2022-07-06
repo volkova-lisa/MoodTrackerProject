@@ -63,6 +63,7 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
                 props.currQuestionNum == props.stressQuestionsQty - 1 -> {
                     nextButton.text = getString(R.string.finish)
                     nextButton.click {
+                        props.shareTestType(props.curTestType)
                         props.openResults()
                     }
                 }
