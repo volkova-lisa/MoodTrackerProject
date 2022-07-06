@@ -21,7 +21,6 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/raleway_bold"
-            android:text="knk"
             android:textColor="@color/light_purple"
             android:textSize="16sp" />
     </LinearLayout>

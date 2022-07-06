@@ -38,8 +38,26 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
             openAnxietyTestScreen = {
                 setState(state, action = MoodScreenActions.StartStressTestScreen)
             },
-            fetchListOfMoods = ::fetchListOfMoods
+            fetchListOfMoods = ::fetchListOfMoods,
+            setTestType = ::setTestType
         )
+    }
+
+    private fun setTestType(type: Int) {
+        val state = Store.appState.stressTestState
+        if (type == 1) {
+            Store.setState(
+                state.copy(
+                    questionList = DataBaseRepository.listOfAnxietyQs
+                )
+            )
+        } else {
+            Store.setState(
+                state.copy(
+                    questionList = DataBaseRepository.listOfStressQs
+                )
+            )
+        }
     }
 
     private fun fetchListOfMoods() {

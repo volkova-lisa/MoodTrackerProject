@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.list
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,13 +41,13 @@ class MoodFragment : BaseFragment<MoodViewModel, FragmentMoodBinding, MoodProps>
             moodsAdapter.submitList(props.listOfMoods)
             moodInclude.addMoodBtn.click(props.addNewMood)
             stressInclude.root.click {
+                props.setTestType(0)
                 Store.setState(Store.appState.stressTestState.copy(testType = 0))
-                Log.d("++++4444+++", Store.appState.stressTestState.testType.toString())
                 props.openStressTestScreen()
             }
             anxietyInclude.root.click {
+                props.setTestType(1)
                 Store.setState(Store.appState.stressTestState.copy(testType = 1))
-                Log.d("++++44444+++", Store.appState.stressTestState.testType.toString())
                 props.openStressTestScreen()
             }
             if (props.action == MoodScreenActions.StartStressTestScreen) {

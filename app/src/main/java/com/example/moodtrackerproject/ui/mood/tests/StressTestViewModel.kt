@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
@@ -22,10 +21,7 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
             moveQuestion = ::nextQuestion,
             again = ::startAgain,
             fetchListOfOptions = ::fetchListOfOptions,
-            setQuestionList = ::setTestQuestions,
-            questionText = state.question.text.ifBlank {
-                state.questionList[0].text
-            },
+            questionList = state.questionList,
             listOfOptions = state.listOfOptions.map { model ->
                 StressTestProps.OptionItemProps(
                     text = model.text,
@@ -49,8 +45,25 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
             savePoints = ::savePoints,
             action = action as? StressTestActions,
             curTestType = state.testType,
-
+            shareTestType = ::shareTestType
         )
+    }
+
+    private fun shareTestType(type: Int) {
+        val state = Store.appState.testResultsState
+        if (type == 1) {
+            Store.setState(
+                state.copy(
+                    questionList = DataBaseRepository.listOfAnxietyQs
+                )
+            )
+        } else {
+            Store.setState(
+                state.copy(
+                    questionList = DataBaseRepository.listOfStressQs
+                )
+            )
+        }
     }
 
     private fun startAgain() {
@@ -67,32 +80,12 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
         val state = Store.appState.stressTestState
         val list = state.questionList
 
-        Log.d("++++66666+++", list.toString())
-
         setState(
             state.copy(
                 question = list[state.currQuestionNum],
                 points = state.currQuestionNum
             )
         )
-    }
-
-    private fun setTestQuestions() {
-        val state = Store.appState.stressTestState
-        Log.d("++++00000+++", state.testType.toString())
-        if (state.testType == 1) {
-            setState(
-                state.copy(
-                    questionList = DataBaseRepository.listOfAnxietyQs
-                )
-            )
-        } else {
-            setState(
-                state.copy(
-                    questionList = DataBaseRepository.listOfStressQs
-                )
-            )
-        }
     }
 
     private fun savePoints(points: Int) {
@@ -104,8 +97,6 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
         val state = Store.appState.stressTestState
         val num = Store.appState.stressTestState.currQuestionNum
         setState(state.copy(currQuestionNum = num + 1))
-        Log.d("++++++++", state.currQuestionNum.toString())
-        // Store.setState(state)
     }
 
     private fun fetchListOfOptions() {

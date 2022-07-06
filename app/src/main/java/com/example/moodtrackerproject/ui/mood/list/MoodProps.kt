@@ -10,7 +10,7 @@ data class MoodProps(
     val fetchListOfMoods: () -> Unit = {},
     val openStressTestScreen: () -> Unit = {},
     val openAnxietyTestScreen: () -> Unit = {},
-
+    val setTestType: (Int) -> Unit = {},
 ) {
     sealed class MoodScreenActions : MviAction {
         object StartAddMoodScreen : MoodScreenActions()

@@ -8,6 +8,7 @@ data class TestResultsProps(
     val resultPer: Int,
     val action: TestResultsActions? = null,
     val openMood: () -> Unit,
+    val testType: Int = 0
 ) {
 
     sealed class TestResultsActions : MviAction {

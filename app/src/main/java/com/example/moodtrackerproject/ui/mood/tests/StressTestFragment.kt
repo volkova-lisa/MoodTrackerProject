@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +34,6 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
     override fun onResume() {
         super.onResume()
         if (::props.isInitialized) {
-            props.setQuestionList()
             props.fetchListOfOptions()
             props.again()
         }
@@ -44,10 +42,9 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
     override fun render(props: StressTestProps) {
         this.props = props
         binding?.run {
-            Log.d("-----------------", props.curTestType.toString())
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
 
-            question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText
+            question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionList[props.currQuestionNum].text
             else getString(R.string.test_finished)
 
             testAdapter.submitList(props.listOfOptions)
@@ -65,7 +62,9 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
             when {
                 props.currQuestionNum == props.stressQuestionsQty - 1 -> {
                     nextButton.text = getString(R.string.finish)
-                    nextButton.click { props.openResults() }
+                    nextButton.click {
+                        props.openResults()
+                    }
                 }
                 props.currQuestionNum < props.stressQuestionsQty -> {
                     nextButton.click {

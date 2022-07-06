@@ -70,6 +70,19 @@
         app:layout_constraintTop_toBottomOf="@+id/progress_bar" />
 
     <TextView
+        android:id="@+id/title_"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:fontFamily="@font/raleway_bold"
+        android:maxWidth="360dp"
+        android:text="@string/in_the_last"
+        android:textColor="@color/light_purple"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/num" />
+
+    <TextView
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -79,9 +92,8 @@
         android:text="@string/stress_q_one"
         android:textColor="@color/light_purple"
         android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/num" />
+        app:layout_constraintTop_toBottomOf="@id/title_" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/option_list"

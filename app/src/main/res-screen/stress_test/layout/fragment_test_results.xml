@@ -39,6 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_bold"
+        android:layout_marginBottom="20dp"
         android:maxWidth="360dp"
         android:text="0%"
         android:textColor="@color/red_stress"
@@ -48,17 +49,55 @@
         app:layout_constraintStart_toStartOf="@+id/stress_bar"
         app:layout_constraintTop_toTopOf="@+id/stress_bar" />
 
+    <TextView
+        android:id="@+id/result_mini"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/raleway_regular"
+        android:layout_marginBottom="20dp"
+        android:text="of stress"
+        android:textColor="@color/text_grey"
+        android:textSize="18sp"
+        android:layout_marginTop="-25dp"
+        app:layout_constraintBottom_toBottomOf="@+id/stress_bar"
+        app:layout_constraintEnd_toEndOf="@+id/stress_bar"
+        app:layout_constraintStart_toStartOf="@+id/stress_bar"
+        app:layout_constraintTop_toTopOf="@+id/result_num" />
+
+    <include
+        android:id="@+id/result_text"
+        layout="@layout/test_text_result"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="-10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/girl"/>
+
+
+    <ImageView
+        android:id="@+id/girl"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:src="@drawable/girl_result"
+        android:layout_marginTop="-100dp"
+        app:layout_constraintTop_toBottomOf="@id/stress_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/back_butt"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="10dp"
-        android:background="@drawable/round_purp_button"
-        android:text="@string/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/round_purple_button"
+        android:text="@string/finish"
         android:textAllCaps="false"
-        android:textColor="@color/text_grey"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/stress_bar" />
+        app:layout_constraintTop_toBottomOf="@id/result_text" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
