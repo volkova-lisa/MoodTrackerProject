@@ -53,7 +53,7 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
             nextButton.isEnabled = !chosenAnswer?.text.isNullOrBlank()
             nextButton.isClickable = !chosenAnswer?.text.isNullOrBlank()
 
-            num.text = "${props.currQuestionNum}/${props.stressQuestionsQty}"
+            num.text = "${props.currQuestionNum + 1}/${props.stressQuestionsQty}"
             progressBar.progress = props.currQuestionNum
 
             if (!chosenAnswer?.text.isNullOrBlank()) {
@@ -63,11 +63,13 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
                 props.currQuestionNum == props.stressQuestionsQty - 1 -> {
                     nextButton.text = getString(R.string.finish)
                     nextButton.click {
+                        props.savePoints(chosenAnswer?.points ?: 0)
                         props.shareTestType(props.curTestType)
                         props.openResults()
                     }
                 }
                 props.currQuestionNum < props.stressQuestionsQty -> {
+                    nextButton.text = getString(R.string.next)
                     nextButton.click {
                         props.moveQuestion()
                         props.setQuestion()
