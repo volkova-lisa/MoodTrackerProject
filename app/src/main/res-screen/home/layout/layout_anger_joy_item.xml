@@ -31,11 +31,12 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/disgust_bar"
+        android:id="@+id/anger_bar"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:progress="80"
+        android:progress="10"
+        android:max="25"
         android:progressBackgroundTint="@color/red_stress"
         android:progressTint="@color/red_stress"
         app:layout_constraintBottom_toBottomOf="parent"

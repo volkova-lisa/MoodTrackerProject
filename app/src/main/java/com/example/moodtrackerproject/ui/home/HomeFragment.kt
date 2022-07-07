@@ -1,11 +1,11 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
@@ -37,7 +37,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         if (::props.isInitialized) {
             props.fetchListOfMoods()
             props.fetchListOfNotes()
-            Log.d("111111111", props.listOfMoodsToday.toString())
         }
     }
 
@@ -46,7 +45,10 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         props.action?.let { handleAction(it) }
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
-        Log.d(")))))))))))", props.listOfNotesToday.toString())
+        binding?.run {
+            aJ.angerBar.progress = DataBaseRepository.stressPoints
+            sH.angerBar.progress = DataBaseRepository.anxietyPoints
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
