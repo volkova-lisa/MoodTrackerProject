@@ -19,6 +19,6 @@
         android:icon="@drawable/ic_bottom_nav_health"/>
     <item
         android:id="@+id/statisticsFragment"
-        android:title="@string/statistics"
-        android:icon="@drawable/ic_bottom_nav_stats"/>
+        android:title="@string/settings"
+        android:icon="@drawable/ic_bottom_nav_settings"/>
 </menu>

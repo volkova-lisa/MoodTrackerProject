@@ -30,6 +30,7 @@
             android:layout_gravity="center_vertical"
             android:drawableStart="@drawable/ic_sleep"
             android:drawablePadding="8dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/raleway_bold"
             android:text="@string/sleep"
             android:textColor="@color/light_purple"

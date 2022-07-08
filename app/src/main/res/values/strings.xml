@@ -110,5 +110,7 @@
 
     <string name="stress_high">Everyone faces challenges at some time or another and we can all benefit from tools that can help us work with them better. Stress and challenges are part of life and on the Be Mindful online course well show you a different way of handling them and discovering how to manage difficulties more skilfully. Find out what your stress score could be below, if you choose to take your next step in taking control with us.</string>
     <string name="stress_high_title">Your stress level is high</string>
+    <string name="edit_health">Edit health</string>
+    <string name="load_from_system">Load from system</string>
 
 </resources>
