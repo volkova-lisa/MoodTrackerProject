@@ -123,4 +123,8 @@
             android:id="@+id/action_testResults_to_moodFragment"
             app:destination="@id/moodFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editHealthFragment"
+        android:name="com.example.moodtrackerproject.ui.health.EditHealthFragment"
+        android:label="EditHealthFragment" />
 </navigation>

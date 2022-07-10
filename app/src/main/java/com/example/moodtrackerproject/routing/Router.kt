@@ -12,6 +12,10 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.action_moodFragment_to_addMoodFragment)
     }
 
+    fun openEditHealth() {
+        navController.navigate(R.id.editHealthFragment)
+    }
+
     fun openResults() {
         navController.navigate(R.id.testResults)
     }

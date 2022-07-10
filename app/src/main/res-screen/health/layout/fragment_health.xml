@@ -29,12 +29,12 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
-        android:id="@+id/edit_button"
+        android:id="@+id/edit_h_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="20dp"
-        android:elevation="5dp"
+        android:elevation="6dp"
         android:padding="10dp"
         android:src="@drawable/ic_edit_details"
         android:visibility="visible"
