@@ -44,7 +44,7 @@ android {
                             'src/main/res-screen/mood',
                             'src/main/res-screen/notes',
                             'src/main/res-screen/home',
-                            'src/main/res-screen/statistics',
+                            'src/main/res-screen/settings',
                             'src/main/res-screen/splash',
                             'src/main/res-screen/welcome',
                             'src/main/res-screen/stress_test',

@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.health
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
@@ -24,7 +23,6 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
     }
 
     override fun render(props: HealthProps) {
-        Log.d("RENDER", "8888")
         this.props = props
         binding?.run {
             editHButton.setOnClickListener() {
