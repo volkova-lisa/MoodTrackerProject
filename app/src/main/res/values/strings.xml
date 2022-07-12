@@ -56,7 +56,7 @@
     <string name="my_notes">My Notes</string>
     <string name="delete">Delete</string>
     <string name="home">Home</string>
-    <string name="logout">LogOut</string>
+    <string name="logout">Log Out</string>
     <string name="empty_title">Title cannot be empty</string>
     <string name="note_details">Note details</string>
     <string name="note_title">Note title</string>
@@ -112,5 +112,10 @@
     <string name="stress_high_title">Your stress level is high</string>
     <string name="edit_health">Edit health</string>
     <string name="load_from_system">Load from system</string>
+    <string name="liza_v">liza.volk999@gmail.com</string>
+    <string name="language">Language</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="health_param">Health parameters</string>
+    <string name="set_app_pass">Set app password</string>
 
 </resources>
