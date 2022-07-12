@@ -61,9 +61,7 @@ object PreferenceManager {
     }
 
     fun saveMoods(moodList: List<MoodModel>) {
-        Log.d("----SAVE MOOD", moodList.toString())
         val serializedMoods = moodsJsonAdapter.toJson(moodList)
-        Log.d("----SERIALIZE MOOD", moodList.toString())
         preferences.edit()
             .putString(KEY_MOODS, serializedMoods)
             .apply()

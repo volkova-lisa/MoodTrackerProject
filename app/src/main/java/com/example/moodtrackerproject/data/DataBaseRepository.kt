@@ -119,16 +119,11 @@ object DataBaseRepository {
     fun getMoods() = PreferenceManager.getMoods()
 
     fun insertMood(moodModel: MoodModel) {
-        Log.d("INSERT---- MOOD", moodModel.toString())
 
         val list = mutableListOf<MoodModel>().apply {
-            Log.d("--INSERT MOOD", moodModel.toString())
             addAll(getMoods())
-            Log.d("----", moodModel.toString())
             add(moodModel)
-            Log.d("======", moodModel.toString())
         }
         PreferenceManager.saveMoods(list)
-        Log.d("----INSERT MOOD", list.toString())
     }
 }

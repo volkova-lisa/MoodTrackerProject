@@ -117,5 +117,10 @@
     <string name="dark_mode">Dark Mode</string>
     <string name="health_param">Health parameters</string>
     <string name="set_app_pass">Set app password</string>
+    <string name="account">ACCOUNT</string>
+    <string name="preferences">PREFERENCES</string>
+    <string name="_0_5">0/5</string>
+    <string name="_0">0%</string>
+    <string name="of_stress">of stress</string>
 
 </resources>

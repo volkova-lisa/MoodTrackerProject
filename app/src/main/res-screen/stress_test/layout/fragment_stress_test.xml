@@ -61,7 +61,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp"
         android:fontFamily="@font/raleway_bold"
-        android:text="0/5"
+        android:text="@string/_0_5"
         android:visibility="visible"
         android:textColor="@color/light_purple"
         android:textSize="16sp"

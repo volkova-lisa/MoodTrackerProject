@@ -63,7 +63,6 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchListOfMoods = ::fetchListOfMoods,
             fetchListOfNotes = ::fetchListOfNotes
         )
-        Log.d("88888888", props.listOfMoodsToday.toString())
     }
 
     private fun logOut() {
@@ -87,9 +86,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             val notes = withContext(Dispatchers.IO) {
                 DataBaseRepository.getNotes()
             }
-            Log.d("66666666", appState.homeState.listOfNotes.toString())
             setState(Store.appState.homeState.copy(listOfNotes = notes))
-            Log.d("33333333", appState.homeState.listOfNotes.toString())
         }
     }
 

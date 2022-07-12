@@ -15,7 +15,6 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
 
     override fun map(appState: AppState, action: MviAction?): HealthProps {
         val state = appState.healthState
-        Log.d("--------------", "hhhhhh")
         return HealthProps(
             isEditing = state.isEdited
         )

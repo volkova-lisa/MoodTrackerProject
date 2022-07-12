@@ -65,7 +65,6 @@ class AddMoodViewModel : BaseViewModel<AddMoodProps>() {
                 moodTitle = title,
                 moodTime = DateUtils.getDateOfNote(),
             )
-            Log.d("INSERT MOOD", emojiSrc.toString())
             DataBaseRepository.insertMood(mood)
             setState(
                 Store.appState.addMoodState,
