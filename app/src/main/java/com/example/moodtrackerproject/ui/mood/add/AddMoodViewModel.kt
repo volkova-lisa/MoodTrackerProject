@@ -64,9 +64,7 @@ class AddMoodViewModel : BaseViewModel<AddMoodProps>() {
                 moodTitle = title,
                 moodTime = DateUtils.getDateOfNote(),
             )
-            withContext(Dispatchers.IO) {
-                DataBaseRepository.insertMood(mood)
-            }
+            DataBaseRepository.insertMood(mood)
             setState(
                 Store.appState.addMoodState,
                 action = NewMoodAction.ShowMoodsScreen

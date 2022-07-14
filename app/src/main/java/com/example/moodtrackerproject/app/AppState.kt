@@ -15,4 +15,8 @@ data class AppState(
     val addMoodState: AddMoodState = AddMoodState(),
     val stressTestState: StressTestState = StressTestState(),
     val testResultsState: TestResultsState = TestResultsState(),
+    val homeState: HomeState = HomeState(),
+    val healthState: HealthState = HealthState(),
+    val settingsState: SettingsState = SettingsState(),
+    val editHealthState: EditHealthState = EditHealthState()
 )

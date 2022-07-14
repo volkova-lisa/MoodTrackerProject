@@ -38,12 +38,12 @@ class NoteDetailsFragment : BaseFragment<NoteDetailsViewModel, FragmentNoteDetai
 
             noteEdit.root.isVisible = props.isEditNoteVisible
             note.root.isVisible = !props.isEditNoteVisible
-            editButton.isVisible = !props.isEditNoteVisible
+            editNoteButton.isVisible = !props.isEditNoteVisible
             noteEdit.title.setText(props.title)
             noteEdit.text.setText(props.text)
 
             note.backButton.click(props.backClicked)
-            editButton.click(props.changeEditVisibility)
+            editNoteButton.click(props.changeEditVisibility)
 
             noteEdit.saveEditedButton.click {
                 props.saveEdited(noteEdit.title.text.toString(), noteEdit.text.text.toString())

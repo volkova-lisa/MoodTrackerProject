@@ -4,14 +4,18 @@ import com.example.moodtrackerproject.app.MviAction
 
 data class MoodProps(
     val action: MoodScreenActions? = null,
+    val testType: Int = 0,
     val listOfMoods: List<MoodItemProps> = listOf(),
     val addNewMood: () -> Unit = {},
     val fetchListOfMoods: () -> Unit = {},
-    val openStressTestScreen: () -> Unit = {}
+    val stressTestConditions: () -> Unit = {},
+    val anxietyTestConditions: () -> Unit = {}
+
 ) {
     sealed class MoodScreenActions : MviAction {
         object StartAddMoodScreen : MoodScreenActions()
         object StartStressTestScreen : MoodScreenActions()
+        object AnxStressTestScreen : MoodScreenActions()
     }
 
     data class MoodItemProps(

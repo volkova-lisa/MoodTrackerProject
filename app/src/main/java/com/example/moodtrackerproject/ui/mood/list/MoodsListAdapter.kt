@@ -25,7 +25,6 @@ class MoodsListAdapter : ListAdapter<MoodItemProps, MoodsListAdapter.MoodHolder>
     }
 
     class MoodHolder(private val binding: HomeMoodItemBinding) : RecyclerView.ViewHolder(binding.root) {
-
         fun bind(mood: MoodItemProps) {
             binding.run {
                 emoji.setImageResource(mood.emojiSrc)

@@ -45,7 +45,7 @@
             android:paddingVertical="16dp"
             tools:context=".ui.home.HomeFragment">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/photo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
@@ -53,7 +53,9 @@
                 android:scaleType="centerCrop"
                 android:src="@color/light_purple"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/circular"
+                />
 
             <TextView
                 android:id="@+id/name"
@@ -159,11 +161,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mental_title">
 
-                <include layout="@layout/layout_disgust_pleasure_item" />
+                <include android:id="@+id/d_p" layout="@layout/layout_disgust_pleasure_item" />
 
-                <include layout="@layout/layout_sad_happy_item" />
+                <include android:id="@+id/sad_happy" layout="@layout/layout_sad_happy_item"/>
 
-                <include layout="@layout/layout_anger_joy_item" />
+                <include android:id="@+id/anger_joy" layout="@layout/layout_anger_joy_item"/>
             </LinearLayout>
 
             <TextView

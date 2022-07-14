@@ -1,11 +1,7 @@
 package com.example.moodtrackerproject.data
 
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.domain.EmojiModel
-import com.example.moodtrackerproject.domain.MoodModel
-import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.domain.OptionModel
-import com.example.moodtrackerproject.domain.QuestionModel
+import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
 
 // single source of truth
@@ -38,6 +34,14 @@ object DataBaseRepository {
         QuestionModel("Felt that things were going your way?"),
         QuestionModel("Felt that things were going your way?")
     )
+    val listOfAnxietyQs = listOf(
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------"),
+        QuestionModel("----------")
+    )
 
     private val lisOfOptions = listOf(
         OptionModel("Never", 1),
@@ -48,8 +52,13 @@ object DataBaseRepository {
     )
 
     var stressPoints = 0
-    fun savePoints(p: Int) {
-        stressPoints = stressPoints + p
+    var anxietyPoints = 0
+
+    fun saveStressPoints(p: Int) {
+        stressPoints += p
+    }
+    fun saveAnxietyPoints(p: Int) {
+        anxietyPoints += p
     }
 
     fun getEmojiList() = listOfEmojis
@@ -109,6 +118,7 @@ object DataBaseRepository {
     fun getMoods() = PreferenceManager.getMoods()
 
     fun insertMood(moodModel: MoodModel) {
+
         val list = mutableListOf<MoodModel>().apply {
             addAll(getMoods())
             add(moodModel)

@@ -56,7 +56,7 @@
     <string name="my_notes">My Notes</string>
     <string name="delete">Delete</string>
     <string name="home">Home</string>
-    <string name="logout">LogOut</string>
+    <string name="logout">Log Out</string>
     <string name="empty_title">Title cannot be empty</string>
     <string name="note_details">Note details</string>
     <string name="note_title">Note title</string>
@@ -88,6 +88,7 @@
     <string name="what_s_your_mood_now">What’s your mood now?</string>
     <string name="choose_emojis">Choose emojis that represent your mood</string>
     <string name="add_mood">Add mood</string>
+    <string name="save_mood">Save mood</string>
     <string name="moods_of_the_day">Moods of the day</string>
     <string name="tests">Tests</string>
     <string name="stress_level_test">Stress level test</string>
@@ -104,6 +105,24 @@
     <string name="mood_t">Mood title</string>
     <string name="test_finished">\"The test is finished! Your results are: \"</string>
     <string name="finish">Finish</string>
+    <string name="in_the_last">In the last month, how often have you:</string>
+    <string name="test_completed">Test completed!</string>
 
+    <string name="stress_high">Everyone faces challenges at some time or another and we can all benefit from tools that can help us work with them better. Stress and challenges are part of life and on the Be Mindful online course well show you a different way of handling them and discovering how to manage difficulties more skilfully. Find out what your stress score could be below, if you choose to take your next step in taking control with us.</string>
+    <string name="stress_high_title">Your stress level is high</string>
+    <string name="edit_health">Edit health</string>
+    <string name="load_from_system">Load from system</string>
+    <string name="liza_v">liza.volk999@gmail.com</string>
+    <string name="language">Language</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="health_param">Health parameters</string>
+    <string name="set_app_pass">Set app password</string>
+    <string name="account">ACCOUNT</string>
+    <string name="preferences">PREFERENCES</string>
+    <string name="_0_5">0/5</string>
+    <string name="_0">0%</string>
+    <string name="of_stress">of stress</string>
+    <string name="hours">hours</string>
+    <string name="_7_5">7.5</string>
 
 </resources>

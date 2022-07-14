@@ -32,11 +32,6 @@
             app:destination="@id/stressTest" />
     </fragment>
     <fragment
-        android:id="@+id/statisticsFragment"
-        android:name="com.example.moodtrackerproject.ui.statistics.StatisticsFragment"
-        android:label="fragment_statistics"
-        tools:layout="@layout/fragment_statistics" />
-    <fragment
         android:id="@+id/welcomeFragment"
         android:name="com.example.moodtrackerproject.ui.welcome.WelcomeFragment"
         android:label="fragment_welcome_screen"
@@ -123,4 +118,13 @@
             android:id="@+id/action_testResults_to_moodFragment"
             app:destination="@id/moodFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editHealthFragment"
+        android:name="com.example.moodtrackerproject.ui.health.EditHealthFragment"
+        android:label="EditHealthFragment" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.moodtrackerproject.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

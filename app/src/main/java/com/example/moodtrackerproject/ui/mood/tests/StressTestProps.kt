@@ -1,9 +1,10 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.domain.QuestionModel
 
 data class StressTestProps(
-    val questionText: String,
+    val questionList: List<QuestionModel> = listOf(),
     val listOfOptions: List<OptionItemProps> = listOf(),
     val stressQuestionsQty: Int,
     val points: Int = 0,
@@ -16,6 +17,8 @@ data class StressTestProps(
     val openResults: () -> Unit = {},
     val savePoints: (Int) -> Unit = {},
     val action: StressTestActions? = null,
+    val curTestType: Int = 0,
+    val shareTestType: (Int) -> Unit = {}
 ) {
 
     sealed class StressTestActions : MviAction {
@@ -28,25 +31,5 @@ data class StressTestProps(
         val points: Int = 0,
         val isChecked: Boolean = false,
         val checkChanged: () -> Unit,
-    ) {
-        override fun equals(other: Any?): Boolean {
-            if (this === other) return true
-            if (javaClass != other?.javaClass) return false
-
-            other as OptionItemProps
-
-            if (text != other.text) return false
-            if (points != other.points) return false
-            if (isChecked != other.isChecked) return false
-
-            return true
-        }
-
-        override fun hashCode(): Int {
-            var result = text.hashCode()
-            result = 31 * result + points
-            result = 31 * result + isChecked.hashCode()
-            return result
-        }
-    }
+    )
 }

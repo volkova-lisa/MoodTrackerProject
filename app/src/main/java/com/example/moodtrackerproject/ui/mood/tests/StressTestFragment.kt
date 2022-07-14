@@ -1,14 +1,15 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.databinding.FragmentStressTestBinding
 import com.example.moodtrackerproject.ui.BaseFragment
-import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.StressTestActions
 import com.example.moodtrackerproject.utils.click
 
 class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestBinding, StressTestProps>(
@@ -45,7 +46,10 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
         binding?.run {
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
 
-            question.text = if (props.currQuestionNum < props.stressQuestionsQty) props.questionText
+            Log.d("stress test fragment----", props.questionList.toString())
+            Log.d("stress test fragment00000000", Store.appState.stressTestState.questionList.toString())
+
+            question.text = if (props.currQuestionNum < props.stressQuestionsQty) Store.appState.stressTestState.questionList[props.currQuestionNum].text
             else getString(R.string.test_finished)
 
             testAdapter.submitList(props.listOfOptions)
@@ -54,17 +58,23 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
             nextButton.isEnabled = !chosenAnswer?.text.isNullOrBlank()
             nextButton.isClickable = !chosenAnswer?.text.isNullOrBlank()
 
-            num.text = "${props.currQuestionNum}/${props.stressQuestionsQty}"
+            num.text = "${props.currQuestionNum + 1}/${props.stressQuestionsQty}"
             progressBar.progress = props.currQuestionNum
 
             if (!chosenAnswer?.text.isNullOrBlank()) {
                 nextButton.setBackgroundResource(R.drawable.round_purple_button)
             }
             when {
-                props.currQuestionNum == props.stressQuestionsQty -> {
+                props.currQuestionNum == props.stressQuestionsQty - 1 -> {
                     nextButton.text = getString(R.string.finish)
+                    nextButton.click {
+                        props.savePoints(chosenAnswer?.points ?: 0)
+                        props.shareTestType(props.curTestType)
+                        props.openResults()
+                    }
                 }
                 props.currQuestionNum < props.stressQuestionsQty -> {
+                    nextButton.text = getString(R.string.next)
                     nextButton.click {
                         props.moveQuestion()
                         props.setQuestion()
@@ -80,10 +90,10 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
                 props.openMood()
             }
 
-            if (props.action == StressTestActions.OpenMood) {
+            if (props.action == StressTestProps.StressTestActions.OpenMood) {
                 (requireActivity() as MainActivity).router.openMood()
             }
-            if (props.action == StressTestActions.OpenResults) {
+            if (props.action == StressTestProps.StressTestActions.OpenResults) {
                 (requireActivity() as MainActivity).router.openResults()
             }
         }
