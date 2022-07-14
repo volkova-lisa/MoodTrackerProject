@@ -8,13 +8,14 @@ data class MoodProps(
     val listOfMoods: List<MoodItemProps> = listOf(),
     val addNewMood: () -> Unit = {},
     val fetchListOfMoods: () -> Unit = {},
-    val openStressTestScreen: () -> Unit = {},
-    val openAnxietyTestScreen: () -> Unit = {},
-    val setTestType: (Int) -> Unit = {},
+    val stressTestConditions: () -> Unit = {},
+    val anxietyTestConditions: () -> Unit = {}
+
 ) {
     sealed class MoodScreenActions : MviAction {
         object StartAddMoodScreen : MoodScreenActions()
         object StartStressTestScreen : MoodScreenActions()
+        object AnxStressTestScreen : MoodScreenActions()
     }
 
     data class MoodItemProps(

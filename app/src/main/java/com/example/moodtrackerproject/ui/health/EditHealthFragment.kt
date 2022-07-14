@@ -1,9 +1,7 @@
 package com.example.moodtrackerproject.ui.health
 
 import EditHealthProps
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentEditHealthBinding
@@ -19,14 +17,6 @@ class EditHealthFragment : BaseFragment<EditHealthViewModel, FragmentEditHealthB
     override fun getFragmentBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentEditHealthBinding = FragmentEditHealthBinding.inflate(inflater, container, false)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
 
     override fun render(props: EditHealthProps) {
         binding?.run {

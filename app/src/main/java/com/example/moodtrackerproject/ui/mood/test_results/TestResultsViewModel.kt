@@ -23,7 +23,9 @@ class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
             openMood = {
                 setState(state, action = TestResultsActions.OpenMood)
             },
-            testType = state.testType
+            testType = state.testType,
+            stressResults = DataBaseRepository.stressPoints,
+            anxResults = DataBaseRepository.anxietyPoints
         )
     }
 

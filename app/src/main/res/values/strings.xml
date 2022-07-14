@@ -122,5 +122,7 @@
     <string name="_0_5">0/5</string>
     <string name="_0">0%</string>
     <string name="of_stress">of stress</string>
+    <string name="hours">hours</string>
+    <string name="_7_5">7.5</string>
 
 </resources>

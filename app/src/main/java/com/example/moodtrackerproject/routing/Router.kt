@@ -75,8 +75,4 @@ class Router(private val activity: MainActivity) {
     fun openStressTest() {
         navController.navigate(R.id.stressTest)
     }
-
-    fun openInsideNote() {
-        navController.navigate(R.id.noteDetailsFragment)
-    }
 }

@@ -19,7 +19,7 @@
         app:cardCornerRadius="6dp"
         app:cardElevation="0dp"
         card_view:contentPadding="5dp"
-        android:backgroundTint="#EFF2FF"
+        android:backgroundTint="@color/health_light"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -41,7 +41,7 @@
         android:id="@+id/water_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="7.5"
+        android:text="@string/_7_5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_water"
         android:layout_marginTop="8dp"
@@ -55,7 +55,7 @@
         android:id="@+id/explanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hours"
+        android:text="@string/hours"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
         app:layout_constraintStart_toEndOf="@id/water_num"

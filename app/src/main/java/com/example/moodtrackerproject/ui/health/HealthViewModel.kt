@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.health
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HealthState
 import com.example.moodtrackerproject.app.MviAction

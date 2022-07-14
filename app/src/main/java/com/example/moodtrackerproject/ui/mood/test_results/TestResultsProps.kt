@@ -7,7 +7,9 @@ data class TestResultsProps(
     val resultPer: Int,
     val action: TestResultsActions? = null,
     val openMood: () -> Unit,
-    val testType: Int = 0
+    val testType: Int = 0,
+    val stressResults: Int = 0,
+    val anxResults: Int = 0
 ) {
 
     sealed class TestResultsActions : MviAction {

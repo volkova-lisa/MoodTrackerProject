@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
@@ -72,6 +73,7 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
         val state = Store.appState.stressTestState
         val list = state.questionList
 
+        Log.d("stress view model setnext----", state.questionList.toString())
         setState(
             state.copy(
                 question = list[state.currQuestionNum],

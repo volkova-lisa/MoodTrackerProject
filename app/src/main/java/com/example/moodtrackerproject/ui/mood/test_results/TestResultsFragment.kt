@@ -21,7 +21,7 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
     override fun render(props: TestResultsProps) {
         binding?.run {
             if (props.testType == 0) {
-                val pers = (DataBaseRepository.stressPoints * 100) / 25
+                val pers = (props.stressResults * 100) / 25
                 stressBar.max = props.sumTestPoints
                 stressBar.progress = DataBaseRepository.stressPoints
                 resultNum.text = "$pers%"
@@ -29,7 +29,7 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
                 resultText.mainTitle.text = getText(R.string.stress_high_title)
                 resultText.subtitle.text = getText(R.string.stress_high)
             } else {
-                val pers = (DataBaseRepository.anxietyPoints * 100) / 25
+                val pers = (props.anxResults * 100) / 25
                 stressBar.max = props.sumTestPoints
                 stressBar.progress = DataBaseRepository.anxietyPoints
                 resultNum.text = "$pers%"

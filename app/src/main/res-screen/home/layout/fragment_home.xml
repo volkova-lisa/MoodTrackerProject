@@ -163,9 +163,9 @@
 
                 <include android:id="@+id/d_p" layout="@layout/layout_disgust_pleasure_item" />
 
-                <include android:id="@+id/s_h" layout="@layout/layout_sad_happy_item"/>
+                <include android:id="@+id/sad_happy" layout="@layout/layout_sad_happy_item"/>
 
-                <include android:id="@+id/a_j" layout="@layout/layout_anger_joy_item"/>
+                <include android:id="@+id/anger_joy" layout="@layout/layout_anger_joy_item"/>
             </LinearLayout>
 
             <TextView

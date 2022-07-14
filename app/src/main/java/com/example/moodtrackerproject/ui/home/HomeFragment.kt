@@ -46,8 +46,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
-            aJ.angerBar.progress = DataBaseRepository.stressPoints
-            sH.angerBar.progress = DataBaseRepository.anxietyPoints
+            angerJoy.angerBar.progress = DataBaseRepository.stressPoints
+            sadHappy.angerBar.progress = DataBaseRepository.anxietyPoints
         }
     }
 

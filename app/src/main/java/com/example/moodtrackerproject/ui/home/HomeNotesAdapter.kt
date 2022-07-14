@@ -41,7 +41,7 @@ class HomeNotesAdapter : ListAdapter<NotesListProps.NoteItemProps, HomeNotesAdap
         override fun areItemsTheSame(
             oldItem: NotesListProps.NoteItemProps,
             newItem: NotesListProps.NoteItemProps
-        ): Boolean = oldItem.title == newItem.title
+        ): Boolean = oldItem.noteId == newItem.noteId
 
         override fun areContentsTheSame(
             oldItem: NotesListProps.NoteItemProps,

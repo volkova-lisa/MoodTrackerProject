@@ -54,6 +54,8 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-crashlytics-buildtools:2.9.1'
+
     //Ktlint
     ktlint 'com.pinterest:ktlint:0.43.2'
 

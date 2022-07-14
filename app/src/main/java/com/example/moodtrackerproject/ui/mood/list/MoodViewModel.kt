@@ -32,32 +32,29 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
             addNewMood = {
                 setState(state, action = MoodScreenActions.StartAddMoodScreen)
             },
-            openStressTestScreen = {
-                setState(state, action = MoodScreenActions.StartStressTestScreen)
-            },
-            openAnxietyTestScreen = {
-                setState(state, action = MoodScreenActions.StartStressTestScreen)
-            },
             fetchListOfMoods = ::fetchListOfMoods,
-            setTestType = ::setTestType
+            testType = state.testType,
+            stressTestConditions = {
+                DataBaseRepository.stressPoints = 0
+                setState(state.copy(testType = 0), action = MoodScreenActions.StartStressTestScreen)
+                Store.setState(
+                    appState.stressTestState.copy(
+                        testType = 0,
+                        questionList = DataBaseRepository.listOfStressQs
+                    )
+                )
+            },
+            anxietyTestConditions = {
+                DataBaseRepository.stressPoints = 1
+                setState(state.copy(testType = 1), action = MoodScreenActions.AnxStressTestScreen)
+                Store.setState(
+                    appState.stressTestState.copy(
+                        testType = 1,
+                        questionList = DataBaseRepository.listOfAnxietyQs
+                    )
+                )
+            }
         )
-    }
-
-    private fun setTestType(type: Int) {
-        val state = Store.appState.stressTestState
-        if (type == 1) {
-            Store.setState(
-                state.copy(
-                    questionList = DataBaseRepository.listOfAnxietyQs
-                )
-            )
-        } else {
-            Store.setState(
-                state.copy(
-                    questionList = DataBaseRepository.listOfStressQs
-                )
-            )
-        }
     }
 
     private fun fetchListOfMoods() {
