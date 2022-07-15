@@ -65,10 +65,10 @@
         android:textSize="15sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minus"
+        android:id="@+id/minus_b"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="-"
+        android:text="@string/minus"
         android:textSize="20sp"
         android:layout_marginStart="10dp"
         android:textStyle="bold"
@@ -82,26 +82,26 @@
         android:id="@+id/add_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0.5 h"
+        android:text="@string/_0_5_h"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@id/minus"
-        app:layout_constraintEnd_toStartOf="@id/plus"
-        app:layout_constraintTop_toTopOf="@id/minus"
-        app:layout_constraintBottom_toBottomOf="@id/minus"
+        app:layout_constraintStart_toEndOf="@id/minus_b"
+        app:layout_constraintEnd_toStartOf="@id/plus_b"
+        app:layout_constraintTop_toTopOf="@id/minus_b"
+        app:layout_constraintBottom_toBottomOf="@id/minus_b"
         android:textColor="@color/light_purple"
         android:fontFamily="@font/raleway_bold"
         android:textSize="25sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/plus"
+        android:id="@+id/plus_b"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:text="+"
+        android:text="@string/plus"
         android:layout_marginEnd="10dp"
         android:textSize="20sp"
         android:textStyle="bold"
         android:backgroundTint="#EFF2FF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/minus"
+        app:layout_constraintTop_toTopOf="@id/minus_b"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

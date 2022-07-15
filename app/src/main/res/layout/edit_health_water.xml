@@ -63,7 +63,7 @@
         android:textSize="15sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minus"
+        android:id="@+id/minus_butt"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="-"
@@ -82,16 +82,16 @@
         android:layout_height="wrap_content"
         android:text="100"
         android:layout_marginTop="5dp"
-        app:layout_constraintStart_toEndOf="@id/minus"
-        app:layout_constraintEnd_toStartOf="@id/plus"
-        app:layout_constraintTop_toTopOf="@id/minus"
-        app:layout_constraintBottom_toBottomOf="@id/minus"
+        app:layout_constraintStart_toEndOf="@id/minus_butt"
+        app:layout_constraintEnd_toStartOf="@id/plus_butt"
+        app:layout_constraintTop_toTopOf="@id/minus_butt"
+        app:layout_constraintBottom_toBottomOf="@id/minus_butt"
         android:textColor="@color/light_purple"
         android:fontFamily="@font/raleway_bold"
         android:textSize="25sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/plus"
+        android:id="@+id/plus_butt"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="+"
@@ -100,6 +100,6 @@
         android:textStyle="bold"
         android:backgroundTint="#EFF2FF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/minus"
+        app:layout_constraintTop_toTopOf="@id/minus_butt"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

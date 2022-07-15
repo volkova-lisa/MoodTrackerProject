@@ -67,6 +67,21 @@ fun View.click(action: () -> Unit) {
     )
 }
 
+// to prevent fantom-double taps
+fun View.quickClick(action: () -> Unit) {
+    setOnClickListener(
+        object : View.OnClickListener {
+            private var lastClickTime: Long = 0
+
+            override fun onClick(v: View) {
+                if (SystemClock.elapsedRealtime() - lastClickTime < 100) return
+                else action()
+                lastClickTime = SystemClock.elapsedRealtime()
+            }
+        }
+    )
+}
+
 fun View.makeGone() {
     this.visibility = View.GONE
 }
