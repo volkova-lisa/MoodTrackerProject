@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.health
 
 import EditHealthProps
+import EditHealthProps.*
 import android.content.Context.SENSOR_SERVICE
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -38,7 +39,6 @@ class EditHealthFragment :
     ): View? {
 
         return super.onCreateView(inflater, container, savedInstanceState)
-
     }
 
     override fun getFragmentBinding(
@@ -61,10 +61,15 @@ class EditHealthFragment :
 
     override fun render(props: EditHealthProps) {
         binding?.run {
-            var tempWater = 0 // should be props.waterNum
+            var tempWater = 0
             var tempKcal = 0
             var tempSteps = 0
             var tempSleep = 0.0f
+
+//            steps.waterNum.text = props.stepsNum.toString()
+//            water.waterNum.text = props.waterNum.toString()
+//            sleep.waterNum.text = props.sleepNum.toString()
+//            kcal.waterNum.text = props.kcalNum.toString()
 
             sensorManager = activity?.getSystemService(SENSOR_SERVICE) as SensorManager
 
@@ -113,6 +118,13 @@ class EditHealthFragment :
             }
 
             cancelButton.click {
+                (requireActivity() as MainActivity).router.openHealth()
+            }
+
+            saveButton.click {
+                props.saveEdited(arrayOf(tempWater, tempSteps, tempSleep, tempKcal))
+            }
+            if (props.action == EditHealthScreenActions.StartHealthScreen) {
                 (requireActivity() as MainActivity).router.openHealth()
             }
         }

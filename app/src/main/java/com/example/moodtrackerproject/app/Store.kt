@@ -26,6 +26,10 @@ object Store {
         appState = appState.copy(stressTestState = newState)
     }
 
+    fun setState(newState: HealthState) {
+        appState = appState.copy(healthState = newState)
+    }
+
     fun setState(newState: MoodState) {
         appState = appState.copy(moodState = newState)
     }

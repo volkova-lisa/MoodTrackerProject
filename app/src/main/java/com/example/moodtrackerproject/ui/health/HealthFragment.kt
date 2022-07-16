@@ -1,10 +1,12 @@
 package com.example.moodtrackerproject.ui.health
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentHealthBinding
 import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.utils.click
 
 class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, HealthProps>(
     HealthViewModel::class.java
@@ -25,7 +27,12 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
     override fun render(props: HealthProps) {
         this.props = props
         binding?.run {
-            editHButton.setOnClickListener() {
+            editHButton.click {
+                props.startEdit()
+                Log.d("---------", props.action.toString())
+                // (requireActivity() as MainActivity).router.openEditHealth()
+            }
+            if (props.action == HealthProps.HealthScreenActions.StartEditHealthScreen) {
                 (requireActivity() as MainActivity).router.openEditHealth()
             }
         }

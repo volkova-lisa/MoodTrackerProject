@@ -3,9 +3,14 @@ package com.example.moodtrackerproject.ui.health
 import com.example.moodtrackerproject.app.MviAction
 
 data class HealthProps(
-    val isEditing: Boolean = false,
+    val startEdit: () -> Unit = {},
+    val water: Int = 0,
+    val steps: Int = 0,
+    val sleep: Float = 0.0f,
+    val kcal: Int = 0,
+    val action: HealthScreenActions? = null
 ) {
     sealed class HealthScreenActions : MviAction {
-        object StartEditHealthScreen : HealthProps.HealthScreenActions()
+        object StartEditHealthScreen : HealthScreenActions()
     }
 }
