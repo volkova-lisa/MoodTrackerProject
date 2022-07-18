@@ -122,7 +122,7 @@ class EditHealthFragment :
             }
 
             saveButton.click {
-                props.saveEdited(arrayOf(tempWater, tempSteps, tempSleep, tempKcal))
+                props.saveEdited(listOf(tempWater, tempSteps, tempSleep, tempKcal))
             }
             if (props.action == EditHealthScreenActions.StartHealthScreen) {
                 (requireActivity() as MainActivity).router.openHealth()

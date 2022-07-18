@@ -16,8 +16,17 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
     override fun map(appState: AppState, action: MviAction?): HealthProps {
         val state = appState.healthState
         return HealthProps(
+            action = action as? HealthScreenActions,
             startEdit = {
-                setState(state.copy(), action = HealthScreenActions.StartEditHealthScreen)
+                setState(
+                    state.copy(
+                        water = state.water,
+                        steps = state.steps,
+                        sleep = state.sleep,
+                        kcal = state.kcal
+                    ),
+                    action = HealthScreenActions.StartEditHealthScreen
+                )
             },
             water = state.water,
             steps = state.steps,

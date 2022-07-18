@@ -5,7 +5,7 @@ data class EditHealthProps(
     val stepsNum: Int = 0,
     val sleepNum: Float = 0.0f,
     val kcalNum: Int = 0,
-    val saveEdited: (Array<Any>) -> Unit = {},
+    val saveEdited: (List<Any>) -> Unit = {},
     val action: EditHealthScreenActions? = null
 
 ) {

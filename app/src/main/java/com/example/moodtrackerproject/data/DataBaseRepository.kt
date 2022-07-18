@@ -125,4 +125,14 @@ object DataBaseRepository {
         }
         PreferenceManager.saveMoods(list)
     }
+
+    fun saveHealth(healthList: List<Any>) {
+        val list = mutableListOf<Any>().apply {
+            clear()
+            add(healthList)
+        }
+        PreferenceManager.saveHealth(list)
+    }
+
+    fun getHealth() = PreferenceManager.getHealth()
 }

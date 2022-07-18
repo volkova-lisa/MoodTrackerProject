@@ -41,7 +41,7 @@
         android:id="@+id/water_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1300"
+        android:text="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_water"
         android:layout_marginTop="15dp"
