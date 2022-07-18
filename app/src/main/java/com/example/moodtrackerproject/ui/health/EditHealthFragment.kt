@@ -61,15 +61,15 @@ class EditHealthFragment :
 
     override fun render(props: EditHealthProps) {
         binding?.run {
-            var tempWater = 0
-            var tempKcal = 0
-            var tempSteps = 0
-            var tempSleep = 0.0f
+            var tempWater = props.waterNum
+            var tempKcal = props.kcalNum
+            var tempSteps = props.stepsNum
+            var tempSleep = props.sleepNum
 
-//            steps.waterNum.text = props.stepsNum.toString()
-//            water.waterNum.text = props.waterNum.toString()
-//            sleep.waterNum.text = props.sleepNum.toString()
-//            kcal.waterNum.text = props.kcalNum.toString()
+            steps.waterNum.text = props.stepsNum.toString()
+            water.waterNum.text = props.waterNum.toString()
+            sleep.waterNum.text = props.sleepNum.toString()
+            kcal.waterNum.text = props.kcalNum.toString()
 
             sensorManager = activity?.getSystemService(SENSOR_SERVICE) as SensorManager
 
@@ -107,14 +107,14 @@ class EditHealthFragment :
             }
 
             sleep.minusB.quickClick {
-                tempSleep -= 0.5f
-                if (tempSleep in 0.0f..24.0f) sleep.waterNum.text = tempSleep.toString()
-                else tempSleep = 0.0f
+                tempSleep -= 1
+                if (tempSleep in 0..24) sleep.waterNum.text = tempSleep.toString()
+                else tempSleep = 0
             }
             sleep.plusB.quickClick {
-                tempSleep += 0.5f
-                if (tempSleep in 0.0f..24.0f) sleep.waterNum.text = tempSleep.toString()
-                else tempSleep = 0.0f
+                tempSleep += 1
+                if (tempSleep in 0..24) sleep.waterNum.text = tempSleep.toString()
+                else tempSleep = 0
             }
 
             cancelButton.click {

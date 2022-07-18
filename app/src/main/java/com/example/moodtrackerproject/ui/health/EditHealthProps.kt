@@ -3,9 +3,9 @@ import com.example.moodtrackerproject.app.MviAction
 data class EditHealthProps(
     val waterNum: Int = 0,
     val stepsNum: Int = 0,
-    val sleepNum: Float = 0.0f,
+    val sleepNum: Int = 0,
     val kcalNum: Int = 0,
-    val saveEdited: (List<Any>) -> Unit = {},
+    val saveEdited: (List<Int>) -> Unit = {},
     val action: EditHealthScreenActions? = null
 
 ) {

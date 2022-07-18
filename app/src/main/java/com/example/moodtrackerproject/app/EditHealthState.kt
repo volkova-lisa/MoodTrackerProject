@@ -4,6 +4,6 @@ data class EditHealthState(
     val save: Boolean = false,
     val waterNum: Int = 0,
     val stepsNum: Int = 0,
-    val sleepNum: Float = 0.0f,
+    val sleepNum: Int = 0,
     val kcalNum: Int = 0
 )

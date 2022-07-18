@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHealthBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.health.HealthProps.HealthScreenActions
@@ -29,6 +30,8 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
         this.props = props
         binding?.run {
 
+            Log.d("++++++++", DataBaseRepository.getHealth().toString())
+
             water.waterNum.text = props.water.toString()
             sleep.waterNum.text = props.sleep.toString()
             kcal.waterNum.text = props.kcal.toString()
@@ -36,13 +39,9 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
 
             editHButton.click {
                 props.startEdit()
-                Log.d("---------", props.action.toString())
             }
 
-            Log.d("222222222", props.action.toString())
-
             if (props.action == HealthScreenActions.StartEditHealthScreen) {
-                Log.d("++++++++", props.action.toString())
                 (requireActivity() as MainActivity).router.openEditHealth()
             }
         }

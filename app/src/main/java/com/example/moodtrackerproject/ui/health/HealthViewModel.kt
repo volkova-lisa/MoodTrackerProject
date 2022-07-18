@@ -4,6 +4,7 @@ import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HealthState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.health.HealthProps.HealthScreenActions
 
@@ -28,10 +29,10 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                     action = HealthScreenActions.StartEditHealthScreen
                 )
             },
-            water = state.water,
-            steps = state.steps,
-            sleep = state.sleep,
-            kcal = state.kcal
+            water = DataBaseRepository.getHealth()[0],
+            steps = DataBaseRepository.getHealth()[1],
+            sleep = DataBaseRepository.getHealth()[2],
+            kcal = DataBaseRepository.getHealth()[3]
         )
     }
 
