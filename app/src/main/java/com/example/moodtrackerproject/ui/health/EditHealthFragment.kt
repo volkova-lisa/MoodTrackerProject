@@ -121,6 +121,11 @@ class EditHealthFragment :
                 (requireActivity() as MainActivity).router.openHealth()
             }
 
+            tempWater = water.waterNum.text.toString().toInt()
+            tempKcal = kcal.waterNum.text.toString().toInt()
+            tempSteps = steps.waterNum.text.toString().toInt()
+            tempSleep = sleep.waterNum.text.toString().toInt()
+
             saveButton.click {
                 props.saveEdited(listOf(tempWater, tempSteps, tempSleep, tempKcal))
             }

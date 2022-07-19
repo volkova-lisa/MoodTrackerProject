@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.health
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
@@ -30,9 +29,10 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
         this.props = props
         binding?.run {
 
-            Log.d("++++++++", props.listOfHealth.toString())
-
-            // if (props.edited) props.fetchListOfHealth()
+            water.waterNum.text = props.currWater.toString()
+            steps.waterNum.text = props.currSteps.toString()
+            sleep.waterNum.text = props.currSleep.toString()
+            kcal.waterNum.text = props.currKcal.toString()
 
             editHButton.click {
                 props.startEdit()
