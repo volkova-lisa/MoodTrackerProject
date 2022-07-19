@@ -61,15 +61,15 @@ class EditHealthFragment :
 
     override fun render(props: EditHealthProps) {
         binding?.run {
-            var tempWater = props.waterNum
-            var tempKcal = props.kcalNum
-            var tempSteps = props.stepsNum
-            var tempSleep = props.sleepNum
+            var tempWater = 0
+            var tempKcal = 0
+            var tempSteps = 0
+            var tempSleep = 0
 
-            steps.waterNum.text = props.stepsNum.toString()
-            water.waterNum.text = props.waterNum.toString()
-            sleep.waterNum.text = props.sleepNum.toString()
-            kcal.waterNum.text = props.kcalNum.toString()
+            steps.waterNum.text = props.listHealth[1].toString()
+            water.waterNum.text = props.listHealth[0].toString()
+            sleep.waterNum.text = props.listHealth[2].toString()
+            kcal.waterNum.text = props.listHealth[3].toString()
 
             sensorManager = activity?.getSystemService(SENSOR_SERVICE) as SensorManager
 

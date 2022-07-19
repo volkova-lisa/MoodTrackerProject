@@ -20,23 +20,16 @@ class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
         val state = appState.editHealthState
         return EditHealthProps(
             action = action as? EditHealthScreenActions,
-            waterNum = DataBaseRepository.getHealth()[0],
-            stepsNum = DataBaseRepository.getHealth()[1],
-            sleepNum = DataBaseRepository.getHealth()[2],
-            kcalNum = DataBaseRepository.getHealth()[3],
+            listHealth = DataBaseRepository.getHealth(),
             saveEdited = {
                 DataBaseRepository.saveHealth(it)
-                val list = DataBaseRepository.getHealth()
                 Log.d("77777777", DataBaseRepository.getHealth().toString())
                 setState(
                     state, action = EditHealthScreenActions.StartHealthScreen
                 )
                 Store.setState(
                     appState.healthState.copy(
-                        water = list[0],
-                        steps = list[1],
-                        sleep = list[2],
-                        kcal = list[3]
+                        edited = true
                     )
                 )
             }

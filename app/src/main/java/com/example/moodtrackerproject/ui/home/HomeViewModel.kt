@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HomeState
 import com.example.moodtrackerproject.app.MviAction
@@ -60,8 +61,24 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             isLoggedIn = state.isLoggedIn,
             logout = ::logOut,
             fetchListOfMoods = ::fetchListOfMoods,
-            fetchListOfNotes = ::fetchListOfNotes
+            fetchListOfNotes = ::fetchListOfNotes,
+            healthList = DataBaseRepository.getHealth(),
+            fetchListOfHealth = {
+                val listHealth = DataBaseRepository.getHealth()
+                setState(Store.appState.homeState.copy(healthList = listHealth))
+                Log.d("3333333", DataBaseRepository.getHealth().toString())
+            }
         )
+    }
+
+    private fun fetchListOfHealth() {
+        launch {
+            val listHealth = withContext(Dispatchers.IO) {
+                DataBaseRepository.getHealth()
+            }
+            setState(appState.homeState.copy(healthList = listHealth))
+            Log.d("3333333", props.healthList.toString())
+        }
     }
 
     private fun logOut() {

@@ -7,6 +7,9 @@ import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.health.HealthProps.HealthScreenActions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class HealthViewModel : BaseViewModel<HealthProps>() {
 
@@ -20,20 +23,23 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
             action = action as? HealthScreenActions,
             startEdit = {
                 setState(
-                    state.copy(
-                        water = state.water,
-                        steps = state.steps,
-                        sleep = state.sleep,
-                        kcal = state.kcal
-                    ),
+                    state,
                     action = HealthScreenActions.StartEditHealthScreen
                 )
             },
-            water = DataBaseRepository.getHealth()[0],
-            steps = DataBaseRepository.getHealth()[1],
-            sleep = DataBaseRepository.getHealth()[2],
-            kcal = DataBaseRepository.getHealth()[3]
+            listOfHealth = state.listOfHealth,
+            fetchListOfHealth = ::fetchListOfHealth,
+            edited = state.edited
         )
+    }
+
+    private fun fetchListOfHealth() {
+        launch {
+            val health = withContext(Dispatchers.IO) {
+                DataBaseRepository.getHealth()
+            }
+            setState(Store.appState.healthState.copy(listOfHealth = health))
+        }
     }
 
     private fun setState(state: HealthState, action: HealthScreenActions? = null) {

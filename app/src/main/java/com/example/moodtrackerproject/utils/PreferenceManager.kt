@@ -88,7 +88,7 @@ object PreferenceManager {
 
     fun getHealth(): List<Int> {
         val healthJson = preferences.getString(KEY_HEAlTH, null)
-        return if (healthJson.isNullOrEmpty()) listOf() else healthJsonAdapter.fromJson(healthJson)
-            ?: listOf()
+        return if (healthJson.isNullOrEmpty()) listOf(0, 0, 0, 0) else healthJsonAdapter.fromJson(healthJson)
+            ?: listOf(7, 7, 7, 7)
     }
 }

@@ -4,7 +4,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHealthBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.health.HealthProps.HealthScreenActions
@@ -23,6 +22,7 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
     override fun onResume() {
         super.onResume()
         if (::props.isInitialized) {
+            props.fetchListOfHealth()
         }
     }
 
@@ -30,12 +30,9 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
         this.props = props
         binding?.run {
 
-            Log.d("++++++++", DataBaseRepository.getHealth().toString())
+            Log.d("++++++++", props.listOfHealth.toString())
 
-            water.waterNum.text = props.water.toString()
-            sleep.waterNum.text = props.sleep.toString()
-            kcal.waterNum.text = props.kcal.toString()
-            steps.waterNum.text = props.steps.toString()
+            // if (props.edited) props.fetchListOfHealth()
 
             editHButton.click {
                 props.startEdit()

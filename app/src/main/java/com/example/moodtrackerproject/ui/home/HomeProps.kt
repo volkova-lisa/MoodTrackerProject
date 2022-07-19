@@ -11,6 +11,8 @@ data class HomeProps(
     val listOfNotesToday: List<NotesListProps.NoteItemProps> = listOf(),
     val fetchListOfMoods: () -> Unit = {},
     val fetchListOfNotes: () -> Unit = {},
+    val fetchListOfHealth: () -> Unit = {},
+    val healthList: List<Int> = listOf()
 
 ) {
     sealed class HomeAction {
