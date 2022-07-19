@@ -1,12 +1,10 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
@@ -38,7 +36,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         if (::props.isInitialized) {
             props.fetchListOfMoods()
             props.fetchListOfNotes()
-            Log.d("###########", props.healthList.toString())
         }
     }
 
@@ -48,9 +45,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
-            Log.d("111111111", props.healthList.toString())
-            angerJoy.angerBar.progress = DataBaseRepository.stressPoints
-            sadHappy.angerBar.progress = DataBaseRepository.anxietyPoints
+            angerJoy.angerBar.progress = props.testPoints[0]
+            sadHappy.angerBar.progress = props.testPoints[1]
 
             val water = props.healthList[0]
             val steps = props.healthList[1]
@@ -62,16 +58,16 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             sleepItem.sleepValue.text = "$sleep h"
             kcalItem.waterValue.text = kcal.toString()
 
-            waterItem.waterBar.max = 2000
+            waterItem.waterBar.max = 2000 // here  will be set the num via settings in new branch
             waterItem.waterBar.progress = water
 
-            stepsItem.stepsBar.max = 10000
+            stepsItem.stepsBar.max = 10000 // here  will be set the num via settings in new branch
             stepsItem.stepsBar.progress = steps
 
-            sleepItem.waterBar.max = 8
+            sleepItem.waterBar.max = 8 // here  will be set the num via settings in new branch
             sleepItem.waterBar.progress = if (sleep> 8) 8 else sleep
 
-            kcalItem.waterBar.max = 2500
+            kcalItem.waterBar.max = 2500 // here  will be set the num via settings in new branch
             kcalItem.waterBar.progress = kcal
         }
     }

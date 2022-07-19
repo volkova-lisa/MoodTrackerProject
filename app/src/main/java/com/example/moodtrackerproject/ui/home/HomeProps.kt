@@ -13,7 +13,8 @@ data class HomeProps(
     val fetchListOfMoods: () -> Unit = {},
     val fetchListOfNotes: () -> Unit = {},
     val fetchListOfHealth: () -> Unit = {},
-    val healthList: List<Int> = DataBaseRepository.getHealth()
+    val healthList: List<Int> = DataBaseRepository.getHealth(),
+    val testPoints: List<Int> = DataBaseRepository.getTestResults()
 
 ) {
     sealed class HomeAction {

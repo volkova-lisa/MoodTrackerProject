@@ -56,9 +56,11 @@ object DataBaseRepository {
 
     fun saveStressPoints(p: Int) {
         stressPoints += p
+        saveTestResults(stressPoints, 0)
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
+        saveTestResults(anxietyPoints, 1)
     }
 
     fun getEmojiList() = listOfEmojis
@@ -135,4 +137,13 @@ object DataBaseRepository {
     }
 
     fun getHealth() = PreferenceManager.getHealth()
+
+    fun saveTestResults(testRes: Int, position: Int) {
+        val list = arrayOf(getTestResults()[0], getTestResults()[1]).apply {
+            set(position, testRes)
+        }
+        PreferenceManager.saveTests(list)
+    }
+
+    fun getTestResults() = PreferenceManager.getTests()
 }

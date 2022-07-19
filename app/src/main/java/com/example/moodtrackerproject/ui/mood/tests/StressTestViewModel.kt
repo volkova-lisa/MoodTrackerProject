@@ -73,7 +73,6 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
         val state = Store.appState.stressTestState
         val list = state.questionList
 
-        Log.d("stress view model setnext----", state.questionList.toString())
         setState(
             state.copy(
                 question = list[state.currQuestionNum],
@@ -90,6 +89,7 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
             DataBaseRepository.saveAnxietyPoints(points)
             setState(Store.appState.stressTestState.copy(points = points))
         }
+        Log.d("==========", DataBaseRepository.getTestResults().toString())
     }
 
     private fun nextQuestion() {

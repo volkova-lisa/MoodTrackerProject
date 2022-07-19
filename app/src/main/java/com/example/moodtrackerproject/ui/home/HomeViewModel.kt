@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.home
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HomeState
 import com.example.moodtrackerproject.app.MviAction
@@ -65,7 +64,6 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchListOfHealth = {
                 val listHealth = DataBaseRepository.getHealth()
                 setState(Store.appState.homeState.copy(healthList = listHealth))
-                Log.d("3333333", DataBaseRepository.getHealth().toString())
             }
         )
     }
@@ -76,7 +74,6 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                 DataBaseRepository.getHealth()
             }
             setState(appState.homeState.copy(healthList = listHealth))
-            Log.d("3333333", props.healthList.toString())
         }
     }
 

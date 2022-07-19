@@ -2,7 +2,6 @@ package com.example.moodtrackerproject.ui.health
 
 import EditHealthProps
 import EditHealthProps.*
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.EditHealthState
 import com.example.moodtrackerproject.app.MviAction
@@ -23,7 +22,6 @@ class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
             listHealth = DataBaseRepository.getHealth(),
             saveEdited = {
                 DataBaseRepository.saveHealth(it)
-                Log.d("77777777", DataBaseRepository.getHealth().toString())
                 setState(
                     state, action = EditHealthScreenActions.StartHealthScreen
                 )

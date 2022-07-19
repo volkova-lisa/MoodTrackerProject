@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,9 +44,6 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
         this.props = props
         binding?.run {
             val chosenAnswer = props.listOfOptions.find { it.isChecked }
-
-            Log.d("stress test fragment----", props.questionList.toString())
-            Log.d("stress test fragment00000000", Store.appState.stressTestState.questionList.toString())
 
             question.text = if (props.currQuestionNum < props.stressQuestionsQty) Store.appState.stressTestState.questionList[props.currQuestionNum].text
             else getString(R.string.test_finished)

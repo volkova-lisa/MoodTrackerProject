@@ -16,6 +16,7 @@ object PreferenceManager {
     private const val KEY_NOTES = "all_notes"
     private const val KEY_MOODS = "all_moods"
     private const val KEY_HEAlTH = "all_health"
+    private const val KEY_TESTS = "all_tests"
 
     private lateinit var preferences: SharedPreferences
 
@@ -30,11 +31,15 @@ object PreferenceManager {
     private val valuesHealth: ParameterizedType =
         Types.newParameterizedType(List::class.java, Integer::class.java)
 
+    private val valuesTests: ParameterizedType =
+        Types.newParameterizedType(List::class.java, Integer::class.java)
+
     private val healthJsonAdapter: JsonAdapter<List<Int>> =
         moshi.adapter<List<Int>>(valuesHealth).nonNull()
+    private val testsJsonAdapter: JsonAdapter<List<Int>> =
+        moshi.adapter<List<Int>>(valuesTests).nonNull()
     private val notesJsonAdapter: JsonAdapter<List<NoteModel>> = moshi.adapter(valuesNote)
     private val moodsJsonAdapter: JsonAdapter<List<MoodModel>> = moshi.adapter(valuesMood)
-    // private val healthJsonAdapter: JsonAdapter<List<Int>> = moshi.adapter(valuesHealth)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -89,6 +94,19 @@ object PreferenceManager {
     fun getHealth(): List<Int> {
         val healthJson = preferences.getString(KEY_HEAlTH, null)
         return if (healthJson.isNullOrEmpty()) listOf(0, 0, 0, 0) else healthJsonAdapter.fromJson(healthJson)
-            ?: listOf(7, 7, 7, 7)
+            ?: listOf(0, 0, 0, 0)
+    }
+
+    fun saveTests(testsList: Array<Int>) {
+        val serializedTests = testsJsonAdapter.toJson(testsList.toList())
+        preferences.edit()
+            .putString(KEY_TESTS, serializedTests)
+            .apply()
+    }
+
+    fun getTests(): List<Int> {
+        val testsJson = preferences.getString(KEY_TESTS, null)
+        return if (testsJson.isNullOrEmpty()) listOf(0, 0) else testsJsonAdapter.fromJson(testsJson)
+            ?: listOf(0, 0)
     }
 }
