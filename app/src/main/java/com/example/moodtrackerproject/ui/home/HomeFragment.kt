@@ -51,6 +51,28 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             Log.d("111111111", props.healthList.toString())
             angerJoy.angerBar.progress = DataBaseRepository.stressPoints
             sadHappy.angerBar.progress = DataBaseRepository.anxietyPoints
+
+            val water = props.healthList[0]
+            val steps = props.healthList[1]
+            val sleep = props.healthList[2]
+            val kcal = props.healthList[3]
+
+            waterItem.waterValue.text = "$water ml"
+            stepsItem.stepsValue.text = steps.toString()
+            sleepItem.sleepValue.text = "$sleep h"
+            kcalItem.waterValue.text = kcal.toString()
+
+            waterItem.waterBar.max = 2000
+            waterItem.waterBar.progress = water
+
+            stepsItem.stepsBar.max = 10000
+            stepsItem.stepsBar.progress = steps
+
+            sleepItem.waterBar.max = 8
+            sleepItem.waterBar.progress = if (sleep> 8) 8 else sleep
+
+            kcalItem.waterBar.max = 2500
+            kcalItem.waterBar.progress = kcal
         }
     }
 

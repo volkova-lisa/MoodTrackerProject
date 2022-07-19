@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.mood.list.MoodProps
 import com.example.moodtrackerproject.ui.notes.list.NotesListProps
 
@@ -12,7 +13,7 @@ data class HomeProps(
     val fetchListOfMoods: () -> Unit = {},
     val fetchListOfNotes: () -> Unit = {},
     val fetchListOfHealth: () -> Unit = {},
-    val healthList: List<Int> = listOf()
+    val healthList: List<Int> = DataBaseRepository.getHealth()
 
 ) {
     sealed class HomeAction {
