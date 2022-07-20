@@ -128,7 +128,7 @@ object DataBaseRepository {
         PreferenceManager.saveMoods(list)
     }
 
-    fun saveHealth(healthList: HealthModel) {
+    fun saveHealth(healthList: List<HealthModel>) {
         PreferenceManager.saveHealth(healthList)
     }
 

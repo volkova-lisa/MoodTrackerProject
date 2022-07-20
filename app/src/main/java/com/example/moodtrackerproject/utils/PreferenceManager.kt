@@ -29,13 +29,14 @@ object PreferenceManager {
     private val valuesMood: ParameterizedType =
         Types.newParameterizedType(List::class.java, MoodModel::class.java)
 
-    private val valuesHealth: HealthModel? = HealthModel()
+    private val valuesHealth: ParameterizedType =
+        Types.newParameterizedType(List::class.java, HealthModel::class.java)
 
     private val valuesTests: ParameterizedType =
         Types.newParameterizedType(List::class.java, Integer::class.java)
 
-    private val healthJsonAdapter: JsonAdapter<HealthModel> =
-        moshi.adapter(valuesHealth).nonNull()
+    private val healthJsonAdapter: JsonAdapter<List<HealthModel>> =
+        moshi.adapter<List<HealthModel>>(valuesHealth).nonNull()
     private val testsJsonAdapter: JsonAdapter<List<Int>> =
         moshi.adapter<List<Int>>(valuesTests).nonNull()
     private val notesJsonAdapter: JsonAdapter<List<NoteModel>> = moshi.adapter(valuesNote)
@@ -84,7 +85,7 @@ object PreferenceManager {
             ?: listOf()
     }
 
-    fun saveHealth(healthList: HealthModel) {
+    fun saveHealth(healthList: List<HealthModel>) {
         val serializedHealth = healthJsonAdapter.toJson(healthList)
         preferences.edit()
             .clear()
@@ -92,10 +93,10 @@ object PreferenceManager {
             .apply()
     }
 
-    fun getHealth(): HealthModel {
+    fun getHealth(): List<HealthModel> {
         val healthJson = preferences.getString(KEY_HEAlTH, null)
-        return if (healthJson.isNullOrEmpty()) HealthModel() else healthJsonAdapter.fromJson(healthJson)
-            ?: HealthModel()
+        return if (healthJson.isNullOrEmpty()) listOf(HealthModel(0, 0, 0, 0)) else healthJsonAdapter.fromJson(healthJson)
+            ?: listOf(HealthModel(0, 0, 0, 0))
     }
 
     fun saveTests(testsList: Array<Int>) {

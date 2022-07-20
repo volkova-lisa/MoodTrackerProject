@@ -45,7 +45,7 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
     private fun fetchListOfHealth() {
         launch {
             val health = withContext(Dispatchers.IO) {
-                DataBaseRepository.getHealth()
+                DataBaseRepository.getHealth()[0]
             }
             setState(Store.appState.healthState.copy(listOfHealth = health))
         }

@@ -129,7 +129,7 @@ class EditHealthFragment :
                 tempSleep = sleep.waterNum.text.toString().toInt()
             }
             saveButton.click {
-                props.saveEdited(HealthModel(tempWater, tempSteps, tempSleep, tempKcal))
+                props.saveEdited(listOf(HealthModel(tempWater, tempSteps, tempSleep, tempKcal)))
             }
             if (props.action == EditHealthScreenActions.StartHealthScreen) {
                 (requireActivity() as MainActivity).router.openHealth()
