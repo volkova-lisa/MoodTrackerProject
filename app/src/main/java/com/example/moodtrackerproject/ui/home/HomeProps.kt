@@ -13,11 +13,18 @@ data class HomeProps(
     val fetchListOfMoods: () -> Unit = {},
     val fetchListOfNotes: () -> Unit = {},
     val fetchListOfHealth: () -> Unit = {},
-    val healthList: List<Int> = listOf(),
+    val healthList: HomeItemProps? = null,
     val testPoints: List<Int> = DataBaseRepository.getTestResults()
 
 ) {
     sealed class HomeAction {
         object LogOut : HomeAction()
     }
+
+    data class HomeItemProps(
+        val water: Int = 0,
+        val steps: Int = 0,
+        val sleep: Int = 0,
+        val kcal: Int = 0
+    )
 }

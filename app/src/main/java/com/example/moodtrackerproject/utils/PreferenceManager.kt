@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.moodtrackerproject.domain.HealthModel
 import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
 import com.squareup.moshi.JsonAdapter
@@ -28,14 +29,13 @@ object PreferenceManager {
     private val valuesMood: ParameterizedType =
         Types.newParameterizedType(List::class.java, MoodModel::class.java)
 
-    private val valuesHealth: ParameterizedType =
-        Types.newParameterizedType(List::class.java, Integer::class.java)
+    private val valuesHealth: HealthModel? = HealthModel()
 
     private val valuesTests: ParameterizedType =
         Types.newParameterizedType(List::class.java, Integer::class.java)
 
-    private val healthJsonAdapter: JsonAdapter<List<Int>> =
-        moshi.adapter<List<Int>>(valuesHealth).nonNull()
+    private val healthJsonAdapter: JsonAdapter<HealthModel> =
+        moshi.adapter(valuesHealth).nonNull()
     private val testsJsonAdapter: JsonAdapter<List<Int>> =
         moshi.adapter<List<Int>>(valuesTests).nonNull()
     private val notesJsonAdapter: JsonAdapter<List<NoteModel>> = moshi.adapter(valuesNote)
@@ -84,17 +84,18 @@ object PreferenceManager {
             ?: listOf()
     }
 
-    fun saveHealth(healthList: List<Int>) {
+    fun saveHealth(healthList: HealthModel) {
         val serializedHealth = healthJsonAdapter.toJson(healthList)
         preferences.edit()
+            .clear()
             .putString(KEY_HEAlTH, serializedHealth)
             .apply()
     }
 
-    fun getHealth(): List<Int> {
+    fun getHealth(): HealthModel {
         val healthJson = preferences.getString(KEY_HEAlTH, null)
-        return if (healthJson.isNullOrEmpty()) listOf(0, 0, 0, 0) else healthJsonAdapter.fromJson(healthJson)
-            ?: listOf(0, 0, 0, 0)
+        return if (healthJson.isNullOrEmpty()) HealthModel() else healthJsonAdapter.fromJson(healthJson)
+            ?: HealthModel()
     }
 
     fun saveTests(testsList: Array<Int>) {

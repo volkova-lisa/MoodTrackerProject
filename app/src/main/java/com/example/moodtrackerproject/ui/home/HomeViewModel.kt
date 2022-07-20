@@ -60,6 +60,15 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             },
             isLoggedIn = state.isLoggedIn,
             logout = ::logOut,
+            healthList =
+            if (state.healthList != null) {
+                HomeProps.HomeItemProps(
+                    water = state.healthList.water,
+                    steps = state.healthList.steps,
+                    sleep = state.healthList.sleep,
+                    kcal = state.healthList.kcal
+                )
+            } else null,
             fetchListOfMoods = ::fetchListOfMoods,
             fetchListOfNotes = ::fetchListOfNotes,
             fetchListOfHealth = ::fetchListOfHealth

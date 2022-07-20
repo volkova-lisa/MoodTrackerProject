@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.getSystemService
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.databinding.FragmentEditHealthBinding
+import com.example.moodtrackerproject.domain.HealthModel
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.quickClick
@@ -66,68 +67,69 @@ class EditHealthFragment :
             var tempSteps = 0
             var tempSleep = 0
 
-            steps.waterNum.text = props.listHealth[1].toString()
-            water.waterNum.text = props.listHealth[0].toString()
-            sleep.waterNum.text = props.listHealth[2].toString()
-            kcal.waterNum.text = props.listHealth[3].toString()
+            if (props.listHealth != null) {
+                steps.waterNum.text = props.listHealth.water.toString()
+                water.waterNum.text = props.listHealth.steps.toString()
+                sleep.waterNum.text = props.listHealth.sleep.toString()
+                kcal.waterNum.text = props.listHealth.kcal.toString()
 
-            sensorManager = activity?.getSystemService(SENSOR_SERVICE) as SensorManager
+                sensorManager = activity?.getSystemService(SENSOR_SERVICE) as SensorManager
 
-            steps.minus.quickClick {
-                tempSteps -= 200
-                if (tempSteps in 0..90000) steps.waterNum.text = tempSteps.toString()
-                else tempSteps = 0
-            }
-            steps.plus.quickClick {
-                tempSteps += 200
-                if (tempSteps in 0..90000) steps.waterNum.text = tempSteps.toString()
-                else tempSteps = 0
-            }
+                steps.minus.quickClick {
+                    tempSteps -= 200
+                    if (tempSteps in 0..90000) steps.waterNum.text = tempSteps.toString()
+                    else tempSteps = 0
+                }
+                steps.plus.quickClick {
+                    tempSteps += 200
+                    if (tempSteps in 0..90000) steps.waterNum.text = tempSteps.toString()
+                    else tempSteps = 0
+                }
 
-            water.minusButt.quickClick {
-                tempWater -= 100
-                if (tempWater in 0..4000) water.waterNum.text = tempWater.toString()
-                else tempWater = 0
-            }
-            water.plusButt.quickClick {
-                tempWater += 100
-                if (tempWater in 0..4000) water.waterNum.text = tempWater.toString()
-                else tempWater = 0
-            }
+                water.minusButt.quickClick {
+                    tempWater -= 100
+                    if (tempWater in 0..4000) water.waterNum.text = tempWater.toString()
+                    else tempWater = 0
+                }
+                water.plusButt.quickClick {
+                    tempWater += 100
+                    if (tempWater in 0..4000) water.waterNum.text = tempWater.toString()
+                    else tempWater = 0
+                }
 
-            kcal.minusButton.quickClick {
-                tempKcal -= 100
-                if (tempKcal in 0..4000) kcal.waterNum.text = tempKcal.toString()
-                else tempKcal = 0
-            }
-            kcal.plusButton.quickClick {
-                tempKcal += 100
-                if (tempKcal in 0..4000) kcal.waterNum.text = tempKcal.toString()
-                else tempKcal = 0
-            }
+                kcal.minusButton.quickClick {
+                    tempKcal -= 100
+                    if (tempKcal in 0..4000) kcal.waterNum.text = tempKcal.toString()
+                    else tempKcal = 0
+                }
+                kcal.plusButton.quickClick {
+                    tempKcal += 100
+                    if (tempKcal in 0..4000) kcal.waterNum.text = tempKcal.toString()
+                    else tempKcal = 0
+                }
 
-            sleep.minusB.quickClick {
-                tempSleep -= 1
-                if (tempSleep in 0..24) sleep.waterNum.text = tempSleep.toString()
-                else tempSleep = 0
-            }
-            sleep.plusB.quickClick {
-                tempSleep += 1
-                if (tempSleep in 0..24) sleep.waterNum.text = tempSleep.toString()
-                else tempSleep = 0
-            }
+                sleep.minusB.quickClick {
+                    tempSleep -= 1
+                    if (tempSleep in 0..24) sleep.waterNum.text = tempSleep.toString()
+                    else tempSleep = 0
+                }
+                sleep.plusB.quickClick {
+                    tempSleep += 1
+                    if (tempSleep in 0..24) sleep.waterNum.text = tempSleep.toString()
+                    else tempSleep = 0
+                }
 
-            cancelButton.click {
-                (requireActivity() as MainActivity).router.openHealth()
+                cancelButton.click {
+                    (requireActivity() as MainActivity).router.openHealth()
+                }
+
+                tempWater = water.waterNum.text.toString().toInt()
+                tempKcal = kcal.waterNum.text.toString().toInt()
+                tempSteps = steps.waterNum.text.toString().toInt()
+                tempSleep = sleep.waterNum.text.toString().toInt()
             }
-
-            tempWater = water.waterNum.text.toString().toInt()
-            tempKcal = kcal.waterNum.text.toString().toInt()
-            tempSteps = steps.waterNum.text.toString().toInt()
-            tempSleep = sleep.waterNum.text.toString().toInt()
-
             saveButton.click {
-                props.saveEdited(listOf(tempWater, tempSteps, tempSleep, tempKcal))
+                props.saveEdited(HealthModel(tempWater, tempSteps, tempSleep, tempKcal))
             }
             if (props.action == EditHealthScreenActions.StartHealthScreen) {
                 (requireActivity() as MainActivity).router.openHealth()

@@ -49,11 +49,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             angerJoy.angerBar.progress = props.testPoints[0]
             sadHappy.angerBar.progress = props.testPoints[1]
 
-            if (props.healthList.isNotEmpty()) {
-                val water = props.healthList[0]
-                val steps = props.healthList[1]
-                val sleep = props.healthList[2]
-                val kcal = props.healthList[3]
+            if (props.healthList != null) {
+                val water = props.healthList.water
+                val steps = props.healthList.steps
+                val sleep = props.healthList.sleep
+                val kcal = props.healthList.kcal
 
                 waterItem.waterValue.text = "$water ml"
                 stepsItem.stepsValue.text = steps.toString()

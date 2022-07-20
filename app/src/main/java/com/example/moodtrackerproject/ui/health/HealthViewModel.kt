@@ -27,7 +27,16 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                     action = HealthScreenActions.StartEditHealthScreen
                 )
             },
-            listOfHealth = state.listOfHealth,
+            listOfHealth =
+            if (state.listOfHealth != null) {
+                HealthProps.HealthItemProps(
+                    water = state.listOfHealth.water,
+                    steps = state.listOfHealth.steps,
+                    sleep = state.listOfHealth.sleep,
+                    kcal = state.listOfHealth.kcal
+                )
+            } else null,
+
             fetchListOfHealth = ::fetchListOfHealth,
             edited = state.edited
         )
