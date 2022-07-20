@@ -22,7 +22,8 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
         action = null,
         logout = ::logOut,
         fetchListOfMoods = ::fetchListOfMoods,
-        fetchListOfNotes = ::fetchListOfNotes
+        fetchListOfNotes = ::fetchListOfNotes,
+        fetchListOfHealth = ::fetchListOfHealth
     )
 
     init {
@@ -61,10 +62,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             logout = ::logOut,
             fetchListOfMoods = ::fetchListOfMoods,
             fetchListOfNotes = ::fetchListOfNotes,
-            fetchListOfHealth = {
-                val listHealth = DataBaseRepository.getHealth()
-                setState(Store.appState.homeState.copy(healthList = listHealth))
-            }
+            fetchListOfHealth = ::fetchListOfHealth
         )
     }
 
