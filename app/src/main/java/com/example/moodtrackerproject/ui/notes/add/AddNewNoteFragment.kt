@@ -21,9 +21,9 @@ class AddNewNoteFragment : BaseFragment<AddNewNoteViewModel, FragmentAddNewNoteB
     override fun render(props: AddNewNoteProps) {
         binding?.run {
             cancelButton.click(props.cancelAdding)
-            saveButton.click {
+            saveButton.click({
                 props.checkNoteData(title.text.toString(), noteText.text.toString())
-            }
+            })
             if (props.action == NewNoteAction.ShowNotesScreen) {
                 (requireActivity() as MainActivity).router.openNotesScreen()
             }

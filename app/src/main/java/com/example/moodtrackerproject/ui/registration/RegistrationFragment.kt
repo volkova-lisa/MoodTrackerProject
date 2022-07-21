@@ -26,13 +26,13 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
             progressBar.isVisible = props.isLoading
             pass.isPasswordVisibilityToggleEnabled = props.isLoading
             registerButton.text = if (props.isLoading) "" else getString(R.string.create_account)
-            registerButton.click {
+            registerButton.click({
                 props.checkRegistrationData(
                     emailInput.text.toString(),
                     passInput.text.toString(),
                     nameInput.text.toString()
                 )
-            }
+            })
             alreadyHaveTextButton.click(props.openLogin)
             props.action?.let { handleAction(it) }
             props.error?.let { handleError(it) }

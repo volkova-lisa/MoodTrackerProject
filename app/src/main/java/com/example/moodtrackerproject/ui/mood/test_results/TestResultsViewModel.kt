@@ -7,6 +7,9 @@ import com.example.moodtrackerproject.app.tests.TestResultsState
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.mood.test_results.TestResultsProps.TestResultsActions
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
 
@@ -24,9 +27,24 @@ class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
                 setState(state, action = TestResultsActions.OpenMood)
             },
             testType = state.testType,
-            stressResults = DataBaseRepository.stressPoints,
-            anxResults = DataBaseRepository.anxietyPoints
+            testResults =
+            if (state.resultsModel != null) {
+                TestResultsProps.ResultsItemProps(
+                    stress = state.resultsModel.stressResult,
+                    anxiety = state.resultsModel.anxResult
+                )
+            } else null,
+            fetchTestResults = ::fetchResults
         )
+    }
+
+    private fun fetchResults() {
+        launch {
+            val testResults = withContext(Dispatchers.IO) {
+                DataBaseRepository.getTestResults()
+            }
+            setState(Store.appState.testResultsState.copy(resultsModel = testResults))
+        }
     }
 
     private fun setState(state: TestResultsState, action: TestResultsActions? = null) {

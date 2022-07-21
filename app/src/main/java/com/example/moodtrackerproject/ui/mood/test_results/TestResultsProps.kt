@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.test_results
 
 import com.example.moodtrackerproject.app.MviAction
-import com.example.moodtrackerproject.data.DataBaseRepository
 
 data class TestResultsProps(
     val sumTestPoints: Int,
@@ -9,11 +8,16 @@ data class TestResultsProps(
     val action: TestResultsActions? = null,
     val openMood: () -> Unit,
     val testType: Int = 0,
-    val stressResults: Int = DataBaseRepository.getTestResults()[0],
-    val anxResults: Int = DataBaseRepository.getTestResults()[1]
+    val testResults: ResultsItemProps? = null,
+    val fetchTestResults: () -> Unit = {}
 ) {
 
     sealed class TestResultsActions : MviAction {
         object OpenMood : TestResultsActions()
     }
+
+    data class ResultsItemProps(
+        val stress: Int = 0,
+        val anxiety: Int = 0
+    )
 }

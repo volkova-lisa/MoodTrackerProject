@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -63,28 +64,30 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
             when {
                 props.currQuestionNum == props.stressQuestionsQty - 1 -> {
                     nextButton.text = getString(R.string.finish)
-                    nextButton.click {
+                    nextButton.click({
+                        Log.d("11111111", "1")
                         props.savePoints(chosenAnswer?.points ?: 0)
                         props.shareTestType(props.curTestType)
                         props.openResults()
-                    }
+                    })
                 }
                 props.currQuestionNum < props.stressQuestionsQty -> {
                     nextButton.text = getString(R.string.next)
-                    nextButton.click {
+                    nextButton.click({
+                        Log.d("2222222", "2")
                         props.moveQuestion()
                         props.setQuestion()
                         props.savePoints(chosenAnswer?.points ?: 0)
                         props.fetchListOfOptions()
-                    }
+                    })
                 }
                 else -> props.openResults()
             }
 
-            backButt.click {
+            backButt.click({
                 props.again()
                 props.openMood()
-            }
+            })
 
             if (props.action == StressTestProps.StressTestActions.OpenMood) {
                 (requireActivity() as MainActivity).router.openMood()

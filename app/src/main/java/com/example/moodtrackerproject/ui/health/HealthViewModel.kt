@@ -28,12 +28,12 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                 )
             },
             listOfHealth =
-            if (state.listOfHealth != null) {
+            if (state.healthModel != null) {
                 HealthProps.HealthItemProps(
-                    water = state.listOfHealth.water,
-                    steps = state.listOfHealth.steps,
-                    sleep = state.listOfHealth.sleep,
-                    kcal = state.listOfHealth.kcal
+                    water = state.healthModel.water,
+                    steps = state.healthModel.steps,
+                    sleep = state.healthModel.sleep,
+                    kcal = state.healthModel.kcal
                 )
             } else null,
 
@@ -45,9 +45,9 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
     private fun fetchListOfHealth() {
         launch {
             val health = withContext(Dispatchers.IO) {
-                DataBaseRepository.getHealth()[0]
+                DataBaseRepository.getHealth()
             }
-            setState(Store.appState.healthState.copy(listOfHealth = health))
+            setState(Store.appState.healthState.copy(healthModel = health))
         }
     }
 

@@ -50,9 +50,9 @@ class NotesListAdapter : ListAdapter<NoteItemProps, NotesListAdapter.NoteItemVie
                         else -> true
                     }
                 }
-                moreButton.click {
+                moreButton.click({
                     popupMenu.show()
-                }
+                })
             }
         }
     }

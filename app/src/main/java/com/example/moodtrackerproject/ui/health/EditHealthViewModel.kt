@@ -21,10 +21,10 @@ class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
             action = action as? EditHealthScreenActions,
             listHealth =
             EditHealthItemProps(
-                water = DataBaseRepository.getHealth()[0].water,
-                steps = DataBaseRepository.getHealth()[0].steps,
-                sleep = DataBaseRepository.getHealth()[0].sleep,
-                kcal = DataBaseRepository.getHealth()[0].kcal
+                water = DataBaseRepository.getHealth().water,
+                steps = DataBaseRepository.getHealth().steps,
+                sleep = DataBaseRepository.getHealth().sleep,
+                kcal = DataBaseRepository.getHealth().kcal
             ),
             saveEdited = {
                 DataBaseRepository.saveHealth(it)

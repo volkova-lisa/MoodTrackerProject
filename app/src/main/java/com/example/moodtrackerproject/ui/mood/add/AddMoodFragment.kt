@@ -45,9 +45,9 @@ class AddMoodFragment : BaseFragment<AddMoodViewModel, FragmentAddMoodBinding, A
             addMoodAdapter.submitList(props.moodItems)
             val mood = props.moodItems.find { it.isChecked }
             emojiName.text = mood?.title ?: getString(R.string.mood_t)
-            saveButton.click {
+            saveButton.click({
                 mood?.let { props.saveMood(it.image, emojiName.text.toString()) }
-            }
+            })
             if (props.action == NewMoodAction.ShowMoodsScreen) {
                 (requireActivity() as MainActivity).router.openMood()
             }

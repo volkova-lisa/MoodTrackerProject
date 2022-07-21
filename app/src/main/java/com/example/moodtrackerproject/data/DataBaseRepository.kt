@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.data
 
+import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -56,11 +57,13 @@ object DataBaseRepository {
 
     fun saveStressPoints(p: Int) {
         stressPoints += p
-        saveTestResults(stressPoints, 0)
+        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
+        Log.d("444444444", ResultsModel(stressPoints, anxietyPoints).toString())
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
-        saveTestResults(anxietyPoints, 1)
+        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
+        Log.d("5555555", ResultsModel(stressPoints, anxietyPoints).toString())
     }
 
     fun getEmojiList() = listOfEmojis
@@ -128,17 +131,15 @@ object DataBaseRepository {
         PreferenceManager.saveMoods(list)
     }
 
-    fun saveHealth(healthList: List<HealthModel>) {
+    fun saveHealth(healthList: HealthModel) {
         PreferenceManager.saveHealth(healthList)
     }
 
     fun getHealth() = PreferenceManager.getHealth()
 
-    fun saveTestResults(testRes: Int, position: Int) {
-        val list = arrayOf(getTestResults()[0], getTestResults()[1]).apply {
-            set(position, testRes)
-        }
-        PreferenceManager.saveTests(list)
+    fun saveTestResults(result: ResultsModel) {
+        PreferenceManager.saveTests(result)
+        Log.d("1111", "888888")
     }
 
     fun getTestResults() = PreferenceManager.getTests()

@@ -80,7 +80,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             val listHealth = withContext(Dispatchers.IO) {
                 DataBaseRepository.getHealth()
             }
-            setState(appState.homeState.copy(healthList = listHealth[0]))
+            setState(appState.homeState.copy(healthList = listHealth))
         }
     }
 
