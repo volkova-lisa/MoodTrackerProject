@@ -127,7 +127,7 @@ class EditHealthFragment :
     }
 
     override fun onSensorChanged(event: SensorEvent?) {
-        if (running) {
+        if (!requireActivity().isFinishing) {
             totalSteps = event!!.values[0]
             val currSteps = totalSteps.toInt() - previousTotalSteps.toInt()
             binding?.steps?.load?.click({ binding?.steps?.waterNum?.text = ("$currSteps") })

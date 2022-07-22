@@ -23,7 +23,8 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
         logout = ::logOut,
         fetchListOfMoods = ::fetchListOfMoods,
         fetchListOfNotes = ::fetchListOfNotes,
-        fetchHealth = ::fetchListOfHealth
+        fetchHealth = ::fetchListOfHealth,
+        fetchResults = ::fetchResults
     )
 
     init {
@@ -72,7 +73,8 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchListOfMoods = ::fetchListOfMoods,
             fetchListOfNotes = ::fetchListOfNotes,
             fetchHealth = ::fetchListOfHealth,
-            testResults = state.resultModel
+            testResults = state.resultModel,
+            fetchResults = ::fetchResults
         )
     }
 
@@ -82,6 +84,15 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                 DataBaseRepository.getHealth()
             }
             setState(appState.homeState.copy(healthModel = listHealth))
+        }
+    }
+
+    private fun fetchResults() {
+        launch {
+            val results = withContext(Dispatchers.IO) {
+                DataBaseRepository.getTestResults()
+            }
+            setState(appState.homeState.copy(resultModel = results))
         }
     }
 

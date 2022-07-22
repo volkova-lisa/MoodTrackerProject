@@ -35,7 +35,7 @@
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
         android:layout_height="5dp"
-        android:progress="12"
+        android:progress="0"
         android:max="25"
         android:progressBackgroundTint="@color/light_purple"
         android:progressTint="@color/light_purple"

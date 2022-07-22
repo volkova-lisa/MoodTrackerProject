@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
@@ -37,6 +38,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             props.fetchListOfMoods()
             props.fetchListOfNotes()
             props.fetchHealth()
+            props.fetchResults()
         }
     }
 
@@ -49,6 +51,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             if (props.testResults != null) {
                 angerJoy.angerBar.progress = props.testResults.stressResult
                 sadHappy.angerBar.progress = props.testResults.anxResult
+                Log.d("--------", angerJoy.angerBar.progress.toString())
+                Log.d("----------", sadHappy.angerBar.progress.toString())
             }
 
             if (props.healthItems != null) {
