@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
@@ -90,12 +89,10 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
 
     private fun savePoints(points: Int) {
         if (Store.appState.stressTestState.testType == 0) {
-            Log.d("savePoints --- stress", Store.appState.stressTestState.testType.toString())
             DataBaseRepository.saveStressPoints(points)
             setState(Store.appState.stressTestState.copy(points = points))
             Store.setState(Store.appState.testResultsState.copy(resultsModel = ResultsModel(points, DataBaseRepository.anxietyPoints)))
         } else {
-            Log.d("savePoints --- anx", Store.appState.stressTestState.testType.toString())
             DataBaseRepository.saveAnxietyPoints(points)
             setState(Store.appState.stressTestState.copy(points = points))
             Store.setState(Store.appState.testResultsState.copy(resultsModel = ResultsModel(DataBaseRepository.stressPoints, points)))

@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.test_results
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,6 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
         super.onResume()
         if (::props.isInitialized) {
             props.fetchTestResults()
-            Log.d("----------", "")
         }
     }
 
@@ -42,10 +40,8 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
         binding?.run {
 
             if (props.testResults != null) {
-                Log.d("props.testResults is not null", "---------")
 
                 if (props.testType == 0) {
-                    Log.d("props.testType ------", props.testType.toString())
                     val pers = (props.testResults.stressResult * 100) / 25
                     stressBar.max = props.sumTestPoints
                     stressBar.progress = DataBaseRepository.stressPoints
@@ -54,8 +50,6 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
                     resultText.mainTitle.text = getText(R.string.stress_high_title)
                     resultText.subtitle.text = getText(R.string.stress_high)
                 } else {
-                    Log.d("else props.testType ------", props.testType.toString())
-
                     val pers = (props.testResults.anxResult * 100) / 25
                     stressBar.max = props.sumTestPoints
                     stressBar.progress = DataBaseRepository.anxietyPoints

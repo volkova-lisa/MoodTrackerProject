@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.data
 
-import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -58,12 +57,10 @@ object DataBaseRepository {
     fun saveStressPoints(p: Int) {
         stressPoints += p
         saveTestResults(ResultsModel(stressPoints, anxietyPoints))
-        Log.d("saveStressPoints ----", ResultsModel(stressPoints, anxietyPoints).toString())
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
         saveTestResults(ResultsModel(stressPoints, anxietyPoints))
-        Log.d("saveAnxietyPoints ----", ResultsModel(stressPoints, anxietyPoints).toString())
     }
 
     fun getEmojiList() = listOfEmojis

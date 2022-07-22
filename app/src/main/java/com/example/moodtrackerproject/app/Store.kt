@@ -14,6 +14,10 @@ object Store {
         appState = appState.copy(notesState = newState)
     }
 
+    fun setState(newState: HomeState) {
+        appState = appState.copy(homeState = newState)
+    }
+
     fun setState(newState: AddMoodState) {
         appState = appState.copy(addMoodState = newState)
     }

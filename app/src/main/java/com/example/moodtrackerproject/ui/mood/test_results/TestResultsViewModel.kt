@@ -25,6 +25,7 @@ class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
             action = action as? TestResultsActions,
             openMood = {
                 setState(state, action = TestResultsActions.OpenMood)
+                Store.setState(Store.appState.homeState.copy(resultModel = DataBaseRepository.getTestResults()))
             },
             testType = state.testType,
             testResults = state.resultsModel,

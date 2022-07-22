@@ -61,17 +61,18 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             isLoggedIn = state.isLoggedIn,
             logout = ::logOut,
             healthItems =
-            if (state.healthList != null) {
+            if (state.healthModel != null) {
                 HomeProps.HomeItemProps(
-                    water = state.healthList.water,
-                    steps = state.healthList.steps,
-                    sleep = state.healthList.sleep,
-                    kcal = state.healthList.kcal
+                    water = state.healthModel.water,
+                    steps = state.healthModel.steps,
+                    sleep = state.healthModel.sleep,
+                    kcal = state.healthModel.kcal
                 )
             } else null,
             fetchListOfMoods = ::fetchListOfMoods,
             fetchListOfNotes = ::fetchListOfNotes,
-            fetchHealth = ::fetchListOfHealth
+            fetchHealth = ::fetchListOfHealth,
+            testResults = state.resultModel
         )
     }
 
@@ -80,7 +81,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             val listHealth = withContext(Dispatchers.IO) {
                 DataBaseRepository.getHealth()
             }
-            setState(appState.homeState.copy(healthList = listHealth))
+            setState(appState.homeState.copy(healthModel = listHealth))
         }
     }
 
