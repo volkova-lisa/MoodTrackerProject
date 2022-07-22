@@ -57,8 +57,8 @@ class EditHealthFragment :
             var tempSleep = 0
 
             if (props.listHealth != null) {
-                steps.waterNum.text = props.listHealth.water.toString()
-                water.waterNum.text = props.listHealth.steps.toString()
+                steps.waterNum.text = props.listHealth.steps.toString()
+                water.waterNum.text = props.listHealth.water.toString()
                 sleep.waterNum.text = props.listHealth.sleep.toString()
                 kcal.waterNum.text = props.listHealth.kcal.toString()
 
@@ -109,7 +109,7 @@ class EditHealthFragment :
                 }, 100)
 
                 cancelButton.click({
-                    (requireActivity() as MainActivity).router.openHealth()
+                    props.startHealth()
                 })
 
                 tempWater = water.waterNum.text.toString().toInt()
@@ -128,7 +128,7 @@ class EditHealthFragment :
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (!requireActivity().isFinishing) {
-            totalSteps = event!!.values[0]
+            totalSteps = if (event != null) event.values[0] else 0.0f
             val currSteps = totalSteps.toInt() - previousTotalSteps.toInt()
             binding?.steps?.load?.click({ binding?.steps?.waterNum?.text = ("$currSteps") })
         }

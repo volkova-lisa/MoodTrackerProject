@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.health
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity
@@ -28,7 +29,9 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
     override fun render(props: HealthProps) {
         this.props = props
         binding?.run {
+
             if (props.healthItems != null) {
+
                 water.waterNum.text = props.healthItems.water.toString()
                 steps.waterNum.text = props.healthItems.steps.toString()
                 sleep.waterNum.text = props.healthItems.sleep.toString()

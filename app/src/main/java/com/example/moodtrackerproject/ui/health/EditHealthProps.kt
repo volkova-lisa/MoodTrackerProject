@@ -4,7 +4,8 @@ import com.example.moodtrackerproject.domain.HealthModel
 data class EditHealthProps(
     val listHealth: EditHealthItemProps? = null,
     val saveEdited: (HealthModel) -> Unit = {},
-    val action: EditHealthScreenActions? = null
+    val action: EditHealthScreenActions? = null,
+    val startHealth: () -> Unit = {}
 
 ) {
     sealed class EditHealthScreenActions : MviAction {

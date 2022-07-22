@@ -37,6 +37,12 @@ class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
                         edited = true
                     )
                 )
+            },
+            startHealth = {
+                setState(
+                    state,
+                    action = EditHealthScreenActions.StartHealthScreen
+                )
             }
         )
     }

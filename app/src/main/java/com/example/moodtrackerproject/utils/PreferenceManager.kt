@@ -78,8 +78,8 @@ object PreferenceManager {
             ?: listOf()
     }
 
-    fun saveHealth(healthList: HealthModel) {
-        val serializedHealth = healthJsonAdapter.toJson(healthList)
+    fun saveHealth(healthModel: HealthModel) {
+        val serializedHealth = healthJsonAdapter.toJson(healthModel)
         preferences.edit()
             .putString(KEY_HEAlTH, serializedHealth)
             .apply()
@@ -91,8 +91,8 @@ object PreferenceManager {
             ?: HealthModel()
     }
 
-    fun saveTests(testsList: ResultsModel) {
-        val serializedTests = testsJsonAdapter.toJson(testsList)
+    fun saveTests(resultModel: ResultsModel) {
+        val serializedTests = testsJsonAdapter.toJson(resultModel)
         preferences.edit()
             .putString(KEY_TESTS, serializedTests)
             .apply()
