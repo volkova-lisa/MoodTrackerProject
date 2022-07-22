@@ -17,14 +17,15 @@ class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
 
     override fun map(appState: AppState, action: MviAction?): EditHealthProps {
         val state = appState.editHealthState
+        val health = DataBaseRepository.getHealth()
         return EditHealthProps(
             action = action as? EditHealthScreenActions,
             listHealth =
             EditHealthItemProps(
-                water = DataBaseRepository.getHealth().water,
-                steps = DataBaseRepository.getHealth().steps,
-                sleep = DataBaseRepository.getHealth().sleep,
-                kcal = DataBaseRepository.getHealth().kcal
+                water = health.water,
+                steps = health.steps,
+                sleep = health.sleep,
+                kcal = health.kcal
             ),
             saveEdited = {
                 DataBaseRepository.saveHealth(it)

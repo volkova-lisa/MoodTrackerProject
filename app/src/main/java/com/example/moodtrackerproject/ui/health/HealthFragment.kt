@@ -28,15 +28,13 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
     override fun render(props: HealthProps) {
         this.props = props
         binding?.run {
-            if (props.listOfHealth != null) {
-                water.waterNum.text = props.listOfHealth.water.toString()
-                steps.waterNum.text = props.listOfHealth.steps.toString()
-                sleep.waterNum.text = props.listOfHealth.sleep.toString()
-                kcal.waterNum.text = props.listOfHealth.kcal.toString()
+            if (props.healthItems != null) {
+                water.waterNum.text = props.healthItems.water.toString()
+                steps.waterNum.text = props.healthItems.steps.toString()
+                sleep.waterNum.text = props.healthItems.sleep.toString()
+                kcal.waterNum.text = props.healthItems.kcal.toString()
             }
-            editHButton.click({
-                props.startEdit()
-            })
+            editHButton.click({props.startEdit()})
 
             if (props.action == HealthScreenActions.StartEditHealthScreen) {
                 (requireActivity() as MainActivity).router.openEditHealth()

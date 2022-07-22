@@ -27,7 +27,7 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                     action = HealthScreenActions.StartEditHealthScreen
                 )
             },
-            listOfHealth =
+            healthItems =
             if (state.healthModel != null) {
                 HealthProps.HealthItemProps(
                     water = state.healthModel.water,

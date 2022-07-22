@@ -23,7 +23,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
         logout = ::logOut,
         fetchListOfMoods = ::fetchListOfMoods,
         fetchListOfNotes = ::fetchListOfNotes,
-        fetchListOfHealth = ::fetchListOfHealth
+        fetchHealth = ::fetchListOfHealth
     )
 
     init {
@@ -60,7 +60,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             },
             isLoggedIn = state.isLoggedIn,
             logout = ::logOut,
-            healthList =
+            healthItems =
             if (state.healthList != null) {
                 HomeProps.HomeItemProps(
                     water = state.healthList.water,
@@ -71,7 +71,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             } else null,
             fetchListOfMoods = ::fetchListOfMoods,
             fetchListOfNotes = ::fetchListOfNotes,
-            fetchListOfHealth = ::fetchListOfHealth
+            fetchHealth = ::fetchListOfHealth
         )
     }
 

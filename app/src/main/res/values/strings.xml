@@ -127,5 +127,6 @@
     <string name="minus">-</string>
     <string name="_0_5_h">0.5 h</string>
     <string name="plus">+</string>
+    <string name="no_sensor">No sensor detected on this device</string>
 
 </resources>

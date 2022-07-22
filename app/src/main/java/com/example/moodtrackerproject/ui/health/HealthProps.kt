@@ -7,7 +7,7 @@ data class HealthProps(
     val action: HealthScreenActions? = null,
     val fetchListOfHealth: () -> Unit = {},
     val edited: Boolean = false,
-    val listOfHealth: HealthItemProps? = null
+    val healthItems: HealthItemProps? = null
 
 ) {
     sealed class HealthScreenActions : MviAction {

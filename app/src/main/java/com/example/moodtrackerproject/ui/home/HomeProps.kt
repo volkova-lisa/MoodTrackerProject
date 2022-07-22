@@ -12,8 +12,8 @@ data class HomeProps(
     val listOfNotesToday: List<NotesListProps.NoteItemProps> = listOf(),
     val fetchListOfMoods: () -> Unit = {},
     val fetchListOfNotes: () -> Unit = {},
-    val fetchListOfHealth: () -> Unit = {},
-    val healthList: HomeItemProps? = null,
+    val fetchHealth: () -> Unit = {},
+    val healthItems: HomeItemProps? = null,
     val testResults: ResultsModel? = null
 
 ) {

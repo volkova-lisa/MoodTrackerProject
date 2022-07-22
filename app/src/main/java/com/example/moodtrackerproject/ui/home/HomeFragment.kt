@@ -39,7 +39,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         if (::props.isInitialized) {
             props.fetchListOfMoods()
             props.fetchListOfNotes()
-            props.fetchListOfHealth()
+            props.fetchHealth()
         }
     }
 
@@ -56,11 +56,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
                 Log.d("55555", props.testResults.toString())
             }
 
-            if (props.healthList != null) {
-                val water = props.healthList.water
-                val steps = props.healthList.steps
-                val sleep = props.healthList.sleep
-                val kcal = props.healthList.kcal
+            if (props.healthItems != null) {
+                val water = props.healthItems.water
+                val steps = props.healthItems.steps
+                val sleep = props.healthItems.sleep
+                val kcal = props.healthItems.kcal
 
                 waterItem.waterValue.text = "$water ml"
                 stepsItem.stepsValue.text = steps.toString()

@@ -7,14 +7,13 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.content.getSystemService
 import com.example.moodtrackerproject.MainActivity
+import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentEditHealthBinding
 import com.example.moodtrackerproject.domain.HealthModel
 import com.example.moodtrackerproject.ui.BaseFragment
@@ -32,15 +31,6 @@ class EditHealthFragment :
     var totalSteps = 0f
     var previousTotalSteps = 0f
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
     override fun getFragmentBinding(
         inflater: LayoutInflater, container: ViewGroup?
     ): FragmentEditHealthBinding = FragmentEditHealthBinding.inflate(inflater, container, false)
@@ -51,7 +41,7 @@ class EditHealthFragment :
         val stepSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         binding?.steps?.load?.click({
             if (stepSensor == null) {
-                Toast.makeText(activity, "No sensor detected on this device", Toast.LENGTH_SHORT)
+                Toast.makeText(activity, getString(R.string.no_sensor), Toast.LENGTH_SHORT)
                     .show()
             } else {
                 sensorManager?.registerListener(this, stepSensor, SensorManager.SENSOR_DELAY_UI)
