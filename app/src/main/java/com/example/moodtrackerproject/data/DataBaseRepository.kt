@@ -58,12 +58,12 @@ object DataBaseRepository {
     fun saveStressPoints(p: Int) {
         stressPoints += p
         saveTestResults(ResultsModel(stressPoints, anxietyPoints))
-        Log.d("444444444", ResultsModel(stressPoints, anxietyPoints).toString())
+        Log.d("saveStressPoints ----", ResultsModel(stressPoints, anxietyPoints).toString())
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
         saveTestResults(ResultsModel(stressPoints, anxietyPoints))
-        Log.d("5555555", ResultsModel(stressPoints, anxietyPoints).toString())
+        Log.d("saveAnxietyPoints ----", ResultsModel(stressPoints, anxietyPoints).toString())
     }
 
     fun getEmojiList() = listOfEmojis
@@ -139,7 +139,6 @@ object DataBaseRepository {
 
     fun saveTestResults(result: ResultsModel) {
         PreferenceManager.saveTests(result)
-        Log.d("1111", "888888")
     }
 
     fun getTestResults() = PreferenceManager.getTests()

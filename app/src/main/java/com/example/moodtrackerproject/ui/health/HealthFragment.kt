@@ -34,7 +34,7 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
                 sleep.waterNum.text = props.healthItems.sleep.toString()
                 kcal.waterNum.text = props.healthItems.kcal.toString()
             }
-            editHButton.click({props.startEdit()})
+            editHButton.click({ props.startEdit() })
 
             if (props.action == HealthScreenActions.StartEditHealthScreen) {
                 (requireActivity() as MainActivity).router.openEditHealth()

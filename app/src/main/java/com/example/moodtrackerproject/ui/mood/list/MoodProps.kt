@@ -4,7 +4,7 @@ import com.example.moodtrackerproject.app.MviAction
 
 data class MoodProps(
     val action: MoodScreenActions? = null,
-    val testType: Int = 8,
+    val testType: Int = 0,
     val listOfMoods: List<MoodItemProps> = listOf(),
     val addNewMood: () -> Unit = {},
     val fetchListOfMoods: () -> Unit = {},

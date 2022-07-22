@@ -42,12 +42,12 @@ class MoodFragment : BaseFragment<MoodViewModel, FragmentMoodBinding, MoodProps>
             moodInclude.addMoodBtn.click(props.addNewMood)
             stressInclude.root.click({
                 props.stressTestConditions()
-                Log.d("00000000", props.testType.toString())
+                Log.d("stressInclude ---", props.testType.toString())
             })
 
             anxietyInclude.root.click({
                 props.anxietyTestConditions()
-                Log.d("9999999", props.testType.toString())
+                Log.d("anxietyInclude -----", props.testType.toString())
             })
             if (props.action == MoodScreenActions.StartStressTestScreen || props.action == MoodScreenActions.AnxStressTestScreen) {
                 (requireActivity() as MainActivity).router.openStressTest()

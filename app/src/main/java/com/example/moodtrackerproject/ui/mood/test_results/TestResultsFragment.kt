@@ -35,21 +35,18 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
         super.onViewCreated(view, savedInstanceState)
         if (::props.isInitialized) {
             props.fetchTestResults()
-            Log.d("6565565635", "")
         }
     }
 
     override fun render(props: TestResultsProps) {
         binding?.run {
-            girl.setOnClickListener {
-                Log.d("333333333", props.testResults.toString())
-            }
-            Log.d("888888888", props.testType.toString())
 
             if (props.testResults != null) {
+                Log.d("props.testResults is not null", "---------")
+
                 if (props.testType == 0) {
-                    Log.d("6565565635", "888888")
-                    val pers = (props.testResults.stress * 100) / 25
+                    Log.d("props.testType ------", props.testType.toString())
+                    val pers = (props.testResults.stressResult * 100) / 25
                     stressBar.max = props.sumTestPoints
                     stressBar.progress = DataBaseRepository.stressPoints
                     resultNum.text = "$pers%"
@@ -57,7 +54,9 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
                     resultText.mainTitle.text = getText(R.string.stress_high_title)
                     resultText.subtitle.text = getText(R.string.stress_high)
                 } else {
-                    val pers = (props.testResults.anxiety * 100) / 25
+                    Log.d("else props.testType ------", props.testType.toString())
+
+                    val pers = (props.testResults.anxResult * 100) / 25
                     stressBar.max = props.sumTestPoints
                     stressBar.progress = DataBaseRepository.anxietyPoints
                     resultNum.text = "$pers%"

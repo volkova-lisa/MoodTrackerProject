@@ -27,13 +27,13 @@ class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
                 setState(state, action = TestResultsActions.OpenMood)
             },
             testType = state.testType,
-            testResults =
-            if (state.resultsModel != null) {
-                TestResultsProps.ResultsItemProps(
-                    stress = state.resultsModel.stressResult,
-                    anxiety = state.resultsModel.anxResult
-                )
-            } else null,
+            testResults = state.resultsModel,
+//            if (state.resultsModel != null) {
+//                TestResultsProps.ResultsItemProps(
+//                    stress = state.resultsModel.stressResult,
+//                    anxiety = state.resultsModel.anxResult
+//                )
+//            } else null,
             fetchTestResults = ::fetchResults
         )
     }

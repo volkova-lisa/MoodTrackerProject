@@ -52,8 +52,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             if (props.testResults != null) {
                 angerJoy.angerBar.progress = props.testResults.stressResult
                 sadHappy.angerBar.progress = props.testResults.anxResult
-                Log.d("55555", ResultsModel(DataBaseRepository.stressPoints, DataBaseRepository.anxietyPoints).toString())
-                Log.d("55555", props.testResults.toString())
+                Log.d("home fr ----", ResultsModel(DataBaseRepository.stressPoints, DataBaseRepository.anxietyPoints).toString())
+                Log.d("home frg -----", props.testResults.toString())
             }
 
             if (props.healthItems != null) {
