@@ -79,11 +79,8 @@
     <string name="water">Water</string>
     <string name="_600_ml">600 ml</string>
     <string name="steps">Steps</string>
-    <string name="_2367">2367</string>
     <string name="sleep">Sleep</string>
-    <string name="_7h">7h</string>
     <string name="kcal">Kcal</string>
-    <string name="_1200">1200</string>
     <string name="add_new_mood">Add new mood</string>
     <string name="what_s_your_mood_now">What’s your mood now?</string>
     <string name="choose_emojis">Choose emojis that represent your mood</string>
@@ -119,14 +116,13 @@
     <string name="set_app_pass">Set app password</string>
     <string name="account">ACCOUNT</string>
     <string name="preferences">PREFERENCES</string>
-    <string name="_0_5">0/5</string>
     <string name="_0">0%</string>
     <string name="of_stress">of stress</string>
     <string name="hours">hours</string>
     <string name="_7_5">7.5</string>
     <string name="minus">-</string>
-    <string name="_0_5_h">0.5 h</string>
     <string name="plus">+</string>
     <string name="no_sensor">No sensor detected on this device</string>
+    <string name="_1h">1h</string>
 
 </resources>

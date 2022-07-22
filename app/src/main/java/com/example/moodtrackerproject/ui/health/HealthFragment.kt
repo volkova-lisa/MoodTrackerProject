@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.health
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.moodtrackerproject.MainActivity

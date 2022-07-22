@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:fontFamily="@font/raleway_bold"
-            android:text="@string/_2367"
+            android:text=""
             android:textColor="@color/light_purple"
             android:textSize="14sp" />
 
