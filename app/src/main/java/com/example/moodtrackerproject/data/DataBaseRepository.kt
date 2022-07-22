@@ -56,9 +56,11 @@ object DataBaseRepository {
 
     fun saveStressPoints(p: Int) {
         stressPoints += p
+        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
+        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
     }
 
     fun getEmojiList() = listOfEmojis
@@ -125,4 +127,16 @@ object DataBaseRepository {
         }
         PreferenceManager.saveMoods(list)
     }
+
+    fun saveHealth(healthModel: HealthModel) {
+        PreferenceManager.saveHealth(healthModel)
+    }
+
+    fun getHealth() = PreferenceManager.getHealth()
+
+    fun saveTestResults(result: ResultsModel) {
+        PreferenceManager.saveTests(result)
+    }
+
+    fun getTestResults() = PreferenceManager.getTests()
 }

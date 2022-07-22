@@ -45,7 +45,7 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
                 )
             },
             anxietyTestConditions = {
-                DataBaseRepository.stressPoints = 1
+                DataBaseRepository.anxietyPoints = 0
                 setState(state.copy(testType = 1), action = MoodScreenActions.AnxStressTestScreen)
                 Store.setState(
                     appState.stressTestState.copy(

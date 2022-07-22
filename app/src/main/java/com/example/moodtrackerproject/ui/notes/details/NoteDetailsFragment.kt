@@ -45,9 +45,9 @@ class NoteDetailsFragment : BaseFragment<NoteDetailsViewModel, FragmentNoteDetai
             note.backButton.click(props.backClicked)
             editNoteButton.click(props.changeEditVisibility)
 
-            noteEdit.saveEditedButton.click {
+            noteEdit.saveEditedButton.click({
                 props.saveEdited(noteEdit.title.text.toString(), noteEdit.text.text.toString())
-            }
+            })
 
             props.action?.let { handleAction(it) }
         }

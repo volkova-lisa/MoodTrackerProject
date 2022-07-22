@@ -32,11 +32,11 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
 
             createNewAccountTextButton.click(props.openRegistration)
             forgotPassTextButton.click(props.openResetPassword)
-            loginButton.click {
+            loginButton.click({
                 emailInput.error = null
                 passInput.error = null
                 props.checkLogInData(emailInput.text.toString(), passInput.text.toString())
-            }
+            }, 100)
             props.action?.let { handleAction(it) }
             props.error?.let { handleError(it) }
         }

@@ -1,11 +1,11 @@
 package com.example.moodtrackerproject.ui.mood.tests
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.app.tests.StressTestState
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.domain.ResultsModel
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.mood.tests.StressTestProps.StressTestActions
 
@@ -41,6 +41,12 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
                 setState(state, action = StressTestActions.OpenMood)
             },
             openResults = {
+                Store.setState(
+                    appState.testResultsState.copy(
+                        resultsModel = DataBaseRepository.getTestResults(),
+                        testType = state.testType
+                    )
+                )
                 setState(state, action = StressTestActions.OpenResults)
             },
             savePoints = ::savePoints,
@@ -73,7 +79,6 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
         val state = Store.appState.stressTestState
         val list = state.questionList
 
-        Log.d("stress view model setnext----", state.questionList.toString())
         setState(
             state.copy(
                 question = list[state.currQuestionNum],
@@ -86,9 +91,11 @@ class StressTestViewModel : BaseViewModel<StressTestProps>() {
         if (Store.appState.stressTestState.testType == 0) {
             DataBaseRepository.saveStressPoints(points)
             setState(Store.appState.stressTestState.copy(points = points))
+            Store.setState(Store.appState.testResultsState.copy(resultsModel = ResultsModel(points, DataBaseRepository.anxietyPoints)))
         } else {
             DataBaseRepository.saveAnxietyPoints(points)
             setState(Store.appState.stressTestState.copy(points = points))
+            Store.setState(Store.appState.testResultsState.copy(resultsModel = ResultsModel(DataBaseRepository.stressPoints, points)))
         }
     }
 

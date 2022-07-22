@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
+import com.example.moodtrackerproject.domain.ResultsModel
 import com.example.moodtrackerproject.ui.mood.list.MoodProps
 import com.example.moodtrackerproject.ui.notes.list.NotesListProps
 
@@ -11,9 +12,20 @@ data class HomeProps(
     val listOfNotesToday: List<NotesListProps.NoteItemProps> = listOf(),
     val fetchListOfMoods: () -> Unit = {},
     val fetchListOfNotes: () -> Unit = {},
+    val fetchHealth: () -> Unit = {},
+    val fetchResults: () -> Unit = {},
+    val healthItems: HomeItemProps? = null,
+    val testResults: ResultsModel? = null
 
 ) {
     sealed class HomeAction {
         object LogOut : HomeAction()
     }
+
+    data class HomeItemProps(
+        val water: Int = 0,
+        val steps: Int = 0,
+        val sleep: Int = 0,
+        val kcal: Int = 0
+    )
 }

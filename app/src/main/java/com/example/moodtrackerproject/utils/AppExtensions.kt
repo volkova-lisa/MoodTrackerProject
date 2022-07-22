@@ -53,13 +53,13 @@ fun String.isPasswordValid(): Boolean {
 }
 
 // to prevent fantom-double taps
-fun View.click(action: () -> Unit) {
+fun View.click(action: () -> Unit, delay: Int = 300) {
     setOnClickListener(
         object : View.OnClickListener {
             private var lastClickTime: Long = 0
 
             override fun onClick(v: View) {
-                if (SystemClock.elapsedRealtime() - lastClickTime < 300) return
+                if (SystemClock.elapsedRealtime() - lastClickTime < delay) return
                 else action()
                 lastClickTime = SystemClock.elapsedRealtime()
             }

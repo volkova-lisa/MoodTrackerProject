@@ -1,5 +1,8 @@
 package com.example.moodtrackerproject.app
 
+import com.example.moodtrackerproject.domain.HealthModel
+
 data class HealthState(
-    val isEdited: Boolean = false,
+    val edited: Boolean = false,
+    val healthModel: HealthModel? = null
 )

@@ -161,7 +161,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/mental_title">
 
-                <include android:id="@+id/d_p" layout="@layout/layout_disgust_pleasure_item" />
 
                 <include android:id="@+id/sad_happy" layout="@layout/layout_sad_happy_item"/>
 

@@ -41,7 +41,7 @@
         android:id="@+id/water_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1300"
+        android:text="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/title_water"
         android:layout_marginTop="15dp"
@@ -51,7 +51,7 @@
         android:textSize="35sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/minus"
+        android:id="@+id/minus_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="-"
@@ -69,16 +69,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="100"
-        app:layout_constraintStart_toEndOf="@id/minus"
-        app:layout_constraintEnd_toStartOf="@id/plus"
-        app:layout_constraintTop_toTopOf="@id/minus"
-        app:layout_constraintBottom_toBottomOf="@id/minus"
+        app:layout_constraintStart_toEndOf="@id/minus_button"
+        app:layout_constraintEnd_toStartOf="@id/plus_button"
+        app:layout_constraintTop_toTopOf="@id/minus_button"
+        app:layout_constraintBottom_toBottomOf="@id/minus_button"
         android:textColor="@color/light_purple"
         android:fontFamily="@font/raleway_bold"
         android:textSize="25sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/plus"
+        android:id="@+id/plus_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:text="+"
@@ -87,6 +87,6 @@
         android:textStyle="bold"
         android:backgroundTint="#EFF2FF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/minus"
+        app:layout_constraintTop_toTopOf="@id/minus_button"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

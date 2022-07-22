@@ -14,6 +14,10 @@ object Store {
         appState = appState.copy(notesState = newState)
     }
 
+    fun setState(newState: HomeState) {
+        appState = appState.copy(homeState = newState)
+    }
+
     fun setState(newState: AddMoodState) {
         appState = appState.copy(addMoodState = newState)
     }
@@ -24,6 +28,10 @@ object Store {
 
     fun setState(newState: StressTestState) {
         appState = appState.copy(stressTestState = newState)
+    }
+
+    fun setState(newState: HealthState) {
+        appState = appState.copy(healthState = newState)
     }
 
     fun setState(newState: MoodState) {
