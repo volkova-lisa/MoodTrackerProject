@@ -5,6 +5,7 @@ import android.app.Application
 import com.google.firebase.FirebaseApp
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import com.yariksoffice.lingver.Lingver
 import timber.log.Timber
 
 class MoodTrackerApp : Application() {
@@ -14,6 +15,7 @@ class MoodTrackerApp : Application() {
 
         firebase()
         timber()
+        Lingver.init(this)
     }
 
     private fun firebase() {
