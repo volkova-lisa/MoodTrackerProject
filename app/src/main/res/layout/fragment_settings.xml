@@ -113,6 +113,51 @@
         app:layout_constraintTop_toBottomOf="@id/pref_rect"
         app:layout_constraintStart_toStartOf="@id/photo"/>
 
+    <TextView
+        android:id="@+id/ua_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawablePadding="20dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="@string/ua"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/slash_title"
+        app:layout_constraintTop_toBottomOf="@id/pref_rect"/>
+
+    <TextView
+        android:id="@+id/slash_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawablePadding="20dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="/"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@id/en_title"
+        app:layout_constraintTop_toBottomOf="@id/pref_rect"/>
+
+    <TextView
+        android:id="@+id/en_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:drawablePadding="20dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/raleway_regular"
+        android:text="en"
+        android:textColor="@color/text_grey"
+        android:textSize="16sp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintEnd_toStartOf="@id/lang_switch"
+        app:layout_constraintTop_toBottomOf="@id/pref_rect"/>
+
+
+
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/lang_switch"
         android:layout_width="wrap_content"

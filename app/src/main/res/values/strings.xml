@@ -124,5 +124,6 @@
     <string name="plus">+</string>
     <string name="no_sensor">No sensor detected on this device</string>
     <string name="_1h">1h</string>
+    <string name="ua">ua</string>
 
 </resources>
