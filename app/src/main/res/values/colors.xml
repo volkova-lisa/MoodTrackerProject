@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_moody">#FFFFFFFF</color>
     <color name="light_purple">#6F95EF</color>
     <color name="dark_purple">#4E43CD</color>
 
@@ -22,4 +23,14 @@
     <color name="red_stress">#E1657E</color>
     <color name="blue_anx">#34B1EA</color>
     <color name="health_light">#EFF2FF</color>
+    <color name="mood_unchecked">#F3F5FE</color>
+    <color name="purple_text">#6F95EF</color>
+    <color name="note_title_text">#000000</color>
+    <color name="fragment_back">#ffffff</color>
+    <color name="edit_date_text">#36000000</color>
+    <color name="sett_space_title">#9B9B9B</color>
+    <color name="sett_titles">#000000</color>
+    <color name="sett_space">#F6F6F6</color>
+    <color name="toolbar">#fff</color>
+    <color name="bott_ic_color">#9a9a9a</color>
 </resources>

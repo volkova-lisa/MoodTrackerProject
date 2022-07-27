@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_back"
     tools:context=".ui.mood.add.AddMoodFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -19,13 +20,13 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/fragment_back"
             android:backgroundTint="@color/white"
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/add_mood"
-            app:titleTextColor="@color/light_purple" />
+            app:titleTextColor="@color/purple_text" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
@@ -35,7 +36,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/how_do_you_feel"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/purple_text"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -95,7 +96,7 @@
         android:background="@drawable/round_purp_button"
         android:text="@string/cancel"
         android:textAllCaps="false"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/purple_text"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/save_button"
         app:layout_constraintEnd_toStartOf="@id/save_button" />

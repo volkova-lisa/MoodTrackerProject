@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_back"
     tools:context=".ui.mood.list.MoodFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -39,7 +40,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/mood"
-            app:titleTextColor="@color/light_purple" />
+            app:titleTextColor="@color/purple_text" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <TextView
@@ -49,7 +50,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/add_new_mood"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/purple_text"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
@@ -72,7 +73,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/moods_of_the_day"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/purple_text"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/mood_include" />
@@ -99,7 +100,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/tests"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/purple_text"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/emoji_list" />

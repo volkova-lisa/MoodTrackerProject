@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/fragment_back"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -16,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/toolbar"
             android:minHeight="?attr/actionBarSize"
             app:menu="@menu/home_menu"
             app:title="@string/home"
-            app:titleTextColor="@color/light_purple">
+            app:titleTextColor="@color/purple_text">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/toolbar_calendar"

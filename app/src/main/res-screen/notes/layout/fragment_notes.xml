@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_back"
     tools:context=".ui.notes.list.NotesFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -26,7 +27,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/my_notes"
-            app:titleTextColor="@color/light_purple" />
+            app:titleTextColor="@color/purple_text" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView
