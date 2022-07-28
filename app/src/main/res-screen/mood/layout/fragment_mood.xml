@@ -35,7 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/toolbar"
             android:minHeight="?attr/actionBarSize"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -50,7 +50,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/add_new_mood"
-        android:textColor="@color/purple_text"
+        android:textColor="@color/light_purple"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
@@ -73,7 +73,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/moods_of_the_day"
-        android:textColor="@color/purple_text"
+        android:textColor="@color/light_purple"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/mood_include" />
@@ -100,7 +100,7 @@
         android:layout_marginTop="20dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/tests"
-        android:textColor="@color/purple_text"
+        android:textColor="@color/light_purple"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/emoji_list" />

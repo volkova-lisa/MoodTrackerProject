@@ -34,6 +34,7 @@
         android:inputType="textCapSentences"
         android:paddingBottom="15dp"
         android:textSize="18sp"
+        android:textColor="@color/text_details_grey"
         android:theme="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
