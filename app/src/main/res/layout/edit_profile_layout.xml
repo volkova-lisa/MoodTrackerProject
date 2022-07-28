@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="5dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:backgroundTint="@color/light_purple"
+            android:minHeight="?attr/actionBarSize"
+            android:theme="?attr/actionBarTheme"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/acc_data"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="21dp"
+        android:fontFamily="@font/raleway_bold"
+        android:text="@string/edit_your_personal_info"
+        android:textColor="@color/prof_dial_title"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/photo"
+        android:layout_width="52dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:src="@color/light_purple"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:shapeAppearanceOverlay="@style/circular" />
+
+    <ImageView
+        android:id="@+id/pencil"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="23dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_edit_profile"
+        app:layout_constraintBottom_toBottomOf="@id/photo"
+        app:layout_constraintStart_toEndOf="@id/photo"
+        app:shapeAppearanceOverlay="@style/circular" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/name_edit_layout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@id/pencil"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:counterEnabled="true"
+        android:layout_marginBottom="-30dp"
+        app:counterMaxLength="30"
+        app:counterOverflowTextAppearance="@style/TextLimitError"
+        app:layout_constraintStart_toEndOf="@id/pencil">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name_edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/raleway_regular"
+            android:hint="@string/enter_your_name"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:inputType="text|textMultiLine|textCapSentences"
+            android:text="Lisa Volkova"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:theme="@style/EditTextStyle" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

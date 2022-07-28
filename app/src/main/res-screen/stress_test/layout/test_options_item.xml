@@ -4,7 +4,7 @@
     android:id="@+id/water_bg"
     android:layout_width="match_parent"
     android:layout_height="70dp"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/home_mood_back"
     app:cardCornerRadius="5dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">

@@ -125,4 +125,9 @@
     <string name="plus">+</string>
     <string name="no_sensor">На цьому пристрої датчик не виявлено</string>
     <string name="_1h">1h</string>
+    <string name="ua">ua</string>
+    <string name="edit_your_personal_info">Змініть ваші данні</string>
+    <string name="acc_data">Данні аккаунту</string>
+    <string name="enter_your_name">Введіть ім\'я</string>
+
 </resources>

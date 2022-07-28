@@ -35,4 +35,5 @@
     <color name="bott_ic_color">#4E587D</color>
     <color name="note_item_color">#2F3251</color>
     <color name="home_mood_back">#3D3D61</color>
+    <color name="prof_dial_title">#000</color>
 </resources>

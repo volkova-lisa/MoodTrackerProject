@@ -4,10 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentSettingsBinding
 import com.example.moodtrackerproject.ui.BaseFragment
+import com.example.moodtrackerproject.utils.click
 import com.yariksoffice.lingver.Lingver
 import java.util.*
 
@@ -43,6 +47,26 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 }
             }
+
+            editAccButton.click({
+                val builder = context?.let { AlertDialog.Builder(it) }
+                val dialogLayout = layoutInflater.inflate(R.layout.edit_profile_layout, null)
+                // val positiveButton = dialogLayout.findViewById<Button>(R.id.save_button)
+                // val negativeButton = dialogLayout.findViewById<Button>(R.id.cancel_button)
+                val editName = dialogLayout.findViewById<EditText>(R.id.name_edit)
+
+                with(builder) {
+                    this?.setPositiveButton("Save") { dialog, which ->
+                        name.text = editName.text.toString()
+                    }
+                    this?.setNegativeButton("Cancel") { dialog, which ->
+                        Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    this?.setView(dialogLayout)
+                    this?.show()
+                }
+            })
         }
     }
 

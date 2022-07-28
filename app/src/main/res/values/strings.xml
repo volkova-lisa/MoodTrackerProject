@@ -125,5 +125,9 @@
     <string name="no_sensor">No sensor detected on this device</string>
     <string name="_1h">1h</string>
     <string name="ua">ua</string>
+    <string name="edit_your_personal_info">Edit your personal info</string>
+    <string name="acc_data">Account data</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="not_saved">Not saved</string>
 
 </resources>

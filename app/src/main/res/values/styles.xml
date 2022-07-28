@@ -18,4 +18,8 @@
         <item name="colorControlHighlight">@color/purple_text</item>
     </style>
 
+    <style name="TextLimitError" parent="TextAppearance.AppCompat.Small">
+    <item name="android:textColor">@color/red_stress</item>
+    </style>
+
 </resources>
