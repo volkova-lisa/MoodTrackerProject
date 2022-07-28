@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.settings
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentSettingsBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
@@ -26,16 +28,48 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         container: ViewGroup?
     ): FragmentSettingsBinding = FragmentSettingsBinding.inflate(inflater, container, false)
 
+    override fun onResume() {
+        super.onResume()
+        if (::props.isInitialized) {
+            props.fetchSettings()
+            Log.d("------>", props.language)
+            Log.d("------>", props.isDarkOn.toString())
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.run {
+            langSwitch.isChecked = DataBaseRepository.getLang() == "en"
+        }
+    }
+
+    override fun render(props: SettingsProps) {
+        this.props = props
+        binding?.run {
+
+            name.text = props.name
+            emailSett.text = props.email
+            // check first which lang is it
+            Log.d("before ------>", props.language)
+
+            Log.d("after ------>", props.language)
+
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
-                    Lingver.getInstance().setLocale(requireContext(), "en")
+                    if (props.language != "en") Lingver.getInstance()
+                        .setLocale(requireContext(), "en")
+                    else Lingver.getInstance().setLocale(requireContext(), "ua")
+                    props.saveLang("en")
+
                     enTitle.setTextColor(resources.getColor(R.color.light_purple))
                     uaTitle.setTextColor(resources.getColor(R.color.text_grey))
                 } else {
-                    Lingver.getInstance().setLocale(requireContext(), "uk-rUA")
+                    if (props.language != "en") Lingver.getInstance()
+                        .setLocale(requireContext(), "en")
+                    else Lingver.getInstance().setLocale(requireContext(), "ua")
+                    props.saveLang("ua")
+
                     uaTitle.setTextColor(resources.getColor(R.color.light_purple))
                     enTitle.setTextColor(resources.getColor(R.color.text_grey))
                 }
@@ -43,16 +77,16 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             darkModeSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    props.saveMode(true)
                 } else {
                     AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    props.saveMode(false)
                 }
             }
 
             editAccButton.click({
                 val builder = context?.let { AlertDialog.Builder(it) }
                 val dialogLayout = layoutInflater.inflate(R.layout.edit_profile_layout, null)
-                // val positiveButton = dialogLayout.findViewById<Button>(R.id.save_button)
-                // val negativeButton = dialogLayout.findViewById<Button>(R.id.cancel_button)
                 val editName = dialogLayout.findViewById<EditText>(R.id.name_edit)
 
                 with(builder) {
@@ -67,13 +101,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                     this?.show()
                 }
             })
-        }
-    }
-
-    override fun render(props: SettingsProps) {
-        binding?.run {
-            langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
-            }
         }
     }
 }

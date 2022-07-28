@@ -15,7 +15,9 @@ data class HomeProps(
     val fetchHealth: () -> Unit = {},
     val fetchResults: () -> Unit = {},
     val healthItems: HomeItemProps? = null,
-    val testResults: ResultsModel? = null
+    val testResults: ResultsModel? = null,
+    val name: String = "",
+    val email: String = "",
 
 ) {
     sealed class HomeAction {

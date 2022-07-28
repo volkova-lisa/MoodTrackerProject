@@ -3,7 +3,6 @@ package com.example.moodtrackerproject.ui.login
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
-import com.example.moodtrackerproject.BuildConfig
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
@@ -23,10 +22,10 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
 
     override fun render(props: LoginProps) {
         binding?.run {
-            if (BuildConfig.DEBUG) {
-                emailInput.setText(BuildConfig.USERNAME)
-                passInput.setText(BuildConfig.PASSWORD)
-            }
+//            if (BuildConfig.DEBUG) {
+//                emailInput.setText(BuildConfig.USERNAME)
+//                passInput.setText(BuildConfig.PASSWORD)
+//            }
             progressBar.isVisible = props.isLoading
             loginButton.text = if (props.isLoading) "" else getString(R.string.login_screen_login)
 

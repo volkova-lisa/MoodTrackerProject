@@ -74,7 +74,9 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchListOfNotes = ::fetchListOfNotes,
             fetchHealth = ::fetchListOfHealth,
             testResults = state.resultModel,
-            fetchResults = ::fetchResults
+            fetchResults = ::fetchResults,
+            name = state.name,
+            email = state.email
         )
     }
 

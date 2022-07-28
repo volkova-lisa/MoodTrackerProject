@@ -19,6 +19,9 @@ object PreferenceManager {
     private const val KEY_MOODS = "all_moods"
     private const val KEY_HEAlTH = "all_health"
     private const val KEY_TESTS = "all_tests"
+    private const val KEY_LANG = "all_lang"
+    private const val KEY_MODE = "all_mode"
+    private const val KEY_NAME = "all_name"
 
     private lateinit var preferences: SharedPreferences
 
@@ -34,6 +37,9 @@ object PreferenceManager {
     private val testsJsonAdapter: JsonAdapter<ResultsModel> = moshi.adapter(ResultsModel::class.java)
     private val notesJsonAdapter: JsonAdapter<List<NoteModel>> = moshi.adapter(valuesNote)
     private val moodsJsonAdapter: JsonAdapter<List<MoodModel>> = moshi.adapter(valuesMood)
+    private val languageJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
+    private val modeJsonAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java)
+    private val nameJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -102,5 +108,44 @@ object PreferenceManager {
         val testsJson = preferences.getString(KEY_TESTS, null)
         return if (testsJson.isNullOrEmpty()) ResultsModel() else testsJsonAdapter.fromJson(testsJson)
             ?: ResultsModel()
+    }
+
+    fun saveLanguage(lang: String) {
+        val serializedLang = languageJsonAdapter.toJson(lang)
+        preferences.edit()
+            .putString(KEY_LANG, serializedLang)
+            .apply()
+    }
+
+    fun getLanguage(): String {
+        val testsJson = preferences.getString(KEY_LANG, null)
+        return if (testsJson.isNullOrEmpty()) " " else languageJsonAdapter.fromJson(testsJson)
+            ?: " "
+    }
+
+    fun saveLanguage(mode: Boolean) {
+        val serializedMode = modeJsonAdapter.toJson(mode)
+        preferences.edit()
+            .putString(KEY_MODE, serializedMode)
+            .apply()
+    }
+
+    fun getMode(): Boolean {
+        val testsJson = preferences.getString(KEY_MODE, null)
+        return if (testsJson.isNullOrEmpty()) false else modeJsonAdapter.fromJson(testsJson)
+            ?: false
+    }
+
+    fun saveName(name: String) {
+        val serializedLang = nameJsonAdapter.toJson(name)
+        preferences.edit()
+            .putString(KEY_NAME, serializedLang)
+            .apply()
+    }
+
+    fun getName(): String {
+        val testsJson = preferences.getString(KEY_NAME, null)
+        return if (testsJson.isNullOrEmpty()) " " else nameJsonAdapter.fromJson(testsJson)
+            ?: " "
     }
 }

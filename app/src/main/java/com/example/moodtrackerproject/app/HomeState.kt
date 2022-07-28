@@ -10,5 +10,7 @@ data class HomeState(
     val listOfNotes: List<NoteModel> = listOf(),
     val isLoggedIn: Boolean = false,
     val healthModel: HealthModel? = null,
-    val resultModel: ResultsModel? = null
+    val resultModel: ResultsModel? = null,
+    val name: String = "",
+    val email: String = "",
 )
