@@ -34,6 +34,10 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             saveMode = {
                 DataBaseRepository.saveMode(it)
             },
+            saveName = {
+                DataBaseRepository.saveName(it)
+                Store.setState(appState.homeState.copy(name = DataBaseRepository.getName()))
+            },
             fetchSettings = ::fetchSettings,
             name = state.name,
             email = state.email

@@ -81,10 +81,11 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 val builder = context?.let { AlertDialog.Builder(it) }
                 val dialogLayout = layoutInflater.inflate(R.layout.edit_profile_layout, null)
                 val editName = dialogLayout.findViewById<EditText>(R.id.name_edit)
-
+                editName.setText(props.name)
                 with(builder) {
                     this?.setPositiveButton("Save") { dialog, which ->
                         name.text = editName.text.toString()
+                        props.saveName(editName.text.toString())
                     }
                     this?.setNegativeButton("Cancel") { dialog, which ->
                         Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
