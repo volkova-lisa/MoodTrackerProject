@@ -14,6 +14,7 @@ data class HomeProps(
     val fetchListOfNotes: () -> Unit = {},
     val fetchHealth: () -> Unit = {},
     val fetchResults: () -> Unit = {},
+    val fetchName: () -> Unit = {},
     val healthItems: HomeItemProps? = null,
     val testResults: ResultsModel? = null,
     val name: String = "",

@@ -75,9 +75,19 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchHealth = ::fetchListOfHealth,
             testResults = state.resultModel,
             fetchResults = ::fetchResults,
+            fetchName = ::fetchName,
             name = state.name,
             email = state.email
         )
+    }
+
+    private fun fetchName() {
+        launch {
+            val name = withContext(Dispatchers.IO) {
+                DataBaseRepository.getName()
+            }
+            setState(appState.homeState.copy(name = name))
+        }
     }
 
     private fun fetchListOfHealth() {

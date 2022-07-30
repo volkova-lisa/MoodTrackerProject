@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.moodtrackerproject.domain.HealthModel
 import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
@@ -141,11 +142,14 @@ object PreferenceManager {
         preferences.edit()
             .putString(KEY_NAME, serializedLang)
             .apply()
+        val a = preferences.getString(KEY_NAME, null)
+        Log.d("in prefer save======", a.toString())
     }
 
     fun getName(): String {
         val testsJson = preferences.getString(KEY_NAME, null)
-        return if (testsJson.isNullOrEmpty()) " " else nameJsonAdapter.fromJson(testsJson)
-            ?: " "
+        return if (testsJson.isNullOrEmpty()) "88 " else nameJsonAdapter.fromJson(testsJson)
+            ?: "99 "
+        Log.d("in prefer get +++++++", testsJson.toString())
     }
 }

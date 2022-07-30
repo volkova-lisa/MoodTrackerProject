@@ -1,6 +1,8 @@
 package com.example.moodtrackerproject.ui.registration
 
+import android.util.Log
 import com.example.moodtrackerproject.app.*
+import com.example.moodtrackerproject.app.Store.appState
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.registration.RegistrationProps.RegistrationAction
@@ -22,11 +24,13 @@ class RegistrationViewModel : BaseViewModel<RegistrationProps>() {
         action = null,
         checkRegistrationData = ::checkRegistrationData,
         openLogin = ::openLogin,
-        fetchName = ::fetchName
+        fetchName = ::fetchName,
+        saveName = ::saveName
     )
 
     init {
         setState(Store.appState.registrationState)
+        Log.d("PROPS INIT REG ====", "yes")
         liveData.value = props
     }
 
@@ -82,35 +86,21 @@ class RegistrationViewModel : BaseViewModel<RegistrationProps>() {
     override fun map(appState: AppState, action: MviAction?): RegistrationProps {
         val state = appState.registrationState
         return RegistrationProps(
-            saveName = {
-                Store.setState(
-                    appState.homeState.copy(
-                        name = state.name
-                    )
-                )
-                Store.setState(
-                    appState.settingsState.copy(
-                        name = state.name
-                    )
-                )
-                DataBaseRepository.saveName(it)
-            },
+            action = action as? RegistrationAction,
+            saveName = ::saveName,
             saveEmail = {
-                Store.setState(
-                    appState.homeState.copy(
-                        email = state.email
-                    )
-                )
-                Store.setState(
-                    appState.settingsState.copy(
-                        email = state.email
-                    )
-                )
+                Store.setState(appState.homeState.copy(email = state.email))
+                Store.setState(appState.settingsState.copy(email = state.email))
             },
             checkRegistrationData = ::checkRegistrationData,
             openLogin = ::openLogin,
             fetchName = ::fetchName
         )
+    }
+
+    private fun saveName(name: String) {
+        DataBaseRepository.saveName(name)
+        Store.setState(appState.homeState.copy(name = DataBaseRepository.getName()))
     }
 
     private fun fetchName() {

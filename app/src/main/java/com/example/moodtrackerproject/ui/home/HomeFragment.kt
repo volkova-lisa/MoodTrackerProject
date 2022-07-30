@@ -1,10 +1,12 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
@@ -27,6 +29,8 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setSupportActionBar(binding?.toolbar)
         setHasOptionsMenu(true)
+        // i don't know how to do it another way
+        binding?.name?.text = DataBaseRepository.getName()
         binding?.emojiList?.adapter = moodsAdapter
         binding?.notesList?.adapter = notesAdapter
     }
@@ -38,15 +42,19 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             props.fetchListOfNotes()
             props.fetchHealth()
             props.fetchResults()
+            props.fetchName()
+            Log.d("ONRESUME CALL HOME", "++++++++++++")
         }
     }
 
     override fun render(props: HomeProps) {
         this.props = props
+        Log.d("RENDER CALL HOME", "---------------")
         props.action?.let { handleAction(it) }
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
+            name.text = props.name
             if (props.testResults != null) {
                 angerJoy.angerBar.progress = props.testResults.stressResult
                 sadHappy.angerBar.progress = props.testResults.anxResult

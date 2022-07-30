@@ -11,6 +11,6 @@ data class HomeState(
     val isLoggedIn: Boolean = false,
     val healthModel: HealthModel? = null,
     val resultModel: ResultsModel? = null,
-    val name: String = "",
+    val name: String = "ii",
     val email: String = "",
 )

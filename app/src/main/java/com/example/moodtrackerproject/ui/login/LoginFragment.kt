@@ -1,10 +1,13 @@
 package com.example.moodtrackerproject.ui.login
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
+import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentLoginScreenBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.login.LoginProps.LoginAction
@@ -35,6 +38,8 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
                 emailInput.error = null
                 passInput.error = null
                 props.checkLogInData(emailInput.text.toString(), passInput.text.toString())
+                Store.setState(Store.appState.homeState.copy(name = DataBaseRepository.getName()))
+                Log.d("SET FROM LOG ----", "")
             }, 100)
             props.action?.let { handleAction(it) }
             props.error?.let { handleError(it) }
