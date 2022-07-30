@@ -48,7 +48,18 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             val darkOn = withContext(Dispatchers.IO) {
                 DataBaseRepository.getMode()
             }
-            setState(Store.appState.settingsState.copy(language = lang, isDarkOn = darkOn))
+            val name = withContext(Dispatchers.IO) {
+                DataBaseRepository.getName()
+            }
+            val email = withContext(Dispatchers.IO) {
+                DataBaseRepository.getEmail()
+            }
+            setState(
+                Store.appState.settingsState.copy(
+                    language = lang, isDarkOn = darkOn,
+                    name = name, email = email
+                )
+            )
         }
     }
 

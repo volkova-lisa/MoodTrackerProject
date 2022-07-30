@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.registration
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -33,10 +32,7 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
                     passInput.text.toString(),
                     nameInput.text.toString()
                 )
-                // DataBaseRepository.saveName(nameInput.text.toString())
-                props.saveName(nameInput.text.toString())
-                props.saveEmail(emailInput.text.toString())
-                Log.d("registr ----", emailInput.text.toString())
+                props.saveAccData(nameInput.text.toString(), emailInput.text.toString())
             })
             alreadyHaveTextButton.click(props.openLogin)
             props.action?.let { handleAction(it) }

@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.data
 
-import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -149,15 +148,22 @@ object DataBaseRepository {
         PreferenceManager.saveLanguage(mode)
     }
 
+    fun getLang() = PreferenceManager.getLanguage()
+    fun getMode() = PreferenceManager.getMode()
+
     fun saveName(name: String) {
         PreferenceManager.saveName(name)
-        Log.d("database ======", "yes")
     }
 
     fun getName(): String {
-        Log.d("GEEET ======", PreferenceManager.getName().toString())
         return PreferenceManager.getName()
     }
-    fun getLang() = PreferenceManager.getLanguage()
-    fun getMode() = PreferenceManager.getMode()
+
+    fun saveEmail(email: String) {
+        PreferenceManager.saveEmail(email)
+    }
+
+    fun getEmail(): String {
+        return PreferenceManager.getEmail()
+    }
 }

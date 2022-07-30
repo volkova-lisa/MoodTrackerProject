@@ -2,7 +2,6 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
 import com.example.moodtrackerproject.domain.HealthModel
 import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
@@ -23,6 +22,7 @@ object PreferenceManager {
     private const val KEY_LANG = "all_lang"
     private const val KEY_MODE = "all_mode"
     private const val KEY_NAME = "all_name"
+    private const val KEY_EMAIL = "all_email"
 
     private lateinit var preferences: SharedPreferences
 
@@ -41,6 +41,7 @@ object PreferenceManager {
     private val languageJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val modeJsonAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java)
     private val nameJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
+    private val emailJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -142,14 +143,23 @@ object PreferenceManager {
         preferences.edit()
             .putString(KEY_NAME, serializedLang)
             .apply()
-        val a = preferences.getString(KEY_NAME, null)
-        Log.d("in prefer save======", a.toString())
     }
 
     fun getName(): String {
         val testsJson = preferences.getString(KEY_NAME, null)
         return if (testsJson.isNullOrEmpty()) "88 " else nameJsonAdapter.fromJson(testsJson)
             ?: "99 "
-        Log.d("in prefer get +++++++", testsJson.toString())
+    }
+
+    fun saveEmail(email: String) {
+        val serializedLang = emailJsonAdapter.toJson(email)
+        preferences.edit()
+            .putString(KEY_EMAIL, serializedLang)
+            .apply()
+    }
+    fun getEmail(): String {
+        val testsJson = preferences.getString(KEY_EMAIL, null)
+        return if (testsJson.isNullOrEmpty()) "88 " else emailJsonAdapter.fromJson(testsJson)
+            ?: "99 "
     }
 }

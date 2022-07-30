@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.login
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -39,7 +38,6 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
                 passInput.error = null
                 props.checkLogInData(emailInput.text.toString(), passInput.text.toString())
                 Store.setState(Store.appState.homeState.copy(name = DataBaseRepository.getName()))
-                Log.d("SET FROM LOG ----", "")
             }, 100)
             props.action?.let { handleAction(it) }
             props.error?.let { handleError(it) }

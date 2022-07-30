@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.settings
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,8 +31,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         super.onResume()
         if (::props.isInitialized) {
             props.fetchSettings()
-            Log.d("------>", props.language)
-            Log.d("------>", props.isDarkOn.toString())
         }
     }
 
@@ -51,10 +48,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             name.text = props.name
             emailSett.text = props.email
             // check first which lang is it
-            Log.d("before ------>", props.language)
-
-            Log.d("after ------>", props.language)
-
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
                     if (props.language != "en") Lingver.getInstance()

@@ -8,8 +8,7 @@ data class RegistrationProps(
     val openLogin: () -> Unit,
     val action: RegistrationAction? = null,
     val error: RegistrationError? = null,
-    val saveName: (String) -> Unit = {},
-    val saveEmail: (String) -> Unit = {},
+    val saveAccData: (String, String) -> Unit,
     val fetchName: () -> Unit = {}
 ) {
     sealed class RegistrationAction : MviAction {

@@ -129,11 +129,11 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             val notes = withContext(Dispatchers.IO) {
                 DataBaseRepository.getNotes()
             }
-            setState(Store.appState.homeState.copy(listOfNotes = notes))
+            setState(appState.homeState.copy(listOfNotes = notes))
         }
     }
 
     private fun setState(state: HomeState) {
-        setState(Store.appState.copy(homeState = state))
+        setState(appState.copy(homeState = state))
     }
 }

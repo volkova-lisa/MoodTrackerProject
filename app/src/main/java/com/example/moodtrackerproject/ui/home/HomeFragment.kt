@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
@@ -43,13 +42,11 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             props.fetchHealth()
             props.fetchResults()
             props.fetchName()
-            Log.d("ONRESUME CALL HOME", "++++++++++++")
         }
     }
 
     override fun render(props: HomeProps) {
         this.props = props
-        Log.d("RENDER CALL HOME", "---------------")
         props.action?.let { handleAction(it) }
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
