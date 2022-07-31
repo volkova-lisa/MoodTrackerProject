@@ -23,6 +23,7 @@ object PreferenceManager {
     private const val KEY_MODE = "all_mode"
     private const val KEY_NAME = "all_name"
     private const val KEY_EMAIL = "all_email"
+    private const val KEY_PHOTO = "all_photo"
 
     private lateinit var preferences: SharedPreferences
 
@@ -42,6 +43,7 @@ object PreferenceManager {
     private val modeJsonAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java)
     private val nameJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val emailJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
+    private val photoJsonAdapter: JsonAdapter<ByteArray> = moshi.adapter(ByteArray::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -139,9 +141,9 @@ object PreferenceManager {
     }
 
     fun saveName(name: String) {
-        val serializedLang = nameJsonAdapter.toJson(name)
+        val serializedName = nameJsonAdapter.toJson(name)
         preferences.edit()
-            .putString(KEY_NAME, serializedLang)
+            .putString(KEY_NAME, serializedName)
             .apply()
     }
 
@@ -152,14 +154,27 @@ object PreferenceManager {
     }
 
     fun saveEmail(email: String) {
-        val serializedLang = emailJsonAdapter.toJson(email)
+        val serializedEmail = emailJsonAdapter.toJson(email)
         preferences.edit()
-            .putString(KEY_EMAIL, serializedLang)
+            .putString(KEY_EMAIL, serializedEmail)
             .apply()
     }
     fun getEmail(): String {
         val testsJson = preferences.getString(KEY_EMAIL, null)
         return if (testsJson.isNullOrEmpty()) "88 " else emailJsonAdapter.fromJson(testsJson)
             ?: "99 "
+    }
+
+    fun savePhoto(photo: ByteArray) {
+        val serializedLang = photoJsonAdapter.toJson(photo)
+        preferences.edit()
+            .putString(KEY_PHOTO, serializedLang)
+            .apply()
+    }
+
+    fun getPhoto(): ByteArray {
+        val testsJson = preferences.getString(KEY_PHOTO, null)
+        return if (testsJson.isNullOrEmpty()) byteArrayOf() else photoJsonAdapter.fromJson(testsJson)
+            ?: byteArrayOf()
     }
 }

@@ -38,13 +38,17 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
                 DataBaseRepository.saveName(it)
                 Store.setState(appState.homeState.copy(name = DataBaseRepository.getName()))
             },
+            savePhoto = {
+                DataBaseRepository.savePhoto(it)
+                // Store.setState(appState.homeState.copy(name = DataBaseRepository.getName()))
+            },
             fetchSettings = ::fetchSettings,
             name = state.name,
             email = state.email
         )
     }
 
-    fun fetchSettings() {
+    private fun fetchSettings() {
         launch {
             val lang = withContext(Dispatchers.IO) {
                 DataBaseRepository.getLang()

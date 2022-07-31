@@ -155,9 +155,7 @@ object DataBaseRepository {
         PreferenceManager.saveName(name)
     }
 
-    fun getName(): String {
-        return PreferenceManager.getName()
-    }
+    fun getName() = PreferenceManager.getName()
 
     fun saveEmail(email: String) {
         PreferenceManager.saveEmail(email)
@@ -166,4 +164,9 @@ object DataBaseRepository {
     fun getEmail(): String {
         return PreferenceManager.getEmail()
     }
+
+    fun savePhoto(photo: ByteArray) {
+        PreferenceManager.savePhoto(photo)
+    }
+    fun getPhoto() = PreferenceManager.getPhoto()
 }
