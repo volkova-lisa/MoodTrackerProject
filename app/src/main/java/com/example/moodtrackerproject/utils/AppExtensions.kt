@@ -3,6 +3,7 @@ package com.example.moodtrackerproject.utils
 import android.app.Activity
 import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
@@ -90,10 +91,15 @@ fun View.visibleIf(condition: Boolean?) {
     }
 }
 
-fun Bitmap.toString(): String {
+fun Bitmap.convertToString(): String {
     val baos = ByteArrayOutputStream()
     this.compress(Bitmap.CompressFormat.PNG, 100, baos)
     val b = baos.toByteArray()
     val encoded = Base64.encodeToString(b, Base64.DEFAULT)
     return encoded
+}
+
+fun String.convertToBitmap(): Bitmap {
+    val imageAsBytes: ByteArray = Base64.decode(this, Base64.DEFAULT)
+    return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size)
 }

@@ -21,6 +21,8 @@ import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentSettingsBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
+import com.example.moodtrackerproject.utils.convertToBitmap
+import com.example.moodtrackerproject.utils.convertToString
 import com.yariksoffice.lingver.Lingver
 import java.io.ByteArrayOutputStream
 
@@ -57,7 +59,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         this.props = props
         binding?.run {
             // i dont know why props.photo here is not working
-            photo.setImageBitmap(bitmapFromString(DataBaseRepository.getPhoto()))
+            photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap())
             name.text = props.name
             emailSett.text = props.email
             // check first which lang is it
@@ -106,7 +108,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                         name.text = editName.text.toString()
                         props.saveName(editName.text.toString())
                         // here save photo
-                        props.savePhoto(bitmapToString(imageBitmap))
+                        props.savePhoto((imageBitmap).convertToString())
                     }
                     this?.setNegativeButton("Cancel") { dialog, which ->
                         Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
@@ -137,17 +139,5 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         } else Toast.makeText(context, "Nonono", Toast.LENGTH_SHORT).show()
         photo.setImageBitmap(imageBitmap)
         Log.d("onActivityResult  -------", imageBitmap.toString())
-    }
-
-    private fun bitmapToString(image: Bitmap): String {
-        val baos = ByteArrayOutputStream()
-        image.compress(Bitmap.CompressFormat.PNG, 100, baos) // bm is the bitmap object
-        val b = baos.toByteArray()
-        val encoded = Base64.encodeToString(b, Base64.DEFAULT)
-        return encoded
-    }
-    private fun bitmapFromString(encoded: String): Bitmap {
-        val imageAsBytes: ByteArray = Base64.decode(encoded, Base64.DEFAULT)
-        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size)
     }
 }
