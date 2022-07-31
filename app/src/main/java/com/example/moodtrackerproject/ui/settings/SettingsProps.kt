@@ -6,12 +6,13 @@ data class SettingsProps(
     val language: String = "",
     val isDarkOn: Boolean = false,
     val saveLang: (String) -> Unit = {},
-    val savePhoto: (ByteArray) -> Unit = {},
+    val savePhoto: (String) -> Unit = {},
     val saveName: (String) -> Unit = {},
     val saveMode: (Boolean) -> Unit = {},
     val fetchSettings: () -> Unit = {},
     val name: String = "",
     val email: String = "",
+    val photo: String = ""
 ) {
     sealed class SettingsActions : MviAction
 }

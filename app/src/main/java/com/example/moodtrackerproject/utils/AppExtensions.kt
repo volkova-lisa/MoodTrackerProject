@@ -2,15 +2,18 @@ package com.example.moodtrackerproject.utils
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Bitmap
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
+import android.util.Base64
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.google.android.material.snackbar.Snackbar
+import java.io.ByteArrayOutputStream
 
 private const val MIN_PASSWORD_LENGTH = 6
 
@@ -85,4 +88,12 @@ fun View.visibleIf(condition: Boolean?) {
     } else {
         this.makeGone()
     }
+}
+
+fun Bitmap.toString(): String {
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.PNG, 100, baos)
+    val b = baos.toByteArray()
+    val encoded = Base64.encodeToString(b, Base64.DEFAULT)
+    return encoded
 }

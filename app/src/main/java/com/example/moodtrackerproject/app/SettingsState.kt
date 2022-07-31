@@ -5,5 +5,5 @@ data class SettingsState(
     val isDarkOn: Boolean = false,
     val name: String = "",
     val email: String = "",
-
+    val photo: String = ""
 )

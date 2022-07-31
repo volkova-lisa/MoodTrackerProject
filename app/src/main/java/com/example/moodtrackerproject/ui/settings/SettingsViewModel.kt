@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.settings
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.SettingsState
@@ -40,11 +41,13 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             },
             savePhoto = {
                 DataBaseRepository.savePhoto(it)
-                // Store.setState(appState.homeState.copy(name = DataBaseRepository.getName()))
+                Store.setState(appState.settingsState.copy(photo = DataBaseRepository.getPhoto()))
+                Log.d("SVM lambda -------", "")
             },
             fetchSettings = ::fetchSettings,
             name = state.name,
-            email = state.email
+            email = state.email,
+            photo = state.photo
         )
     }
 
@@ -62,10 +65,13 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             val email = withContext(Dispatchers.IO) {
                 DataBaseRepository.getEmail()
             }
+            val photo = withContext(Dispatchers.IO) {
+                DataBaseRepository.getPhoto()
+            }
             setState(
                 Store.appState.settingsState.copy(
                     language = lang, isDarkOn = darkOn,
-                    name = name, email = email
+                    name = name, email = email, photo = photo
                 )
             )
         }

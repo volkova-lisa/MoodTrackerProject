@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.moodtrackerproject.domain.HealthModel
 import com.example.moodtrackerproject.domain.MoodModel
 import com.example.moodtrackerproject.domain.NoteModel
@@ -43,7 +44,7 @@ object PreferenceManager {
     private val modeJsonAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java)
     private val nameJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val emailJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
-    private val photoJsonAdapter: JsonAdapter<ByteArray> = moshi.adapter(ByteArray::class.java)
+    private val photoJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -165,16 +166,18 @@ object PreferenceManager {
             ?: "99 "
     }
 
-    fun savePhoto(photo: ByteArray) {
+    fun savePhoto(photo: String) {
         val serializedLang = photoJsonAdapter.toJson(photo)
         preferences.edit()
             .putString(KEY_PHOTO, serializedLang)
             .apply()
+        Log.d("PM save -------", serializedLang)
     }
 
-    fun getPhoto(): ByteArray {
+    fun getPhoto(): String {
         val testsJson = preferences.getString(KEY_PHOTO, null)
-        return if (testsJson.isNullOrEmpty()) byteArrayOf() else photoJsonAdapter.fromJson(testsJson)
-            ?: byteArrayOf()
+        return if (testsJson.isNullOrEmpty()) "67" else photoJsonAdapter.fromJson(testsJson)
+            ?: "89"
+        Log.d("PM get -------", "")
     }
 }

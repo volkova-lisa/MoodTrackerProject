@@ -13,4 +13,5 @@ data class HomeState(
     val resultModel: ResultsModel? = null,
     val name: String = "ii",
     val email: String = "",
+    val photo: String = "",
 )

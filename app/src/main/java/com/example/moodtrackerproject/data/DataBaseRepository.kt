@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.data
 
+import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -165,8 +166,9 @@ object DataBaseRepository {
         return PreferenceManager.getEmail()
     }
 
-    fun savePhoto(photo: ByteArray) {
+    fun savePhoto(photo: String) {
         PreferenceManager.savePhoto(photo)
+        Log.d("DBR  -------", photo)
     }
     fun getPhoto() = PreferenceManager.getPhoto()
 }

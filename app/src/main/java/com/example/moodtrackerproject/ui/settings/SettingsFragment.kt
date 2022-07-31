@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.settings
 
-import android.R
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
@@ -25,7 +24,6 @@ import com.example.moodtrackerproject.utils.click
 import com.yariksoffice.lingver.Lingver
 import java.io.ByteArrayOutputStream
 
-
 class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding, SettingsProps>(
     SettingsViewModel::class.java
 ) {
@@ -35,8 +33,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     }
 
     private lateinit var props: SettingsProps
-    lateinit var imageBitmap: Bitmap
-
+    private lateinit var imageBitmap: Bitmap
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -59,7 +56,8 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun render(props: SettingsProps) {
         this.props = props
         binding?.run {
-
+            // i dont know why props.photo here is not working
+            photo.setImageBitmap(bitmapFromString(DataBaseRepository.getPhoto()))
             name.text = props.name
             emailSett.text = props.email
             // check first which lang is it
@@ -100,12 +98,15 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
                 photo.click({
                     uploadImageGallery()
+                    // photo.setImageBitmap(imageBitmap)
                 })
                 editName.setText(props.name)
                 with(builder) {
                     this?.setPositiveButton("Save") { dialog, which ->
                         name.text = editName.text.toString()
                         props.saveName(editName.text.toString())
+                        // here save photo
+                        props.savePhoto(bitmapToString(imageBitmap))
                     }
                     this?.setNegativeButton("Cancel") { dialog, which ->
                         Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
@@ -118,39 +119,35 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         }
     }
 
+    private fun uploadImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/"
+        startActivityForResult(intent, IMAGE_REQUEST_CODE)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        val dialogLayout = layoutInflater.inflate(R.layout.edit_profile_layout, null)
+        val photo = dialogLayout.findViewById<ImageView>(R.id.photo)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             imageBitmap =
                 ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, data?.data!!)).copy(
                     Bitmap.Config.RGBA_F16, true
                 )
-        }
-        props.savePhoto(bitmapToByte())
-        binding?.photo?.setImageBitmap(bitmapFromByte(DataBaseRepository.getPhoto()))
-        Log.d("======", DataBaseRepository.getPhoto().toString())
+        } else Toast.makeText(context, "Nonono", Toast.LENGTH_SHORT).show()
+        photo.setImageBitmap(imageBitmap)
+        Log.d("onActivityResult  -------", imageBitmap.toString())
     }
 
-    private fun uploadImageGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/"
-
-        startActivityForResult(intent, IMAGE_REQUEST_CODE)
-    }
-
-    fun bitmapToByte(): String {
+    private fun bitmapToString(image: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos) //bm is the bitmap object
+        image.compress(Bitmap.CompressFormat.PNG, 100, baos) // bm is the bitmap object
         val b = baos.toByteArray()
         val encoded = Base64.encodeToString(b, Base64.DEFAULT)
-        Log.d("------", encoded.toString())
         return encoded
     }
-    fun bitmapFromByte(encoded: String): Bitmap {
-        val imageAsBytes: ByteArray = Base64.decode(encoded.getBytes(), Base64.DEFAULT)
-        val image = this.findViewById(R.id.ImageView) as ImageView
-        image.setImageBitmap(BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size))
-        Log.d("----", "a.toString()")
-        return Base64.encodeToString(byteArray, Base64.DEFAULT) as Bitmap
+    private fun bitmapFromString(encoded: String): Bitmap {
+        val imageAsBytes: ByteArray = Base64.decode(encoded, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size)
     }
 }
