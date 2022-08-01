@@ -56,28 +56,26 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun render(props: SettingsProps) {
         this.props = props
         binding?.run {
+            val currLang = Lingver.getInstance().getLanguage()
             imageBitmap = DataBaseRepository.getPhoto().convertToBitmap()
             // i dont know why props.photo here is not working
             photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap())
             name.text = props.name
             emailSett.text = props.email
-            // check first which lang is it
-            Log.d("lang-------", Lingver.getInstance().getLanguage())
-            Log.d("lang---=----", Lingver.getInstance().getLocale().toString())
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
-                    if (props.language != "en") Lingver.getInstance()
-                        .setLocale(requireContext(), "en")
-                    else Lingver.getInstance().setLocale(requireContext(), "ua")
-                    props.saveLang("en")
+                    if (currLang == "en") Lingver.getInstance()
+                        .setLocale(requireContext(), "ua")
+                    else Lingver.getInstance().setLocale(requireContext(), "en")
+                    props.saveLang(currLang)
 
                     enTitle.setTextColor(resources.getColor(R.color.light_purple))
                     uaTitle.setTextColor(resources.getColor(R.color.text_grey))
                 } else {
-                    if (props.language != "en") Lingver.getInstance()
+                    if (currLang == "ua") Lingver.getInstance()
                         .setLocale(requireContext(), "en")
                     else Lingver.getInstance().setLocale(requireContext(), "ua")
-                    props.saveLang("ua")
+                    props.saveLang(currLang)
 
                     uaTitle.setTextColor(resources.getColor(R.color.light_purple))
                     enTitle.setTextColor(resources.getColor(R.color.text_grey))
