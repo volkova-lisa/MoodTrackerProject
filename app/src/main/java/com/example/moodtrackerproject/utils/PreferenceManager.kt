@@ -175,9 +175,6 @@ object PreferenceManager {
     }
 
     fun getPhoto(): String {
-        val testsJson = preferences.getString(KEY_PHOTO, null)
-        return if (testsJson.isNullOrEmpty()) "67" else photoJsonAdapter.fromJson(testsJson)
-            ?: "89"
-        Log.d("PM get -------", "")
+        return preferences.getString(KEY_PHOTO, "")!!
     }
 }

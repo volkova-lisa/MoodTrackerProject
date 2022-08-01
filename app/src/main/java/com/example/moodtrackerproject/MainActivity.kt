@@ -3,6 +3,7 @@ package com.example.moodtrackerproject
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
@@ -14,13 +15,15 @@ import com.example.moodtrackerproject.utils.PreferenceManager
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getActivityBinding(inflater: LayoutInflater) = ActivityMainBinding.inflate(inflater)
-    override fun fetchData() {
-    }
     // TODO("revise router use")
     val router = Router(this)
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.fetchData()
         binding?.run {
             val navHostFragment =
                 supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment

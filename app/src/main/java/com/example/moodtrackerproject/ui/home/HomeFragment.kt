@@ -30,7 +30,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         (activity as? AppCompatActivity)?.setSupportActionBar(binding?.toolbar)
         setHasOptionsMenu(true)
         // i don't know how to do it another way
-        binding?.name?.text = DataBaseRepository.getName()
+        // binding?.name?.text = DataBaseRepository.getName()
         binding?.emojiList?.adapter = moodsAdapter
         binding?.notesList?.adapter = notesAdapter
     }
@@ -52,7 +52,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
-            photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap())
+            photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap(resources))
             name.text = props.name
             if (props.testResults != null) {
                 angerJoy.angerBar.progress = props.testResults.stressResult

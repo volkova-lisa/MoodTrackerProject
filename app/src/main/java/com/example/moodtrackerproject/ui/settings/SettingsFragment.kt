@@ -15,7 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.moodtrackerproject.R
-import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.databinding.FragmentSettingsBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
@@ -33,6 +32,9 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
     private lateinit var props: SettingsProps
     private lateinit var imageBitmap: Bitmap
+    private lateinit var onActivityResultImageBitmap: Bitmap
+    private lateinit var photoAlertDialog: ImageView
+
     override fun getFragmentBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -57,9 +59,9 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         this.props = props
         binding?.run {
             val currLang = Lingver.getInstance().getLanguage()
-            imageBitmap = DataBaseRepository.getPhoto().convertToBitmap()
-            // i dont know why props.photo here is not working
-            photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap())
+            Log.d("===HELLO", "render called")
+            imageBitmap = props.photo.convertToBitmap(resources)
+            photo.setImageBitmap(imageBitmap)
             name.text = props.name
             emailSett.text = props.email
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
@@ -95,20 +97,20 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 val builder = context?.let { AlertDialog.Builder(it) }
                 val dialogLayout = layoutInflater.inflate(R.layout.edit_profile_layout, null)
                 val editName = dialogLayout.findViewById<EditText>(R.id.name_edit)
-                val photo = dialogLayout.findViewById<ImageView>(R.id.photo)
-
-                photo.click({
+                photoAlertDialog = dialogLayout.findViewById(R.id.photo)
+                photoAlertDialog.setImageBitmap(props.photo.convertToBitmap(resources))
+                Log.d("========HELLO", imageBitmap.convertToString())
+                photoAlertDialog.click({
                     uploadImageGallery()
-                    // photo.setImageBitmap(imageBitmap)
                 })
                 editName.setText(props.name)
                 with(builder) {
                     this?.setPositiveButton("Save") { dialog, which ->
                         name.text = editName.text.toString()
+                        imageBitmap = onActivityResultImageBitmap
                         props.saveName(editName.text.toString())
-                        // here save photo
-                        if (imageBitmap != (DataBaseRepository.getPhoto()).convertToBitmap())
-                            props.savePhoto((imageBitmap).convertToString())
+                        props.savePhoto(onActivityResultImageBitmap.convertToString())
+                        props.fetchSettings()
                     }
                     this?.setNegativeButton("Cancel") { dialog, which ->
                         Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
@@ -129,15 +131,11 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        val dialogLayout = layoutInflater.inflate(R.layout.edit_profile_layout, null)
-        val photo = dialogLayout.findViewById<ImageView>(R.id.photo)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            imageBitmap =
-                ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, data?.data!!)).copy(
-                    Bitmap.Config.RGBA_F16, true
-                )
+            onActivityResultImageBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, data?.data!!)).copy(
+                Bitmap.Config.RGBA_F16, true
+            )
+            photoAlertDialog.setImageBitmap(onActivityResultImageBitmap)
         } else Toast.makeText(context, "Nonono", Toast.LENGTH_SHORT).show()
-        photo.setImageBitmap(imageBitmap)
-        Log.d("onActivityResult  -------", imageBitmap.toString())
     }
 }

@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
@@ -13,6 +14,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import com.example.moodtrackerproject.R
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
 
@@ -95,11 +97,16 @@ fun Bitmap.convertToString(): String {
     val baos = ByteArrayOutputStream()
     this.compress(Bitmap.CompressFormat.PNG, 100, baos)
     val b = baos.toByteArray()
-    val encoded = Base64.encodeToString(b, Base64.DEFAULT)
+    val encoded = Base64.encodeToString(b, Base64.NO_WRAP)
     return encoded
 }
 
-fun String.convertToBitmap(): Bitmap {
-    val imageAsBytes: ByteArray = Base64.decode(this, Base64.DEFAULT)
-    return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size)
+fun String.convertToBitmap(res: Resources): Bitmap {
+    val imageAsBytes: ByteArray = Base64.decode(this, Base64.NO_WRAP)
+
+    return if (this.isEmpty()) {
+        BitmapFactory.decodeResource(res, R.drawable.anon)
+    } else {
+        BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size)
+    }
 }

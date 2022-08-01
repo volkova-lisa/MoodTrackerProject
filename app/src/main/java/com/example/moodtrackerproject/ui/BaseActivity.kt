@@ -14,7 +14,6 @@ abstract class BaseActivity<BINDING : ViewBinding> : AppCompatActivity() {
 
     protected var binding: BINDING? = null
     abstract fun getActivityBinding(inflater: LayoutInflater): BINDING
-    abstract fun fetchData()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

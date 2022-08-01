@@ -21,7 +21,7 @@ class MoodTrackerApp : Application() {
     private fun firebase() {
         FirebaseApp.initializeApp(this)
         if (BuildConfig.DEBUG) {
-            Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
+//            Firebase.crashlytics.setCrashlyticsCollectionEnabled(false)
         } else {
             Firebase.crashlytics.setCrashlyticsCollectionEnabled(true)
         }
