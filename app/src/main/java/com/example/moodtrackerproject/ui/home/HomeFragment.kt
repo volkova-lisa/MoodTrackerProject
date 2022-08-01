@@ -10,6 +10,7 @@ import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 import com.example.moodtrackerproject.ui.mood.list.MoodsListAdapter
+import com.example.moodtrackerproject.utils.convertToBitmap
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>(
     HomeViewModel::class.java
@@ -51,6 +52,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
+            photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap())
             name.text = props.name
             if (props.testResults != null) {
                 angerJoy.angerBar.progress = props.testResults.stressResult

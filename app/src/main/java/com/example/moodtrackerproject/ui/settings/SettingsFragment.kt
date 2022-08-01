@@ -3,10 +3,8 @@ package com.example.moodtrackerproject.ui.settings
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.ImageDecoder
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -24,7 +22,6 @@ import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.convertToBitmap
 import com.example.moodtrackerproject.utils.convertToString
 import com.yariksoffice.lingver.Lingver
-import java.io.ByteArrayOutputStream
 
 class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding, SettingsProps>(
     SettingsViewModel::class.java
@@ -58,6 +55,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun render(props: SettingsProps) {
         this.props = props
         binding?.run {
+            imageBitmap = DataBaseRepository.getPhoto().convertToBitmap()
             // i dont know why props.photo here is not working
             photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap())
             name.text = props.name
@@ -108,7 +106,8 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                         name.text = editName.text.toString()
                         props.saveName(editName.text.toString())
                         // here save photo
-                        props.savePhoto((imageBitmap).convertToString())
+                        if (imageBitmap != (DataBaseRepository.getPhoto()).convertToBitmap())
+                            props.savePhoto((imageBitmap).convertToString())
                     }
                     this?.setNegativeButton("Cancel") { dialog, which ->
                         Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
