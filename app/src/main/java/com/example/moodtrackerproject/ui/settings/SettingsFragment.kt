@@ -48,7 +48,8 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding?.run {
-            langSwitch.isChecked = DataBaseRepository.getLang() == "en"
+            langSwitch.isChecked = Lingver.getInstance().getLanguage() == "en"
+            // langSwitch.isChecked = DataBaseRepository.getLang() == "en"
         }
     }
 
@@ -61,6 +62,8 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             name.text = props.name
             emailSett.text = props.email
             // check first which lang is it
+            Log.d("lang-------", Lingver.getInstance().getLanguage())
+            Log.d("lang---=----", Lingver.getInstance().getLocale().toString())
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
                     if (props.language != "en") Lingver.getInstance()

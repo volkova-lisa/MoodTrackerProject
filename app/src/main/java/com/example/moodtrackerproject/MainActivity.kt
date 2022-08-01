@@ -14,7 +14,8 @@ import com.example.moodtrackerproject.utils.PreferenceManager
 class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getActivityBinding(inflater: LayoutInflater) = ActivityMainBinding.inflate(inflater)
-
+    override fun fetchData() {
+    }
     // TODO("revise router use")
     val router = Router(this)
 
