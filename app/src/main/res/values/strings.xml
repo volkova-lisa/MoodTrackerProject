@@ -139,5 +139,9 @@
     <string name="_4000_kcal"><![CDATA[< 4000 kcal]]></string>
     <string name="out_of_ml">з %d ml</string>
     <string name="out_of_h">з %d steps</string>
+    <string name="set_new_password">Set new password</string>
+    <string name="current_password">Current password</string>
+    <string name="new_password">New password</string>
+    <string name="confirm_password">Confirm password</string>
 
 </resources>

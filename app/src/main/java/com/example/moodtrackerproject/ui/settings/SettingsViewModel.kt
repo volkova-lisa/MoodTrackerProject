@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.settings
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.SettingsState

@@ -21,6 +21,8 @@ import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.convertToBitmap
 import com.example.moodtrackerproject.utils.convertToString
+import com.google.firebase.auth.EmailAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.yariksoffice.lingver.Lingver
 
 class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding, SettingsProps>(
@@ -149,6 +151,88 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 props.logout()
                 if (props.action == SettingsProps.SettingsActions.LogOut) {
                     (requireActivity() as MainActivity).router.openWelcome()
+                }
+            })
+
+            passTitle.click({
+                val builder = context?.let { AlertDialog.Builder(it) }
+                val dialogLayout = layoutInflater.inflate(R.layout.edit_password, null)
+                val currPass = dialogLayout.findViewById<EditText>(R.id.curr_pass)
+                val newPass = dialogLayout.findViewById<EditText>(R.id.new_pass)
+                val confPass = dialogLayout.findViewById<EditText>(R.id.conf_pass)
+                val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
+
+                with(builder) {
+                    this?.setPositiveButton("Save") { dialog, which ->
+                        if (currPass.text.isNotEmpty() &&
+                            newPass.text.isNotEmpty() &&
+                            confPass.text.isNotEmpty()
+                        ) {
+                            if (newPass.text.toString().equals(confPass.text.toString())) {
+                                Log.d("======", currPass.toString())
+                                Log.d("======", newPass.toString())
+                                Log.d("======", confPass.toString())
+                                val user = auth.currentUser
+                                if (user != null && user.email != null) {
+                                    val credential =
+                                        EmailAuthProvider.getCredential(
+                                            user.email!!,
+                                            currPass.text.toString()
+                                        )
+                                    Log.d("--------", credential.toString())
+
+// Prompt the user to re-provide their sign-in credentials
+                                    user.reauthenticate(credential).addOnCompleteListener {
+                                        Log.d("1111111", credential.toString())
+                                        if (it.isSuccessful) {
+                                            Log.d("success222222", credential.toString())
+                                            Toast.makeText(
+                                                context,
+                                                "Re-Authentication success.",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
+                                            user.updatePassword(newPass.text.toString())
+                                                .addOnCompleteListener { task ->
+                                                    if (task.isSuccessful) {
+                                                        Log.d(
+                                                            "success333333",
+                                                            credential.toString()
+                                                        )
+                                                        Toast.makeText(
+                                                            context,
+                                                            "Password changed successfully.",
+                                                            Toast.LENGTH_SHORT
+                                                        ).show()
+                                                        auth.signOut()
+                                                        // startActivity(Intent(context, MainActivity::class.java))
+                                                        (requireActivity() as MainActivity).router.openWelcome()
+                                                        // finish()
+                                                    }
+                                                }
+                                        } else Toast.makeText(
+                                            context,
+                                            "Re-Authentication failed.",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                } else {
+                                    // startActivity(Intent(context, MainActivity::class.java))
+                                    (requireActivity() as MainActivity).router.openWelcome()
+                                }
+                            }
+                        }
+                    }
+
+                    this?.setNegativeButton("Cancel") { dialog, which ->
+                        Toast.makeText(
+                            context,
+                            getString(R.string.not_saved),
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                    this?.setView(dialogLayout)
+                    this?.show()
                 }
             })
         }
