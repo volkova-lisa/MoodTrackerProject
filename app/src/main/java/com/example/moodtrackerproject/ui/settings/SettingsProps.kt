@@ -8,6 +8,7 @@ data class SettingsProps(
     val language: String = "",
     val isDarkOn: Boolean = false,
     val saveLang: (String) -> Unit = {},
+    val changePassword: (String, String, String) -> Unit,
     val savePhoto: (String) -> Unit = {},
     val saveName: (String) -> Unit = {},
     val saveMode: (Boolean) -> Unit = {},

@@ -143,5 +143,8 @@
     <string name="current_password">Current password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
+    <string name="reauth_success">Re-Authentication success.</string>
+    <string name="pass_ch_success">Password changed successfully.</string>
+    <string name="reauth_fail">Re-Authentication failed.</string>
 
 </resources>
