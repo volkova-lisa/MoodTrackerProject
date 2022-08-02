@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import com.example.moodtrackerproject.MainActivity
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.databinding.FragmentSettingsBinding
 import com.example.moodtrackerproject.ui.BaseFragment
@@ -50,7 +52,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         super.onViewCreated(view, savedInstanceState)
         binding?.run {
             langSwitch.isChecked = Lingver.getInstance().getLanguage() == "en"
-            // langSwitch.isChecked = DataBaseRepository.getLang() == "en"
         }
     }
 
@@ -141,6 +142,13 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                     }
                     this?.setView(dialogLayout)
                     this?.show()
+                }
+            })
+
+            logoutTitle.click({
+                props.logout()
+                if (props.action == SettingsProps.SettingsActions.LogOut) {
+                    (requireActivity() as MainActivity).router.openWelcome()
                 }
             })
         }

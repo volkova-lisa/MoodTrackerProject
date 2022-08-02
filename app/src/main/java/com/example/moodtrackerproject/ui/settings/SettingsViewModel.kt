@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.settings
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.SettingsState
@@ -7,6 +8,8 @@ import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.domain.MaxHealthModel
 import com.example.moodtrackerproject.ui.BaseViewModel
+import com.example.moodtrackerproject.utils.PreferenceManager
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,19 +17,23 @@ import kotlinx.coroutines.withContext
 class SettingsViewModel : BaseViewModel<SettingsProps>() {
 
     private val props = SettingsProps(
+        action = null,
         fetchSettings = ::fetchSettings,
         language = DataBaseRepository.getLang(),
-        saveHealthMax = ::saveHealthMax
+        saveHealthMax = ::saveHealthMax,
+        logout = ::logOut,
     )
 
     init {
         setState(Store.appState.settingsState)
         liveData.value = props
     }
+    private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
     override fun map(appState: AppState, action: MviAction?): SettingsProps {
         val state = appState.settingsState
         return SettingsProps(
+            action = action as? SettingsProps.SettingsActions,
             language = state.language,
             isDarkOn = state.isDarkOn,
             saveLang = {
@@ -52,8 +59,16 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             stepsMax = state.stepsMax,
             sleepMax = state.sleepMax,
             kcalMax = state.kcalMax,
-            saveHealthMax = ::saveHealthMax
+            saveHealthMax = ::saveHealthMax,
+            logout = ::logOut,
+            isLoggedIn = state.isLoggedIn,
         )
+    }
+
+    private fun logOut() {
+        auth.signOut()
+        PreferenceManager.setInitUser(false)
+        setState(Store.appState.settingsState.copy(isLoggedIn = false), action = SettingsProps.SettingsActions.LogOut)
     }
 
     private fun saveHealthMax(w: Int, st: Int, sl: Int, kc: Int) {

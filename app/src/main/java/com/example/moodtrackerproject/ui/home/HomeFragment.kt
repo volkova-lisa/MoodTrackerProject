@@ -29,8 +29,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         super.onViewCreated(view, savedInstanceState)
         (activity as? AppCompatActivity)?.setSupportActionBar(binding?.toolbar)
         setHasOptionsMenu(true)
-        // i don't know how to do it another way
-        // binding?.name?.text = DataBaseRepository.getName()
         binding?.emojiList?.adapter = moodsAdapter
         binding?.notesList?.adapter = notesAdapter
     }
@@ -70,17 +68,17 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
                 sleepItem.sleepValue.text = "$sleep h"
                 kcalItem.waterValue.text = kcal.toString()
                 waterItem.waterBar.max =
-                    props.healthItems.waterMax // here  will be set the num via settings in new branch
+                    props.healthItems.waterMax
                 waterItem.waterBar.progress = water
 
                 stepsItem.stepsBar.max =
-                    props.healthItems.stepsMax // here  will be set the num via settings in new branch
+                    props.healthItems.stepsMax
                 stepsItem.stepsBar.progress = steps
 
-                sleepItem.waterBar.max = props.healthItems.sleepMax // here  will be set the num via settings in new branch
+                sleepItem.waterBar.max = props.healthItems.sleepMax
                 sleepItem.waterBar.progress = if (sleep > 8) 8 else sleep
 
-                kcalItem.waterBar.max = props.healthItems.kcalMax // here  will be set the num via settings in new branch
+                kcalItem.waterBar.max = props.healthItems.kcalMax
                 kcalItem.waterBar.progress = kcal
             }
         }

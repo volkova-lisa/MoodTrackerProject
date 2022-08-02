@@ -3,6 +3,8 @@ package com.example.moodtrackerproject.ui.settings
 import com.example.moodtrackerproject.app.MviAction
 
 data class SettingsProps(
+    val isLoggedIn: Boolean = false,
+    val action: SettingsActions? = null,
     val language: String = "",
     val isDarkOn: Boolean = false,
     val saveLang: (String) -> Unit = {},
@@ -17,7 +19,10 @@ data class SettingsProps(
     val stepsMax: Int = 0,
     val sleepMax: Int = 0,
     val kcalMax: Int = 0,
-    val saveHealthMax: (Int, Int, Int, Int) -> Unit
+    val saveHealthMax: (Int, Int, Int, Int) -> Unit,
+    val logout: () -> Unit,
 ) {
-    sealed class SettingsActions : MviAction
+    sealed class SettingsActions : MviAction {
+        object LogOut : SettingsActions()
+    }
 }
