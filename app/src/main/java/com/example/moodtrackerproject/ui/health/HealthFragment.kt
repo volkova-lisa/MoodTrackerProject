@@ -34,9 +34,9 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
                 val waterMax = props.healthItems.waterMax
                 val stepsMax = props.healthItems.stepsMax
                 water.waterNum.text = props.healthItems.water.toString()
-                water.explanation.text = getString(R.string.out_of, waterMax)
+                water.explanation.text = getString(R.string.out_of_ml, waterMax)
                 steps.waterNum.text = props.healthItems.steps.toString()
-                steps.explanation.text = getString(R.string.out_of, stepsMax)
+                steps.explanation.text = getString(R.string.out_of_h, stepsMax)
                 sleep.waterNum.text = props.healthItems.sleep.toString()
                 kcal.waterNum.text = props.healthItems.kcal.toString()
             }

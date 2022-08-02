@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity

@@ -138,6 +138,7 @@
     <string name="_4000ml"><![CDATA[< 4000 мл]]></string>
     <string name="_24h"><![CDATA[< 24 год]]></string>
     <string name="_4000_kcal"><![CDATA[< 4000 ккал]]></string>
-    <string name="out_of">з %d</string>
+    <string name="out_of_ml">з %d мл</string>
+    <string name="out_of_h">з %d кроків</string>
 
 </resources>
