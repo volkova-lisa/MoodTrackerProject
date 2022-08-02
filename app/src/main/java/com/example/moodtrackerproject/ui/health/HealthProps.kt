@@ -18,6 +18,10 @@ data class HealthProps(
         val water: Int = 0,
         val steps: Int = 0,
         val sleep: Int = 0,
-        val kcal: Int = 0
+        val kcal: Int = 0,
+        val waterMax: Int = 0,
+        val stepsMax: Int = 0,
+        val sleepMax: Int = 0,
+        val kcalMax: Int = 0
     )
 }

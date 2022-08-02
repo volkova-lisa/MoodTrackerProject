@@ -38,6 +38,10 @@ object Store {
         appState = appState.copy(stressTestState = newState)
     }
 
+    fun setState(newState: EditHealthState) {
+        appState = appState.copy(editHealthState = newState)
+    }
+
     fun setState(newState: HealthState) {
         appState = appState.copy(healthState = newState)
     }

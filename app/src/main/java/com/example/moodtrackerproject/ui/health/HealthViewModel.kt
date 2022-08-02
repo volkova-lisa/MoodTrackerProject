@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.health
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HealthState
 import com.example.moodtrackerproject.app.MviAction
@@ -33,10 +34,13 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                     water = state.healthModel.water,
                     steps = state.healthModel.steps,
                     sleep = state.healthModel.sleep,
-                    kcal = state.healthModel.kcal
+                    kcal = state.healthModel.kcal,
+                    waterMax = state.waterMax,
+                    stepsMax = state.stepsMax,
+                    sleepMax = state.sleepMax,
+                    kcalMax = state.kcalMax
                 )
             } else null,
-
             fetchListOfHealth = ::fetchListOfHealth,
             edited = state.edited
         )
@@ -48,6 +52,19 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                 DataBaseRepository.getHealth()
             }
             setState(Store.appState.healthState.copy(healthModel = health))
+            val maxHealth = withContext(Dispatchers.IO) {
+                DataBaseRepository.getHealthMax()
+            }
+            Log.d("==========", DataBaseRepository.getHealthMax().toString())
+
+            setState(
+                Store.appState.healthState.copy(
+                    waterMax = maxHealth.waterMax,
+                    stepsMax = maxHealth.stepsMax,
+                    sleepMax = maxHealth.sleepMax,
+                    kcalMax = maxHealth.kcalMax
+                )
+            )
         }
     }
 

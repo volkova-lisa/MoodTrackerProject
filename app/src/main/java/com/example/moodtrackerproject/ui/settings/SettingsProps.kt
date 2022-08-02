@@ -12,7 +12,12 @@ data class SettingsProps(
     val fetchSettings: () -> Unit = {},
     val name: String = "",
     val email: String = "",
-    val photo: String = ""
+    val photo: String = "",
+    val waterMax: Int = 0,
+    val stepsMax: Int = 0,
+    val sleepMax: Int = 0,
+    val kcalMax: Int = 0,
+    val saveHealthMax: (Int, Int, Int, Int) -> Unit
 ) {
     sealed class SettingsActions : MviAction
 }

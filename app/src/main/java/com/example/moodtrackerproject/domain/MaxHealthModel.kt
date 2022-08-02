@@ -1,6 +1,6 @@
-package com.example.moodtrackerproject.app
+package com.example.moodtrackerproject.domain
 
-data class EditHealthState(
+data class MaxHealthModel(
     val waterMax: Int = 0,
     val stepsMax: Int = 0,
     val sleepMax: Int = 0,

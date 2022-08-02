@@ -5,7 +5,8 @@ data class EditHealthProps(
     val listHealth: EditHealthItemProps? = null,
     val saveEdited: (HealthModel) -> Unit = {},
     val action: EditHealthScreenActions? = null,
-    val startHealth: () -> Unit = {}
+    val startHealth: () -> Unit = {},
+    val fetchMaxHealth: () -> Unit = {}
 
 ) {
     sealed class EditHealthScreenActions : MviAction {
@@ -16,6 +17,10 @@ data class EditHealthProps(
         val water: Int = 0,
         val steps: Int = 0,
         val sleep: Int = 0,
-        val kcal: Int = 0
+        val kcal: Int = 0,
+        val waterMax: Int = 0,
+        val stepsMax: Int = 0,
+        val sleepMax: Int = 0,
+        val kcalMax: Int = 0,
     )
 }

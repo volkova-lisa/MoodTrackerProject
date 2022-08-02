@@ -2,11 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.util.Log
-import com.example.moodtrackerproject.domain.HealthModel
-import com.example.moodtrackerproject.domain.MoodModel
-import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.domain.ResultsModel
+import com.example.moodtrackerproject.domain.*
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -25,6 +21,7 @@ object PreferenceManager {
     private const val KEY_NAME = "all_name"
     private const val KEY_EMAIL = "all_email"
     private const val KEY_PHOTO = "all_photo"
+    private const val KEY_MAX_H = "all_max"
 
     private lateinit var preferences: SharedPreferences
 
@@ -45,6 +42,7 @@ object PreferenceManager {
     private val nameJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val emailJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val photoJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
+    private val maxHealthJsonAdapter: JsonAdapter<MaxHealthModel> = moshi.adapter(MaxHealthModel::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -171,10 +169,22 @@ object PreferenceManager {
         preferences.edit()
             .putString(KEY_PHOTO, serializedLang)
             .apply()
-        Log.d("PM save -------", serializedLang)
     }
 
     fun getPhoto(): String {
         return preferences.getString(KEY_PHOTO, "")!!
+    }
+
+    fun saveHealthMax(max: MaxHealthModel) {
+        val serializedMax = maxHealthJsonAdapter.toJson(max)
+        preferences.edit()
+            .putString(KEY_MAX_H, serializedMax)
+            .apply()
+    }
+
+    fun getHealthMax(): MaxHealthModel {
+        val testsJson = preferences.getString(KEY_MAX_H, null)
+        return if (testsJson.isNullOrEmpty()) MaxHealthModel() else maxHealthJsonAdapter.fromJson(testsJson)
+            ?: MaxHealthModel()
     }
 }

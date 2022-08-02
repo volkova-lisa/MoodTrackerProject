@@ -129,5 +129,14 @@
     <string name="acc_data">Account data</string>
     <string name="enter_your_name">Enter your name</string>
     <string name="not_saved">Not saved</string>
+    <string name="set_new_health_goals">Set new health goals</string>
+    <string name="water_goal">Water goal</string>
+    <string name="steps_goal">Steps goal</string>
+    <string name="sleep_hours_goal">Sleep hours goal</string>
+    <string name="kcal_goal">Kcal goal</string>
+    <string name="_4000ml"><![CDATA[< 4000 ml]]></string>
+    <string name="_24h"><![CDATA[< 24 h]]></string>
+    <string name="_4000_kcal"><![CDATA[< 4000 kcal]]></string>
+    <string name="out_of">out of %d</string>
 
 </resources>

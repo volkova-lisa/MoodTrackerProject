@@ -1,11 +1,11 @@
 package com.example.moodtrackerproject.ui.settings
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.SettingsState
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.domain.MaxHealthModel
 import com.example.moodtrackerproject.ui.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -15,7 +15,8 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
 
     private val props = SettingsProps(
         fetchSettings = ::fetchSettings,
-        language = DataBaseRepository.getLang()
+        language = DataBaseRepository.getLang(),
+        saveHealthMax = ::saveHealthMax
     )
 
     init {
@@ -42,13 +43,45 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             savePhoto = {
                 DataBaseRepository.savePhoto(it)
                 Store.setState(appState.settingsState.copy(photo = DataBaseRepository.getPhoto()))
-                Log.d("SVM lambda -------", "")
             },
             fetchSettings = ::fetchSettings,
             name = state.name,
             email = state.email,
-            photo = state.photo
+            photo = state.photo,
+            waterMax = state.waterMax,
+            stepsMax = state.stepsMax,
+            sleepMax = state.sleepMax,
+            kcalMax = state.kcalMax,
+            saveHealthMax = ::saveHealthMax
         )
+    }
+
+    private fun saveHealthMax(w: Int, st: Int, sl: Int, kc: Int) {
+        Store.setState(
+            Store.appState.healthState.copy(
+                waterMax = w,
+                stepsMax = st,
+                sleepMax = sl,
+                kcalMax = kc
+            )
+        )
+        Store.setState(
+            Store.appState.editHealthState.copy(
+                waterMax = w,
+                stepsMax = st,
+                sleepMax = sl,
+                kcalMax = kc
+            )
+        )
+        Store.setState(
+            Store.appState.homeState.copy(
+                waterMax = w,
+                stepsMax = st,
+                sleepMax = sl,
+                kcalMax = kc
+            )
+        )
+        DataBaseRepository.saveHealthMax(MaxHealthModel(w, st, sl, kc))
     }
 
     private fun fetchSettings() {

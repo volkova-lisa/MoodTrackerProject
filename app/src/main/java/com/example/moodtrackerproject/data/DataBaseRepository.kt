@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.data
 
-import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -168,7 +167,12 @@ object DataBaseRepository {
 
     fun savePhoto(photo: String) {
         PreferenceManager.savePhoto(photo)
-        Log.d("DBR  -------", photo)
     }
     fun getPhoto() = PreferenceManager.getPhoto()
+
+    fun saveHealthMax(maxHealthModel: MaxHealthModel) {
+        PreferenceManager.saveHealthMax(maxHealthModel)
+    }
+
+    fun getHealthMax() = PreferenceManager.getHealthMax()
 }

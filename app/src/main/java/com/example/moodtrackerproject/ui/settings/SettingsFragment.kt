@@ -5,7 +5,6 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,7 +58,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         this.props = props
         binding?.run {
             val currLang = Lingver.getInstance().getLanguage()
-            Log.d("===HELLO", "render called")
             imageBitmap = props.photo.convertToBitmap(resources)
             photo.setImageBitmap(imageBitmap)
             name.text = props.name
@@ -99,7 +97,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 val editName = dialogLayout.findViewById<EditText>(R.id.name_edit)
                 photoAlertDialog = dialogLayout.findViewById(R.id.photo)
                 photoAlertDialog.setImageBitmap(props.photo.convertToBitmap(resources))
-                Log.d("========HELLO", imageBitmap.convertToString())
                 photoAlertDialog.click({
                     uploadImageGallery()
                 })
@@ -111,6 +108,32 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                         props.saveName(editName.text.toString())
                         props.savePhoto(onActivityResultImageBitmap.convertToString())
                         props.fetchSettings()
+                    }
+                    this?.setNegativeButton("Cancel") { dialog, which ->
+                        Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    this?.setView(dialogLayout)
+                    this?.show()
+                }
+            })
+
+            paramTitle.click({
+                val builder = context?.let { AlertDialog.Builder(it) }
+                val dialogLayout = layoutInflater.inflate(R.layout.edit_health_par_dialog, null)
+                val editWater = dialogLayout.findViewById<EditText>(R.id.water_edit)
+                val editSteps = dialogLayout.findViewById<EditText>(R.id.steps_edit)
+                val editSleep = dialogLayout.findViewById<EditText>(R.id.sleep_edit)
+                val editKcal = dialogLayout.findViewById<EditText>(R.id.kcal_edit)
+
+                with(builder) {
+                    this?.setPositiveButton("Save") { dialog, which ->
+                        props.saveHealthMax(
+                            editWater.text.toString().toInt(),
+                            editSteps.text.toString().toInt(),
+                            editSleep.text.toString().toInt(),
+                            editKcal.text.toString().toInt()
+                        )
                     }
                     this?.setNegativeButton("Cancel") { dialog, which ->
                         Toast.makeText(context, getString(R.string.not_saved), Toast.LENGTH_SHORT)
@@ -132,7 +155,12 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            onActivityResultImageBitmap = ImageDecoder.decodeBitmap(ImageDecoder.createSource(requireContext().contentResolver, data?.data!!)).copy(
+            onActivityResultImageBitmap = ImageDecoder.decodeBitmap(
+                ImageDecoder.createSource(
+                    requireContext().contentResolver,
+                    data?.data!!
+                )
+            ).copy(
                 Bitmap.Config.RGBA_F16, true
             )
             photoAlertDialog.setImageBitmap(onActivityResultImageBitmap)

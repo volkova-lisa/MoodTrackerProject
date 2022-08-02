@@ -129,5 +129,12 @@
     <string name="edit_your_personal_info">Змініть ваші данні</string>
     <string name="acc_data">Данні аккаунту</string>
     <string name="enter_your_name">Введіть ім\'я</string>
+    <string name="not_saved">Не збережено</string>
+    <string name="set_new_health_goals">Задайте нові цілі здоровья</string>
+    <string name="water_goal">Ціль по воді</string>
+    <string name="steps_goal">Ціль по крокам</string>
+    <string name="sleep_hours_goal">Ціль по сну</string>
+    <string name="kcal_goal">Ціль по калоріям</string>
+
 
 </resources>
