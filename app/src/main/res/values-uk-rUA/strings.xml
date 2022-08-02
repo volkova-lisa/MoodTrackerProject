@@ -135,6 +135,9 @@
     <string name="steps_goal">Ціль по крокам</string>
     <string name="sleep_hours_goal">Ціль по сну</string>
     <string name="kcal_goal">Ціль по калоріям</string>
-
+    <string name="_4000ml"><![CDATA[< 4000 мл]]></string>
+    <string name="_24h"><![CDATA[< 24 год]]></string>
+    <string name="_4000_kcal"><![CDATA[< 4000 ккал]]></string>
+    <string name="out_of">з %d</string>
 
 </resources>

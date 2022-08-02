@@ -148,8 +148,8 @@ object PreferenceManager {
 
     fun getName(): String {
         val testsJson = preferences.getString(KEY_NAME, null)
-        return if (testsJson.isNullOrEmpty()) "88 " else nameJsonAdapter.fromJson(testsJson)
-            ?: "99 "
+        return if (testsJson.isNullOrEmpty()) "No Name" else nameJsonAdapter.fromJson(testsJson)
+            ?: "No Name"
     }
 
     fun saveEmail(email: String) {
@@ -160,8 +160,8 @@ object PreferenceManager {
     }
     fun getEmail(): String {
         val testsJson = preferences.getString(KEY_EMAIL, null)
-        return if (testsJson.isNullOrEmpty()) "88 " else emailJsonAdapter.fromJson(testsJson)
-            ?: "99 "
+        return if (testsJson.isNullOrEmpty()) "No Email" else emailJsonAdapter.fromJson(testsJson)
+            ?: "No Email"
     }
 
     fun savePhoto(photo: String) {
@@ -184,7 +184,7 @@ object PreferenceManager {
 
     fun getHealthMax(): MaxHealthModel {
         val testsJson = preferences.getString(KEY_MAX_H, null)
-        return if (testsJson.isNullOrEmpty()) MaxHealthModel() else maxHealthJsonAdapter.fromJson(testsJson)
-            ?: MaxHealthModel()
+        return if (testsJson.isNullOrEmpty()) MaxHealthModel(2000, 3000, 8, 2000) else maxHealthJsonAdapter.fromJson(testsJson)
+            ?: MaxHealthModel(2000, 3000, 8, 2000)
     }
 }

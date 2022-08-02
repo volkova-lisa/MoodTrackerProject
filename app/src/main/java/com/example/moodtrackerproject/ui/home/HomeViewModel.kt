@@ -67,7 +67,11 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     water = state.healthModel.water,
                     steps = state.healthModel.steps,
                     sleep = state.healthModel.sleep,
-                    kcal = state.healthModel.kcal
+                    kcal = state.healthModel.kcal,
+                    waterMax = state.waterMax,
+                    stepsMax = state.stepsMax,
+                    sleepMax = state.sleepMax,
+                    kcalMax = state.kcalMax
                 )
             } else null,
             fetchListOfMoods = ::fetchListOfMoods,
@@ -96,6 +100,17 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                 DataBaseRepository.getHealth()
             }
             setState(appState.homeState.copy(healthModel = listHealth))
+            val maxHealth = withContext(Dispatchers.IO) {
+                DataBaseRepository.getHealthMax()
+            }
+            setState(
+                Store.appState.homeState.copy(
+                    waterMax = maxHealth.waterMax,
+                    stepsMax = maxHealth.stepsMax,
+                    sleepMax = maxHealth.sleepMax,
+                    kcalMax = maxHealth.kcalMax
+                )
+            )
         }
     }
 

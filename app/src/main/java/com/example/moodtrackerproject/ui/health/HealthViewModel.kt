@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.ui.health
 
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HealthState
 import com.example.moodtrackerproject.app.MviAction
@@ -55,8 +54,6 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
             val maxHealth = withContext(Dispatchers.IO) {
                 DataBaseRepository.getHealthMax()
             }
-            Log.d("==========", DataBaseRepository.getHealthMax().toString())
-
             setState(
                 Store.appState.healthState.copy(
                     waterMax = maxHealth.waterMax,
