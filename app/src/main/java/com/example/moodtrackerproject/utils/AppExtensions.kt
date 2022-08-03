@@ -2,15 +2,21 @@ package com.example.moodtrackerproject.utils
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
+import android.util.Base64
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
+import com.example.moodtrackerproject.R
 import com.google.android.material.snackbar.Snackbar
+import java.io.ByteArrayOutputStream
 
 private const val MIN_PASSWORD_LENGTH = 6
 
@@ -52,7 +58,6 @@ fun String.isPasswordValid(): Boolean {
     return length >= MIN_PASSWORD_LENGTH && isNotEmpty()
 }
 
-// to prevent fantom-double taps
 fun View.click(action: () -> Unit, delay: Int = 300) {
     setOnClickListener(
         object : View.OnClickListener {
@@ -84,5 +89,23 @@ fun View.visibleIf(condition: Boolean?) {
         this.makeVisible()
     } else {
         this.makeGone()
+    }
+}
+
+fun Bitmap.convertToString(): String {
+    val baos = ByteArrayOutputStream()
+    this.compress(Bitmap.CompressFormat.PNG, 100, baos)
+    val b = baos.toByteArray()
+    val encoded = Base64.encodeToString(b, Base64.NO_WRAP)
+    return encoded
+}
+
+fun String.convertToBitmap(res: Resources): Bitmap {
+    val imageAsBytes: ByteArray = Base64.decode(this, Base64.NO_WRAP)
+
+    return if (this.isEmpty()) {
+        BitmapFactory.decodeResource(res, R.drawable.anon)
+    } else {
+        BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.size)
     }
 }

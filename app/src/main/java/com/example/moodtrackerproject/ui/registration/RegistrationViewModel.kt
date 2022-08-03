@@ -1,7 +1,8 @@
 package com.example.moodtrackerproject.ui.registration
 
-import com.example.moodtrackerproject.app.AppState
-import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.app.*
+import com.example.moodtrackerproject.app.Store.appState
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.registration.RegistrationProps.RegistrationAction
 import com.example.moodtrackerproject.ui.registration.RegistrationProps.RegistrationError
@@ -12,6 +13,9 @@ import com.example.moodtrackerproject.utils.isPasswordValid
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class RegistrationViewModel : BaseViewModel<RegistrationProps>() {
 
@@ -19,9 +23,12 @@ class RegistrationViewModel : BaseViewModel<RegistrationProps>() {
         action = null,
         checkRegistrationData = ::checkRegistrationData,
         openLogin = ::openLogin,
+        fetchName = ::fetchName,
+        saveAccData = ::saveAccData
     )
 
     init {
+        setState(Store.appState.registrationState)
         liveData.value = props
     }
 
@@ -75,6 +82,37 @@ class RegistrationViewModel : BaseViewModel<RegistrationProps>() {
     }
 
     override fun map(appState: AppState, action: MviAction?): RegistrationProps {
-        TODO("Not yet implemented")
+        return RegistrationProps(
+            action = action as? RegistrationAction,
+            saveAccData = ::saveAccData,
+            checkRegistrationData = ::checkRegistrationData,
+            openLogin = ::openLogin,
+            fetchName = ::fetchName
+        )
+    }
+
+    private fun saveAccData(name: String, email: String) {
+        DataBaseRepository.saveName(name)
+        DataBaseRepository.saveEmail(email)
+
+        val currName = DataBaseRepository.getName()
+        val currEmail = DataBaseRepository.getEmail()
+        Store.setState(appState.homeState.copy(name = currName))
+        Store.setState(appState.settingsState.copy(name = currName))
+        Store.setState(appState.homeState.copy(email = currEmail))
+        Store.setState(appState.settingsState.copy(email = currEmail))
+    }
+
+    private fun fetchName() {
+        launch {
+            val name = withContext(Dispatchers.IO) {
+                DataBaseRepository.getName()
+            }
+            Store.setState(appState.registrationState.copy(name = name))
+        }
+    }
+
+    private fun setState(state: RegistrationState, action: RegistrationAction? = null) {
+        setState(appState.copy(registrationState = state), action)
     }
 }

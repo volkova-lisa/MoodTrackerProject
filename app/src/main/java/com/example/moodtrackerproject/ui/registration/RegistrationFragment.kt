@@ -32,6 +32,7 @@ class RegistrationFragment : BaseFragment<RegistrationViewModel, FragmentRegistr
                     passInput.text.toString(),
                     nameInput.text.toString()
                 )
+                props.saveAccData(nameInput.text.toString(), emailInput.text.toString())
             })
             alreadyHaveTextButton.click(props.openLogin)
             props.action?.let { handleAction(it) }

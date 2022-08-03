@@ -2,10 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.moodtrackerproject.domain.HealthModel
-import com.example.moodtrackerproject.domain.MoodModel
-import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.domain.ResultsModel
+import com.example.moodtrackerproject.domain.*
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.Types
@@ -19,6 +16,12 @@ object PreferenceManager {
     private const val KEY_MOODS = "all_moods"
     private const val KEY_HEAlTH = "all_health"
     private const val KEY_TESTS = "all_tests"
+    private const val KEY_LANG = "all_lang"
+    private const val KEY_MODE = "all_mode"
+    private const val KEY_NAME = "all_name"
+    private const val KEY_EMAIL = "all_email"
+    private const val KEY_PHOTO = "all_photo"
+    private const val KEY_MAX_H = "all_max"
 
     private lateinit var preferences: SharedPreferences
 
@@ -34,6 +37,9 @@ object PreferenceManager {
     private val testsJsonAdapter: JsonAdapter<ResultsModel> = moshi.adapter(ResultsModel::class.java)
     private val notesJsonAdapter: JsonAdapter<List<NoteModel>> = moshi.adapter(valuesNote)
     private val moodsJsonAdapter: JsonAdapter<List<MoodModel>> = moshi.adapter(valuesMood)
+    private val stringJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
+    private val modeJsonAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java)
+    private val maxHealthJsonAdapter: JsonAdapter<MaxHealthModel> = moshi.adapter(MaxHealthModel::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
         if (!::preferences.isInitialized) {
@@ -102,5 +108,80 @@ object PreferenceManager {
         val testsJson = preferences.getString(KEY_TESTS, null)
         return if (testsJson.isNullOrEmpty()) ResultsModel() else testsJsonAdapter.fromJson(testsJson)
             ?: ResultsModel()
+    }
+
+    fun saveLanguage(lang: String) {
+        val serializedLang = stringJsonAdapter.toJson(lang)
+        preferences.edit()
+            .putString(KEY_LANG, serializedLang)
+            .apply()
+    }
+
+    fun getLanguage(): String {
+        val testsJson = preferences.getString(KEY_LANG, null)
+        return if (testsJson.isNullOrEmpty()) " " else stringJsonAdapter.fromJson(testsJson)
+            ?: " "
+    }
+
+    fun saveLanguage(mode: Boolean) {
+        val serializedMode = modeJsonAdapter.toJson(mode)
+        preferences.edit()
+            .putString(KEY_MODE, serializedMode)
+            .apply()
+    }
+
+    fun getMode(): Boolean {
+        val testsJson = preferences.getString(KEY_MODE, null)
+        return if (testsJson.isNullOrEmpty()) false else modeJsonAdapter.fromJson(testsJson)
+            ?: false
+    }
+
+    fun saveName(name: String) {
+        val serializedName = stringJsonAdapter.toJson(name)
+        preferences.edit()
+            .putString(KEY_NAME, serializedName)
+            .apply()
+    }
+
+    fun getName(): String {
+        val testsJson = preferences.getString(KEY_NAME, null)
+        return if (testsJson.isNullOrEmpty()) "No Name" else stringJsonAdapter.fromJson(testsJson)
+            ?: "No Name"
+    }
+
+    fun saveEmail(email: String) {
+        val serializedEmail = stringJsonAdapter.toJson(email)
+        preferences.edit()
+            .putString(KEY_EMAIL, serializedEmail)
+            .apply()
+    }
+    fun getEmail(): String {
+        val testsJson = preferences.getString(KEY_EMAIL, null)
+        return if (testsJson.isNullOrEmpty()) "No Email" else stringJsonAdapter.fromJson(testsJson)
+            ?: "No Email"
+    }
+
+    fun savePhoto(photo: String) {
+        val serializedLang = stringJsonAdapter.toJson(photo)
+        preferences.edit()
+            .putString(KEY_PHOTO, serializedLang)
+            .apply()
+    }
+
+    fun getPhoto(): String {
+        return preferences.getString(KEY_PHOTO, "")!!
+    }
+
+    fun saveHealthMax(max: MaxHealthModel) {
+        val serializedMax = maxHealthJsonAdapter.toJson(max)
+        preferences.edit()
+            .putString(KEY_MAX_H, serializedMax)
+            .apply()
+    }
+
+    fun getHealthMax(): MaxHealthModel {
+        val testsJson = preferences.getString(KEY_MAX_H, null)
+        return if (testsJson.isNullOrEmpty()) MaxHealthModel(2000, 3000, 8, 2000) else maxHealthJsonAdapter.fromJson(testsJson)
+            ?: MaxHealthModel(2000, 3000, 8, 2000)
     }
 }

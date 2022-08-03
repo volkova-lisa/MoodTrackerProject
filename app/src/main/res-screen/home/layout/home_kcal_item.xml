@@ -4,7 +4,7 @@
     android:id="@+id/water_bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardBackgroundColor="@color/white"
+    app:cardBackgroundColor="@color/home_mood_back"
     app:cardCornerRadius="8dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:fontFamily="@font/raleway_bold"
-            android:text="@string/_1200"
+            android:text=""
             android:textColor="@color/light_purple"
             android:textSize="14sp" />
 

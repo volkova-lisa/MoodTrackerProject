@@ -18,5 +18,6 @@ data class AppState(
     val homeState: HomeState = HomeState(),
     val healthState: HealthState = HealthState(),
     val settingsState: SettingsState = SettingsState(),
-    val editHealthState: EditHealthState = EditHealthState()
+    val editHealthState: EditHealthState = EditHealthState(),
+    val registrationState: RegistrationState = RegistrationState()
 )

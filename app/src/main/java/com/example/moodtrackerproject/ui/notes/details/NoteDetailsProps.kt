@@ -3,7 +3,7 @@ package com.example.moodtrackerproject.ui.notes.details
 import com.example.moodtrackerproject.app.MviAction
 
 data class NoteDetailsProps(
-    val noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
+    val noteId: String = "",
     val date: String = "",
     val editedDate: String = "",
     val title: String = "",

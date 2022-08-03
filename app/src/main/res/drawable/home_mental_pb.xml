@@ -2,6 +2,6 @@
     android:shape="rectangle">
     <corners android:radius="8dp"/>
     <solid
-        android:color="@color/light_purple_text"/>
+        android:color="@color/lavender_blue"/>
 
 </shape>

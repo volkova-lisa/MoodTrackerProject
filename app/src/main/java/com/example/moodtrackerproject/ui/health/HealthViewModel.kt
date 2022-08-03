@@ -5,6 +5,7 @@ import com.example.moodtrackerproject.app.HealthState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.domain.MaxHealthModel
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.health.HealthProps.HealthScreenActions
 import kotlinx.coroutines.Dispatchers
@@ -33,12 +34,12 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                     water = state.healthModel.water,
                     steps = state.healthModel.steps,
                     sleep = state.healthModel.sleep,
-                    kcal = state.healthModel.kcal
+                    kcal = state.healthModel.kcal,
                 )
             } else null,
-
             fetchListOfHealth = ::fetchListOfHealth,
-            edited = state.edited
+            edited = state.edited,
+            healthMax = state.healthMax
         )
     }
 
@@ -48,6 +49,20 @@ class HealthViewModel : BaseViewModel<HealthProps>() {
                 DataBaseRepository.getHealth()
             }
             setState(Store.appState.healthState.copy(healthModel = health))
+            val maxHealth = withContext(Dispatchers.IO) {
+                DataBaseRepository.getHealthMax()
+            }
+            setState(
+                Store.appState.healthState.copy(
+                    healthMax =
+                    MaxHealthModel(
+                        waterMax = maxHealth.waterMax,
+                        stepsMax = maxHealth.stepsMax,
+                        sleepMax = maxHealth.sleepMax,
+                        kcalMax = maxHealth.kcalMax
+                    )
+                )
+            )
         }
     }
 

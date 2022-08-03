@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fragment_back"
     tools:context=".ui.notes.add.AddNewNoteFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -20,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/fragment_back"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/new_note"
-            app:titleTextColor="@color/light_purple" />
+            app:titleTextColor="@color/cornflower" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -97,8 +98,8 @@
         android:fontFamily="@font/raleway_bold"
         android:hint="@string/title"
         android:inputType="text|textMultiLine|textCapSentences"
-        android:textColor="@color/black"
-        android:textColorHint="@color/black"
+        android:textColor="@color/note_title_text"
+        android:textColorHint="@color/note_title_text"
         android:textSize="18sp"
         android:theme="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -114,7 +115,8 @@
         android:hint="@string/note_text"
         android:inputType="text|textMultiLine|textCapSentences"
         android:lineHeight="25dp"
-        android:textColorHint="@color/black"
+        android:textColor="@color/note_title_text"
+        android:textColorHint="@color/note_title_text"
         android:textSize="18sp"
         android:theme="@style/EditTextStyle"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -128,7 +130,7 @@
         android:background="@drawable/round_purp_button"
         android:text="@string/cancel"
         android:textAllCaps="false"
-        android:textColor="@color/light_purple"
+        android:textColor="@color/cornflower"
         android:textSize="14dp"
         app:layout_constraintBottom_toBottomOf="@id/save_button"
         app:layout_constraintEnd_toStartOf="@id/guideline_two"

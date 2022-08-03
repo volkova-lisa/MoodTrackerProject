@@ -134,9 +134,45 @@ object DataBaseRepository {
 
     fun getHealth() = PreferenceManager.getHealth()
 
-    fun saveTestResults(result: ResultsModel) {
+    private fun saveTestResults(result: ResultsModel) {
         PreferenceManager.saveTests(result)
     }
 
     fun getTestResults() = PreferenceManager.getTests()
+
+    fun saveLanguage(lang: String) {
+        PreferenceManager.saveLanguage(lang)
+    }
+
+    fun saveMode(mode: Boolean) {
+        PreferenceManager.saveLanguage(mode)
+    }
+
+    fun getLang() = PreferenceManager.getLanguage()
+    fun getMode() = PreferenceManager.getMode()
+
+    fun saveName(name: String) {
+        PreferenceManager.saveName(name)
+    }
+
+    fun getName() = PreferenceManager.getName()
+
+    fun saveEmail(email: String) {
+        PreferenceManager.saveEmail(email)
+    }
+
+    fun getEmail(): String {
+        return PreferenceManager.getEmail()
+    }
+
+    fun savePhoto(photo: String) {
+        PreferenceManager.savePhoto(photo)
+    }
+    fun getPhoto() = PreferenceManager.getPhoto()
+
+    fun saveHealthMax(maxHealthModel: MaxHealthModel) {
+        PreferenceManager.saveHealthMax(maxHealthModel)
+    }
+
+    fun getHealthMax() = PreferenceManager.getHealthMax()
 }

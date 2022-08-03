@@ -63,7 +63,6 @@ class NotesFragment : BaseFragment<NotesViewModel, FragmentNotesBinding, NotesLi
                 (requireActivity() as MainActivity).router.openAddNewNote()
             }
             NotesListAction.StartDetailsScreen -> {
-                // maybe here i should refresh notes  --- nono what if ill need it before opening
                 (requireActivity() as MainActivity).router.openDetails()
             }
         }

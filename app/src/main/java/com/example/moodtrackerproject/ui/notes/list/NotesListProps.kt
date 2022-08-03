@@ -16,7 +16,7 @@ data class NotesListProps(
     }
 
     data class NoteItemProps(
-        val noteId: String = "", // text.hashCode()//UUID.randomUUID().toString(), //System.currentTimeMillis(),"",
+        val noteId: String = "",
         val date: String = "",
         val editedDate: String = "",
         val title: String = "",

@@ -29,12 +29,6 @@ class TestResultsViewModel : BaseViewModel<TestResultsProps>() {
             },
             testType = state.testType,
             testResults = state.resultsModel,
-//            if (state.resultsModel != null) {
-//                TestResultsProps.ResultsItemProps(
-//                    stress = state.resultsModel.stressResult,
-//                    anxiety = state.resultsModel.anxResult
-//                )
-//            } else null,
             fetchTestResults = ::fetchResults
         )
     }

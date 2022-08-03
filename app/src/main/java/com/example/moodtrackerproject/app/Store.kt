@@ -10,6 +10,14 @@ import com.example.moodtrackerproject.app.tests.TestResultsState
 object Store {
     var appState = AppState()
 
+    fun setState(newState: RegistrationState) {
+        appState = appState.copy(registrationState = newState)
+    }
+
+    fun setState(newState: SettingsState) {
+        appState = appState.copy(settingsState = newState)
+    }
+
     fun setState(newState: NotesState) {
         appState = appState.copy(notesState = newState)
     }
@@ -28,6 +36,10 @@ object Store {
 
     fun setState(newState: StressTestState) {
         appState = appState.copy(stressTestState = newState)
+    }
+
+    fun setState(newState: EditHealthState) {
+        appState = appState.copy(editHealthState = newState)
     }
 
     fun setState(newState: HealthState) {

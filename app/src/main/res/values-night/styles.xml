@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LoginTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="boxStrokeColor">@color/light_purple</item>
+        <item name="boxStrokeWidth">2dp</item>
+    </style>
+
+    <style name="NoteTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="colorControlActivated">@color/light_purple</item>
+        <item name="colorControlHighlight">@color/dark_purple</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/edit_text_line_grey</item>
+        <item name="colorControlActivated">@color/cornflower</item>
+        <item name="colorControlHighlight">@color/cornflower</item>
+    </style>
+
+</resources>

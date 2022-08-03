@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/fragment_back"
     android:layout_height="match_parent"
     tools:context=".ui.notes.details.NoteDetailsFragment">
 
@@ -34,13 +35,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/colorPrimary"
-            android:backgroundTint="@color/white"
+            android:backgroundTint="@color/toolbar"
             android:minHeight="?attr/actionBarSize"
             android:theme="?attr/actionBarTheme"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/note_details"
-            app:titleTextColor="@color/light_purple" />
+            app:titleTextColor="@color/cornflower" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView

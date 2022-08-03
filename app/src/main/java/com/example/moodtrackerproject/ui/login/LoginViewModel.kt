@@ -2,6 +2,8 @@ package com.example.moodtrackerproject.ui.login
 
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.app.Store
+import com.example.moodtrackerproject.data.DataBaseRepository
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.login.LoginProps.LoginAction
 import com.example.moodtrackerproject.ui.login.LoginProps.LoginError
@@ -21,6 +23,7 @@ class LoginViewModel : BaseViewModel<LoginProps>() {
         error = null,
         openRegistration = ::openRegistration,
         openResetPassword = ::openResetPassword,
+        saveName = ::saveName
     )
 
     init {
@@ -43,6 +46,10 @@ class LoginViewModel : BaseViewModel<LoginProps>() {
                 liveData.value = props.copy(error = LoginError.ShowPasswordInvalid)
             }
         }
+    }
+
+    private fun saveName() {
+        Store.setState(Store.appState.homeState.copy(name = DataBaseRepository.getName()))
     }
 
     private fun openRegistration() {
