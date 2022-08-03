@@ -1,7 +1,5 @@
 package com.example.moodtrackerproject.ui.settings
 
-import android.widget.Toast
-import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.SettingsState
@@ -12,7 +10,6 @@ import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.utils.PreferenceManager
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.core.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -80,24 +77,23 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
     private fun changePass(currPass: String, newPass: String, confPass: String) {
         if (currPass.isNotEmpty() && newPass.isNotEmpty() && confPass.isNotEmpty()) {
             if (newPass.equals(confPass)) {
-                if (user != null &&  user.email != null) {
+                if (user != null && user.email != null) {
                     val credential = EmailAuthProvider.getCredential(user.email!!, currPass.toString())
                     user.reauthenticate(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            //toast(getString(R.string.reauth_success))
+                            // toast(getString(R.string.reauth_success))
                             user.updatePassword(newPass.toString()).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    //toast(getString(R.string.pass_ch_success))
+                                    // toast(getString(R.string.pass_ch_success))
                                     props.logout()
                                 }
                             }
-                        } //else toast(getString(R.string.reauth_fail))
+                        } // else toast(getString(R.string.reauth_fail))
                     }
                 } else logOut()
             }
         }
     }
-
 
     private fun saveHealthMax(w: Int, st: Int, sl: Int, kc: Int) {
         Store.setState(

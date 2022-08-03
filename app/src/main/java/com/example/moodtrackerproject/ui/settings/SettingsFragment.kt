@@ -4,9 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.ImageView
@@ -20,8 +18,6 @@ import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.convertToBitmap
 import com.example.moodtrackerproject.utils.convertToString
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
 import com.yariksoffice.lingver.Lingver
 
 class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding, SettingsProps>(
@@ -49,36 +45,27 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        binding?.run {
-            langSwitch.isChecked = Lingver.getInstance().getLanguage() == "en"
-        }
-    }
-
     override fun render(props: SettingsProps) {
         this.props = props
         binding?.run {
-            val currLang = Lingver.getInstance().getLanguage()
+            if (props.language == "en") {
+                langSwitch.isChecked = true
+                enTitle.setTextColor(resources.getColor(R.color.light_purple))
+            } else uaTitle.setTextColor(resources.getColor(R.color.light_purple))
+            darkModeSwitch.isChecked = props.isDarkOn
             imageBitmap = props.photo.convertToBitmap(resources)
             photo.setImageBitmap(imageBitmap)
             name.text = props.name
             emailSett.text = props.email
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
-                    if (currLang == "en") Lingver.getInstance()
-                        .setLocale(requireContext(), "ua")
-                    else Lingver.getInstance().setLocale(requireContext(), "en")
-                    props.saveLang(currLang)
-
+                    Lingver.getInstance().setLocale(requireContext(), "en")
+                    props.saveLang(Lingver.getInstance().getLanguage())
                     enTitle.setTextColor(resources.getColor(R.color.light_purple))
                     uaTitle.setTextColor(resources.getColor(R.color.text_grey))
                 } else {
-                    if (currLang == "ua") Lingver.getInstance()
-                        .setLocale(requireContext(), "en")
-                    else Lingver.getInstance().setLocale(requireContext(), "ua")
-                    props.saveLang(currLang)
-
+                    Lingver.getInstance().setLocale(requireContext(), "ua")
+                    props.saveLang(Lingver.getInstance().getLanguage())
                     uaTitle.setTextColor(resources.getColor(R.color.light_purple))
                     enTitle.setTextColor(resources.getColor(R.color.text_grey))
                 }
@@ -128,7 +115,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 val editKcal = dialogLayout.findViewById<EditText>(R.id.kcal_edit)
 
                 with(builder) {
-                    this?.setPositiveButton("Save") { dialog, which ->
+                    this?.setPositiveButton(getString(R.string.save)) { dialog, which ->
                         props.saveHealthMax(
                             editWater.text.toString().toInt(),
                             editSteps.text.toString().toInt(),
@@ -136,7 +123,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                             editKcal.text.toString().toInt()
                         )
                     }
-                    this?.setNegativeButton("Cancel") { dialog, which ->
+                    this?.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
                         toast(getString(R.string.not_saved))
                     }
                     this?.setView(dialogLayout)
@@ -153,31 +140,16 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 val currPass = dialogLayout.findViewById<EditText>(R.id.curr_pass)
                 val newPass = dialogLayout.findViewById<EditText>(R.id.new_pass)
                 val confPass = dialogLayout.findViewById<EditText>(R.id.conf_pass)
-                val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
-                val user = auth.currentUser
 
                 with(builder) {
-                    this?.setPositiveButton("Save") { dialog, which ->
-                        if (currPass.text.isNotEmpty() && newPass.text.isNotEmpty() && confPass.text.isNotEmpty()) {
-                            if (newPass.text.toString().equals(confPass.text.toString())) {
-                                if (user != null &&  user.email != null) {
-                                    val credential = EmailAuthProvider.getCredential(user.email!!, currPass.text.toString())
-                                    user.reauthenticate(credential).addOnCompleteListener {
-                                        if (it.isSuccessful) {
-                                            toast(getString(R.string.reauth_success))
-                                            user.updatePassword(newPass.text.toString()).addOnCompleteListener { task ->
-                                                    if (task.isSuccessful) {
-                                                        toast(getString(R.string.pass_ch_success))
-                                                        props.logout()
-                                                    }
-                                                }
-                                        } else toast(getString(R.string.reauth_fail))
-                                    }
-                                } else  props.logout()
-                            }
-                        }
+                    this?.setPositiveButton(getString(R.string.save)) { dialog, which ->
+                        props.changePassword(
+                            currPass.text.toString(),
+                            newPass.text.toString(),
+                            confPass.text.toString()
+                        )
                     }
-                    this?.setNegativeButton("Cancel") { dialog, which ->
+                    this?.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
                         toast(getString(R.string.not_saved))
                     }
                     this?.setView(dialogLayout)
@@ -212,6 +184,6 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 Bitmap.Config.RGBA_F16, true
             )
             photoAlertDialog.setImageBitmap(onActivityResultImageBitmap)
-        } else toast("Nonono")
+        } else toast(getString(R.string.not_saved))
     }
 }

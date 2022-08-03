@@ -1,9 +1,11 @@
 package com.example.moodtrackerproject
 
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.yariksoffice.lingver.Lingver
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -11,6 +13,9 @@ class MainViewModel : ViewModel() {
 
     fun fetchData() {
         viewModelScope.launch(Dispatchers.Main) {
+            val darkMode = DataBaseRepository.getMode()
+            if (darkMode) AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            val lang = Lingver.getInstance().getLanguage()
             val photo = DataBaseRepository.getPhoto()
             val name = DataBaseRepository.getName()
             Store.setState(
@@ -22,9 +27,10 @@ class MainViewModel : ViewModel() {
 
             Store.setState(
                 Store.appState.settingsState.copy(
-                    language = DataBaseRepository.getLang(),
+                    language = lang,
                     name = name,
-                    photo = photo
+                    photo = photo,
+                    isDarkOn = darkMode,
                 )
             )
         }
