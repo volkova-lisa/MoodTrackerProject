@@ -40,7 +40,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/stress_title"
-            app:titleTextColor="@color/purple_text" />
+            app:titleTextColor="@color/cornflower" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
@@ -51,7 +51,7 @@
         android:layout_marginTop="16dp"
         android:progress="65"
         android:progressBackgroundTint="@color/light_purple"
-        android:progressTint="@color/red_stress"
+        android:progressTint="@color/blush"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/toolbar_layout" />
@@ -78,7 +78,7 @@
         android:fontFamily="@font/raleway_bold"
         android:maxWidth="360dp"
         android:text="@string/in_the_last"
-        android:textColor="@color/purple_text"
+        android:textColor="@color/cornflower"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/num" />
@@ -91,7 +91,7 @@
         android:fontFamily="@font/raleway_regular"
         android:maxWidth="360dp"
         android:text="@string/stress_q_one"
-        android:textColor="@color/purple_text"
+        android:textColor="@color/cornflower"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
         app:layout_constraintTop_toBottomOf="@id/title_" />

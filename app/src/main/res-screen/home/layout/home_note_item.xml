@@ -27,7 +27,7 @@
         android:maxLines="3"
         android:fontFamily="@font/raleway_regular"
         android:text="Have to coete several tasks at work  and r ..."
-        android:textColor="@color/light_purple_text"
+        android:textColor="@color/lavender_blue"
         android:textSize="10sp" />
 
     <TextView

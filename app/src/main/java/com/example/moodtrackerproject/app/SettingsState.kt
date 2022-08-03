@@ -1,5 +1,7 @@
 package com.example.moodtrackerproject.app
 
+import com.example.moodtrackerproject.domain.MaxHealthModel
+
 data class SettingsState(
     val language: String = "",
     val isDarkOn: Boolean = false,
@@ -7,8 +9,5 @@ data class SettingsState(
     val email: String = "",
     val photo: String = "",
     val isLoggedIn: Boolean = false,
-    val waterMax: Int = 0,
-    val stepsMax: Int = 0,
-    val sleepMax: Int = 0,
-    val kcalMax: Int = 0,
+    val healthMax: MaxHealthModel = MaxHealthModel(),
 )

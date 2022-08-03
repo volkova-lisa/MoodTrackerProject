@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
@@ -39,6 +40,7 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             props.fetchListOfMoods()
             props.fetchListOfNotes()
             props.fetchHealth()
+            Log.d("fetch resume -----------", "maxHealth.toString()")
             props.fetchResults()
             props.fetchName()
         }
@@ -68,17 +70,17 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
                 sleepItem.sleepValue.text = "$sleep h"
                 kcalItem.waterValue.text = kcal.toString()
                 waterItem.waterBar.max =
-                    props.healthItems.waterMax
+                    props.healthMax.waterMax
                 waterItem.waterBar.progress = water
 
                 stepsItem.stepsBar.max =
-                    props.healthItems.stepsMax
+                    props.healthMax.stepsMax
                 stepsItem.stepsBar.progress = steps
 
-                sleepItem.waterBar.max = props.healthItems.sleepMax
+                sleepItem.waterBar.max = props.healthMax.sleepMax
                 sleepItem.waterBar.progress = if (sleep > 8) 8 else sleep
 
-                kcalItem.waterBar.max = props.healthItems.kcalMax
+                kcalItem.waterBar.max = props.healthMax.kcalMax
                 kcalItem.waterBar.progress = kcal
             }
         }

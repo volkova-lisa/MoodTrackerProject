@@ -1,11 +1,13 @@
 package com.example.moodtrackerproject.ui.home
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HomeState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
 import com.example.moodtrackerproject.app.Store.appState
 import com.example.moodtrackerproject.data.DataBaseRepository
+import com.example.moodtrackerproject.domain.MaxHealthModel
 import com.example.moodtrackerproject.ui.BaseViewModel
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 import com.example.moodtrackerproject.ui.mood.list.MoodProps
@@ -68,10 +70,6 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     steps = state.healthModel.steps,
                     sleep = state.healthModel.sleep,
                     kcal = state.healthModel.kcal,
-                    waterMax = state.waterMax,
-                    stepsMax = state.stepsMax,
-                    sleepMax = state.sleepMax,
-                    kcalMax = state.kcalMax
                 )
             } else null,
             fetchListOfMoods = ::fetchListOfMoods,
@@ -81,7 +79,8 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchResults = ::fetchResults,
             fetchName = ::fetchName,
             name = state.name,
-            email = state.email
+            email = state.email,
+            healthMax = state.healthMax
         )
     }
 
@@ -105,12 +104,16 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             }
             setState(
                 Store.appState.homeState.copy(
-                    waterMax = maxHealth.waterMax,
-                    stepsMax = maxHealth.stepsMax,
-                    sleepMax = maxHealth.sleepMax,
-                    kcalMax = maxHealth.kcalMax
+                    healthMax =
+                    MaxHealthModel(
+                        waterMax = maxHealth.waterMax,
+                        stepsMax = maxHealth.stepsMax,
+                        sleepMax = maxHealth.sleepMax,
+                        kcalMax = maxHealth.kcalMax
+                    )
                 )
             )
+            Log.d("fetch home -----------", maxHealth.toString())
         }
     }
 

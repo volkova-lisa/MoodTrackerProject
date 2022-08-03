@@ -57,10 +57,7 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
             name = state.name,
             email = state.email,
             photo = state.photo,
-            waterMax = state.waterMax,
-            stepsMax = state.stepsMax,
-            sleepMax = state.sleepMax,
-            kcalMax = state.kcalMax,
+            healthMax = state.healthMax,
             saveHealthMax = ::saveHealthMax,
             logout = ::logOut,
             isLoggedIn = state.isLoggedIn,
@@ -98,26 +95,35 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
     private fun saveHealthMax(w: Int, st: Int, sl: Int, kc: Int) {
         Store.setState(
             Store.appState.healthState.copy(
-                waterMax = w,
-                stepsMax = st,
-                sleepMax = sl,
-                kcalMax = kc
+                healthMax =
+                MaxHealthModel(
+                    waterMax = w,
+                    stepsMax = st,
+                    sleepMax = sl,
+                    kcalMax = kc
+                )
             )
         )
         Store.setState(
             Store.appState.editHealthState.copy(
-                waterMax = w,
-                stepsMax = st,
-                sleepMax = sl,
-                kcalMax = kc
+                healthMax =
+                MaxHealthModel(
+                    waterMax = w,
+                    stepsMax = st,
+                    sleepMax = sl,
+                    kcalMax = kc
+                )
             )
         )
         Store.setState(
             Store.appState.homeState.copy(
-                waterMax = w,
-                stepsMax = st,
-                sleepMax = sl,
-                kcalMax = kc
+                healthMax =
+                MaxHealthModel(
+                    waterMax = w,
+                    stepsMax = st,
+                    sleepMax = sl,
+                    kcalMax = kc
+                )
             )
         )
         DataBaseRepository.saveHealthMax(MaxHealthModel(w, st, sl, kc))

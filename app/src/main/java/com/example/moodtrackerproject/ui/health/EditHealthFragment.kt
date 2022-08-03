@@ -62,7 +62,7 @@ class EditHealthFragment :
             if (props.listHealth != null) {
                 steps.waterNum.text = props.listHealth.steps.toString()
                 water.waterNum.text = props.listHealth.water.toString()
-                water.explanation.text = getString(R.string.out_of_ml, props.listHealth.waterMax)
+                water.explanation.text = getString(R.string.out_of_ml, props.healthMax.waterMax)
                 sleep.waterNum.text = props.listHealth.sleep.toString()
                 kcal.waterNum.text = props.listHealth.kcal.toString()
 

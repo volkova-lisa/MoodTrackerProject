@@ -17,7 +17,7 @@
             android:shape="ring"
             android:thicknessRatio="16"
             android:useLevel="true">
-            <solid android:color="@color/red_stress"/>
+            <solid android:color="@color/blush"/>
         </shape>
         </rotate>
     </item>

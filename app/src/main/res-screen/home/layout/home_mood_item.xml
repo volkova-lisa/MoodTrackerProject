@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/raleway_regular"
         android:text="@string/at_10_20"
-        android:textColor="@color/light_purple_text"
+        android:textColor="@color/lavender_blue"
         android:textSize="14sp" />
 
 </LinearLayout>

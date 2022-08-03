@@ -1,6 +1,7 @@
 package com.example.moodtrackerproject.ui.settings
 
 import com.example.moodtrackerproject.app.MviAction
+import com.example.moodtrackerproject.domain.MaxHealthModel
 
 data class SettingsProps(
     val isLoggedIn: Boolean = false,
@@ -16,10 +17,7 @@ data class SettingsProps(
     val name: String = "",
     val email: String = "",
     val photo: String = "",
-    val waterMax: Int = 0,
-    val stepsMax: Int = 0,
-    val sleepMax: Int = 0,
-    val kcalMax: Int = 0,
+    val healthMax: MaxHealthModel = MaxHealthModel(),
     val saveHealthMax: (Int, Int, Int, Int) -> Unit,
     val logout: () -> Unit,
 ) {

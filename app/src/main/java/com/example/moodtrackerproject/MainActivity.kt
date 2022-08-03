@@ -18,11 +18,16 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
     // TODO("revise router use")
     val router = Router(this)
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by lazy {
+        ViewModelProvider(this)[MainViewModel::class.java]
+    }
+
+//    private val viewModel: VIEW_MODEL by lazy {
+//        ViewModelProvider(this)[modelClass]
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.fetchData()
         binding?.run {
             val navHostFragment =

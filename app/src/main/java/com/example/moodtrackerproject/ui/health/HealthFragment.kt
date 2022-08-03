@@ -31,8 +31,8 @@ class HealthFragment : BaseFragment<HealthViewModel, FragmentHealthBinding, Heal
         binding?.run {
 
             if (props.healthItems != null) {
-                val waterMax = props.healthItems.waterMax
-                val stepsMax = props.healthItems.stepsMax
+                val waterMax = props.healthMax.waterMax
+                val stepsMax = props.healthMax.stepsMax
                 water.waterNum.text = props.healthItems.water.toString()
                 water.explanation.text = getString(R.string.out_of_ml, waterMax)
                 steps.waterNum.text = props.healthItems.steps.toString()

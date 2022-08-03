@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
+import com.example.moodtrackerproject.domain.MaxHealthModel
 import com.example.moodtrackerproject.domain.ResultsModel
 import com.example.moodtrackerproject.ui.mood.list.MoodProps
 import com.example.moodtrackerproject.ui.notes.list.NotesListProps
@@ -19,6 +20,7 @@ data class HomeProps(
     val testResults: ResultsModel? = null,
     val name: String = "",
     val email: String = "",
+    val healthMax: MaxHealthModel = MaxHealthModel(),
 
 ) {
     sealed class HomeAction {
@@ -29,10 +31,6 @@ data class HomeProps(
         val water: Int = 0,
         val steps: Int = 0,
         val sleep: Int = 0,
-        val kcal: Int = 0,
-        val waterMax: Int = 0,
-        val stepsMax: Int = 0,
-        val sleepMax: Int = 0,
-        val kcalMax: Int = 0
+        val kcal: Int = 0
     )
 }

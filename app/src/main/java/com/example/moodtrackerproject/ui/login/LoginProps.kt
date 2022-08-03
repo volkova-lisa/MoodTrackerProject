@@ -4,6 +4,7 @@ data class LoginProps(
     val isLoading: Boolean = false,
     val openRegistration: () -> Unit,
     val openResetPassword: () -> Unit,
+    val saveName: () -> Unit,
     val checkLogInData: (String, String) -> Unit,
     val action: LoginAction? = null,
     val error: LoginError? = null,

@@ -48,7 +48,7 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun render(props: SettingsProps) {
         this.props = props
         binding?.run {
-            if (props.language == "en") {
+            if (props.language == getString(R.string.en)) {
                 langSwitch.isChecked = true
                 enTitle.setTextColor(resources.getColor(R.color.light_purple))
             } else uaTitle.setTextColor(resources.getColor(R.color.light_purple))
@@ -59,12 +59,12 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
             emailSett.text = props.email
             langSwitch.setOnCheckedChangeListener { buttonView, onSwitch ->
                 if (onSwitch) {
-                    Lingver.getInstance().setLocale(requireContext(), "en")
+                    Lingver.getInstance().setLocale(requireContext(), getString(R.string.en))
                     props.saveLang(Lingver.getInstance().getLanguage())
                     enTitle.setTextColor(resources.getColor(R.color.light_purple))
                     uaTitle.setTextColor(resources.getColor(R.color.text_grey))
                 } else {
-                    Lingver.getInstance().setLocale(requireContext(), "ua")
+                    Lingver.getInstance().setLocale(requireContext(), getString(R.string.ua))
                     props.saveLang(Lingver.getInstance().getLanguage())
                     uaTitle.setTextColor(resources.getColor(R.color.light_purple))
                     enTitle.setTextColor(resources.getColor(R.color.text_grey))
@@ -91,14 +91,14 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
                 })
                 editName.setText(props.name)
                 with(builder) {
-                    this?.setPositiveButton("Save") { dialog, which ->
+                    this?.setPositiveButton(getString(R.string.save)) { dialog, which ->
                         name.text = editName.text.toString()
                         imageBitmap = onActivityResultImageBitmap
                         props.saveName(editName.text.toString())
                         props.savePhoto(onActivityResultImageBitmap.convertToString())
                         props.fetchSettings()
                     }
-                    this?.setNegativeButton("Cancel") { dialog, which ->
+                    this?.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
                         toast(getString(R.string.not_saved))
                     }
                     this?.setView(dialogLayout)
@@ -175,14 +175,14 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            onActivityResultImageBitmap = ImageDecoder.decodeBitmap(
-                ImageDecoder.createSource(
-                    requireContext().contentResolver,
-                    data?.data!!
+                onActivityResultImageBitmap = ImageDecoder.decodeBitmap(
+                    ImageDecoder.createSource(
+                        requireContext().contentResolver,
+                        data?.data!!
+                    )
+                ).copy(
+                    Bitmap.Config.RGBA_F16, true
                 )
-            ).copy(
-                Bitmap.Config.RGBA_F16, true
-            )
             photoAlertDialog.setImageBitmap(onActivityResultImageBitmap)
         } else toast(getString(R.string.not_saved))
     }

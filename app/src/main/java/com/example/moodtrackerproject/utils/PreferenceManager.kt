@@ -37,11 +37,8 @@ object PreferenceManager {
     private val testsJsonAdapter: JsonAdapter<ResultsModel> = moshi.adapter(ResultsModel::class.java)
     private val notesJsonAdapter: JsonAdapter<List<NoteModel>> = moshi.adapter(valuesNote)
     private val moodsJsonAdapter: JsonAdapter<List<MoodModel>> = moshi.adapter(valuesMood)
-    private val languageJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
+    private val stringJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val modeJsonAdapter: JsonAdapter<Boolean> = moshi.adapter(Boolean::class.java)
-    private val nameJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
-    private val emailJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
-    private val photoJsonAdapter: JsonAdapter<String> = moshi.adapter(String::class.java)
     private val maxHealthJsonAdapter: JsonAdapter<MaxHealthModel> = moshi.adapter(MaxHealthModel::class.java)
 
     fun getPreference(context: Context): PreferenceManager {
@@ -114,7 +111,7 @@ object PreferenceManager {
     }
 
     fun saveLanguage(lang: String) {
-        val serializedLang = languageJsonAdapter.toJson(lang)
+        val serializedLang = stringJsonAdapter.toJson(lang)
         preferences.edit()
             .putString(KEY_LANG, serializedLang)
             .apply()
@@ -122,7 +119,7 @@ object PreferenceManager {
 
     fun getLanguage(): String {
         val testsJson = preferences.getString(KEY_LANG, null)
-        return if (testsJson.isNullOrEmpty()) " " else languageJsonAdapter.fromJson(testsJson)
+        return if (testsJson.isNullOrEmpty()) " " else stringJsonAdapter.fromJson(testsJson)
             ?: " "
     }
 
@@ -140,7 +137,7 @@ object PreferenceManager {
     }
 
     fun saveName(name: String) {
-        val serializedName = nameJsonAdapter.toJson(name)
+        val serializedName = stringJsonAdapter.toJson(name)
         preferences.edit()
             .putString(KEY_NAME, serializedName)
             .apply()
@@ -148,24 +145,24 @@ object PreferenceManager {
 
     fun getName(): String {
         val testsJson = preferences.getString(KEY_NAME, null)
-        return if (testsJson.isNullOrEmpty()) "No Name" else nameJsonAdapter.fromJson(testsJson)
+        return if (testsJson.isNullOrEmpty()) "No Name" else stringJsonAdapter.fromJson(testsJson)
             ?: "No Name"
     }
 
     fun saveEmail(email: String) {
-        val serializedEmail = emailJsonAdapter.toJson(email)
+        val serializedEmail = stringJsonAdapter.toJson(email)
         preferences.edit()
             .putString(KEY_EMAIL, serializedEmail)
             .apply()
     }
     fun getEmail(): String {
         val testsJson = preferences.getString(KEY_EMAIL, null)
-        return if (testsJson.isNullOrEmpty()) "No Email" else emailJsonAdapter.fromJson(testsJson)
+        return if (testsJson.isNullOrEmpty()) "No Email" else stringJsonAdapter.fromJson(testsJson)
             ?: "No Email"
     }
 
     fun savePhoto(photo: String) {
-        val serializedLang = photoJsonAdapter.toJson(photo)
+        val serializedLang = stringJsonAdapter.toJson(photo)
         preferences.edit()
             .putString(KEY_PHOTO, serializedLang)
             .apply()

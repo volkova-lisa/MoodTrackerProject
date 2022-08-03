@@ -41,7 +41,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:title="@string/note_details"
-            app:titleTextColor="@color/purple_text" />
+            app:titleTextColor="@color/cornflower" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <ImageView

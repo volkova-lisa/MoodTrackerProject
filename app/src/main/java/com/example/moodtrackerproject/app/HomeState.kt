@@ -1,9 +1,6 @@
 package com.example.moodtrackerproject.app
 
-import com.example.moodtrackerproject.domain.HealthModel
-import com.example.moodtrackerproject.domain.MoodModel
-import com.example.moodtrackerproject.domain.NoteModel
-import com.example.moodtrackerproject.domain.ResultsModel
+import com.example.moodtrackerproject.domain.*
 
 data class HomeState(
     val listOfMoods: List<MoodModel> = listOf(),
@@ -14,8 +11,5 @@ data class HomeState(
     val name: String = "",
     val email: String = "",
     val photo: String = "",
-    val waterMax: Int = 0,
-    val stepsMax: Int = 0,
-    val sleepMax: Int = 0,
-    val kcalMax: Int = 0
+    val healthMax: MaxHealthModel = MaxHealthModel(),
 )
