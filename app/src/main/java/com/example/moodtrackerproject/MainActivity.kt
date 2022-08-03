@@ -22,10 +22,6 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
         ViewModelProvider(this)[MainViewModel::class.java]
     }
 
-//    private val viewModel: VIEW_MODEL by lazy {
-//        ViewModelProvider(this)[modelClass]
-//    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.fetchData()

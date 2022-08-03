@@ -58,7 +58,6 @@ fun String.isPasswordValid(): Boolean {
     return length >= MIN_PASSWORD_LENGTH && isNotEmpty()
 }
 
-// to prevent fantom-double taps
 fun View.click(action: () -> Unit, delay: Int = 300) {
     setOnClickListener(
         object : View.OnClickListener {

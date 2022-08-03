@@ -40,7 +40,6 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             props.fetchListOfMoods()
             props.fetchListOfNotes()
             props.fetchHealth()
-            Log.d("fetch resume -----------", "maxHealth.toString()")
             props.fetchResults()
             props.fetchName()
         }

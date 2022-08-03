@@ -113,7 +113,6 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     )
                 )
             )
-            Log.d("fetch home -----------", maxHealth.toString())
         }
     }
 

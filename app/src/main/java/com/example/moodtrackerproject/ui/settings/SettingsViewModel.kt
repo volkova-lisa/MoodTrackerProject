@@ -78,14 +78,12 @@ class SettingsViewModel : BaseViewModel<SettingsProps>() {
                     val credential = EmailAuthProvider.getCredential(user.email!!, currPass.toString())
                     user.reauthenticate(credential).addOnCompleteListener {
                         if (it.isSuccessful) {
-                            // toast(getString(R.string.reauth_success))
                             user.updatePassword(newPass.toString()).addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
-                                    // toast(getString(R.string.pass_ch_success))
                                     props.logout()
                                 }
                             }
-                        } // else toast(getString(R.string.reauth_fail))
+                        }
                     }
                 } else logOut()
             }
