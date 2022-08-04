@@ -1,6 +1,5 @@
 package com.example.moodtrackerproject.data
 
-import android.content.res.Resources
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
