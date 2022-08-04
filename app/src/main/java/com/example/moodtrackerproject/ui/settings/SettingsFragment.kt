@@ -175,14 +175,14 @@ class SettingsFragment : BaseFragment<SettingsViewModel, FragmentSettingsBinding
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-                onActivityResultImageBitmap = ImageDecoder.decodeBitmap(
-                    ImageDecoder.createSource(
-                        requireContext().contentResolver,
-                        data?.data!!
-                    )
-                ).copy(
-                    Bitmap.Config.RGBA_F16, true
+            onActivityResultImageBitmap = ImageDecoder.decodeBitmap(
+                ImageDecoder.createSource(
+                    requireContext().contentResolver,
+                    data?.data!!
                 )
+            ).copy(
+                Bitmap.Config.RGBA_F16, true
+            )
             photoAlertDialog.setImageBitmap(onActivityResultImageBitmap)
         } else toast(getString(R.string.not_saved))
     }

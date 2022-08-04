@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MoodTrackerProject</string>
 
@@ -27,9 +26,9 @@
     <string name="create_account">Створити аккаунт</string>
     <string name="forgot_password">Забув пароль? <b>Створи новий!</b> </string>
     <string name="get_new">Отримати новий</string>
-    <string name="do_you_have_an_account">Маєте аккаунт? <b>Створити новий!</b></string>
+    <string name="do_you_have_an_account">Немає аккаунта? <b>Створити новий!</b></string>
     <string name="create_new">Створити новий</string>
-    <string name="create_new_account">Створити новий аккаунт</string>
+    <string name="create_new_account">Створіть новий аккаунт</string>
     <string name="registration_enter_email">Будь ласка, введіть імейл</string>
     <string name="registration_enter_pass">Будь ласка, введіть пароль</string>
     <string name="login_failed">Не вдалося ввійти</string>
@@ -74,8 +73,8 @@
     <string name="pleasure">Задоволення</string>
     <string name="sadness">Сум</string>
     <string name="happiness">Щастя</string>
-    <string name="anger">Злість</string>
-    <string name="joy">Радість</string>
+    <string name="anger">Стресс</string>
+    <string name="joy">Спокій</string>
     <string name="body_health">Здоров\'\я тіла</string>
     <string name="water">Вода</string>
     <string name="_600_ml">600 мл</string>
@@ -148,5 +147,7 @@
     <string name="pass_ch_success">Пароль успішно змінено.</string>
     <string name="reauth_fail">Повторна аут. неуспішна.</string>
     <string name="en">en</string>
+    <string name="add_another_mood">Додати ще один</string>
+    <string name="add_note">Додати</string>
 
 </resources>

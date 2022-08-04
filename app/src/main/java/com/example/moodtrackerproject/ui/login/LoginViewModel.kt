@@ -22,7 +22,6 @@ class LoginViewModel : BaseViewModel<LoginProps>() {
         isLoading = false,
         error = null,
         openRegistration = ::openRegistration,
-        openResetPassword = ::openResetPassword,
         saveName = ::saveName
     )
 
@@ -54,10 +53,6 @@ class LoginViewModel : BaseViewModel<LoginProps>() {
 
     private fun openRegistration() {
         liveData.value = props.copy(action = LoginAction.StartRegistrationScreen)
-    }
-
-    private fun openResetPassword() {
-        liveData.value = props.copy(action = LoginAction.StartResetPasswordScreen)
     }
 
     private fun loginUserWithEmailAndPassword(email: String, password: String) {

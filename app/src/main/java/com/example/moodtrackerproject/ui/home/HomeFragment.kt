@@ -11,6 +11,7 @@ import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 import com.example.moodtrackerproject.ui.mood.list.MoodsListAdapter
+import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.convertToBitmap
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>(
@@ -42,15 +43,20 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
             props.fetchHealth()
             props.fetchResults()
             props.fetchName()
+            Log.d("home resume ---", props.listOfMoodsToday.toString())
         }
     }
 
     override fun render(props: HomeProps) {
         this.props = props
+        Log.d("home render ---", props.listOfMoodsToday.toString())
         props.action?.let { handleAction(it) }
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
+            addNoteHome.root.click({
+                (requireActivity() as MainActivity).router.openSettings()
+            })
             photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap(resources))
             name.text = props.name
             if (props.testResults != null) {

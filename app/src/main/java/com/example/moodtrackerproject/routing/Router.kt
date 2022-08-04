@@ -20,6 +20,10 @@ class Router(private val activity: MainActivity) {
         navController.navigate(R.id.action_moodFragment_to_addMoodFragment)
     }
 
+    fun openAddMoodHome() {
+        navController.navigate(R.id.addMoodFragment)
+    }
+
     fun openEditHealth() {
         navController.navigate(R.id.editHealthFragment)
     }
@@ -66,10 +70,6 @@ class Router(private val activity: MainActivity) {
 
     fun openLoginFromRegistration() {
         navController.navigate(R.id.action_registrationFragment_to_loginFragment)
-    }
-
-    fun openResetPassScreen() {
-        navController.navigate(R.id.action_loginFragment_to_resetPasswordFragment)
     }
 
     fun openStressTest() {

@@ -3,7 +3,6 @@ package com.example.moodtrackerproject.ui.login
 data class LoginProps(
     val isLoading: Boolean = false,
     val openRegistration: () -> Unit,
-    val openResetPassword: () -> Unit,
     val saveName: () -> Unit,
     val checkLogInData: (String, String) -> Unit,
     val action: LoginAction? = null,
@@ -12,7 +11,6 @@ data class LoginProps(
     sealed class LoginAction {
         object StartNotesScreen : LoginAction()
         object StartRegistrationScreen : LoginAction()
-        object StartResetPasswordScreen : LoginAction()
     }
 
     sealed class LoginError {

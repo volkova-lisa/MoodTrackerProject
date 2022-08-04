@@ -48,6 +48,9 @@ class AddMoodFragment : BaseFragment<AddMoodViewModel, FragmentAddMoodBinding, A
             saveButton.click({
                 mood?.let { props.saveMood(it.image, emojiName.text.toString()) }
             })
+            cancelButton.click({
+                props.cancelAdding()
+            })
             if (props.action == NewMoodAction.ShowMoodsScreen) {
                 (requireActivity() as MainActivity).router.openMood()
             }

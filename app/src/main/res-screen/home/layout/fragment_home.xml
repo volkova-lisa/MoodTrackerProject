@@ -19,20 +19,8 @@
             android:background="?attr/colorPrimary"
             android:backgroundTint="@color/toolbar"
             android:minHeight="?attr/actionBarSize"
-            app:menu="@menu/home_menu"
             app:title="@string/home"
-            app:titleTextColor="@color/cornflower">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/toolbar_calendar"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="end"
-                android:elevation="5dp"
-                app:srcCompat="@drawable/ic_baseline_calendar"
-                app:tint="@color/light_purple" />
-
-        </androidx.appcompat.widget.Toolbar>
+            app:titleTextColor="@color/cornflower"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
@@ -52,7 +40,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
                 android:scaleType="centerCrop"
-                android:src="@color/light_purple"
+                android:src="@drawable/anon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:shapeAppearanceOverlay="@style/circular"
@@ -95,17 +83,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/photo" />
 
+            <include
+                android:id="@+id/add_mood_home"
+                layout="@layout/add_new_item"
+                android:layout_width="90dp"
+                android:layout_marginStart="10dp"
+                android:layout_height="125dp"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mood_title"
+                android:visibility="visible"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/emoji_list"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="-8dp"
-                android:layout_marginTop="8dp"
+                android:layout_height="0dp"
                 android:orientation="horizontal"
-                android:paddingStart="20dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mood_title"
+                app:layout_constraintStart_toEndOf="@id/add_mood_home"
+                app:layout_constraintBottom_toBottomOf="@id/add_mood_home"
+                app:layout_constraintTop_toTopOf="@id/add_mood_home"
                 tools:ignore="RtlSymmetry"
                 tools:listitem="@layout/home_mood_item"
                 tools:visibility="visible" />
@@ -115,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/raleway_bold"
                 android:text="@string/notes"
                 android:textColor="@color/light_purple"
@@ -123,16 +120,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/emoji_list" />
 
+            <include
+                android:id="@+id/add_note_home"
+                layout="@layout/home_note_add"
+                android:layout_width="100dp"
+                android:layout_marginStart="10dp"
+                android:layout_height="100dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/notes_title"
+                android:visibility="visible"/>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notes_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:orientation="horizontal"
-                android:paddingStart="20dp"
+                android:paddingStart="2dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/notes_title"
+                app:layout_constraintStart_toEndOf="@id/add_note_home"
+                app:layout_constraintTop_toTopOf="@id/add_note_home"
+                app:layout_constraintBottom_toBottomOf="@id/add_note_home"
                 tools:ignore="RtlSymmetry"
                 tools:listitem="@layout/home_note_item"
                 tools:visibility="visible" />
@@ -142,13 +149,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/raleway_bold"
                 android:text="@string/mental_health"
                 android:textColor="@color/light_purple"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/notes_list" />
+                app:layout_constraintTop_toBottomOf="@id/add_note_home" />
 
             <LinearLayout
                 android:id="@+id/mental_bg"
@@ -173,7 +180,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:fontFamily="@font/raleway_bold"
                 android:text="@string/body_health"
                 android:textColor="@color/light_purple"

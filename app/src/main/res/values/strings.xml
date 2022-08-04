@@ -73,7 +73,7 @@
     <string name="pleasure">Pleasure</string>
     <string name="sadness">Sadness</string>
     <string name="happiness">Happy</string>
-    <string name="anger">Anger</string>
+    <string name="anger">Stress</string>
     <string name="joy">Joy</string>
     <string name="body_health">Body Health</string>
     <string name="water">Water</string>
@@ -147,5 +147,7 @@
     <string name="pass_ch_success">Password changed successfully.</string>
     <string name="reauth_fail">Re-Authentication failed.</string>
     <string name="en">en</string>
+    <string name="add_another_mood">Add one more</string>
+    <string name="add_note">Add note</string>
 
 </resources>
