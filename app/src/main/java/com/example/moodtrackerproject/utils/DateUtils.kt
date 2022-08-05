@@ -7,7 +7,7 @@ object DateUtils {
 
     fun getDateOfNote(): String {
         val calendar = Calendar.getInstance()
-        val dateFormat = SimpleDateFormat("MMM", Locale.getDefault())
+        val dateFormat = SimpleDateFormat("MM", Locale.getDefault())
         val month = dateFormat.format(calendar.get(Calendar.MONTH))
         val day = calendar.get(Calendar.DAY_OF_MONTH)
         val hour = calendar.get(Calendar.HOUR_OF_DAY)
