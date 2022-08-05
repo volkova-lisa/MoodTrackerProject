@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.ui.health
 
 import EditHealthProps
 import EditHealthProps.*
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.EditHealthState
 import com.example.moodtrackerproject.app.MviAction
@@ -14,6 +15,10 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
+
+    val props = EditHealthProps(
+        fetchMaxHealth = ::fetchMaxHealth,
+    )
 
     init {
         setState(Store.appState.editHealthState)

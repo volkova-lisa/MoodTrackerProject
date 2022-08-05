@@ -7,6 +7,7 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
@@ -53,6 +54,7 @@ class EditHealthFragment :
     }
 
     override fun render(props: EditHealthProps) {
+        this.props = props
         binding?.run {
             var tempWater = 0
             var tempKcal = 0
@@ -62,7 +64,7 @@ class EditHealthFragment :
             if (props.listHealth != null) {
                 steps.waterNum.text = props.listHealth.steps.toString()
                 water.waterNum.text = props.listHealth.water.toString()
-                water.explanation.text = getString(R.string.out_of_ml, props.healthMax.waterMax)
+                water.explanation.text = getString(R.string.out_of_ml, props.healthMax?.waterMax)
                 sleep.waterNum.text = props.listHealth.sleep.toString()
                 kcal.waterNum.text = props.listHealth.kcal.toString()
 

@@ -35,12 +35,12 @@ object DataBaseRepository {
         QuestionModel("Felt that things were going your way?")
     )
     val listOfAnxietyQs = listOf(
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------")
+        QuestionModel("Been upset because of something that happened unexpectedly?"),
+        QuestionModel("Felt that you were unable to control important things in your life?"),
+        QuestionModel("Felt nervous and 'stressed"),
+        QuestionModel("Felt confident about your ability to handle your personal problems?"),
+        QuestionModel("Felt that things were going your way?"),
+        QuestionModel("Felt that things were going your way?")
     )
 
     private val lisOfOptions = listOf(
@@ -56,11 +56,11 @@ object DataBaseRepository {
 
     fun saveStressPoints(p: Int) {
         stressPoints += p
-        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
+        saveTestResults(ResultsModel(stressPoints, getTestResults().anxResult))
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
-        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
+        saveTestResults(ResultsModel(getTestResults().stressResult, anxietyPoints))
     }
 
     fun getEmojiList() = listOfEmojis
