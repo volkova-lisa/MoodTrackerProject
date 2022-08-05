@@ -2,7 +2,6 @@ package com.example.moodtrackerproject.ui.health
 
 import EditHealthProps
 import EditHealthProps.*
-import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.EditHealthState
 import com.example.moodtrackerproject.app.MviAction
