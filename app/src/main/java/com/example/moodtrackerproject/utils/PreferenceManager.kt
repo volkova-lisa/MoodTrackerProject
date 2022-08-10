@@ -2,6 +2,7 @@ package com.example.moodtrackerproject.utils
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.util.Log
 import com.example.moodtrackerproject.domain.*
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
@@ -76,6 +77,7 @@ object PreferenceManager {
         preferences.edit()
             .putString(KEY_MOODS, serializedMoods)
             .apply()
+        Log.d("map list ====", moodList.toString())
     }
 
     fun getMoods(): List<MoodModel> {

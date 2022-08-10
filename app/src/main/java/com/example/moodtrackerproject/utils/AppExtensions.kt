@@ -17,6 +17,8 @@ import androidx.fragment.app.Fragment
 import com.example.moodtrackerproject.R
 import com.google.android.material.snackbar.Snackbar
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val MIN_PASSWORD_LENGTH = 6
 
@@ -90,6 +92,12 @@ fun View.visibleIf(condition: Boolean?) {
     } else {
         this.makeGone()
     }
+}
+
+fun Date.formatTo(dateFormat: String, timeZone: TimeZone? = null): String {
+    val formatter = SimpleDateFormat(dateFormat, Locale.ENGLISH)
+    formatter.timeZone = timeZone ?: TimeZone.getDefault()
+    return formatter.format(this)
 }
 
 fun Bitmap.convertToString(): String {

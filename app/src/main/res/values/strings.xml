@@ -113,7 +113,7 @@
     <string name="language">Language</string>
     <string name="dark_mode">Dark Mode</string>
     <string name="health_param">Health parameters</string>
-    <string name="set_app_pass">Set app password</string>
+    <string name="set_app_pass">Reset password</string>
     <string name="account">ACCOUNT</string>
     <string name="preferences">PREFERENCES</string>
     <string name="_0">0%</string>
@@ -149,5 +149,10 @@
     <string name="en">en</string>
     <string name="add_another_mood">Add one more</string>
     <string name="add_note">Add note</string>
+    <string name="of_anx">of anxiety</string>
+    <string name="anx_high_title">Your anxiety level is high</string>
+    <string name="result">Result</string>
+    <string name="fav_notes">Favourite notes</string>
+
 
 </resources>

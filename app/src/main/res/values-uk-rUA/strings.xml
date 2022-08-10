@@ -47,7 +47,7 @@
     <string name="invalid_password">Невірний пароль</string>
     <string name="created">Створено!</string>
     <string name="you_have_no_notes">В тебе ще немає заміток, натисни + щоб створити</string>
-    <string name="note_small_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</string>
+    <string name="note_small_text">oloremagna</string>
     <string name="new_note">Нова нотатка</string>
     <string name="title">Заголовок</string>
     <string name="note_text">Текст нотатки</string>
@@ -113,7 +113,7 @@
     <string name="language">Мова</string>
     <string name="dark_mode">Темна тема</string>
     <string name="health_param">Параметри здоров\'\я</string>
-    <string name="set_app_pass">Встановити пароль захисту</string>
+    <string name="set_app_pass">Змінити пароль</string>
     <string name="account">АККАУНТ</string>
     <string name="preferences">УПОДОБАННЯ</string>
     <string name="_0">0%</string>
@@ -149,5 +149,9 @@
     <string name="en">en</string>
     <string name="add_another_mood">Додати ще один</string>
     <string name="add_note">Додати</string>
+    <string name="of_anx">тривожності</string>
+    <string name="anx_high_title">Ваш рівень тривожності високий</string>
+    <string name="result">Результат</string>
+    <string name="fav_notes">Обрані нотатки</string>
 
 </resources>

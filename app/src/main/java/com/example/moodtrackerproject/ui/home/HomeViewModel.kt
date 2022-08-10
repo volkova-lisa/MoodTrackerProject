@@ -44,6 +44,9 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     emojiSrc = it.emojiSrc,
                     moodTitle = it.moodTitle,
                     moodTime = it.moodTime,
+                    moodId = it.moodId,
+                    isDeleted = it.isDeleted,
+                    deleteMood = {}
                 )
             },
             listOfNotesToday = state.listOfNotes.map {

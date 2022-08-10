@@ -54,6 +54,8 @@ class StressTestFragment : BaseFragment<StressTestViewModel, FragmentStressTestB
             nextButton.isEnabled = !chosenAnswer?.text.isNullOrBlank()
             nextButton.isClickable = !chosenAnswer?.text.isNullOrBlank()
 
+            toolbar.title = if (props.curTestType == 0) getString(R.string.stress_title) else getString(R.string.anxiety_level_test)
+
             num.text = "${props.currQuestionNum + 1}/${props.stressQuestionsQty}"
             progressBar.progress = props.currQuestionNum
 

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragment_back"
     tools:context=".ui.mood.list.MoodFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -80,13 +79,15 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/emoji_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toEndOf="@id/add_mood_home"
-        app:layout_constraintTop_toTopOf="@id/add_mood_home"
         app:layout_constraintBottom_toBottomOf="@id/add_mood_home"
+        app:layout_constraintStart_toEndOf="@id/add_mood_home"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintTop_toTopOf="@id/add_mood_home"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlSymmetry"
         tools:listitem="@layout/home_mood_item"
         tools:visibility="visible" />

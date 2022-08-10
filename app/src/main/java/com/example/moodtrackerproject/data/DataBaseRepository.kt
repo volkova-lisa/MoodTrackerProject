@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.data
 
+import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -102,6 +103,20 @@ object DataBaseRepository {
         PreferenceManager.saveNotes(notesList)
     }
 
+    fun setMoodDeleted(moodBody: MoodModel) {
+        val list = getMoods().map {
+            if (it.moodId == moodBody.moodId) it.copy(isDeleted = !it.isDeleted) else it
+        }
+        Log.d("dbr list ====", list.toString())
+        saveMoods(list)
+    }
+
+    fun removeDeletedMood(): List<MoodModel> {
+        val list = getMoods().filter { !it.isDeleted }
+        saveMoods(list)
+        return list
+    }
+
     fun saveFavorite(noteId: String): List<NoteModel> {
         val list = getNotes().map {
             if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
@@ -126,6 +141,10 @@ object DataBaseRepository {
             add(moodModel)
         }
         PreferenceManager.saveMoods(list)
+    }
+
+    fun saveMoods(moodsList: List<MoodModel>) {
+        PreferenceManager.saveMoods(moodsList)
     }
 
     fun saveHealth(healthModel: HealthModel) {

@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@color/fragment_back"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -96,9 +95,10 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/emoji_list"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toEndOf="@id/add_mood_home"
                 app:layout_constraintBottom_toBottomOf="@id/add_mood_home"
@@ -132,10 +132,11 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/notes_list"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingStart="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toEndOf="@id/add_note_home"
                 app:layout_constraintTop_toTopOf="@id/add_note_home"
