@@ -31,7 +31,6 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
                     moodTime = it.moodTime,
                     isDeleted = it.isDeleted,
                     deleteMood = { deleted ->
-                        Log.d("map list ====", it.toString())
                         DataBaseRepository.setMoodDeleted(it)
                         val list = DataBaseRepository.removeDeletedMood()
                         setState(state.copy(listOfMoods = list))

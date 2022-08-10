@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.HomeState
 import com.example.moodtrackerproject.app.MviAction
@@ -46,7 +47,11 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     moodTime = it.moodTime,
                     moodId = it.moodId,
                     isDeleted = it.isDeleted,
-                    deleteMood = {}
+                    deleteMood = { deleted ->
+                        DataBaseRepository.setMoodDeleted(it)
+                        val list = DataBaseRepository.removeDeletedMood()
+                        setState(state.copy(listOfMoods = list))
+                    }
                 )
             },
             listOfNotesToday = state.listOfNotes.map {

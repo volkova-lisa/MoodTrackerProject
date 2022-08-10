@@ -107,7 +107,6 @@ object DataBaseRepository {
         val list = getMoods().map {
             if (it.moodId == moodBody.moodId) it.copy(isDeleted = !it.isDeleted) else it
         }
-        Log.d("dbr list ====", list.toString())
         saveMoods(list)
     }
 

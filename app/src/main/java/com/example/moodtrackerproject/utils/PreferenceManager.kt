@@ -77,7 +77,6 @@ object PreferenceManager {
         preferences.edit()
             .putString(KEY_MOODS, serializedMoods)
             .apply()
-        Log.d("map list ====", moodList.toString())
     }
 
     fun getMoods(): List<MoodModel> {

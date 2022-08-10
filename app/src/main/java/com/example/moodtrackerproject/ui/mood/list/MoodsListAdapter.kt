@@ -42,7 +42,6 @@ class MoodsListAdapter : ListAdapter<MoodItemProps, MoodsListAdapter.MoodHolder>
                     when (it.itemId) {
                         R.id.delete -> {
                             mood.deleteMood?.invoke(mood.moodId)
-                            Log.d("adapter ====", it.toString())
                             true
                         }
                         else -> true
