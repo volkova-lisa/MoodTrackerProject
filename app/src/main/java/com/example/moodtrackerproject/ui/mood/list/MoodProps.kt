@@ -19,9 +19,13 @@ data class MoodProps(
     }
 
     data class MoodItemProps(
+        val moodId: String = "",
         val emojiSrc: Int = 0,
         val moodTitle: String = "",
-        val moodTime: String = " "
+        val moodTime: String = " ",
+        val isDeleted: Boolean = false,
+        val deleteMood: ((String) -> Unit)? = null
+
     ) {
         override fun equals(other: Any?): Boolean {
             if (this === other) return true

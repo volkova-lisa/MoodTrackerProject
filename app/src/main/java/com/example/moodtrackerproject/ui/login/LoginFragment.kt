@@ -30,7 +30,6 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
             loginButton.text = if (props.isLoading) "" else getString(R.string.login_screen_login)
 
             createNewAccountTextButton.click(props.openRegistration)
-            forgotPassTextButton.click(props.openResetPassword)
             loginButton.click({
                 emailInput.error = null
                 passInput.error = null
@@ -62,9 +61,6 @@ class LoginFragment : BaseFragment<LoginViewModel, FragmentLoginScreenBinding, L
             }
             is LoginAction.StartRegistrationScreen -> {
                 (requireActivity() as MainActivity).router.openRegistration()
-            }
-            is LoginAction.StartResetPasswordScreen -> {
-                (requireActivity() as MainActivity).router.openResetPassScreen()
             }
         }
     }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fragment_back"
     tools:context=".ui.mood.list.MoodFragment">
 
     <androidx.constraintlayout.widget.Guideline
@@ -59,7 +58,7 @@
         android:id="@+id/mood_include"
         layout="@layout/layout_whats_your_mood"
         android:layout_width="0dp"
-        android:layout_height="125dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="-5dp"
         android:layout_marginRight="-5dp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -80,36 +79,47 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/emoji_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-8dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        android:paddingStart="20dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mood_title"
+        app:layout_constraintBottom_toBottomOf="@id/add_mood_home"
+        app:layout_constraintStart_toEndOf="@id/add_mood_home"
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        app:layout_constraintTop_toTopOf="@id/add_mood_home"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlSymmetry"
         tools:listitem="@layout/home_mood_item"
         tools:visibility="visible" />
+
+    <include
+        android:id="@+id/add_mood_home"
+        layout="@layout/add_new_item"
+        android:layout_width="90dp"
+        android:layout_marginStart="10dp"
+        android:layout_height="125dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mood_title"
+        android:visibility="visible"/>
 
     <TextView
         android:id="@+id/test_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:fontFamily="@font/raleway_bold"
         android:text="@string/tests"
         android:textColor="@color/light_purple"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
-        app:layout_constraintTop_toBottomOf="@id/emoji_list" />
+        app:layout_constraintTop_toBottomOf="@id/add_mood_home" />
 
     <include
         android:id="@+id/stress_include"
         layout="@layout/stress_test_layout"
         android:layout_width="0dp"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="-5dp"
         android:layout_marginRight="-5dp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
@@ -120,7 +130,7 @@
         android:id="@+id/anxiety_include"
         layout="@layout/anxiety_test_layout"
         android:layout_width="0dp"
-        android:layout_height="90dp"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="-5dp"
         android:layout_marginRight="-5dp"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"

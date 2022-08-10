@@ -36,4 +36,5 @@
     <color name="note_item_color">#fff</color>
     <color name="home_mood_back">#fff</color>
     <color name="prof_dial_title">#000</color>
+    <color name="seek_progress">#526F95EF</color>
 </resources>

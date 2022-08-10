@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.ui.mood.list
 
+import android.util.Log
 import com.example.moodtrackerproject.app.AppState
 import com.example.moodtrackerproject.app.MviAction
 import com.example.moodtrackerproject.app.Store
@@ -24,9 +25,16 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
             action = action as? MoodScreenActions,
             listOfMoods = state.listOfMoods.map {
                 MoodItemProps(
+                    moodId = it.moodId,
                     emojiSrc = it.emojiSrc,
                     moodTitle = it.moodTitle,
                     moodTime = it.moodTime,
+                    isDeleted = it.isDeleted,
+                    deleteMood = { deleted ->
+                        DataBaseRepository.setMoodDeleted(it)
+                        val list = DataBaseRepository.removeDeletedMood()
+                        setState(state.copy(listOfMoods = list))
+                    },
                 )
             },
             addNewMood = {
@@ -53,7 +61,7 @@ class MoodViewModel : BaseViewModel<MoodProps>() {
                         questionList = DataBaseRepository.listOfAnxietyQs
                     )
                 )
-            }
+            },
         )
     }
 

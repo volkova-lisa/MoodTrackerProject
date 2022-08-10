@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MoodTrackerProject</string>
 
@@ -27,9 +26,9 @@
     <string name="create_account">Створити аккаунт</string>
     <string name="forgot_password">Забув пароль? <b>Створи новий!</b> </string>
     <string name="get_new">Отримати новий</string>
-    <string name="do_you_have_an_account">Маєте аккаунт? <b>Створити новий!</b></string>
+    <string name="do_you_have_an_account">Немає аккаунта? <b>Створити новий!</b></string>
     <string name="create_new">Створити новий</string>
-    <string name="create_new_account">Створити новий аккаунт</string>
+    <string name="create_new_account">Створіть новий аккаунт</string>
     <string name="registration_enter_email">Будь ласка, введіть імейл</string>
     <string name="registration_enter_pass">Будь ласка, введіть пароль</string>
     <string name="login_failed">Не вдалося ввійти</string>
@@ -48,7 +47,7 @@
     <string name="invalid_password">Невірний пароль</string>
     <string name="created">Створено!</string>
     <string name="you_have_no_notes">В тебе ще немає заміток, натисни + щоб створити</string>
-    <string name="note_small_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna</string>
+    <string name="note_small_text">oloremagna</string>
     <string name="new_note">Нова нотатка</string>
     <string name="title">Заголовок</string>
     <string name="note_text">Текст нотатки</string>
@@ -74,8 +73,8 @@
     <string name="pleasure">Задоволення</string>
     <string name="sadness">Сум</string>
     <string name="happiness">Щастя</string>
-    <string name="anger">Злість</string>
-    <string name="joy">Радість</string>
+    <string name="anger">Стресс</string>
+    <string name="joy">Спокій</string>
     <string name="body_health">Здоров\'\я тіла</string>
     <string name="water">Вода</string>
     <string name="_600_ml">600 мл</string>
@@ -85,7 +84,7 @@
     <string name="add_new_mood">Додати настрій</string>
     <string name="what_s_your_mood_now">Який у вас зараз настрій?</string>
     <string name="choose_emojis">Виберіть емодзі, які відповідають вашому настрою</string>
-    <string name="add_mood">Додати настрій</string>
+    <string name="add_mood">Додати</string>
     <string name="save_mood">Зберегти настрій</string>
     <string name="moods_of_the_day">Настрої дня</string>
     <string name="tests">Тести</string>
@@ -114,7 +113,7 @@
     <string name="language">Мова</string>
     <string name="dark_mode">Темна тема</string>
     <string name="health_param">Параметри здоров\'\я</string>
-    <string name="set_app_pass">Встановити пароль захисту</string>
+    <string name="set_app_pass">Змінити пароль</string>
     <string name="account">АККАУНТ</string>
     <string name="preferences">УПОДОБАННЯ</string>
     <string name="_0">0%</string>
@@ -148,5 +147,11 @@
     <string name="pass_ch_success">Пароль успішно змінено.</string>
     <string name="reauth_fail">Повторна аут. неуспішна.</string>
     <string name="en">en</string>
+    <string name="add_another_mood">Додати ще один</string>
+    <string name="add_note">Додати</string>
+    <string name="of_anx">тривожності</string>
+    <string name="anx_high_title">Ваш рівень тривожності високий</string>
+    <string name="result">Результат</string>
+    <string name="fav_notes">Обрані нотатки</string>
 
 </resources>

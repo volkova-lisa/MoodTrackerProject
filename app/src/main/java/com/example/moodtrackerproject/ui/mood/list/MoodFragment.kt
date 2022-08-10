@@ -43,6 +43,9 @@ class MoodFragment : BaseFragment<MoodViewModel, FragmentMoodBinding, MoodProps>
                 props.stressTestConditions()
             })
 
+            addMoodHome.root.click({
+                props.addNewMood()
+            })
             anxietyInclude.root.click({
                 props.anxietyTestConditions()
             })

@@ -55,7 +55,9 @@ class TestResultsFragment : BaseFragment<TestResultsViewModel, FragmentTestResul
                     stressBar.progress = DataBaseRepository.anxietyPoints
                     resultNum.text = "$pers%"
                     backButt.click(props.openMood)
-                    resultMini.text = "of anxiety"
+                    resultMini.text = getString(R.string.of_anx)
+                    resultText.mainTitle.text = getText(R.string.anx_high_title)
+                    resultText.subtitle.text = getText(R.string.stress_high)
                 }
             }
             if (props.action == TestResultsActions.OpenMood) {

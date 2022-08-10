@@ -15,6 +15,10 @@ import kotlinx.coroutines.withContext
 
 class EditHealthViewModel : BaseViewModel<EditHealthProps>() {
 
+    val props = EditHealthProps(
+        fetchMaxHealth = ::fetchMaxHealth,
+    )
+
     init {
         setState(Store.appState.editHealthState)
     }

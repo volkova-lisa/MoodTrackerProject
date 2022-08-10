@@ -60,9 +60,6 @@
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:destination="@id/registrationFragment" />
-        <action
-            android:id="@+id/action_loginFragment_to_resetPasswordFragment"
-            app:destination="@id/resetPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -78,14 +75,6 @@
         android:name="com.example.moodtrackerproject.ui.home.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/resetPasswordFragment"
-        android:name="com.example.moodtrackerproject.ui.reset_password.ResetPasswordFragment"
-        android:label="ResetPasswordFragment">
-        <action
-            android:id="@+id/action_resetPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
     <fragment
         android:id="@+id/addNewNoteFragment"
         android:name="com.example.moodtrackerproject.ui.notes.add.AddNewNoteFragment"

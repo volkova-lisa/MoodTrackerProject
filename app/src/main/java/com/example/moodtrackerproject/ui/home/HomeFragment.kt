@@ -1,7 +1,6 @@
 package com.example.moodtrackerproject.ui.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.moodtrackerproject.MainActivity
@@ -11,6 +10,7 @@ import com.example.moodtrackerproject.databinding.FragmentHomeBinding
 import com.example.moodtrackerproject.ui.BaseFragment
 import com.example.moodtrackerproject.ui.home.HomeProps.HomeAction
 import com.example.moodtrackerproject.ui.mood.list.MoodsListAdapter
+import com.example.moodtrackerproject.utils.click
 import com.example.moodtrackerproject.utils.convertToBitmap
 
 class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>(
@@ -51,6 +51,9 @@ class HomeFragment : BaseFragment<HomeViewModel, FragmentHomeBinding, HomeProps>
         notesAdapter.submitList(props.listOfNotesToday)
         moodsAdapter.submitList(props.listOfMoodsToday)
         binding?.run {
+            addNoteHome.root.click({
+                (requireActivity() as MainActivity).router.openSettings()
+            })
             photo.setImageBitmap((DataBaseRepository.getPhoto()).convertToBitmap(resources))
             name.text = props.name
             if (props.testResults != null) {

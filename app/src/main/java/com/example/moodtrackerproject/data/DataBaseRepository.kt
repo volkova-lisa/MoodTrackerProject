@@ -1,5 +1,6 @@
 package com.example.moodtrackerproject.data
 
+import android.util.Log
 import com.example.moodtrackerproject.R
 import com.example.moodtrackerproject.domain.*
 import com.example.moodtrackerproject.utils.PreferenceManager
@@ -35,12 +36,12 @@ object DataBaseRepository {
         QuestionModel("Felt that things were going your way?")
     )
     val listOfAnxietyQs = listOf(
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------"),
-        QuestionModel("----------")
+        QuestionModel("Been upset because of something that happened unexpectedly?"),
+        QuestionModel("Felt that you were unable to control important things in your life?"),
+        QuestionModel("Felt nervous and 'stressed"),
+        QuestionModel("Felt confident about your ability to handle your personal problems?"),
+        QuestionModel("Felt that things were going your way?"),
+        QuestionModel("Felt that things were going your way?")
     )
 
     private val lisOfOptions = listOf(
@@ -56,11 +57,11 @@ object DataBaseRepository {
 
     fun saveStressPoints(p: Int) {
         stressPoints += p
-        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
+        saveTestResults(ResultsModel(stressPoints, getTestResults().anxResult))
     }
     fun saveAnxietyPoints(p: Int) {
         anxietyPoints += p
-        saveTestResults(ResultsModel(stressPoints, anxietyPoints))
+        saveTestResults(ResultsModel(getTestResults().stressResult, anxietyPoints))
     }
 
     fun getEmojiList() = listOfEmojis
@@ -102,6 +103,19 @@ object DataBaseRepository {
         PreferenceManager.saveNotes(notesList)
     }
 
+    fun setMoodDeleted(moodBody: MoodModel) {
+        val list = getMoods().map {
+            if (it.moodId == moodBody.moodId) it.copy(isDeleted = !it.isDeleted) else it
+        }
+        saveMoods(list)
+    }
+
+    fun removeDeletedMood(): List<MoodModel> {
+        val list = getMoods().filter { !it.isDeleted }
+        saveMoods(list)
+        return list
+    }
+
     fun saveFavorite(noteId: String): List<NoteModel> {
         val list = getNotes().map {
             if (it.noteId == noteId) it.copy(isChecked = !it.isChecked) else it
@@ -126,6 +140,10 @@ object DataBaseRepository {
             add(moodModel)
         }
         PreferenceManager.saveMoods(list)
+    }
+
+    fun saveMoods(moodsList: List<MoodModel>) {
+        PreferenceManager.saveMoods(moodsList)
     }
 
     fun saveHealth(healthModel: HealthModel) {

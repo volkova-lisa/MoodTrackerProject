@@ -8,7 +8,7 @@ data class EditHealthProps(
     val action: EditHealthScreenActions? = null,
     val startHealth: () -> Unit = {},
     val fetchMaxHealth: () -> Unit = {},
-    val healthMax: MaxHealthModel = MaxHealthModel(),
+    val healthMax: MaxHealthModel? = null,
 
 ) {
     sealed class EditHealthScreenActions : MviAction {

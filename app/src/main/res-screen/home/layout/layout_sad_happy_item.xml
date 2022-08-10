@@ -10,14 +10,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.18" />
+        app:layout_constraintGuide_percent="0.14" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.82" />
+        app:layout_constraintGuide_percent="0.86" />
 
     <TextView
         android:id="@+id/disgust_title"
@@ -28,17 +28,19 @@
         android:textColor="@color/light_purple"
         android:textSize="12sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <ProgressBar
+    <SeekBar
         android:id="@+id/anger_bar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="0dp"
-        android:layout_height="5dp"
-        android:progress="0"
+        android:layout_height="wrap_content"
+        android:thumb="@drawable/ic_seek_bar_ic"
         android:max="25"
+        android:padding="6dp"
+        android:progress="20"
         android:progressBackgroundTint="@color/light_purple"
-        android:progressTint="@color/light_purple"
+        android:progressTint="@color/seek_progress"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline_right"
         app:layout_constraintStart_toStartOf="@id/guideline_left"
@@ -52,6 +54,7 @@
         android:text="@string/happiness"
         android:textColor="@color/light_purple"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

@@ -26,7 +26,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
         fetchListOfMoods = ::fetchListOfMoods,
         fetchListOfNotes = ::fetchListOfNotes,
         fetchHealth = ::fetchListOfHealth,
-        fetchResults = ::fetchResults
+        fetchResults = ::fetchResults,
     )
 
     init {
@@ -45,6 +45,13 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                     emojiSrc = it.emojiSrc,
                     moodTitle = it.moodTitle,
                     moodTime = it.moodTime,
+                    moodId = it.moodId,
+                    isDeleted = it.isDeleted,
+                    deleteMood = { deleted ->
+                        DataBaseRepository.setMoodDeleted(it)
+                        val list = DataBaseRepository.removeDeletedMood()
+                        setState(state.copy(listOfMoods = list))
+                    }
                 )
             },
             listOfNotesToday = state.listOfNotes.map {
@@ -80,7 +87,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
             fetchName = ::fetchName,
             name = state.name,
             email = state.email,
-            healthMax = state.healthMax
+            healthMax = state.healthMax,
         )
     }
 
@@ -138,6 +145,7 @@ class HomeViewModel : BaseViewModel<HomeProps>() {
                 DataBaseRepository.getMoods()
             }
             setState(Store.appState.homeState.copy(listOfMoods = moods))
+            liveData.value = props.copy(action = null)
         }
     }
 

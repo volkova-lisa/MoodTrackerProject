@@ -24,7 +24,12 @@ class AddMoodViewModel : BaseViewModel<AddMoodProps>() {
         return AddMoodProps(
             action = action as? NewMoodAction,
             fetchListOfMoods = ::fetchListOfMoods,
-            cancelAdding = {},
+            cancelAdding = {
+                setState(
+                    Store.appState.addMoodState,
+                    action = NewMoodAction.ShowMoodsScreen
+                )
+            },
             saveMood = ::addNewMood,
             moodItems = state.moods.map {
                 AddMoodProps.MoodItemProps(
